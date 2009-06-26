@@ -29,7 +29,7 @@ sub announce {
 	});
 }
 
-tcp_server('::', 6666, sub {
+tcp_server('10.56.0.1', 6666, sub {
 	my($fh, $host, $port) = @_;
 	if (!$fh) {
 		warn "Server failure: $!";
