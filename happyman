@@ -14,6 +14,8 @@
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 use strict;
+use warnings;
+use autodie;
 use AnyEvent::Handle;
 use AnyEvent::IRC::Client;
 use AnyEvent::Socket;
@@ -22,49 +24,49 @@ my $CHANNEL = '#skyshaper';
 my $irc = new AnyEvent::IRC::Client;
 
 sub announce {
-	my($host, $handle, $line) = @_;
-	$irc->send_chan($CHANNEL, 'PRIVMSG', $CHANNEL, $line);
-	$handle->push_read(line => sub {
-		announce($host, @_);
-	});
+    my($host, $handle, $line) = @_;
+    $irc->send_chan($CHANNEL, 'PRIVMSG', $CHANNEL, $line);
+    $handle->push_read(line => sub {
+        announce($host, @_);
+    });
 }
 
 tcp_server('10.56.0.1', 6666, sub {
-	my($fh, $host, $port) = @_;
-	if (!$fh) {
-		warn "Server failure: $!";
-		return;
-	}
-	my $handle;
-	$handle = new AnyEvent::Handle(
-		fh => $fh,
-		on_eof => sub { undef $handle },
-	);
-	$handle->push_read(line => sub {
-		announce($host, @_);
-	});
+    my($fh, $host, $port) = @_;
+    if (!$fh) {
+        warn "Server failure: $!";
+        return;
+    }
+    my $handle;
+    $handle = new AnyEvent::Handle(
+        fh => $fh,
+        on_eof => sub { undef $handle },
+    );
+    $handle->push_read(line => sub {
+        announce($host, @_);
+    });
 });
 
 $irc->reg_cb(
-	connect => sub {
-		my($irc, $err) = @_;
-		if ($err) {
-			die "Connecting to IRC failed: $err";
-		}
-	},
-	disconnect => sub {
-		my($irc, $reason) = @_;
-		print "Disconnect: $reason\n";
-		exit;
-	},
+    connect => sub {
+        my($irc, $err) = @_;
+        if ($err) {
+            die "Connecting to IRC failed: $err";
+        }
+    },
+    disconnect => sub {
+        my($irc, $reason) = @_;
+        print "Disconnect: $reason\n";
+        exit;
+    },
 );
 
 $irc->send_srv('JOIN', $CHANNEL);
 $irc->enable_ssl;
 $irc->connect('irc.oftc.net', 6697, {
-	nick => 'happyman',
-	user => 'happyman',
-	real => 'Happy Man - Skyshaper Announcement Bot',
+    nick => 'happyman',
+    user => 'happyman',
+    real => 'Happy Man - Skyshaper Announcement Bot',
 });
 
 AnyEvent->condvar->wait;
