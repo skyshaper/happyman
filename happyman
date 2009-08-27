@@ -15,23 +15,48 @@
 
 use strict;
 use warnings;
-use autodie;
+use autodie qw(:all);
 use AnyEvent::Handle;
 use AnyEvent::IRC::Client;
 use AnyEvent::Socket;
+use Config::Tiny;
+use IO::Handle;
 
-my $CHANNEL = '#skyshaper';
+my $profile;
+if (@ARGV == 0) {
+    $profile = 'default';
+}
+elsif (@ARGV == 1) {
+    $profile = shift @ARGV;
+}
+else {
+    STDERR->say("Usage: $0 [PROFILE]");
+    STDERR->say('If PROFILE is missing, default is assumed.');
+    exit 1;
+}
+
+my $config_all = Config::Tiny->read('happyman.conf')
+  or die $Config::Tiny::errstr;
+my $Config = $config_all->{$profile}
+  or die "Config section $profile missing";
+
+foreach (qw(server channel nick user ircname listen_addr listen_port)) {
+    if (!defined $Config->{$_}) {
+        die "Config key $_ missing";
+    }
+}
+
 my $irc = new AnyEvent::IRC::Client;
 
 sub announce {
     my($host, $handle, $line) = @_;
-    $irc->send_chan($CHANNEL, 'PRIVMSG', $CHANNEL, $line);
+    $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, $line);
     $handle->push_read(line => sub {
         announce($host, @_);
     });
 }
 
-tcp_server('10.56.0.1', 6666, sub {
+tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
     my($fh, $host, $port) = @_;
     if (!$fh) {
         warn "Server failure: $!";
@@ -61,12 +86,14 @@ $irc->reg_cb(
     },
 );
 
-$irc->send_srv('JOIN', $CHANNEL);
-$irc->enable_ssl;
-$irc->connect('irc.oftc.net', 6697, {
-    nick => 'happyman',
-    user => 'happyman',
-    real => 'Happy Man - Skyshaper Announcement Bot',
+$irc->send_srv('JOIN', $Config->{channel});
+if ($Config->{ssl}) {
+  $irc->enable_ssl;
+}
+$irc->connect($Config->{server}, $Config->{port} || 6667, {
+    nick => $Config->{nick},
+    user => $Config->{user},
+    real => $Config->{ircname},
 });
 
 AnyEvent->condvar->wait;
