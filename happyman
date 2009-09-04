@@ -22,15 +22,16 @@ use AnyEvent::IRC::Client;
 use AnyEvent::Socket;
 use Config::Tiny;
 use IO::Handle;
+use Sys::Syslog qw(:standard);
 
 sub log_info {
     my($msg) = @_;
-    say $msg;
+    syslog('info', $msg);
 }
 
 sub log_warning {
     my($msg) = @_;
-    say $msg;
+    syslog('warning', $msg);
 }
 
 my $profile;
@@ -56,6 +57,11 @@ foreach (qw(server channel nick user ircname listen_addr listen_port)) {
         die "Config key $_ missing";
     }
 }
+
+openlog('happyman' . ($profile ne 'default' ? "-$profile" : ''),
+        'ndelay,pid',
+        'daemon',
+);
 
 my $irc = new AnyEvent::IRC::Client;
 
