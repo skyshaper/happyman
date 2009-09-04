@@ -57,7 +57,7 @@ my $irc = new AnyEvent::IRC::Client;
 sub announce {
     my($host, $handle, $line) = @_;
     $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, $line);
-    log_info("Announcing message from $host: $line");
+    log_info("$host - Message: $line");
     $handle->push_read(line => sub {
         announce($host, @_);
     });
@@ -69,11 +69,17 @@ tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
         warn "Server failure: $!";
         return;
     }
+
+    log_info("$host - Connected");
     my $handle;
+    my $connection_closed = sub {
+        log_info("$host - Disconnected");
+        undef $handle;
+    };
     $handle = new AnyEvent::Handle(
         fh => $fh,
-        on_eof => sub { undef $handle },
-        on_error => sub { undef $handle },
+        on_eof => $connection_closed,
+        on_error => $connection_closed,
     );
     $handle->push_read(line => sub {
         announce($host, @_);
