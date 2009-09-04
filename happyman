@@ -28,6 +28,11 @@ sub log_info {
     say $msg;
 }
 
+sub log_warning {
+    my($msg) = @_;
+    say $msg;
+}
+
 my $profile;
 if (@ARGV == 0) {
     $profile = 'default';
@@ -86,28 +91,44 @@ tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
     });
 });
 
+sub connect_irc {
+    log_warning('Connecting to IRC server');
+    $irc->send_srv('JOIN', $Config->{channel});
+    if ($Config->{ssl}) {
+        $irc->enable_ssl;
+    }
+    $irc->connect($Config->{server}, $Config->{port} || 6667, {
+        nick => $Config->{nick},
+        user => $Config->{user},
+        real => $Config->{ircname},
+    });
+}
+
+sub reconnect_irc {
+    my $timer;
+    log_warning("Will reconnect in 10 seconds");
+    $timer = AnyEvent->timer(after => 10, cb => sub {
+        undef $timer;
+        connect_irc();
+    });
+}
+
 $irc->reg_cb(
     connect => sub {
         my($irc, $err) = @_;
         if ($err) {
-            die "Connecting to IRC failed: $err";
+            log_warning("Connecting to IRC server failed: $err");
+            reconnect_irc();
+        } else {
+            log_warning("Connected to IRC server");
         }
     },
     disconnect => sub {
         my($irc, $reason) = @_;
-        print "Disconnect: $reason\n";
-        exit;
+        log_warning("Disconnected from IRC server: $reason");
+        reconnect_irc();
     },
 );
 
-$irc->send_srv('JOIN', $Config->{channel});
-if ($Config->{ssl}) {
-  $irc->enable_ssl;
-}
-$irc->connect($Config->{server}, $Config->{port} || 6667, {
-    nick => $Config->{nick},
-    user => $Config->{user},
-    real => $Config->{ircname},
-});
-
+connect_irc();
 AnyEvent->condvar->wait;
