@@ -73,6 +73,7 @@ tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
     $handle = new AnyEvent::Handle(
         fh => $fh,
         on_eof => sub { undef $handle },
+        on_error => sub { undef $handle },
     );
     $handle->push_read(line => sub {
         announce($host, @_);
