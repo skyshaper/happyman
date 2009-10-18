@@ -16,7 +16,6 @@
 use strict;
 use warnings;
 use 5.10.0;
-use autodie qw(:all);
 use AnyEvent::Handle;
 use AnyEvent::IRC::Client;
 use AnyEvent::Socket;
@@ -67,7 +66,8 @@ my $irc = new AnyEvent::IRC::Client;
 
 sub announce {
     my($host, $handle, $line) = @_;
-    $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, $line);
+    $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, "$line
+      [$host]");
     log_info("$host - Message: $line");
     $handle->push_read(line => sub {
         announce($host, @_);
