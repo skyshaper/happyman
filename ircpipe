@@ -1,0 +1,50 @@
+#!/bin/sh
+set -e
+
+die ()
+{
+	echo $(basename $0): $* >&2
+	exit 1
+}
+
+waitforcode ()
+{
+	while read server code data <&6; do
+		if [ "$code" = "$1" ]; then
+			break
+		fi
+	done
+}
+
+if [ -z "$NICK" ]; then
+	die '$NICK is missing'
+fi
+
+if [ -z "$CHANNEL" ]; then
+	die '$CHANNEL is missing'
+fi
+
+if [ -z "$IRCNAME" ]; then
+	die '$IRCNAME is missing'
+fi
+
+echo NICK $NICK >&7
+echo "USER $NICK * * :$IRCNAME" >&7
+waitforcode 376
+
+echo "JOIN $CHANNEL" >&7
+waitforcode 366
+
+(while read a b <&6; do
+	if [ "$a" = "PING" ]; then
+		echo PONG $b >&7
+	fi
+done) &
+
+subshell_pid=$!
+trap "kill $subshell_pid" INT QUIT TERM
+
+while read line; do
+	echo "PRIVMSG $CHANNEL :$line" >&7
+done
+

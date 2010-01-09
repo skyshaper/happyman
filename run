@@ -1,0 +1,4 @@
+#!/bin/sh
+exec tcpserver -v 127.0.0.1 6666 recordio sh -c \
+  'sed -u s/\$/\ [${TCPREMOTEHOST}]/ >&3' 3>&1 \
+| exec envdir ./env tcpclient 127.0.0.1 6667 ./ircpipe
