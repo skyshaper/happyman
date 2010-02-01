@@ -1,5 +1,0 @@
-#!/bin/sh
-exec 2>&1
-exec setuidgid happyman tcpserver -Rl0 -v 0 6666 recordio sh -c \
-  'delcr | sed -u s/\$/\ [${TCPREMOTEHOST}]/ >&3' 3>&1 \
-| exec setuidgid happyman envdir ./env sslclient -NRHl0 -v -a /etc/ssl/certs/ca-certificates.crt -V 23 irc.oftc.net 6697 ./ircpipe
