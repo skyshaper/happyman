@@ -67,8 +67,8 @@ my $irc = new AnyEvent::IRC::Client;
 
 sub announce {
     my($host, $handle, $line) = @_;
-    $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, "$line
-      [$host]");
+    $irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, 
+                    "$line [$host]");
     log_info("$host - Message: $line");
     my $w;
     $w = AE::timer(1, 0, sub {
