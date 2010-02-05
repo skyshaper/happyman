@@ -82,7 +82,7 @@ sub announce {
 tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
 	my($fh, $host, $port) = @_;
 	if (!$fh) {
-		warn "Server failure: $!";
+		log_warning("Server failure: $!");
 		return;
 	}
 
