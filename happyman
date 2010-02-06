@@ -19,8 +19,10 @@ use 5.10.0;
 use AnyEvent;
 use AnyEvent::Handle;
 use AnyEvent::IRC::Client;
+use AnyEvent::IRC::Util qw(encode_ctcp);
 use AnyEvent::Socket;
 use Config::Tiny;
+use Hailo;
 use IO::Handle;
 use Sys::Syslog qw(:standard);
 
@@ -52,11 +54,18 @@ my $config_all = Config::Tiny->read('happyman.conf')
 my $Config = $config_all->{$profile}
   or die "Config section $profile missing";
 
-foreach (qw(server channel nick user ircname listen_addr listen_port)) {
+foreach (qw(server channel nick user ircname listen_addr listen_port
+            brain_resource encoding))
+{
 	if (!defined $Config->{$_}) {
 		die "Config key $_ missing";
 	}
 }
+
+my $hailo = Hailo->new(
+	storage_class => 'SQLite',
+	brain_resource => $Config->{brain_resource},
+);
 
 openlog('happyman' . ($profile ne 'default' ? "-$profile" : ''),
 		'ndelay,pid',
@@ -124,6 +133,20 @@ sub reconnect_irc {
 	});
 }
 
+sub answer {
+	my($channel, $msg) = @_;
+	log_info("Channel message received: $msg");
+	if (my $reply = $hailo->learn_reply($msg)) {
+		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG', $channel, $reply);
+		log_info("Reply: $reply");
+	}
+	else {
+		$irc->send_srv('PRIVMSG', $channel,
+		  encode_ctcp(['ACTION', 'has no answer for that']));
+		log_info("No answer available");
+	}
+}
+
 $irc->reg_cb(
 	connect => sub {
 		my($irc, $err) = @_;
@@ -138,6 +161,14 @@ $irc->reg_cb(
 		my($irc, $reason) = @_;
 		log_warning("Disconnected from IRC server: $reason");
 		reconnect_irc();
+	},
+	publicmsg => sub {
+		my($irc, $channel, $ircmsg) = @_;
+		my $nick = $Config->{nick};
+		my $body = $ircmsg->{params}->[1];
+		if ($body =~ /^$nick[:,]\s*(.+)\s*$/) {
+			answer($channel, $1);
+		}
 	},
 );
 
