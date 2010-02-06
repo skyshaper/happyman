@@ -22,6 +22,7 @@ use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp);
 use AnyEvent::Socket;
 use Config::Tiny;
+use Encode;
 use Hailo;
 use IO::Handle;
 use Sys::Syslog qw(:standard);
@@ -138,7 +139,8 @@ sub answer {
 	log_info("Channel message received: $msg");
 	if (my $reply = $hailo->learn_reply($msg)) {
 		$reply =~ s/^\s+//;
-		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG', $channel, $reply);
+		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG', $channel,
+		                       decode($Config->{encoding}, $reply));
 		log_info("Reply: $reply");
 	}
 	else {
