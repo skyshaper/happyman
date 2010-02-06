@@ -135,17 +135,18 @@ sub reconnect_irc {
 }
 
 sub answer {
-	my($channel, $msg) = @_;
+	my($channel, $sender, $msg) = @_;
 	log_info("Channel message received: $msg");
-	if (my $reply = $hailo->learn_reply($msg)) {
+	if (my $reply = $hailo->reply($msg)) {
 		$reply =~ s/^\s+//;
-		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG', $channel,
-		                       decode($Config->{encoding}, $reply));
+		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG',
+		                        $channel, decode($Config->{encoding},
+		                        "$sender: $reply"));
 		log_info("Reply: $reply");
 	}
 	else {
 		$irc->send_srv('PRIVMSG', $channel,
-		  encode_ctcp(['ACTION', 'has no answer for that']));
+		  encode_ctcp(['ACTION', "has no answer for $sender"]));
 		log_info("No answer available");
 	}
 }
@@ -168,9 +169,14 @@ $irc->reg_cb(
 	publicmsg => sub {
 		my($irc, $channel, $ircmsg) = @_;
 		my $nick = $Config->{nick};
+		$ircmsg->{prefix} =~ /^(\w+)\!/;
+		my $sender = $1;
 		my $body = $ircmsg->{params}->[1];
-		if ($body =~ /^$nick[:,]\s*(.+)\s*$/) {
-			answer($channel, $1);
+		if ($body =~ /^(\w+)[:,]\s*(.+)\s*$/) { # a highlight
+			if ($1 eq $Config->{nick}) {
+				answer($channel, $sender, $2);
+			}
+			$hailo->learn($2);
 		}
 		else {
 			$hailo->learn($body);
