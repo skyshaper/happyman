@@ -137,6 +137,7 @@ sub answer {
 	my($channel, $msg) = @_;
 	log_info("Channel message received: $msg");
 	if (my $reply = $hailo->learn_reply($msg)) {
+		$reply =~ s/^\s+//;
 		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG', $channel, $reply);
 		log_info("Reply: $reply");
 	}
