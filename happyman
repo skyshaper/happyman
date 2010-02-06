@@ -169,6 +169,9 @@ $irc->reg_cb(
 		if ($body =~ /^$nick[:,]\s*(.+)\s*$/) {
 			answer($channel, $1);
 		}
+		else {
+			$hailo->learn($body);
+		}
 	},
 );
 
