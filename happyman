@@ -19,7 +19,7 @@ use 5.10.0;
 use AnyEvent;
 use AnyEvent::Handle;
 use AnyEvent::IRC::Client;
-use AnyEvent::IRC::Util qw(encode_ctcp);
+use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
 use AnyEvent::Socket;
 use Config::Tiny;
 use Encode;
@@ -169,8 +169,7 @@ $irc->reg_cb(
 	publicmsg => sub {
 		my($irc, $channel, $ircmsg) = @_;
 		my $nick = $Config->{nick};
-		$ircmsg->{prefix} =~ /^(\w+)\!/;
-		my $sender = $1;
+		my $sender = prefix_nick($ircmsg->{prefix});
 		my $body = $ircmsg->{params}->[1];
 		if ($body =~ /^(\w+)[:,]\s*(.+)\s*$/) { # a highlight
 			if ($1 eq $Config->{nick}) {
