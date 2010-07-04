@@ -28,20 +28,20 @@ use IO::Handle;
 use Sys::Syslog qw(:standard);
 
 sub log_info {
-	my($msg) = @_;
-	syslog('info', $msg);
+	my ($msg) = @_;
+	syslog( 'info', $msg );
 }
 
 sub log_warning {
-	my($msg) = @_;
-	syslog('warning', $msg);
+	my ($msg) = @_;
+	syslog( 'warning', $msg );
 }
 
 my $profile;
-if (@ARGV == 0) {
+if ( @ARGV == 0 ) {
 	$profile = 'default';
 }
-elsif (@ARGV == 1) {
+elsif ( @ARGV == 1 ) {
 	$profile = shift @ARGV;
 }
 else {
@@ -55,125 +55,143 @@ my $config_all = Config::Tiny->read('happyman.conf')
 my $Config = $config_all->{$profile}
   or die "Config section $profile missing";
 
-foreach (qw(server channel nick user ircname listen_addr listen_port
-            brain_resource encoding))
+foreach (
+	qw(server channel nick user ircname listen_addr listen_port
+	brain_resource encoding)
+  )
 {
-	if (!defined $Config->{$_}) {
+	if ( !defined $Config->{$_} ) {
 		die "Config key $_ missing";
 	}
 }
 
 my $hailo = Hailo->new(
-	storage_class => 'SQLite',
+	storage_class  => 'SQLite',
 	brain_resource => $Config->{brain_resource},
 );
 
-openlog('happyman' . ($profile ne 'default' ? "-$profile" : ''),
-		'ndelay,pid',
-		'daemon',
-);
+openlog( 'happyman' . ( $profile ne 'default' ? "-$profile" : '' ),
+	'ndelay,pid', 'daemon', );
 
 my $irc = new AnyEvent::IRC::Client;
 
 sub announce {
-	my($host, $handle, $line) = @_;
-	$irc->send_chan($Config->{channel}, 'PRIVMSG', $Config->{channel}, 
-					"$line [$host]");
+	my ( $host, $handle, $line ) = @_;
+	$irc->send_chan( $Config->{channel}, 'PRIVMSG', $Config->{channel},
+		"$line [$host]" );
 	log_info("$host - Message: $line");
 	my $w;
-	$w = AE::timer(1, 0, sub {
-		$handle->push_read(line => sub {
-			announce($host, @_);
-		});
-		undef $w;
-	});
+	$w = AE::timer(
+		1, 0,
+		sub {
+			$handle->push_read(
+				line => sub {
+					announce( $host, @_ );
+				}
+			);
+			undef $w;
+		}
+	);
 }
 
-tcp_server($Config->{listen_addr}, $Config->{listen_port}, sub {
-	my($fh, $host, $port) = @_;
-	if (!$fh) {
-		log_warning("Server failure: $!");
-		return;
-	}
+tcp_server(
+	$Config->{listen_addr},
+	$Config->{listen_port},
+	sub {
+		my ( $fh, $host, $port ) = @_;
+		if ( !$fh ) {
+			log_warning("Server failure: $!");
+			return;
+		}
 
-	log_info("$host - Connected");
-	my $handle;
-	my $connection_closed = sub {
-		log_info("$host - Disconnected");
-		undef $handle;
-	};
-	$handle = new AnyEvent::Handle(
-		fh => $fh,
-		on_eof => $connection_closed,
-		on_error => $connection_closed,
-	);
-	$handle->push_read(line => sub {
-		announce($host, @_);
-	});
-});
+		log_info("$host - Connected");
+		my $handle;
+		my $connection_closed = sub {
+			log_info("$host - Disconnected");
+			undef $handle;
+		};
+		$handle = new AnyEvent::Handle(
+			fh       => $fh,
+			on_eof   => $connection_closed,
+			on_error => $connection_closed,
+		);
+		$handle->push_read(
+			line => sub {
+				announce( $host, @_ );
+			}
+		);
+	}
+);
 
 sub connect_irc {
 	log_warning('Connecting to IRC server');
-	$irc->send_srv('JOIN', $Config->{channel});
-	if ($Config->{ssl}) {
+	$irc->send_srv( 'JOIN', $Config->{channel} );
+	if ( $Config->{ssl} ) {
 		$irc->enable_ssl;
 	}
-	$irc->connect($Config->{server}, $Config->{port} || 6667, {
-		nick => $Config->{nick},
-		user => $Config->{user},
-		real => $Config->{ircname},
-	});
+	$irc->connect(
+		$Config->{server},
+		$Config->{port} || 6667,
+		{
+			nick => $Config->{nick},
+			user => $Config->{user},
+			real => $Config->{ircname},
+		}
+	);
 }
 
 sub reconnect_irc {
 	my $timer;
 	log_warning("Will reconnect in 10 seconds");
-	$timer = AnyEvent->timer(after => 10, cb => sub {
-		undef $timer;
-		connect_irc();
-	});
+	$timer = AnyEvent->timer(
+		after => 10,
+		cb    => sub {
+			undef $timer;
+			connect_irc();
+		}
+	);
 }
 
 sub answer {
-	my($channel, $sender, $msg) = @_;
+	my ( $channel, $sender, $msg ) = @_;
 	log_info("Channel message received: $msg");
-	if (my $reply = $hailo->reply($msg)) {
+	if ( my $reply = $hailo->reply($msg) ) {
 		$reply =~ s/^\s+//;
-		$irc->send_long_message($Config->{encoding}, 0, 'PRIVMSG',
-		                        $channel, decode($Config->{encoding},
-		                        "$sender: $reply"));
+		$irc->send_long_message( $Config->{encoding}, 0, 'PRIVMSG', $channel,
+			decode( $Config->{encoding}, "$sender: $reply" ) );
 		log_info("Reply: $reply");
 	}
 	else {
-		$irc->send_srv('PRIVMSG', $channel,
-		  encode_ctcp(['ACTION', "has no answer for $sender"]));
+		$irc->send_srv( 'PRIVMSG', $channel,
+			encode_ctcp( [ 'ACTION', "has no answer for $sender" ] ) );
 		log_info("No answer available");
 	}
 }
 
 $irc->reg_cb(
 	connect => sub {
-		my($irc, $err) = @_;
+		my ( $irc, $err ) = @_;
 		if ($err) {
 			log_warning("Connecting to IRC server failed: $err");
 			reconnect_irc();
-		} else {
+		}
+		else {
 			log_warning("Connected to IRC server");
 		}
 	},
 	disconnect => sub {
-		my($irc, $reason) = @_;
+		my ( $irc, $reason ) = @_;
 		log_warning("Disconnected from IRC server: $reason");
 		reconnect_irc();
 	},
 	publicmsg => sub {
-		my($irc, $channel, $ircmsg) = @_;
-		my $nick = $Config->{nick};
-		my $sender = prefix_nick($ircmsg->{prefix});
-		my $body = $ircmsg->{params}->[1];
-		if ($body =~ /^(\w+)[:,]\s*(.+)\s*$/) { # a highlight
-			if ($1 eq $Config->{nick}) {
-				answer($channel, $sender, $2);
+		my ( $irc, $channel, $ircmsg ) = @_;
+		my $nick   = $Config->{nick};
+		my $sender = prefix_nick( $ircmsg->{prefix} );
+		my $body   = $ircmsg->{params}->[1];
+		if ( $body =~ /^(\w+)[:,]\s*(.+)\s*$/ ) {    # a highlight
+			if ( $1 eq $Config->{nick} ) {
+				answer( $channel, $sender, $2 );
 			}
 			$hailo->learn($2);
 		}
