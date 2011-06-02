@@ -29,6 +29,18 @@ has 'host' => (
   required => 1,
 );
 
+has 'port' => (
+  is       => 'ro',
+  isa      => 'Int',
+  default  => 6667,
+);
+
+has 'ssl' => (
+  is       => 'ro',
+  isa      => 'Bool',
+  default  => 0,
+);
+
 has 'channels' => (
   is       => 'ro',
   isa      => 'ArrayRef[Str]',
@@ -73,7 +85,8 @@ sub _build_irc {
     }
   });
 
-  $irc->connect($self->host, 6667, {
+  $irc->enable_ssl() if $self->ssl;
+  $irc->connect($self->host, $self->port, {
     nick => $self->nick,
     user => $self->nick,
     real => $self->nick,
