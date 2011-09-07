@@ -1,5 +1,7 @@
 use Modern::Perl;
 
+use lib 'lib';
+
 use App::Happyman::Connection;
 use App::Happyman::Plugin::Hailo;
 use App::Happyman::Plugin::PeekURI;
