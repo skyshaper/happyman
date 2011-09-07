@@ -1,6 +1,5 @@
 package App::Happyman::Plugin::PeekURI;
 use Moose;
-use feature qw(say);
 
 with 'App::Happyman::Plugin';
 
@@ -42,31 +41,26 @@ my %peekers = (
     http_get($uri, headers => $headers, sub {
       my ($data, $headers) = @_;
 
-      return if $headers->{'content-type'} ne 'text/html' and
-                $headers->{'content-type'} ne 'application/xhtml+xml';
-
-      try {
-        my $tree = do {
-          local $SIG{__WARN__} = sub { };
-          XML::LibXML->load_html(
-            string => $data,
-            recover => 1,
-          );
-        };
-        return unless $tree;
-
-        my $node = $tree->findnodes('//title')->[0];
-        return unless $node;
-
-        my $title = $node ? $node->textContent : 'no title';
-        return unless $title;
-
-        $title =~ s/\n/ /g;
-        $self->conn->send_notice($channel, $title);
+      if ($headers->{'Status'} !~ /^2/) {
+        my ($status, $reason) = @{ $headers }{'Status', 'Reason'};
+        $self->conn->send_notice($channel, "$status $reason");
+        return;
       }
-      catch {
-        warn "$_";
+
+      return if $headers->{'content-type'} !~ /html/;
+
+      my $tree = do {
+        local $SIG{__WARN__} = sub { };
+        XML::LibXML->load_html(
+          string => $data,
+          recover => 1,
+        );
       };
+
+      my $node = $tree->findnodes('//title')->[0];
+      my $title = $node ? $node->textContent : 'no title';
+      $title =~ s/\n/ /g;
+      $self->conn->send_notice($channel, $title);
     });
   },
 );
