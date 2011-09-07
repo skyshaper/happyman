@@ -112,6 +112,7 @@ sub run {
     }
     catch {
       chomp;
+      $self->send_notice("Caught exception: $_");
       STDERR->say("Caught exception: $_");
     }
   }
@@ -126,6 +127,7 @@ sub _trigger_event {
     }
     catch {
       chomp;
+      $self->send_notice("Caught exception: $_");
       STDERR->say("Caught exception: $_");
     }
   }
