@@ -121,7 +121,13 @@ sub _trigger_event {
   my ($self, $name, $sender, $channel, $body) = @_;
 
   foreach my $plugin (@{ $self->_plugins }) {
-    $plugin->$name($sender, $channel, $body) if $plugin->can($name);
+    try {
+      $plugin->$name($sender, $channel, $body) if $plugin->can($name);
+    }
+    catch {
+      chomp;
+      STDERR->say("Caught exception: $_");
+    }
   }
 }
 
