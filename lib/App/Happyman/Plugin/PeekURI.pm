@@ -17,7 +17,6 @@ my %peekers = (
   qr/\.wikipedia\.org$/ => sub {},
   qr/^twitter\.com$/ => sub {
     my ($self, $channel, $uri) = @_;
-    print "$uri\n";
     $uri =~ m{status/(\d+)};
     return unless $1;
 
@@ -82,7 +81,6 @@ sub on_channel_message {
   $finder->find(\$body);
 
   foreach my $uri (@uris) {
-    say $uri;
     while (my ($pattern, $cb) = each %peekers) {
       if ($uri->host =~ $pattern) {
         $cb->($self, $channel, $uri);
