@@ -11,10 +11,10 @@ use URI;
 use URI::Find;
 use XML::LibXML;
 
-my %peekers = (
-  qr/\.ibash\.de$/ => sub {},
-  qr/\.wikipedia\.org$/ => sub {},
-  qr/^twitter\.com$/ => sub {
+my @peekers = (
+  [ qr/(^|\.)ibash\.de$/ => sub {} ],
+  [ qr/\.wikipedia\.org$/ => sub {} ],
+  [ qr/^twitter\.com$/ => sub {
     my ($self, $uri) = @_;
     $uri =~ m{status/(\d+)};
     return unless $1;
@@ -31,8 +31,8 @@ my %peekers = (
         $self->conn->send_notice($msg);
       }
     });
-  },
-  qr// => sub {
+  } ],
+  [ qr/./ => sub {
     my ($self, $uri) = @_;
     my $headers = {
       Range => 'bytes=0-20000',
@@ -62,7 +62,7 @@ my %peekers = (
       $title =~ s/\n/ /g;
       $self->conn->send_notice($title);
     });
-  },
+  } ],
 );
 
 sub on_message {
@@ -75,9 +75,11 @@ sub on_message {
   $finder->find(\$body);
 
   foreach my $uri (@uris) {
-    while (my ($pattern, $cb) = each %peekers) {
+    foreach (@peekers) {
+      my ($pattern, $cb) = @$_;
       if ($uri->host =~ $pattern) {
         $cb->($self, $uri);
+        return
       }
     }
   }
