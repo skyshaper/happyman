@@ -32,9 +32,7 @@ sub _build_announcer_socket_guard {
 sub _announce {
   my ($self, $host, $handle, $line) = @_;
 
-  foreach my $channel (@{ $self->conn->channels }) {
-    $self->conn->send_notice($channel, "$line [$host]");
-  }
+  $self->conn->send_notice("$line [$host]");
 
   my $w;
   $w = AE::timer(1, 0, sub {

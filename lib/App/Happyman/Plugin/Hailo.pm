@@ -22,18 +22,18 @@ sub _build_hailo {
   });
 }
 
-sub on_channel_message {
-  my ($self, $sender, $channel, $body) = @_;
+sub on_message {
+  my ($self, $sender, $body) = @_;
 
   $self->_hailo->do(learn => $body, sub {});
 }
 
-sub on_channel_message_me {
-  my ($self, $sender, $channel, $body) = @_;
+sub on_message_me {
+  my ($self, $sender, $body) = @_;
 
   $self->_hailo->do(reply => $body, sub {
     my $msg = $@ || decode('utf-8', $_[1]);
-    $self->conn->send_message($channel, "$sender: $msg");
+    $self->conn->send_message("$sender: $msg");
   });
 }
 

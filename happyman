@@ -8,7 +8,7 @@ use App::Happyman::Plugin::SocketAnnouncer;
 my $conn = App::Happyman::Connection->new(
   nick => 'happyman',
   host => 'localhost',
-  channels => ['#happyman'],
+  channel => '#happyman',
 );
 
 $conn->add_plugin(App::Happyman::Plugin::Hailo->new());

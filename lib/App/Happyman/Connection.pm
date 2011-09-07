@@ -42,9 +42,9 @@ has 'ssl' => (
   default  => 0,
 );
 
-has 'channels' => (
+has 'channel' => (
   is       => 'ro',
-  isa      => 'ArrayRef[Str]',
+  isa      => 'Str',
   required => 1,
 );
 
@@ -75,14 +75,14 @@ sub _build_irc {
     if ($text =~ /^(\w+)[:,]\s+(.+)$/) {
       # for some weird reason, without stringification the value turns to undef
       # at some point
-      $self->_trigger_event('on_channel_message', $sender, $channel, "$2");
+      $self->_trigger_event('on_message', $sender, "$2");
 
       if ($1 eq $self->nick) {
-        $self->_trigger_event('on_channel_message_me', $sender, $channel, "$2");
+        $self->_trigger_event('on_message_me', $sender, "$2");
       }
     }
     else {
-      $self->_trigger_event('on_channel_message', $sender, $channel, $text);
+      $self->_trigger_event('on_message', $sender, $text);
     }
   });
 
@@ -93,7 +93,7 @@ sub _build_irc {
     real => $self->nick,
   });
 
-  $irc->send_srv('JOIN', $_) foreach @{$self->channels};
+  $irc->send_srv('JOIN', $self->channel);
   return $irc;
 }
 
@@ -126,15 +126,15 @@ sub _trigger_event {
 }
 
 sub send_message {
-  my ($self, $target, $body) = @_;
+  my ($self, $body) = @_;
 
-  $self->irc->send_long_message('utf-8', 0, 'PRIVMSG', $target, $body);
+  $self->irc->send_long_message('utf-8', 0, 'PRIVMSG', $self->channel, $body);
 }
 
 sub send_notice {
-  my ($self, $target, $body) = @_;
+  my ($self, $body) = @_;
 
-  $self->irc->send_long_message('utf-8', 0, 'NOTICE', $target, $body);
+  $self->irc->send_long_message('utf-8', 0, 'NOTICE', $self->channel, $body);
 }
 
 __PACKAGE__->meta->make_immutable();

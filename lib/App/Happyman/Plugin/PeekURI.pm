@@ -15,7 +15,7 @@ my %peekers = (
   qr/\.ibash\.de$/ => sub {},
   qr/\.wikipedia\.org$/ => sub {},
   qr/^twitter\.com$/ => sub {
-    my ($self, $channel, $uri) = @_;
+    my ($self, $uri) = @_;
     $uri =~ m{status/(\d+)};
     return unless $1;
 
@@ -28,12 +28,12 @@ my %peekers = (
         my $msg = 'Tweet by @' . $data->{user}{screen_name} . ': ' 
                 . $data->{text};
 
-        $self->conn->send_notice($channel, $msg);
+        $self->conn->send_notice($msg);
       }
     });
   },
   qr// => sub {
-    my ($self, $channel, $uri) = @_;
+    my ($self, $uri) = @_;
     my $headers = {
       Range => 'bytes=0-20000',
     };
@@ -43,7 +43,7 @@ my %peekers = (
 
       if ($headers->{'Status'} !~ /^2/) {
         my ($status, $reason) = @{ $headers }{'Status', 'Reason'};
-        $self->conn->send_notice($channel, "$status $reason");
+        $self->conn->send_notice("$status $reason");
         return;
       }
 
@@ -60,13 +60,13 @@ my %peekers = (
       my $node = $tree->findnodes('//title')->[0];
       my $title = $node ? $node->textContent : 'no title';
       $title =~ s/\n/ /g;
-      $self->conn->send_notice($channel, $title);
+      $self->conn->send_notice($title);
     });
   },
 );
 
-sub on_channel_message {
-  my ($self, $sender, $channel, $body) = @_;
+sub on_message {
+  my ($self, $sender, $body) = @_;
 
   my @uris;
   my $finder = URI::Find->new(sub {
@@ -77,7 +77,7 @@ sub on_channel_message {
   foreach my $uri (@uris) {
     while (my ($pattern, $cb) = each %peekers) {
       if ($uri->host =~ $pattern) {
-        $cb->($self, $channel, $uri);
+        $cb->($self, $uri);
       }
     }
   }
