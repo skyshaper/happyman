@@ -63,7 +63,7 @@ my %peekers = (
         return unless $title;
 
         $title =~ s/\n/ /g;
-        $self->conn->send_notice($channel, "$title");
+        $self->conn->send_notice($channel, $title);
       }
       catch {
         warn "$_";
