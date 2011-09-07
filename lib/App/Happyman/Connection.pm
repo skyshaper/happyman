@@ -2,6 +2,7 @@ package App::Happyman::Connection;
 use Moose;
 
 use AnyEvent;
+use AnyEvent::Impl::Perl; # we depend on its exception behaviour
 use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
@@ -105,14 +106,22 @@ sub BUILD {
 sub run {
   my ($self) = @_;
 
-  AnyEvent->condvar->recv();
+  while (1) {
+    try {
+      AnyEvent->condvar->recv();
+    }
+    catch {
+      chomp;
+      STDERR->say("Caught exception: $_");
+    }
+  }
 }
 
 sub _trigger_event {
-  my ($self, $name, @args) = @_;
+  my ($self, $name, $sender, $channel, $body) = @_;
 
   foreach my $plugin (@{ $self->_plugins }) {
-    $plugin->$name(@args) if $plugin->can($name);
+    $plugin->$name($sender, $channel, $body) if $plugin->can($name);
   }
 }
 
