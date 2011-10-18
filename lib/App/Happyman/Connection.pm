@@ -1,4 +1,5 @@
 package App::Happyman::Connection;
+use 5.014;
 use Moose;
 
 use AnyEvent;

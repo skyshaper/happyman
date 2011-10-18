@@ -1,4 +1,5 @@
 package App::Happyman::Plugin::Hailo;
+use 5.014;
 use Moose;
 use feature qw(say);
 

@@ -1,4 +1,5 @@
 package App::Happyman::Plugin::PeekURI;
+use 5.014;
 use Moose;
 
 with 'App::Happyman::Plugin';
