@@ -9,7 +9,7 @@ Module::Build->new(
   dist_version => '0.0',
   license => 'unrestricted',
   requires => {
-    perl => '5.10.',
+    perl => '5.14.',
     'AnyEvent' => 0,
     'AnyEvent::HTTP' => 0,
     'AnyEvent::Handle' => 0,
