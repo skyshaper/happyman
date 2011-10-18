@@ -1,20 +1,20 @@
+#!/usr/bin/env perl
 use 5.014;
 use warnings;
-
 use lib 'lib';
 
 use App::Happyman::Connection;
-use App::Happyman::Plugin::Hailo;
-use App::Happyman::Plugin::PeekURI;
-use App::Happyman::Plugin::SocketAnnouncer;
+use Class::Load qw(load_class);
+use Config::INI::Reader;
 
-my $conn = App::Happyman::Connection->new(
-  nick => 'happyman',
-  host => 'localhost',
-  channel => '#happyman',
-);
+my %conf = %{ Config::INI::Reader->read_file('happyman.conf') };
+my $conn = App::Happyman::Connection->new($conf{_});
 
-$conn->add_plugin(App::Happyman::Plugin::Hailo->new());
-$conn->add_plugin(App::Happyman::Plugin::PeekURI->new());
-$conn->add_plugin(App::Happyman::Plugin::SocketAnnouncer->new());
+delete $conf{_};
+while (my ($plugin_name, $plugin_conf) = each %conf) {
+  my $class = "App::Happyman::Plugin::$plugin_name";
+  load_class($class);
+  $conn->add_plugin($class->new($plugin_conf));
+}
+
 $conn->run();

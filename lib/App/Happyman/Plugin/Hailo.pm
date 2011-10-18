@@ -18,7 +18,7 @@ has '_hailo' => (
 sub _build_hailo {
   return AnyEvent::Worker->new({
       class => 'Hailo',
-      args  => [brain => '/home/mxey/skyshaper/happyman/hailo.sqlite']
+      args  => [brain => 'hailo.db']
   });
 }
 

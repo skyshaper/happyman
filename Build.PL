@@ -19,6 +19,8 @@ Module::Build->new(
     'AnyEvent::Socket' => 0,
     'AnyEvent::Strict' => 0,
     'AnyEvent::Worker' => 0,
+    'Class::Load' => 0,
+    'Config::INI::Reader' => 0,
     'Encode' => 0,
     'Hailo' => 0,
     'JSON' => 0,

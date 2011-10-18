@@ -1,0 +1,7 @@
+nick = happyman
+host = localhost
+channel = #happyman
+
+[Hailo]
+[PeekURI]
+[SocketAnnouncer]
