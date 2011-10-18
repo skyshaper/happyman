@@ -1,0 +1,7 @@
+*.swp
+/.carton
+/Build
+/_build
+/happyman.conf
+/local
+/hailo.db
