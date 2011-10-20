@@ -27,6 +27,7 @@ Module::Build->new(
     'List::MoreUtils' => 0,
     'Moose' => 0,
     'Moose::Role' => 0,
+    'Net::SSLeay' => 0,
     'Try::Tiny' => 0,
     'URI' => 0,
     'URI::Find' => 0,
