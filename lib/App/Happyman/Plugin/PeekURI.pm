@@ -49,6 +49,7 @@ my @peekers = (
       }
 
       return if $headers->{'content-type'} !~ /html/;
+      return if not $data;
 
       my $tree = do {
         local $SIG{__WARN__} = sub { };
