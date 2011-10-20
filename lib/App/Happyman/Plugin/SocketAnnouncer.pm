@@ -6,6 +6,7 @@ with 'App::Happyman::Plugin';
 
 use AnyEvent::Handle;
 use AnyEvent::Socket;
+use Encode;
 
 has '_announcer_socket_guard' => (
   is => 'ro',
@@ -33,6 +34,7 @@ sub _build_announcer_socket_guard {
 sub _announce {
   my ($self, $host, $handle, $line) = @_;
 
+  $line = decode('UTF-8', $line);
   $self->conn->send_notice("$line [$host]");
 
   my $w;
