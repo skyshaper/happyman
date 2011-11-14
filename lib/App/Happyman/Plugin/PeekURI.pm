@@ -17,7 +17,7 @@ my @peekers = (
   [ qr/\.wikipedia\.org$/ => sub {} ],
   [ qr/^twitter\.com$/ => sub {
     my ($self, $uri) = @_;
-    $uri =~ m{(\d+)};
+    $uri =~ m{/(\d+)$};
     return unless $1;
 
     $uri = "http://api.twitter.com/1/statuses/show/$1.json";
