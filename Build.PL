@@ -12,6 +12,7 @@ Module::Build->new(
     perl => '5.14.',
     'AnyEvent' => 0,
     'AnyEvent::HTTP' => 0,
+    'AnyEvent::HTTPD' => 0,
     'AnyEvent::Handle' => 0,
     'AnyEvent::IRC::Client' => 0,
     'AnyEvent::IRC::Util' => 0,
