@@ -30,6 +30,7 @@ Module::Build->new(
     'Moose::Role' => 0,
     'Net::SSLeay' => 0,
     'Try::Tiny' => 0,
+    'TryCatch' => 0,
     'URI' => 0,
     'URI::Find' => 0,
     'XML::LibXML' => 0,
