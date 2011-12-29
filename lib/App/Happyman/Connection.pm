@@ -146,4 +146,10 @@ sub send_notice {
   $self->irc->send_long_message('utf-8', 0, 'NOTICE', $self->channel, $body);
 }
 
+sub nick_exists {
+  my ($self, $nick) = @_;
+
+  return defined $self->irc->nick_modes($self->channel, $nick);
+}
+
 __PACKAGE__->meta->make_immutable();

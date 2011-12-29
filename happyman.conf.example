@@ -5,3 +5,4 @@ channel = #happyman
 [Hailo]
 [PeekURI]
 [SocketAnnouncer]
+[NickReply]
