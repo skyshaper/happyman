@@ -7,7 +7,7 @@ with 'App::Happyman::Plugin';
 sub on_message {
   my ($self, $sender, $body) = @_;
 
-  if (($sender ne $body) && $self->conn->nick_exists($body)) {
+  if ($body eq $self->conn->nick) {
     $self->conn->send_message($sender);
   }
 }
