@@ -4,11 +4,17 @@ use Moose;
 
 with 'App::Happyman::Plugin';
 
+use AnyEvent;
+
 sub on_message {
   my ($self, $sender, $body) = @_;
 
   if ($body eq $self->conn->nick) {
-    $self->conn->send_message($sender);
+    my $w;
+    $w = AE::timer(rand(2), 0, sub { 
+      undef $w; 
+      $self->conn->send_message($sender);
+    });
   }
 }
 
