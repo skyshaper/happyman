@@ -2,7 +2,7 @@ nick = happyman
 host = localhost
 channel = #happyman
 
-[Hailo]
+[Cobe]
 [PeekURI]
 [SocketAnnouncer]
 [NickReply]
