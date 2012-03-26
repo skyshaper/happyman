@@ -38,9 +38,7 @@ sub _spawn_child {
     $self->_in(Coro::Handle->new_from_fh($in));
     $self->_out(Coro::Handle->new_from_fh($out));
 
-    return AnyEvent->child(
-        pid => $pid,
-        cb  => sub {
+    return AE::child($pid, sub {
             my ( $pid, $status ) = @_;
             warn "$pid exited with status $status\n";
             $self->_child( $self->_spawn_child );

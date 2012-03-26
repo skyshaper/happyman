@@ -114,7 +114,7 @@ sub run {
 
     while (1) {
         try {
-            AnyEvent->condvar->recv();
+            AE::cv->recv();
         }
         catch {
             chomp;
