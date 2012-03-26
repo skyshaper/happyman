@@ -5,9 +5,8 @@ use Moose;
 with 'App::Happyman::Plugin';
 
 use AnyEvent;
+use Coro::Handle;
 use IPC::Open2;
-use Encode;
-use open ':encoding(utf8)';
 
 has _child => (
     is      => 'rw',
@@ -15,7 +14,10 @@ has _child => (
     builder => '_spawn_child',
 );
 
-has [qw/_in _out/] => ( is => 'rw', );
+has [qw/_in _out/] => ( 
+  is => 'rw',
+  isa => 'Coro::Handle',
+);
 
 has command => (
     is      => 'ro',
@@ -31,8 +33,12 @@ sub _spawn_child {
     my ( $in, $out );
 
     my $pid = open2( $out, $in, $self->command );
+    binmode $out, ':encoding(UTF-8)';
 
-    my $child = AnyEvent->child(
+    $self->_in(Coro::Handle->new_from_fh($in));
+    $self->_out(Coro::Handle->new_from_fh($out));
+
+    return AnyEvent->child(
         pid => $pid,
         cb  => sub {
             my ( $pid, $status ) = @_;
@@ -40,23 +46,6 @@ sub _spawn_child {
             $self->_child( $self->_spawn_child );
         },
     );
-
-    $self->_out(
-        AnyEvent->io(
-            fh   => $out,
-            poll => 'r',
-            cb   => sub {
-                my $input = <$out>;
-                return unless defined $input;
-                chomp $input;
-                $self->conn->send_message( decode( 'utf-8', $input ) );
-            },
-        )
-    );
-
-    $self->_in($in);
-
-    return $child;
 }
 
 sub on_message {
@@ -69,6 +58,7 @@ sub on_message_me {
     my ( $self, $sender, $body ) = @_;
 
     $self->_in->print("reply $sender $body\n");
+    $self->conn->send_message($self->_out->readline());    
 }
 
 __PACKAGE__->meta->make_immutable;
