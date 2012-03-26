@@ -4,18 +4,14 @@ use Moose;
 
 with 'App::Happyman::Plugin';
 
-use AnyEvent;
+use Coro::AnyEvent;
 
 sub on_message {
   my ($self, $sender, $body) = @_;
+  return if $body ne $self->conn->nick;
 
-  if ($body eq $self->conn->nick) {
-    my $w;
-    $w = AE::timer(rand(2), 0, sub { 
-      undef $w; 
-      $self->conn->send_message($sender);
-    });
-  }
+  Coro::AnyEvent::sleep rand(2);
+  $self->conn->send_message($sender);
 }
 
 __PACKAGE__->meta->make_immutable();
