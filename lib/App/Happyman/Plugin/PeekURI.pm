@@ -64,31 +64,31 @@ sub _find_uris {
     push @uris, URI->new($_[0]);
   });
   $finder->find(\$body);
-  
+
   return @uris;
 }
 
 sub _peek_uri {
   my ($self, $uri) = @_;
- 
+
   my @peekers = (
    [ qr/(^|\.)ibash\.de$/ => \&_ignore_link ],
    [ qr/\.wikipedia\.org$/ => \&_ignore_link ],
    [ qr/^twitter\.com$/ => \&_fetch_tweet_text ],
    [ qr/./ => \&_fetch_html_title ],
   );
-  
+
   for (@peekers) {
     my ($pattern, $cb) = @$_;
     if ($uri->host =~ $pattern) {
       return $cb->($self, $uri);
     }
-  }  
+  }
 }
 
 sub on_message {
   my ($self, $sender, $body) = @_;
-  
+
   for ($self->_find_uris($body)) {
     my $notice = $self->_peek_uri($_);
     $self->conn->send_notice($notice) if $notice;

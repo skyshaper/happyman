@@ -125,11 +125,11 @@ sub _trigger_event {
 
   foreach my $plugin (@{ $self->_plugins }) {
     next unless $plugin->can($name);
-    
+
     async {
-	    say "Starting: $plugin $name";
+      say "Starting: $plugin $name";
       $plugin->$name($sender, $channel, $body);
-	    say "Done: $plugin $name";      
+      say "Done: $plugin $name";
     };
   }
 }

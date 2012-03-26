@@ -22,7 +22,7 @@ Module::Build->new(
     'AnyEvent::Worker' => 0,
     'Class::Load' => 0,
     'Config::INI::Reader' => 0,
-	'Coro' => 0,
+    'Coro' => 0,
     'Encode' => 0,
     'Hailo' => 0,
     'JSON' => 0,
