@@ -7,6 +7,7 @@ use AnyEvent::Impl::Perl; # we depend on its exception behaviour
 use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
+use Coro;
 use Try::Tiny;
 
 has 'irc' => (
@@ -123,14 +124,13 @@ sub _trigger_event {
   my ($self, $name, $sender, $channel, $body) = @_;
 
   foreach my $plugin (@{ $self->_plugins }) {
-    try {
-      $plugin->$name($sender, $channel, $body) if $plugin->can($name);
-    }
-    catch {
-      chomp;
-      $self->send_notice("Caught exception: $_");
-      STDERR->say("Caught exception: $_");
-    }
+    next unless $plugin->can($name);
+    
+    async {
+	    say "Starting: $plugin $name";
+      $plugin->$name($sender, $channel, $body);
+	    say "Done: $plugin $name";      
+    };
   }
 }
 
