@@ -4,4 +4,6 @@
 /_build
 /happyman.conf
 /local
-/hailo.db
+/cobe.sqlite*
+/python
+/training
