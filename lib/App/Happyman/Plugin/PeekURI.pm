@@ -5,6 +5,7 @@ use Moose;
 with 'App::Happyman::Plugin';
 
 use AnyEvent::HTTP;
+use Coro;
 use JSON;
 use List::MoreUtils qw(natatime);
 use Try::Tiny;
@@ -12,78 +13,85 @@ use URI;
 use URI::Find;
 use XML::LibXML;
 
-my @peekers = (
-  [ qr/(^|\.)ibash\.de$/ => sub {} ],
-  [ qr/\.wikipedia\.org$/ => sub {} ],
-  [ qr/^twitter\.com$/ => sub {
-    my ($self, $uri) = @_;
-    $uri =~ m{/(\d+)$};
-    return unless $1;
+sub _ignore_link {
+}
 
-    $uri = "http://api.twitter.com/1/statuses/show/$1.json";
-    http_get($uri, sub {
-      my ($body, $headers) = @_;
-      my $data = decode_json($body);
+sub _fetch_tweet_text {
+  my ($self, $uri) = @_;
+  $uri =~ m{/(\d+)$};
+  return unless $1;
 
-      if ($data->{text}) {
-        my $msg = 'Tweet by @' . $data->{user}{screen_name} . ': ' 
-                . $data->{text};
+  http_get("http://api.twitter.com/1/statuses/show/$1.json", Coro::rouse_cb);
+  my ($body, $headers) = Coro::rouse_wait();
+  my $data = decode_json($body);
+  return unless $data->{text};
 
-        $self->conn->send_notice($msg);
-      }
-    });
-  } ],
-  [ qr/./ => sub {
-    my ($self, $uri) = @_;
-    my $headers = {
-      Range => 'bytes=0-20000',
-    };
+  return 'Tweet by @' . $data->{user}{screen_name} . ': ' . $data->{text};
+}
 
-    http_get($uri, headers => $headers, sub {
-      my ($data, $headers) = @_;
+sub _fetch_html_title {
+  my ($self, $uri) = @_;
+  my $request_headers = {
+    Range => 'bytes=0-20000',
+  };
 
-      if ($headers->{'Status'} !~ /^2/) {
-        my ($status, $reason) = @{ $headers }{'Status', 'Reason'};
-        $self->conn->send_notice("$status $reason");
-        return;
-      }
+  http_get($uri, headers => $request_headers, Coro::rouse_cb);
+  my ($data, $response_headers) = Coro::rouse_wait();
 
-      return if $headers->{'content-type'} !~ /html/;
-      return if not $data;
+  if ($response_headers->{'Status'} !~ /^2/) {
+    my ($status, $reason) = @{ $response_headers }{'Status', 'Reason'};
+    return "$status $reason";
+  }
 
-      my $tree = do {
-        local $SIG{__WARN__} = sub { };
-        XML::LibXML->load_html(
-          string => $data,
-          recover => 1,
-        );
-      };
+  return if $response_headers->{'content-type'} !~ /html/;
+  return unless $data;
 
-      my $node = $tree->findnodes('//title')->[0];
-      my $title = $node ? $node->textContent : 'no title';
-      $title =~ s/\n/ /g;
-      $self->conn->send_notice($title);
-    });
-  } ],
-);
+  my $tree = XML::LibXML->load_html(
+    string => $data,
+    recover => 1,
+  );
 
-sub on_message {
-  my ($self, $sender, $body) = @_;
+  my $node = $tree->findnodes('//title')->[0];
+  my $title = $node ? $node->textContent : 'no title';
+  $title =~ s/\n/ /g;
+  return $title;
+}
 
+sub _find_uris {
+  my ($self, $body) = @_;
   my @uris;
   my $finder = URI::Find->new(sub {
     push @uris, URI->new($_[0]);
   });
   $finder->find(\$body);
+  
+  return @uris;
+}
 
-  foreach my $uri (@uris) {
-    foreach (@peekers) {
-      my ($pattern, $cb) = @$_;
-      if ($uri->host =~ $pattern) {
-        $cb->($self, $uri);
-        return
-      }
+sub _peek_uri {
+  my ($self, $uri) = @_;
+ 
+  my @peekers = (
+   [ qr/(^|\.)ibash\.de$/ => \&_ignore_link ],
+   [ qr/\.wikipedia\.org$/ => \&_ignore_link ],
+   [ qr/^twitter\.com$/ => \&_fetch_tweet_text ],
+   [ qr/./ => \&_fetch_html_title ],
+  );
+  
+  for (@peekers) {
+    my ($pattern, $cb) = @$_;
+    if ($uri->host =~ $pattern) {
+      return $cb->($self, $uri);
     }
+  }  
+}
+
+sub on_message {
+  my ($self, $sender, $body) = @_;
+  
+  for ($self->_find_uris($body)) {
+    my $notice = $self->_peek_uri($_);
+    $self->conn->send_notice($notice) if $notice;
   }
 }
 
