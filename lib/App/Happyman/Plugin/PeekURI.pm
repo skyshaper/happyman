@@ -88,9 +88,9 @@ sub _peek_uri {
 }
 
 sub on_message {
-    my ( $self, $sender, $body ) = @_;
+    my ( $self, $msg ) = @_;
 
-    for ( $self->_find_uris($body) ) {
+    for ( $self->_find_uris($msg->text) ) {
         my $notice = $self->_peek_uri($_);
         $self->conn->send_notice($notice) if $notice;
     }

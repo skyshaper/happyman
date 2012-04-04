@@ -16,7 +16,6 @@ while True:
 	if cmd == 'learn':
 		brain.learn(line)
 	elif cmd == 'reply':
-		nick, line = line.split(' ', 1)[:2]
 		reply = brain.reply(line)
-		sys.stdout.write((nick + ": " + reply + "\n").encode('utf-8'))
+		sys.stdout.write((reply + "\n").encode('utf-8'))
 		sys.stdout.flush()

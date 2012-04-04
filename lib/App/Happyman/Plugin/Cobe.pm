@@ -47,16 +47,14 @@ sub _spawn_child {
 }
 
 sub on_message {
-    my ( $self, $sender, $body ) = @_;
+    my ( $self, $msg ) = @_;
 
-    $self->_in->print("learn $body\n");
-}
-
-sub on_message_me {
-    my ( $self, $sender, $body ) = @_;
-
-    $self->_in->print("reply $sender $body\n");
-    $self->conn->send_message($self->_out->readline());    
+    $self->_in->print('learn ' . $msg->text . "\n");
+    
+    if ($msg->addressed_me) {
+        $self->_in->print('reply ' . $msg->text . "\n");
+        $msg->reply($self->_out->readline()); 
+    }
 }
 
 __PACKAGE__->meta->make_immutable;

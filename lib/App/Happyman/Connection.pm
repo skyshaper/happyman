@@ -2,6 +2,7 @@ package App::Happyman::Connection;
 use 5.014;
 use Moose;
 
+use App::Happyman::Message;
 use AnyEvent;
 use AnyEvent::Impl::Perl;    # we depend on its exception behaviour
 use AnyEvent::Strict;
@@ -70,22 +71,11 @@ sub _build_irc {
     $irc->reg_cb(
         publicmsg => sub {
             my ( $irc, $channel, $ircmsg ) = @_;
-            my $sender = prefix_nick( $ircmsg->{prefix} );
-            my $text   = $ircmsg->{params}->[1];
+            my $sender      = prefix_nick( $ircmsg->{prefix} );
+            my $full_text   = $ircmsg->{params}->[1];
 
-            if ( $text =~ /^(\w+)[:,]\s+(.+)$/ ) {
-
-     # for some weird reason, without stringification the value turns to undef
-     # at some point
-                $self->_trigger_event( 'on_message', $sender, "$2" );
-
-                if ( $1 eq $self->nick ) {
-                    $self->_trigger_event( 'on_message_me', $sender, "$2" );
-                }
-            }
-            else {
-                $self->_trigger_event( 'on_message', $sender, $text );
-            }
+            my $msg = App::Happyman::Message->new($self, $sender, $full_text);
+            $self->_trigger_event('on_message', $msg);
         }
     );
 
@@ -125,14 +115,14 @@ sub run {
 }
 
 sub _trigger_event {
-    my ( $self, $name, $sender, $channel, $body ) = @_;
+    my ( $self, $name, $msg ) = @_;
 
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
         async {
             say "Starting: $plugin $name";
-            $plugin->$name( $sender, $channel, $body );
+            $plugin->$name( $msg );
             say "Done: $plugin $name";
         };
     }
