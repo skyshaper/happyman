@@ -44,7 +44,7 @@ sub BUILDARGS {
 sub addressed_me {
   my ($self) = @_;
   
-  return defined $self->addressed_nick and $self->addressed_nick eq $self->conn->nick;
+  return (defined $self->addressed_nick and $self->addressed_nick eq $self->conn->nick);
 }
 
 sub reply {
