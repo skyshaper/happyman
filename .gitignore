@@ -5,5 +5,8 @@
 /happyman.conf
 /local
 /cobe.sqlite*
-/python
+/python/bin
+/python/lib
+/python/include
+/python/.Python
 /training
