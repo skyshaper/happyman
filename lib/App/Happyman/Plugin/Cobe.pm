@@ -22,7 +22,7 @@ has [qw/_in _out/] => (
 has command => (
     is      => 'ro',
     isa     => 'Str',
-    default => './python/bin/python ./cobe_pipe.py ./cobe.sqlite',
+    default => './python/bin/python ./python/cobe_pipe.py ./cobe.sqlite',
 );
 
 sub BUILD { shift->_child }
