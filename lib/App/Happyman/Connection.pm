@@ -63,6 +63,33 @@ sub add_plugin {
     push @{ $self->_plugins }, $plugin;
 }
 
+sub _connect {
+    my ( $self ) = @_;
+    
+    $self->irc->enable_ssl() if $self->ssl;
+    $self->irc->connect(
+        $self->host,
+        $self->port,
+        {   nick => $self->nick,
+            user => $self->nick,
+            real => $self->nick,
+        }
+    );
+
+    $self->irc->send_srv( 'JOIN', $self->channel );    
+}
+
+sub _retry_connect {
+    my ( $self ) = @_;
+    
+    my $w;
+    $w = AE::timer 5, 0, sub {
+        undef $w;
+        say 'Retrying connect';
+        $self->_connect();
+    };
+}
+
 sub _build_irc {
     my ($self) = @_;
 
@@ -76,27 +103,31 @@ sub _build_irc {
 
             my $msg = App::Happyman::Message->new($self, $sender, $full_text);
             $self->_trigger_event('on_message', $msg);
-        }
+        },
+        connect => sub {
+            my ( $irc, $err ) = @_;
+            return if not $err;
+            
+            say 'Connection failed';
+            $self->_retry_connect();
+         },
+        disconnect => sub {
+            say 'Disconnected';
+            $self->_retry_connect();
+        },
+        registered => sub {
+            say 'Registered';
+            $irc->enable_ping(60);
+        },
     );
 
-    $irc->enable_ssl() if $self->ssl;
-    $irc->connect(
-        $self->host,
-        $self->port,
-        {   nick => $self->nick,
-            user => $self->nick,
-            real => $self->nick,
-        }
-    );
-
-    $irc->send_srv( 'JOIN', $self->channel );
     return $irc;
 }
 
 sub BUILD {
     my ($self) = @_;
 
-    $self->irc();    # enforce construction
+    $self->_connect();    # enforce construction
 }
 
 sub run {
