@@ -1,5 +1,5 @@
 package App::Happyman::Message;
-use 5.014;
+use v5.16;
 use Moose;
 
 has [qw(full_text text sender_nick)] => (

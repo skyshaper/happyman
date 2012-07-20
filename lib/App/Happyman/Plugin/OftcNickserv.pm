@@ -1,5 +1,5 @@
 package App::Happyman::Plugin::OftcNickserv;
-use 5.014;
+use v5.16;
 use Moose;
 
 with 'App::Happyman::Plugin';

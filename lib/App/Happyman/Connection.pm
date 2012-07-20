@@ -1,5 +1,5 @@
 package App::Happyman::Connection;
-use 5.014;
+use v5.16;
 use Moose;
 
 use App::Happyman::Message;
