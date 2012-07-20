@@ -118,6 +118,7 @@ sub _build_irc {
         registered => sub {
             say 'Registered';
             $irc->enable_ping(60);
+            $self->_trigger_event('on_registered');
         },
     );
 
@@ -171,6 +172,12 @@ sub send_notice {
 
     $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
+}
+
+sub send_private_message {
+    my ( $self, $nick, $body ) = @_;
+    
+    $self->irc->send_srv('PRIVMSG', $nick, $body);
 }
 
 sub nick_exists {
