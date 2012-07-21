@@ -11,9 +11,9 @@ has password => (
 );
 
 sub on_registered {
-    my ( $self ) = @_;
-    
-    $self->conn->send_private_message( 'NickServ', 
+    my ($self) = @_;
+
+    $self->conn->send_private_message('NickServ',
         join(' ', 'IDENTIFY', $self->password, $self->conn->nick));
 }
 

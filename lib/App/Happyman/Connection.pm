@@ -57,15 +57,15 @@ has '_plugins' => (
 );
 
 sub add_plugin {
-    my ( $self, $plugin ) = @_;
+    my ($self, $plugin) = @_;
 
     $plugin->conn($self);
     push @{ $self->_plugins }, $plugin;
 }
 
 sub _connect {
-    my ( $self ) = @_;
-    
+    my ($self) = @_;
+
     $self->irc->enable_ssl() if $self->ssl;
     $self->irc->connect(
         $self->host,
@@ -76,12 +76,12 @@ sub _connect {
         }
     );
 
-    $self->irc->send_srv( 'JOIN', $self->channel );    
+    $self->irc->send_srv('JOIN', $self->channel);
 }
 
 sub _retry_connect {
-    my ( $self ) = @_;
-    
+    my ($self) = @_;
+
     my $w;
     $w = AE::timer 5, 0, sub {
         undef $w;
@@ -97,17 +97,17 @@ sub _build_irc {
 
     $irc->reg_cb(
         publicmsg => sub {
-            my ( $irc, $channel, $ircmsg ) = @_;
-            my $sender      = prefix_nick( $ircmsg->{prefix} );
-            my $full_text   = $ircmsg->{params}->[1];
+            my ($irc, $channel, $ircmsg) = @_;
+            my $sender    = prefix_nick($ircmsg->{prefix});
+            my $full_text = $ircmsg->{params}->[1];
 
             my $msg = App::Happyman::Message->new($self, $sender, $full_text);
             $self->_trigger_event('on_message', $msg);
         },
         connect => sub {
-            my ( $irc, $err ) = @_;
+            my ($irc, $err) = @_;
             return if not $err;
-            
+
             say 'Connection failed';
             $self->_retry_connect();
         },
@@ -147,43 +147,43 @@ sub run {
 }
 
 sub _trigger_event {
-    my ( $self, $name, $msg ) = @_;
+    my ($self, $name, $msg) = @_;
 
-    foreach my $plugin ( @{ $self->_plugins } ) {
+    foreach my $plugin (@{ $self->_plugins }) {
         next unless $plugin->can($name);
 
         async {
             say "Starting: $plugin $name";
-            $plugin->$name( $msg );
+            $plugin->$name($msg);
             say "Done: $plugin $name";
         };
     }
 }
 
 sub send_message {
-    my ( $self, $body ) = @_;
+    my ($self, $body) = @_;
 
-    $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
-        $body );
+    $self->irc->send_long_message('utf-8', 0, 'PRIVMSG', $self->channel,
+        $body);
 }
 
 sub send_notice {
-    my ( $self, $body ) = @_;
+    my ($self, $body) = @_;
 
-    $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
-        $body );
+    $self->irc->send_long_message('utf-8', 0, 'NOTICE', $self->channel,
+        $body);
 }
 
 sub send_private_message {
-    my ( $self, $nick, $body ) = @_;
-    
+    my ($self, $nick, $body) = @_;
+
     $self->irc->send_srv('PRIVMSG', $nick, $body);
 }
 
 sub nick_exists {
-    my ( $self, $nick ) = @_;
+    my ($self, $nick) = @_;
 
-    return defined $self->irc->nick_modes( $self->channel, $nick );
+    return defined $self->irc->nick_modes($self->channel, $nick);
 }
 
 __PACKAGE__->meta->make_immutable();

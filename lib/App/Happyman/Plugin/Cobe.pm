@@ -14,9 +14,9 @@ has _child => (
     builder => '_spawn_child',
 );
 
-has [qw/_in _out/] => ( 
-  is => 'rw',
-  isa => 'Coro::Handle',
+has [qw/_in _out/] => (
+    is  => 'rw',
+    isa => 'Coro::Handle',
 );
 
 has command => (
@@ -30,30 +30,32 @@ sub BUILD { shift->_child }
 sub _spawn_child {
     my ($self) = @_;
 
-    my ( $in, $out );
+    my ($in, $out);
 
-    my $pid = open2( $out, $in, $self->command );
+    my $pid = open2($out, $in, $self->command);
     binmode $out, ':encoding(UTF-8)';
 
     $self->_in(Coro::Handle->new_from_fh($in));
     $self->_out(Coro::Handle->new_from_fh($out));
 
-    return AE::child($pid, sub {
-            my ( $pid, $status ) = @_;
+    return AE::child(
+        $pid,
+        sub {
+            my ($pid, $status) = @_;
             warn "$pid exited with status $status\n";
-            $self->_child( $self->_spawn_child );
+            $self->_child($self->_spawn_child);
         },
     );
 }
 
 sub on_message {
-    my ( $self, $msg ) = @_;
+    my ($self, $msg) = @_;
 
     $self->_in->print('learn ' . $msg->text . "\n");
-    
+
     if ($msg->addressed_me) {
         $self->_in->print('reply ' . $msg->text . "\n");
-        $msg->reply($self->_out->readline()); 
+        $msg->reply($self->_out->readline());
     }
 }
 
