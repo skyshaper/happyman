@@ -110,7 +110,7 @@ sub _build_irc {
             
             say 'Connection failed';
             $self->_retry_connect();
-         },
+        },
         disconnect => sub {
             say 'Disconnected';
             $self->_retry_connect();
