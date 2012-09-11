@@ -14602,16 +14602,16 @@
          "version" : "0.24"
       },
       "Test::use::ok" : {
-         "dist" : "Test-use-ok-0.02",
+         "dist" : "Test-use-ok-0.11",
          "mymeta" : {
             "abstract" : "Alternative to Test::More::use_ok",
             "author" : [
-               ", 2006 by Audrey Tang <cpan@audreyt.org>."
+               "unknown"
             ],
             "dynamic_config" : 0,
-            "generated_by" : "Module::Install version 0.64, CPAN::Meta::Converter version 2.120630",
+            "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120630",
             "license" : [
-               "perl_5"
+               "unrestricted"
             ],
             "meta-spec" : {
                "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -14627,32 +14627,41 @@
             "prereqs" : {
                "build" : {
                   "requires" : {
-                     "ExtUtils::MakeMaker" : "0"
+                     "ExtUtils::MakeMaker" : "6.36"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.36"
                   }
                },
                "runtime" : {
                   "requires" : {
-                     "Test::More" : "0"
+                     "perl" : "5.005"
                   }
                }
             },
             "release_status" : "stable",
-            "version" : "0.02"
+            "resources" : {
+               "homepage" : "http://github.com/audreyt/Test-use-ok/tree"
+            },
+            "version" : "0.10",
+            "x_module_name" : "Test::use::ok"
          },
          "name" : "Test::use::ok",
-         "pathname" : "A/AU/AUDREYT/Test-use-ok-0.02.tar.gz",
+         "pathname" : "A/AU/AUDREYT/Test-use-ok-0.11.tar.gz",
          "provides" : {
             "Test::use::ok" : {
                "file" : "Test/use/ok.pm",
-               "version" : "0.02"
+               "version" : "0.11"
             },
             "ok" : {
                "file" : "ok.pm",
-               "version" : "0.02"
+               "version" : "0.11"
             }
          },
          "target" : "Test::use::ok",
-         "version" : "0.02"
+         "version" : "0.11"
       },
       "Text::Diff" : {
          "dist" : "Text-Diff-1.41",
