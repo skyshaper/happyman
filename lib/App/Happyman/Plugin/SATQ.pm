@@ -7,6 +7,7 @@ with 'App::Happyman::Plugin';
 use Coro;
 use LWP::Protocol::AnyEvent::http;
 use LWP::UserAgent;
+use MIME::Base64;
 
 has '_buffer' => (
     is => 'ro',
@@ -14,8 +15,7 @@ has '_buffer' => (
     default => sub { [] },
 );
 
-has [qw(uri credentials_netloc credentials_realm credentials_user       
-     credentials_password)] => (
+has [qw(uri user password)] => (
     is => 'ro',
     isa => 'Str',
     required => 1,
@@ -32,17 +32,13 @@ sub _build_ua {
     my ($self) = @_;
     
     my $ua = LWP::UserAgent->new();
-    say 
-        $self->credentials_netloc,
-        $self->credentials_realm,
-        $self->credentials_user,
-        $self->credentials_password;
-    $ua->credentials(
-        $self->credentials_netloc,
-        $self->credentials_realm,
-        $self->credentials_user,
-        $self->credentials_password,
-    );
+
+    # LWP::UserAgent only sends an authenticated request after it sees a 401
+    # response. SATQ never sends a 401, because HTTP Authentication is not
+    # used by human users
+    my $authorization =  'Basic ' . encode_base64(
+        $self->user . ':' . $self->password, '');
+    $ua->default_header(Authorization => $authorization);
     
     return $ua;
 }
