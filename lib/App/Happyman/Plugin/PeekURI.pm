@@ -44,10 +44,16 @@ sub _fetch_html_title {
 
     return if $response_headers->{'content-type'} !~ /html/;
     return unless $data;
+    
+    my $encoding;
+    if ($response_headers->{'content-type'} =~ /charset=(.+)/) {
+        $encoding = $1;
+    } 
 
     my $tree = XML::LibXML->load_html(
         string  => $data,
         recover => 1,
+        encoding => $encoding,
     );
 
     my $node = $tree->findnodes('//title')->[0];
