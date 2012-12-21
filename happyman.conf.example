@@ -6,3 +6,4 @@ channel = #happyman
 [PeekURI]
 [SocketAnnouncer]
 [NickReply]
+[RandomTopic]

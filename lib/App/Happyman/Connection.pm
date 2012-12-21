@@ -120,6 +120,11 @@ sub _build_irc {
             $irc->enable_ping(60);
             $self->_trigger_event('on_registered');
         },
+        channel_topic => sub {
+            my ($irc, $channel, $topic, $who) = @_;
+            say "Topic: $topic";
+            $self->_trigger_event('on_topic', $topic);
+        }
     );
 
     return $irc;
@@ -185,5 +190,11 @@ sub nick_exists {
 
     return defined $self->irc->nick_modes($self->channel, $nick);
 }
+
+sub set_topic {
+    my ($self, $topic) = @_;
+    $self->irc->send_msg('TOPIC', $self->channel, $topic);
+}
+
 
 __PACKAGE__->meta->make_immutable();
