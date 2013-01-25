@@ -5,6 +5,7 @@ use Moose;
 with 'App::Happyman::Plugin';
 
 use AnyEvent::HTTP;
+use AnyEvent::Twitter;
 use Coro;
 use JSON;
 use List::MoreUtils qw(natatime);
@@ -12,6 +13,30 @@ use Try::Tiny;
 use URI;
 use URI::Find;
 use XML::LibXML;
+
+has [qw(twitter_consumer_key twitter_consumer_secret twitter_token twitter_token_secret)]=> (
+    is => 'ro',
+    isa => 'Str',
+    required => 1,
+);
+
+has _twitter => (
+    is => 'ro',
+    isa => 'AnyEvent::Twitter',
+    lazy => 1,
+    builder => '_build_twitter',
+);
+
+sub _build_twitter {
+    my ($self) = @_;
+    return AnyEvent::Twitter->new(
+        consumer_key    => $self->twitter_consumer_key,
+        consumer_secret => $self->twitter_consumer_secret,
+        token           => $self->twitter_token,
+        token_secret    => $self->twitter_token_secret,
+    );
+}
+
 
 sub _ignore_link {
 }
@@ -21,13 +46,11 @@ sub _fetch_tweet_text {
     $uri =~ m{/(\d+)$};
     return unless $1;
 
-    http_get("http://api.twitter.com/1/statuses/show/$1.json",
-        Coro::rouse_cb);
-    my ($body, $headers) = Coro::rouse_wait();
-    my $data = decode_json($body);
-    return unless $data->{text};
+    $self->_twitter->get("statuses/show/$1", Coro::rouse_cb);
+    my ($header, $response, $reason) = Coro::rouse_wait();
+    return unless $response->{text};
 
-    return 'Tweet by @' . $data->{user}{screen_name} . ': ' . $data->{text};
+    return 'Tweet by @' . $response->{user}{screen_name} . ': ' . $response->{text};
 }
 
 sub _fetch_html_title {
@@ -44,11 +67,11 @@ sub _fetch_html_title {
 
     return if $response_headers->{'content-type'} !~ /html/;
     return unless $data;
-    
+
     my $encoding;
     if ($response_headers->{'content-type'} =~ /charset=(.+)/) {
         $encoding = $1;
-    } 
+    }
 
     my $tree = XML::LibXML->load_html(
         string  => $data,

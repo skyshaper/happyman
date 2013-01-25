@@ -19,6 +19,7 @@ Module::Build->new(
     'AnyEvent::Impl::Perl' => 0,
     'AnyEvent::Socket' => 0,
     'AnyEvent::Strict' => 0,
+    'AnyEvent::Twitter' => 0,
     'AnyEvent::Worker' => 0,
     'Class::Load' => 0,
     'Config::INI::Reader' => 0,

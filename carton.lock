@@ -448,6 +448,82 @@
          "target" : "AnyEvent::IRC::Util",
          "version" : "0.96"
       },
+      "AnyEvent::Twitter" : {
+         "dist" : "AnyEvent-Twitter-0.64",
+         "mymeta" : {
+            "abstract" : "A thin wrapper for Twitter API using OAuth",
+            "author" : [
+               "punytan <punytan@gmail.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "AnyEvent-Twitter",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t",
+                  "xt"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59",
+                     "Test::More" : "0.98"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "AnyEvent" : "5.34",
+                     "AnyEvent::HTTP" : "2.12",
+                     "Data::Recursive::Encode" : "0.04",
+                     "Digest::SHA" : "5.62",
+                     "HTTP::Request::Common" : "6.04",
+                     "JSON" : "2.53",
+                     "Net::OAuth" : "0.27",
+                     "Net::SSLeay" : "1.35",
+                     "Time::Piece" : "1.2",
+                     "URI" : "1.58",
+                     "URI::Escape" : "3.3",
+                     "perl" : "5.008"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "type" : "git",
+                  "url" : "git://github.com/punytan/AnyEvent-Twitter.git"
+               }
+            },
+            "version" : "0.64"
+         },
+         "name" : "AnyEvent::Twitter",
+         "pathname" : "P/PU/PUNYTAN/AnyEvent-Twitter-0.64.tar.gz",
+         "provides" : {
+            "AnyEvent::Twitter" : {
+               "file" : "AnyEvent/Twitter.pm",
+               "version" : "0.64"
+            }
+         },
+         "target" : "AnyEvent::Twitter",
+         "version" : "0.64"
+      },
       "AnyEvent::Worker" : {
          "dist" : "AnyEvent-Worker-0.06",
          "mymeta" : {
@@ -945,6 +1021,98 @@
          },
          "target" : "Carp::Clan",
          "version" : "6.04"
+      },
+      "Class::Accessor" : {
+         "dist" : "Class-Accessor-0.34",
+         "mymeta" : {
+            "abstract" : "unknown",
+            "author" : [
+               "Marty Pauley <marty+perl@kasei.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.42, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Class-Accessor",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "base" : "1.01"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.34"
+         },
+         "name" : "Class::Accessor",
+         "pathname" : "K/KA/KASEI/Class-Accessor-0.34.tar.gz",
+         "provides" : {
+            "Class::Accessor" : {
+               "file" : "Class/Accessor.pm",
+               "version" : "0.34"
+            },
+            "Class::Accessor::Fast" : {
+               "file" : "Class/Accessor/Fast.pm",
+               "version" : "0.34"
+            },
+            "Class::Accessor::Faster" : {
+               "file" : "Class/Accessor/Faster.pm",
+               "version" : "0.34"
+            }
+         },
+         "target" : "Class::Accessor",
+         "version" : "0.34"
+      },
+      "Class::Data::Inheritable" : {
+         "dist" : "Class-Data-Inheritable-0.08",
+         "mymeta" : {
+            "abstract" : "Inheritable, overridable class data",
+            "author" : [
+               "unknown"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.42, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Class-Data-Inheritable",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.08"
+         },
+         "name" : "Class::Data::Inheritable",
+         "pathname" : "T/TM/TMTM/Class-Data-Inheritable-0.08.tar.gz",
+         "provides" : {
+            "Class::Data::Inheritable" : {
+               "file" : "Class/Data/Inheritable.pm",
+               "version" : "0.08"
+            }
+         },
+         "target" : "Class::Data::Inheritable",
+         "version" : "0.08"
       },
       "Class::Inspector" : {
          "dist" : "Class-Inspector-1.27",
@@ -1913,6 +2081,67 @@
          },
          "target" : "Data::OptList",
          "version" : "0.107"
+      },
+      "Data::Recursive::Encode" : {
+         "dist" : "Data-Recursive-Encode-0.04",
+         "mymeta" : {
+            "abstract" : "Encode/Decode Values In A Structure",
+            "author" : [
+               "Tokuhiro Matsuno <tokuhirom AAJKLFJEF GMAIL COM>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 1.00, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Data-Recursive-Encode",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t",
+                  "xt"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42",
+                     "Test::More" : "0.94"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "perl" : "5.008001"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ]
+            },
+            "version" : "0.04"
+         },
+         "name" : "Data::Recursive::Encode",
+         "pathname" : "T/TO/TOKUHIROM/Data-Recursive-Encode-0.04.tar.gz",
+         "provides" : {
+            "Data::Recursive::Encode" : {
+               "file" : "Data/Recursive/Encode.pm",
+               "version" : "0.04"
+            }
+         },
+         "target" : "Data::Recursive::Encode",
+         "version" : "0.04"
       },
       "Data::Section" : {
          "dist" : "Data-Section-0.101621",
@@ -7565,6 +7794,126 @@
          "target" : "Devel::PartialDump",
          "version" : "0.15"
       },
+      "Digest::HMAC" : {
+         "dist" : "Digest-HMAC-1.03",
+         "mymeta" : {
+            "abstract" : "Keyed-Hashing for Message Authentication",
+            "author" : [
+               "Gisle Aas <gisle@activestate.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.57_05, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Digest-HMAC",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Digest::MD5" : "2",
+                     "Digest::SHA" : "1",
+                     "perl" : "5.004"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "1.03"
+         },
+         "name" : "Digest::HMAC",
+         "pathname" : "G/GA/GAAS/Digest-HMAC-1.03.tar.gz",
+         "provides" : {
+            "Digest::HMAC" : {
+               "file" : "Digest/HMAC.pm",
+               "version" : "1.03"
+            },
+            "Digest::HMAC_MD5" : {
+               "file" : "Digest/HMAC_MD5.pm",
+               "version" : "1.01"
+            },
+            "Digest::HMAC_SHA1" : {
+               "file" : "Digest/HMAC_SHA1.pm",
+               "version" : "1.03"
+            }
+         },
+         "target" : "Digest::HMAC_SHA1",
+         "version" : "1.03"
+      },
+      "Digest::SHA1" : {
+         "dist" : "Digest-SHA1-2.13",
+         "mymeta" : {
+            "abstract" : "Perl interface to the SHA-1 algorithm",
+            "author" : [
+               "Gisle Aas <gisle@activestate.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Digest-SHA1",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Digest::base" : "1.00",
+                     "perl" : "5.004"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "2.13",
+            "x_repository" : "http://github.com/gisle/digest-sha1"
+         },
+         "name" : "Digest::SHA1",
+         "pathname" : "G/GA/GAAS/Digest-SHA1-2.13.tar.gz",
+         "provides" : {
+            "Digest::SHA1" : {
+               "file" : "Digest/SHA1.pm",
+               "version" : "2.13"
+            }
+         },
+         "target" : "Digest::SHA1",
+         "version" : "2.13"
+      },
       "Dist::CheckConflicts" : {
          "dist" : "Dist-CheckConflicts-0.02",
          "mymeta" : {
@@ -8777,7 +9126,7 @@
          "version" : "6.02"
       },
       "HTTP::Message" : {
-         "dist" : "HTTP-Message-6.03",
+         "dist" : "HTTP-Message-6.06",
          "mymeta" : {
             "abstract" : "HTTP style messages",
             "author" : [
@@ -8813,13 +9162,13 @@
                "runtime" : {
                   "requires" : {
                      "Compress::Raw::Zlib" : "0",
-                     "Encode" : "2.12",
+                     "Encode" : "2.21",
                      "Encode::Locale" : "1",
-                     "HTML::Parser" : "3.33",
                      "HTTP::Date" : "6",
                      "IO::Compress::Bzip2" : "2.021",
                      "IO::Compress::Deflate" : "0",
                      "IO::Compress::Gzip" : "0",
+                     "IO::HTML" : "0",
                      "IO::Uncompress::Bunzip2" : "2.021",
                      "IO::Uncompress::Gunzip" : "0",
                      "IO::Uncompress::Inflate" : "0",
@@ -8835,14 +9184,14 @@
             "release_status" : "stable",
             "resources" : {
                "repository" : {
-                  "url" : "http://github.com/gisle/http-message"
+                  "url" : "http://github.com/libwww-perl/http-message"
                },
                "x_MailingList" : "mailto:libwww@perl.org"
             },
-            "version" : "6.03"
+            "version" : "6.06"
          },
          "name" : "HTTP::Message",
-         "pathname" : "G/GA/GAAS/HTTP-Message-6.03.tar.gz",
+         "pathname" : "G/GA/GAAS/HTTP-Message-6.06.tar.gz",
          "provides" : {
             "HTTP::Config" : {
                "file" : "HTTP/Config.pm",
@@ -8850,7 +9199,7 @@
             },
             "HTTP::Headers" : {
                "file" : "HTTP/Headers.pm",
-               "version" : "6.00"
+               "version" : "6.05"
             },
             "HTTP::Headers::Auth" : {
                "file" : "HTTP/Headers/Auth.pm",
@@ -8866,7 +9215,7 @@
             },
             "HTTP::Message" : {
                "file" : "HTTP/Message.pm",
-               "version" : "6.03"
+               "version" : "6.06"
             },
             "HTTP::Request" : {
                "file" : "HTTP/Request.pm",
@@ -8874,19 +9223,19 @@
             },
             "HTTP::Request::Common" : {
                "file" : "HTTP/Request/Common.pm",
-               "version" : "6.03"
+               "version" : "6.04"
             },
             "HTTP::Response" : {
                "file" : "HTTP/Response.pm",
-               "version" : "6.03"
+               "version" : "6.04"
             },
             "HTTP::Status" : {
                "file" : "HTTP/Status.pm",
                "version" : "6.03"
             }
          },
-         "target" : "HTTP::Response",
-         "version" : "6.03"
+         "target" : "HTTP::Request::Common",
+         "version" : "6.06"
       },
       "HTTP::Negotiate" : {
          "dist" : "HTTP-Negotiate-6.01",
@@ -9012,6 +9361,248 @@
          },
          "target" : "Hook::LexWrap",
          "version" : "0.24"
+      },
+      "IO::HTML" : {
+         "dist" : "IO-HTML-0.04",
+         "mymeta" : {
+            "abstract" : "Open an HTML file with automatic charset detection",
+            "author" : [
+               "Christopher J. Madsen <perl@cjmweb.net>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Dist::Zilla version 4.300006, CPAN::Meta::Converter version 2.113640, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "IO-HTML",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "File::Temp" : "0",
+                     "Scalar::Util" : "0",
+                     "Test::More" : "0.88"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.30"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Carp" : "0",
+                     "Encode" : "2.10",
+                     "Exporter" : "5.57"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "type" : "git",
+                  "url" : "git://github.com/madsen/io-html.git"
+               }
+            },
+            "version" : "0.04",
+            "x_Dist_Zilla" : {
+               "plugins" : [
+                  {
+                     "class" : "Dist::Zilla::Plugin::VersionFromModule",
+                     "name" : "CJM/VersionFromModule",
+                     "version" : "0.08"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::GatherDir",
+                     "name" : "CJM/GatherDir",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::PruneCruft",
+                     "name" : "CJM/PruneCruft",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::ManifestSkip",
+                     "name" : "CJM/ManifestSkip",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::MetaJSON",
+                     "name" : "CJM/MetaJSON",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::MetaYAML",
+                     "name" : "CJM/MetaYAML",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::License",
+                     "name" : "CJM/License",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Test::PrereqsFromMeta",
+                     "name" : "CJM/Test::PrereqsFromMeta",
+                     "version" : "4.04"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::PodSyntaxTests",
+                     "name" : "CJM/PodSyntaxTests",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::PodCoverageTests",
+                     "name" : "CJM/PodCoverageTests",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::ExtraTests",
+                     "name" : "CJM/ExtraTests",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::PodLoom",
+                     "config" : {
+                        "Pod::Loom version" : "0.05"
+                     },
+                     "name" : "CJM/PodLoom",
+                     "version" : "4.10"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::MakeMaker",
+                     "name" : "CJM/MakeMaker",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::MetaConfig",
+                     "name" : "CJM/MetaConfig",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::MatchManifest",
+                     "name" : "CJM/MatchManifest",
+                     "version" : "4.00"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::RecommendedPrereqs",
+                     "name" : "CJM/RecommendedPrereqs",
+                     "version" : "4.06"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::CheckPrereqsIndexed",
+                     "name" : "CJM/CheckPrereqsIndexed",
+                     "version" : "0.006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::GitVersionCheckCJM",
+                     "name" : "CJM/GitVersionCheckCJM",
+                     "version" : "4.03"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::TemplateCJM",
+                     "name" : "CJM/TemplateCJM",
+                     "version" : "4.00"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Repository",
+                     "name" : "CJM/Repository",
+                     "version" : "0.18"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Git::Check",
+                     "name" : "CJM/@Git/Check",
+                     "version" : "1.112510"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Git::Commit",
+                     "name" : "CJM/@Git/Commit",
+                     "version" : "1.112510"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Git::Tag",
+                     "name" : "CJM/@Git/Tag",
+                     "version" : "1.112510"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::Git::Push",
+                     "name" : "CJM/@Git/Push",
+                     "version" : "1.112510"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::TestRelease",
+                     "name" : "CJM/TestRelease",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::UploadToCPAN",
+                     "name" : "CJM/UploadToCPAN",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::ArchiveRelease",
+                     "name" : "CJM/ArchiveRelease",
+                     "version" : "4.00"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::AutoPrereqs",
+                     "name" : "AutoPrereqs",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":InstallModules",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":IncModules",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":TestFiles",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":ExecFiles",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":ShareFiles",
+                     "version" : "4.300006"
+                  },
+                  {
+                     "class" : "Dist::Zilla::Plugin::FinderCode",
+                     "name" : ":MainModule",
+                     "version" : "4.300006"
+                  }
+               ],
+               "zilla" : {
+                  "class" : "Dist::Zilla::Dist::Builder",
+                  "config" : {
+                     "is_trial" : "0"
+                  },
+                  "version" : "4.300006"
+               }
+            }
+         },
+         "name" : "IO::HTML",
+         "pathname" : "C/CJ/CJM/IO-HTML-0.04.tar.gz",
+         "provides" : {
+            "IO::HTML" : {
+               "file" : "IO/HTML.pm",
+               "version" : "0.04"
+            }
+         },
+         "target" : "IO::HTML",
+         "version" : "0.04"
       },
       "IO::String" : {
          "dist" : "IO-String-1.08",
@@ -11211,6 +11802,235 @@
          },
          "target" : "Net::HTTP",
          "version" : "6.03"
+      },
+      "Net::OAuth" : {
+         "dist" : "Net-OAuth-0.28",
+         "mymeta" : {
+            "abstract" : "An implementation of the OAuth protocol",
+            "author" : [
+               "Keith Grennan <kgrennan@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Build version 0.3901, CPAN::Meta::Converter version 2.120630",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Net-OAuth",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0.66",
+                     "Test::Warn" : "0.21"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "Module::Build" : "0.36"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Class::Accessor" : "0.31",
+                     "Class::Data::Inheritable" : "0.06",
+                     "Digest::HMAC_SHA1" : "1.01",
+                     "Digest::SHA" : "5.47",
+                     "Digest::SHA1" : "2.12",
+                     "Encode" : "2.35",
+                     "LWP::UserAgent" : "1",
+                     "URI::Escape" : "3.28"
+                  }
+               }
+            },
+            "provides" : {
+               "Net::OAuth" : {
+                  "file" : "lib/Net/OAuth.pm",
+                  "version" : "0.28"
+               },
+               "Net::OAuth::AccessToken" : {
+                  "file" : "lib/Net/OAuth/AccessToken.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::AccessTokenRequest" : {
+                  "file" : "lib/Net/OAuth/AccessTokenRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::AccessTokenResponse" : {
+                  "file" : "lib/Net/OAuth/AccessTokenResponse.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::Client" : {
+                  "file" : "lib/Net/OAuth/Client.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::ConsumerRequest" : {
+                  "file" : "lib/Net/OAuth/ConsumerRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::Message" : {
+                  "file" : "lib/Net/OAuth/Message.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::ProtectedResourceRequest" : {
+                  "file" : "lib/Net/OAuth/ProtectedResourceRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::Request" : {
+                  "file" : "lib/Net/OAuth/Request.pm",
+                  "version" : "0.28"
+               },
+               "Net::OAuth::RequestTokenRequest" : {
+                  "file" : "lib/Net/OAuth/RequestTokenRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::RequestTokenResponse" : {
+                  "file" : "lib/Net/OAuth/RequestTokenResponse.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::Response" : {
+                  "file" : "lib/Net/OAuth/Response.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::SignatureMethod::HMAC_SHA1" : {
+                  "file" : "lib/Net/OAuth/SignatureMethod/HMAC_SHA1.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::SignatureMethod::HMAC_SHA256" : {
+                  "file" : "lib/Net/OAuth/SignatureMethod/HMAC_SHA256.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::SignatureMethod::PLAINTEXT" : {
+                  "file" : "lib/Net/OAuth/SignatureMethod/PLAINTEXT.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::SignatureMethod::RSA_SHA1" : {
+                  "file" : "lib/Net/OAuth/SignatureMethod/RSA_SHA1.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::UserAuthRequest" : {
+                  "file" : "lib/Net/OAuth/UserAuthRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::UserAuthResponse" : {
+                  "file" : "lib/Net/OAuth/UserAuthResponse.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::V1_0A::AccessTokenRequest" : {
+                  "file" : "lib/Net/OAuth/V1_0A/AccessTokenRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::V1_0A::RequestTokenRequest" : {
+                  "file" : "lib/Net/OAuth/V1_0A/RequestTokenRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::V1_0A::RequestTokenResponse" : {
+                  "file" : "lib/Net/OAuth/V1_0A/RequestTokenResponse.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::V1_0A::UserAuthResponse" : {
+                  "file" : "lib/Net/OAuth/V1_0A/UserAuthResponse.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::XauthAccessTokenRequest" : {
+                  "file" : "lib/Net/OAuth/XauthAccessTokenRequest.pm",
+                  "version" : "0"
+               },
+               "Net::OAuth::YahooAccessTokenRefreshRequest" : {
+                  "file" : "lib/Net/OAuth/YahooAccessTokenRefreshRequest.pm",
+                  "version" : "0"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ]
+            },
+            "version" : "0.28"
+         },
+         "name" : "Net::OAuth",
+         "pathname" : "K/KG/KGRENNAN/Net-OAuth-0.28.tar.gz",
+         "provides" : {
+            "Net::OAuth" : {
+               "file" : "Net/OAuth.pm",
+               "version" : "0.28"
+            },
+            "Net::OAuth::AccessToken" : {
+               "file" : "Net/OAuth/AccessToken.pm"
+            },
+            "Net::OAuth::AccessTokenRequest" : {
+               "file" : "Net/OAuth/AccessTokenRequest.pm"
+            },
+            "Net::OAuth::AccessTokenResponse" : {
+               "file" : "Net/OAuth/AccessTokenResponse.pm"
+            },
+            "Net::OAuth::Client" : {
+               "file" : "Net/OAuth/Client.pm"
+            },
+            "Net::OAuth::ConsumerRequest" : {
+               "file" : "Net/OAuth/ConsumerRequest.pm"
+            },
+            "Net::OAuth::Message" : {
+               "file" : "Net/OAuth/Message.pm"
+            },
+            "Net::OAuth::ProtectedResourceRequest" : {
+               "file" : "Net/OAuth/ProtectedResourceRequest.pm"
+            },
+            "Net::OAuth::Request" : {
+               "file" : "Net/OAuth/Request.pm",
+               "version" : "0.28"
+            },
+            "Net::OAuth::RequestTokenRequest" : {
+               "file" : "Net/OAuth/RequestTokenRequest.pm"
+            },
+            "Net::OAuth::RequestTokenResponse" : {
+               "file" : "Net/OAuth/RequestTokenResponse.pm"
+            },
+            "Net::OAuth::Response" : {
+               "file" : "Net/OAuth/Response.pm"
+            },
+            "Net::OAuth::SignatureMethod::HMAC_SHA1" : {
+               "file" : "Net/OAuth/SignatureMethod/HMAC_SHA1.pm"
+            },
+            "Net::OAuth::SignatureMethod::HMAC_SHA256" : {
+               "file" : "Net/OAuth/SignatureMethod/HMAC_SHA256.pm"
+            },
+            "Net::OAuth::SignatureMethod::PLAINTEXT" : {
+               "file" : "Net/OAuth/SignatureMethod/PLAINTEXT.pm"
+            },
+            "Net::OAuth::SignatureMethod::RSA_SHA1" : {
+               "file" : "Net/OAuth/SignatureMethod/RSA_SHA1.pm"
+            },
+            "Net::OAuth::UserAuthRequest" : {
+               "file" : "Net/OAuth/UserAuthRequest.pm"
+            },
+            "Net::OAuth::UserAuthResponse" : {
+               "file" : "Net/OAuth/UserAuthResponse.pm"
+            },
+            "Net::OAuth::V1_0A::AccessTokenRequest" : {
+               "file" : "Net/OAuth/V1_0A/AccessTokenRequest.pm"
+            },
+            "Net::OAuth::V1_0A::RequestTokenRequest" : {
+               "file" : "Net/OAuth/V1_0A/RequestTokenRequest.pm"
+            },
+            "Net::OAuth::V1_0A::RequestTokenResponse" : {
+               "file" : "Net/OAuth/V1_0A/RequestTokenResponse.pm"
+            },
+            "Net::OAuth::V1_0A::UserAuthResponse" : {
+               "file" : "Net/OAuth/V1_0A/UserAuthResponse.pm"
+            },
+            "Net::OAuth::XauthAccessTokenRequest" : {
+               "file" : "Net/OAuth/XauthAccessTokenRequest.pm"
+            },
+            "Net::OAuth::YahooAccessTokenRefreshRequest" : {
+               "file" : "Net/OAuth/YahooAccessTokenRefreshRequest.pm"
+            }
+         },
+         "target" : "Net::OAuth",
+         "version" : "0.28"
       },
       "Net::SSLeay" : {
          "dist" : "Net-SSLeay-1.48",
