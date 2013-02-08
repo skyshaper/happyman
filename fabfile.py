@@ -8,3 +8,6 @@ def deploy():
     with cd('happyman'):
         run('git pull')
     run('svc -t ~/service/happyman')
+    
+def restart():
+    run('svc -t ~/service/happyman')
