@@ -29,6 +29,12 @@ has check_interval => (
     default => 1800,
 );
 
+has min_line_length => (
+    is => 'ro',
+    isa => 'Int',
+    default => '12',
+);
+
 has min_topic_age => (
     is => 'ro',
     isa => 'Int',
@@ -46,8 +52,10 @@ sub _build_lines {
     my @lines;
 
     while (<DATA>) {
-      chomp;
-      push @lines, $_;
+        chomp;
+        if ( length($_) >= $self->min_line_length ) {
+            push @lines, $_;
+        }
     }
 
     return \@lines;
