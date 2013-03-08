@@ -80,12 +80,28 @@ sub _build_timer {
 
         return if not defined $self->_topic_time();
         return if (time - $self->_topic_time()) < $self->min_topic_age;
-
-        my $line = $self->_random_line();
-        say $line;
-        $self->conn->set_topic($line);
+        
+        $self->_set_random_topic();
     });
 }
+
+sub _set_random_topic {
+    my ($self) = @_;
+
+    my $line = $self->_random_line();
+    say $line;
+    $self->conn->set_topic($line);
+}
+
+
+sub on_message {
+    my ($self, $msg) = @_;
+
+    if ($msg->full_text =~ /^\!topic\s*$/) {
+        $self->_set_random_topic();
+    }
+}
+
 
 __PACKAGE__->meta->make_immutable();
 
