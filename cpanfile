@@ -14,6 +14,7 @@ requires 'LWP::UserAgent';
 requires 'LWP::Protocol::AnyEvent::http';
 requires 'Moose';
 requires 'Net::SSLeay';
+requires 'Test::Spec';
 requires 'Try::Tiny';
 requires 'TryCatch';
 requires 'URI';
