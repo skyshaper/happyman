@@ -1,6 +1,7 @@
 use v5.16;
 use warnings;
 
+use App::Happyman::Test;
 use AnyEvent;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(prefix_nick);
@@ -9,26 +10,12 @@ use Test::More tests => 5;
 use_ok('App::Happyman::Connection');
 use_ok('App::Happyman::Plugin::NickReply');
 
-my $happyman = App::Happyman::Connection->new(
-    nick    => 'happyman',
-    host    => 'localhost',
-    port    => 6667,
-    channel => '#happyman',
-);
-$happyman->add_plugin(App::Happyman::Plugin::NickReply->new());
-
-my $irc = AnyEvent::IRC::Client->new();
-my $cv  = AE::cv;
-$irc->reg_cb(connect => $cv);
-$irc->connect('localhost', 6667, { nick => 'HMTest' });
-my (undef, $error) = $cv->recv();
-if ($error) {
-    BAIL_OUT("Failed to connect to test IRC server!: $error");
-}
+my $happyman = make_happyman_with_plugin('App::Happyman::Plugin::NickReply', {});
+my $irc = make_test_client();
 
 $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'happyman');
-$cv = AE::cv;
-$irc->send_srv('JOIN', '#happyman');
+my $cv = AE::cv;
+
 $irc->reg_cb(publicmsg => $cv);
 my $timer = AE::timer(5, 0, $cv);
 my (undef, undef, $ircmsg) = $cv->recv();
