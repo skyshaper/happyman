@@ -43,15 +43,15 @@ describe 'The RandomTopic plugin' => sub {
         }
         
     };
-    
-    describe 'with short time settings with a timeout of 10 seconds' => sub {
+        
+    describe 'with low topic age setting' => sub {
         my ($previous_topic, $topic, $happyman);
         
         before all => sub {
             diag 'Making short time happyman';
             $happyman = make_happyman_with_plugin('App::Happyman::Plugin::RandomTopic', {
                 check_interval => 1,
-                min_topic_age => 1,
+                min_topic_age => 3,
             });
         };
         
@@ -60,22 +60,45 @@ describe 'The RandomTopic plugin' => sub {
             $happyman->disconnect_and_wait();
         };
         
-        before each => sub {
-            diag 'Waiting on topic';
-            $previous_topic = $topic;
-            (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 10);
-        };
+        describe 'with a timeout of 5 seconds' => sub {
+            before each => sub {
+                diag 'Waiting on topic';
+                $previous_topic = $topic;
+                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 5);
+            };
         
-        it 'should set a topic' => sub {        
-            ok($topic);
-        };
+            it 'should set a topic' => sub {        
+                ok($topic);
+            };
 
-        it 'should set another topic' => sub {
-            ok($topic);
+            it 'should set another topic' => sub {
+                ok($topic);
+            };
+        
+            it 'should set a another topic different from the previous one' => sub {
+                isnt($topic, $previous_topic);
+            };
         };
         
-        it 'should set a another topic different from the previous one' => sub {
-            isnt($topic, $previous_topic);
+        describe 'with the user setting a topic' => sub {
+            before each => sub {
+                $irc->send_msg('TOPIC', '#happyman', 'User topic');
+                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 5);
+                if ($topic ne 'User topic') {
+                    BAIL_OUT('Failed to set user topic');
+                }
+            };
+            
+            it 'should not set a topic in 3 seconds' => sub {
+                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 3);
+                ok(!$topic);
+            };
+            
+            it 'should set a topic in 5 seconds' => sub {
+                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 5);
+                ok($topic);
+            };
+            
         };
     };
     
