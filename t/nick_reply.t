@@ -32,16 +32,6 @@ describe 'The NickReply plugin' => sub {
             (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 5);  
         };
     
-        it 'should reply' => sub {
-            if ($ircmsg) {
-                my $sender = prefix_nick($ircmsg->{prefix});
-                is($sender, 'happyman');
-            }
-            else {
-                fail();
-            }
-        };
-    
         it 'should reply with sender\'s nickname' => sub {
             if ($ircmsg) {
                 my $full_text = $ircmsg->{params}->[1];
