@@ -29,15 +29,12 @@ describe 'The NickReply plugin' => sub {
         
         before each => sub {
             $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'happyman');
-            my $cv = AE::cv;
-            $irc->reg_cb(publicmsg => $cv);
-            my $timer = AE::timer(5, 0, $cv);
-            (undef, undef, $ircmsg) = $cv->recv();        
+            (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 5);  
         };
     
         it 'should reply' => sub {
             if ($ircmsg) {
-                my $sender    = prefix_nick($ircmsg->{prefix});
+                my $sender = prefix_nick($ircmsg->{prefix});
                 is($sender, 'happyman');
             }
             else {
@@ -54,20 +51,24 @@ describe 'The NickReply plugin' => sub {
                 fail();
             }
         };
-    };    
-            
-    it 'should not reply to other words' => sub {
-        $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'foobar');
-        my $cv = AE::cv;
-        $irc->reg_cb(publicmsg => $cv);
-        my $timer = AE::timer(5, 0, $cv);
-        my (undef, undef, $ircmsg) = $cv->recv();
-        if ($ircmsg) {
-            fail();
-        }
-        else {
-            pass();
-        }
+    };
+    
+    describe 'when receiving other messages' => sub {
+        my $ircmsg;
+                
+        before each => sub {
+            $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'foobar');
+            (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 5);
+        };
+        
+        it 'should not reply' => sub {
+            if ($ircmsg) {
+                fail();
+            }
+            else {
+                pass();
+            }
+        };
     };
 };
 
