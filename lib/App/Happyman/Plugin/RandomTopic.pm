@@ -10,6 +10,7 @@ has _lines => (
     is => 'ro',
     isa => 'ArrayRef[Str]',
     builder => '_build_lines',
+    lazy => 1,
 );
 
 has _timer => (
@@ -32,7 +33,7 @@ has check_interval => (
 has min_line_length => (
     is => 'ro',
     isa => 'Int',
-    default => '12',
+    default => 12,
 );
 
 has min_topic_age => (
@@ -49,16 +50,9 @@ sub BUILD {
 
 sub _build_lines {
     my ($self) = @_;
-    my @lines;
-
-    while (<DATA>) {
-        chomp;
-        if ( length($_) >= $self->min_line_length ) {
-            push @lines, $_;
-        }
-    }
-
-    return \@lines;
+    
+    return [ grep { length >= $self->min_line_length } 
+             map { chomp; $_} <DATA> ];
 }
 
 sub _random_line {
