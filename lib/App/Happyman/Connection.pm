@@ -151,6 +151,16 @@ sub run {
     }
 }
 
+sub disconnect_and_wait {
+    my ($self) = @_;
+    my $cv = AE::cv;
+    $self->irc->reg_cb(disconnect => $cv);
+    $self->irc->disconnect();
+    $cv->recv();
+    return;
+}
+
+
 sub _trigger_event {
     my ($self, $name, $msg) = @_;
 

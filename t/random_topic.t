@@ -27,6 +27,8 @@ for (1..10) {
     isnt($topic, $previous_topic, "topic $_ is not equal to previous topic");
 }
 
+$happyman->disconnect_and_wait();
+
 $happyman = make_happyman_with_plugin('App::Happyman::Plugin::RandomTopic', {});
 $cv = AE::cv;
 $timer = AE::timer(5, 0, $cv);
