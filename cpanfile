@@ -7,6 +7,7 @@ requires 'AnyEvent::Worker';
 requires 'Class::Load';
 requires 'Config::INI::Reader';
 requires 'Coro';
+requires 'Data::Handle';
 requires 'JSON';
 requires 'List::MoreUtils';
 requires 'LWP::UserAgent';

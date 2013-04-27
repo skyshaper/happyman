@@ -5,6 +5,7 @@ use Moose;
 with 'App::Happyman::Plugin';
 
 use AnyEvent;
+use Data::Handle;
 
 has _lines => (
     is => 'ro',
@@ -50,9 +51,9 @@ sub BUILD {
 
 sub _build_lines {
     my ($self) = @_;
-    
+    my $handle = Data::Handle->new(__PACKAGE__);
     return [ grep { length >= $self->min_line_length } 
-             map { chomp; $_} <DATA> ];
+              map { chomp; $_} <$handle> ];
 }
 
 sub _random_line {
