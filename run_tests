@@ -1,0 +1,2 @@
+#!/bin/sh
+carton exec prove -Ilib t/*.t
