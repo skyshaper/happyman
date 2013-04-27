@@ -8,6 +8,7 @@ requires 'Class::Load';
 requires 'Config::INI::Reader';
 requires 'Coro';
 requires 'Data::Handle';
+requires 'File::Slurp';
 requires 'JSON';
 requires 'List::MoreUtils';
 requires 'LWP::UserAgent';
