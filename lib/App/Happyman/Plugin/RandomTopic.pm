@@ -27,7 +27,7 @@ has _topic_time => (
 
 has check_interval => (
     is => 'ro',
-    isa => 'Int',
+    isa => 'Num',
     default => 1800,
 );
 

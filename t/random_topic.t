@@ -50,7 +50,7 @@ describe 'The RandomTopic plugin' => sub {
         before all => sub {
             diag 'Making short time happyman';
             $happyman = make_happyman_with_plugin('App::Happyman::Plugin::RandomTopic', {
-                check_interval => 1,
+                check_interval => 0.2,
                 min_topic_age => 3,
             });
         };
@@ -89,8 +89,8 @@ describe 'The RandomTopic plugin' => sub {
                 }
             };
             
-            it 'should not set a topic in 3 seconds' => sub {
-                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 3);
+            it 'should not set a topic in 2 seconds' => sub {
+                (undef, undef, $topic, undef) = wait_on_event_or_timeout($irc, 'channel_topic', 2);
                 ok(!$topic);
             };
             
