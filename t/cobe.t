@@ -26,8 +26,8 @@ describe 'The Cobe plugin' => sub {
     };
     
     after each => sub {
-        disconnect_and_wait($irc);
         $happyman->disconnect_and_wait();
+        disconnect_and_wait($irc);
     };
         
     describe 'with an empty brain' => sub {
@@ -48,7 +48,7 @@ describe 'The Cobe plugin' => sub {
         before each => sub {
             for (1..20) {
                 $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'Are you happy, man?');
-            }
+             }
         };
         
         describe 'when addressed' => sub {

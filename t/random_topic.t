@@ -20,7 +20,7 @@ describe 'The RandomTopic plugin' => sub {
 
     after all => sub {
         diag 'Disconnecting test client';
-        $irc->disconnect();
+        disconnect_and_wait($irc);
     };
     
     describe 'with default settings when issued the !topic command with a 5 second timeout' => sub {

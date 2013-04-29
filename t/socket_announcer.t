@@ -26,7 +26,7 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     after all => sub {
         $happyman->disconnect_and_wait();
-        $irc->disconnect();
+        disconnect_and_wait($irc);
     };
     
     it 'should accept HTTP requests on its socket' => sub {

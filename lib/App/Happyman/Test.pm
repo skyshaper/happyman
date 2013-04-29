@@ -45,7 +45,7 @@ sub disconnect_and_wait {
     my ($irc) = @_;
     my $cv = AE::cv;
     $irc->reg_cb(disconnect => $cv);
-    $irc->disconnect();    
+    $irc->send_srv('QUIT');
     $cv->recv();
     return;
 }
