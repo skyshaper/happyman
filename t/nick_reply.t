@@ -21,7 +21,7 @@ describe 'The NickReply plugin' => sub {
     
     after each => sub {
         $happyman->disconnect_and_wait();
-        $irc->disconnect();
+        disconnect_and_wait($irc);
     };
     
     describe 'when mentioned with nickname' => sub {
