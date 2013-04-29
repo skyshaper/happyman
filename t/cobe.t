@@ -5,7 +5,6 @@ use App::Happyman::Test;
 use AnyEvent;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(prefix_nick);
-use Bot::Training;
 use File::Slurp qw(read_file);
 use File::Temp;
 use Test::Spec;
