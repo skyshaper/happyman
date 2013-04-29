@@ -19,10 +19,10 @@ has [qw/_in _out/] => (
     isa => 'Coro::Handle',
 );
 
-has command => (
+has brain => (
     is      => 'ro',
     isa     => 'Str',
-    default => './python/bin/python ./python/cobe_pipe.py ./cobe.sqlite',
+    default => 'cobe.sqlite',
 );
 
 sub BUILD { shift->_child }
@@ -32,7 +32,7 @@ sub _spawn_child {
 
     my ($in, $out);
 
-    my $pid = open2($out, $in, $self->command);
+    my $pid = open2($out, $in, './python/bin/python ./python/cobe_pipe.py ' . $self->brain);
     binmode $out, ':encoding(UTF-8)';
 
     $self->_in(Coro::Handle->new_from_fh($in));

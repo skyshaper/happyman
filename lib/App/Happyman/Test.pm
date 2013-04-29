@@ -3,7 +3,7 @@ use v5.16;
 use warnings;
 
 use parent 'Exporter';
-our @EXPORT = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout);
+our @EXPORT = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait);
 
 use AnyEvent;
 
@@ -41,5 +41,13 @@ sub wait_on_event_or_timeout {
     return $cv->recv();
 }
 
+sub disconnect_and_wait {
+    my ($irc) = @_;
+    my $cv = AE::cv;
+    $irc->reg_cb(disconnect => $cv);
+    $irc->disconnect();    
+    $cv->recv();
+    return;
+}
 
 1;
