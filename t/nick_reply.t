@@ -35,7 +35,7 @@ describe 'The NickReply plugin' => sub {
         it 'should reply with sender\'s nickname' => sub {
             if ($ircmsg) {
                 my $full_text = $ircmsg->{params}->[1];
-                is($full_text, 'HMTest');
+                is($full_text, $irc->nick);
             }
             else {
                 fail();
