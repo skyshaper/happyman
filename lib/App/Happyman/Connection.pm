@@ -56,6 +56,13 @@ has '_plugins' => (
     default => sub { [] },
 );
 
+has '_stay_connected' => (
+    is => 'rw',
+    isa => 'Bool',
+    default => 1,
+);
+
+
 sub add_plugin {
     my ($self, $plugin) = @_;
 
@@ -113,7 +120,7 @@ sub _build_irc {
         },
         disconnect => sub {
             say 'Disconnected';
-            $self->_retry_connect();
+            $self->_retry_connect() if $self->_stay_connected;
         },
         registered => sub {
             say 'Registered';
@@ -154,6 +161,7 @@ sub run {
 sub disconnect_and_wait {
     my ($self) = @_;
     my $cv = AE::cv;
+    $self->_stay_connected(0);
     $self->irc->reg_cb(disconnect => $cv);
     $self->irc->disconnect();
     $cv->recv();
