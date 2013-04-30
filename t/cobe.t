@@ -13,25 +13,23 @@ use_ok('App::Happyman::Connection');
 use_ok('App::Happyman::Plugin::Cobe');
 
 describe 'The Cobe plugin' => sub {
-    my $happyman;
-    my $irc;
-    my $tempdir;
+    my ( $happyman, $irc, $tempdir );
 
-    before each => sub {
+    before sub {
         $irc      = make_test_client();
         $tempdir  = File::Temp->newdir();
         $happyman = make_happyman_with_plugin( 'App::Happyman::Plugin::Cobe',
             { brain => "$tempdir/cobe_test.sqlite" } );
     };
 
-    after each => sub {
+    after sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };
 
     describe 'with an empty brain' => sub {
         describe 'when addressed' => sub {
-            before each => sub {
+            before sub {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
                     '#happyman', 'happyman: hello'
@@ -39,17 +37,14 @@ describe 'The Cobe plugin' => sub {
             };
 
             it 'tells the sender it does not know enough yet' => sub {
-                my ( undef, undef, $ircmsg )
-                    = wait_on_event_or_timeout( $irc, 'publicmsg', 5 );
-                my $full_text = $ircmsg->{params}->[1];
-                is( $full_text,
+                is( wait_on_message_or_timeout( $irc, 5 ),
                     'HMTest: I don\'t know enough to answer you yet!' );
             };
         };
     };
 
     describe 'with a trained brain' => sub {
-        before each => sub {
+        before sub {
             for ( 1 .. 20 ) {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
@@ -59,7 +54,7 @@ describe 'The Cobe plugin' => sub {
         };
 
         describe 'when addressed' => sub {
-            before each => sub {
+            before sub {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
                     '#happyman', 'happyman: hello'
@@ -67,10 +62,9 @@ describe 'The Cobe plugin' => sub {
             };
 
             it 'gives the sender an answer' => sub {
-                my ( undef, undef, $ircmsg )
-                    = wait_on_event_or_timeout( $irc, 'publicmsg', 30 );
-                my $full_text = $ircmsg->{params}->[1];
-                is( $full_text, 'HMTest: Are you happy, man?' );
+                is( wait_on_message_or_timeout( $irc, 30 ),
+                    'HMTest: Are you happy, man?'
+                );
             };
             }
     };

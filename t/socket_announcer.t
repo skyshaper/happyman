@@ -36,7 +36,7 @@ describe 'The SocketAnnouncer plugin' => sub {
     };
 
     describe 'when sent a plain message' => sub {
-        before each => sub {
+        before sub {
             $lwp->post(
                 'http://localhost:6666/plain',
                 { message => 'Hello World', }
@@ -44,21 +44,13 @@ describe 'The SocketAnnouncer plugin' => sub {
         };
 
         it 'should send the message to the channel' => sub {
-            my ( undef, undef, $ircmsg )
-                = wait_on_event_or_timeout( $irc, 'publicmsg', 5 );
-            if ($ircmsg) {
-                my $full_text = $ircmsg->{params}->[1];
-                is( $full_text, 'Hello World' );
-            }
-            else {
-                fail();
-            }
+            is( wait_on_message_or_timeout( $irc, 5 ), 'Hello World' );
         };
     };
 
     describe 'when sent an example GitHub payload' => sub {
 
-        before each => sub {
+        before sub {
             my $github_payload = read_file( Data::Handle->new(__PACKAGE__) );
             $lwp->post(
                 'http://localhost:6666/github',

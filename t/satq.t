@@ -28,7 +28,7 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
         );
     };
 
-    before each => sub {
+    before sub {
         $happyman = make_happyman_with_plugin(
             'App::Happyman::Plugin::SATQ',
             {   uri      => 'http://localhost:7777/quotes',
@@ -40,7 +40,7 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
         $http_request_cv = AE::cv;
     };
 
-    after each => sub {
+    after sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };

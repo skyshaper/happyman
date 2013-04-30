@@ -23,30 +23,28 @@ describe 'The RandomTopic plugin' => sub {
         disconnect_and_wait($irc);
     };
 
-    describe
-        'with default settings when issued the !topic command with a 5 second timeout'
-        => sub {
+    describe 'with default settings when issued the !topic command' => sub {
         my ( $happyman, $topic );
 
-        before each => sub {
+        before sub {
             diag 'making defaults happyman';
             $happyman = make_happyman_with_plugin(
                 'App::Happyman::Plugin::RandomTopic', {} );
             $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman', '!topic' );
-            ( undef, undef, $topic, undef )
-                = wait_on_event_or_timeout( $irc, 'channel_topic', 5 );
         };
 
-        after each => sub {
+        after sub {
             diag 'disconnecting defaults happyman';
             $happyman->disconnect_and_wait();
         };
 
         it 'should set a topic' => sub {
+            ( undef, undef, $topic, undef )
+                = wait_on_event_or_timeout( $irc, 'channel_topic', 5 );
             ok($topic);
-            }
-
         };
+
+    };
 
     describe 'with low topic age setting' => sub {
         my ( $previous_topic, $topic, $happyman );
@@ -67,7 +65,7 @@ describe 'The RandomTopic plugin' => sub {
         };
 
         describe 'with a timeout of 5 seconds' => sub {
-            before each => sub {
+            before sub {
                 diag 'Waiting on topic';
                 $previous_topic = $topic;
                 ( undef, undef, $topic, undef )
@@ -89,7 +87,7 @@ describe 'The RandomTopic plugin' => sub {
         };
 
         describe 'with the user setting a topic' => sub {
-            before each => sub {
+            before sub {
                 $irc->send_msg( 'TOPIC', '#happyman', 'User topic' );
                 ( undef, undef, $topic, undef )
                     = wait_on_event_or_timeout( $irc, 'channel_topic', 5 );

@@ -4,7 +4,7 @@ use Moose;
 
 with 'App::Happyman::Plugin';
 
-use AnyEvent::HTTP::LWP::UserAgent;
+use AnyEvent::HTTP;
 use AnyEvent::Twitter;
 use JSON;
 use List::MoreUtils qw(natatime);

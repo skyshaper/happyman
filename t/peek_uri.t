@@ -11,10 +11,9 @@ use_ok('App::Happyman::Connection');
 use_ok('App::Happyman::Plugin::PeekURI');
 
 describe 'PeekURI' => sub {
-    my $happyman;
-    my $irc;
+    my ( $happyman, $irc );
 
-    before each => sub {
+    before sub {
         my $config = load_local_config();
         $happyman
             = make_happyman_with_plugin( 'App::Happyman::Plugin::PeekURI',
@@ -22,7 +21,7 @@ describe 'PeekURI' => sub {
         $irc = make_test_client();
     };
 
-    after each => sub {
+    after sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };
