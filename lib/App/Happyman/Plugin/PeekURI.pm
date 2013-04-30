@@ -5,10 +5,10 @@ use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
-use AnyEvent::HTTP;
 use AnyEvent::Twitter;
 use JSON;
 use List::MoreUtils qw(natatime);
+use Mojo::UserAgent;
 use URI::Find;
 use URI::URL;
 use XML::LibXML;
@@ -28,6 +28,14 @@ has _twitter => (
     builder => '_build_twitter',
 );
 
+
+has '_ua' => (
+    is      => 'ro',
+    isa     => 'Mojo::UserAgent',
+    builder => '_build_ua',
+    lazy    => 1,
+);
+
 method _build_twitter {
     return AnyEvent::Twitter->new(
         consumer_key    => $self->twitter_consumer_key,
@@ -35,6 +43,10 @@ method _build_twitter {
         token           => $self->twitter_token,
         token_secret    => $self->twitter_token_secret,
     );
+}
+
+method _build_ua {
+    return Mojo::UserAgent->new();
 }
 
 method _ignore_link (Str $uri) {
@@ -46,8 +58,7 @@ method _fetch_tweet_text (Str $uri) {
 
     $self->_twitter->get(
         "statuses/show/$1",
-        sub {
-            my ( $header, $response, $reason ) = @_;
+        func ( $header, $response, $reason ) {
             return unless $response->{text};
 
             $self->conn->send_notice( 'Tweet by @'
@@ -58,41 +69,16 @@ method _fetch_tweet_text (Str $uri) {
 }
 
 method _fetch_html_title (Str $uri) {
-    my $request_headers = { Range => 'bytes=0-20000', };
-
-    http_get(
-        $uri,
-        headers => $request_headers,
-        sub {
-            my ( $data, $response_headers ) = @_;
-
-            if ( $response_headers->{'Status'} !~ /^2/ ) {
-                my ( $status, $reason )
-                    = @{$response_headers}{ 'Status', 'Reason' };
-                return "$status $reason";
-            }
-
-            return if $response_headers->{'content-type'} !~ /html/;
-            return unless $data;
-
-            my $encoding;
-            if ( $response_headers->{'content-type'} =~ /charset=(.+)/ ) {
-                $encoding = $1;
-            }
-
-            my $tree = XML::LibXML->load_html(
-                string   => $data,
-                recover  => 1,
-                encoding => $encoding,
-            );
-
-            my $node = $tree->findnodes('//title')->[0];
-            my $title = $node ? $node->textContent : 'no title';
-            $title =~ s/\n/ /g;
-
-            $self->conn->send_notice($title);
+    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
+        if ( !$tx->success ) {
+            my ($err, $code) = $tx->error;
+            return "$code err";
         }
-    );
+
+        return if $tx->res->headers->content_type !~ /html/;
+
+        $self->conn->send_notice($tx->res->dom->html->head->title->text);
+    });
 
     return;
 }
