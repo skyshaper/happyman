@@ -6,7 +6,6 @@ with 'App::Happyman::Plugin';
 
 use AnyEvent::HTTP;
 use AnyEvent::Twitter;
-use Coro;
 use JSON;
 use List::MoreUtils qw(natatime);
 use URI;
@@ -45,43 +44,46 @@ sub _fetch_tweet_text {
     $uri =~ m{/(\d+)$};
     return unless $1;
 
-    $self->_twitter->get("statuses/show/$1", Coro::rouse_cb);
-    my ($header, $response, $reason) = Coro::rouse_wait();
-    return unless $response->{text};
+    $self->_twitter->get("statuses/show/$1", sub {
+        my ($header, $response, $reason) = @_;
+        return unless $response->{text};
 
-    return 'Tweet by @' . $response->{user}{screen_name} . ': ' . $response->{text};
+        $self->conn->send_notice('Tweet by @' . $response->{user}{screen_name} . ': ' . $response->{text});
+    });
 }
 
 sub _fetch_html_title {
     my ($self, $uri) = @_;
     my $request_headers = { Range => 'bytes=0-20000', };
 
-    http_get($uri, headers => $request_headers, Coro::rouse_cb);
-    my ($data, $response_headers) = Coro::rouse_wait();
+    http_get($uri, headers => $request_headers, sub {
+        my ($data, $response_headers) = @_;
 
-    if ($response_headers->{'Status'} !~ /^2/) {
-        my ($status, $reason) = @{$response_headers}{ 'Status', 'Reason' };
-        return "$status $reason";
-    }
+        if ($response_headers->{'Status'} !~ /^2/) {
+            my ($status, $reason) = @{$response_headers}{ 'Status', 'Reason' };
+            return "$status $reason";
+        }
 
-    return if $response_headers->{'content-type'} !~ /html/;
-    return unless $data;
+        return if $response_headers->{'content-type'} !~ /html/;
+        return unless $data;
 
-    my $encoding;
-    if ($response_headers->{'content-type'} =~ /charset=(.+)/) {
-        $encoding = $1;
-    }
+        my $encoding;
+        if ($response_headers->{'content-type'} =~ /charset=(.+)/) {
+            $encoding = $1;
+        }
 
-    my $tree = XML::LibXML->load_html(
-        string  => $data,
-        recover => 1,
-        encoding => $encoding,
-    );
+        my $tree = XML::LibXML->load_html(
+            string  => $data,
+            recover => 1,
+            encoding => $encoding,
+        );
 
-    my $node = $tree->findnodes('//title')->[0];
-    my $title = $node ? $node->textContent : 'no title';
-    $title =~ s/\n/ /g;
-    return $title;
+        my $node = $tree->findnodes('//title')->[0];
+        my $title = $node ? $node->textContent : 'no title';
+        $title =~ s/\n/ /g;
+    
+        $self->conn->send_notice($title);
+    });
 }
 
 sub _find_uris {
@@ -119,8 +121,7 @@ sub on_message {
     my ($self, $msg) = @_;
 
     for ($self->_find_uris($msg->text)) {
-        my $notice = $self->_peek_uri($_);
-        $self->conn->send_notice($notice) if $notice;
+        $self->_peek_uri($_);
     }
 }
 
