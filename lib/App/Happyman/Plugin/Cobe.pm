@@ -5,7 +5,7 @@ use Moose;
 with 'App::Happyman::Plugin';
 
 use AnyEvent;
-use Coro::Handle;
+use AnyEvent::Handle;
 use IPC::Open2;
 
 has _child => (
@@ -16,7 +16,7 @@ has _child => (
 
 has [qw/_in _out/] => (
     is  => 'rw',
-    isa => 'Coro::Handle',
+    isa => 'AnyEvent::Handle',
 );
 
 has brain => (
@@ -35,8 +35,8 @@ sub _spawn_child {
     my $pid = open2($out, $in, './python/bin/python ./python/cobe_pipe.py ' . $self->brain);
     binmode $out, ':encoding(UTF-8)';
 
-    $self->_in(Coro::Handle->new_from_fh($in));
-    $self->_out(Coro::Handle->new_from_fh($out));
+    $self->_in(AnyEvent::Handle->new(fh => $in));
+    $self->_out(AnyEvent::Handle->new(fh => $out));
 
     return AE::child(
         $pid,
@@ -51,11 +51,14 @@ sub _spawn_child {
 sub on_message {
     my ($self, $msg) = @_;
 
-    $self->_in->print('learn ' . $msg->text . "\n");
+    $self->_in->push_write('learn ' . $msg->text . "\n");
 
     if ($msg->addressed_me) {
-        $self->_in->print('reply ' . $msg->text . "\n");
-        $msg->reply($self->_out->readline());
+        $self->_in->push_write('reply ' . $msg->text . "\n");
+        $self->_out->push_read(line => sub {
+            my (undef, $line) = @_;
+            $msg->reply($line);
+        });
     }
 }
 
