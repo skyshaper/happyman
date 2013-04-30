@@ -13,8 +13,8 @@ has password => (
 sub on_registered {
     my ($self) = @_;
 
-    $self->conn->send_private_message('NickServ',
-        join(' ', 'IDENTIFY', $self->password, $self->conn->nick));
+    $self->conn->send_private_message( 'NickServ',
+        join( ' ', 'IDENTIFY', $self->password, $self->conn->nick ) );
 }
 
 __PACKAGE__->meta->make_immutable();

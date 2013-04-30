@@ -16,52 +16,63 @@ describe 'The Cobe plugin' => sub {
     my $happyman;
     my $irc;
     my $tempdir;
-    
+
     before each => sub {
-        $irc = make_test_client();
-        $tempdir = File::Temp->newdir();
-        $happyman = make_happyman_with_plugin('App::Happyman::Plugin::Cobe', {
-            brain => "$tempdir/cobe_test.sqlite"
-        });
+        $irc      = make_test_client();
+        $tempdir  = File::Temp->newdir();
+        $happyman = make_happyman_with_plugin( 'App::Happyman::Plugin::Cobe',
+            { brain => "$tempdir/cobe_test.sqlite" } );
     };
-    
+
     after each => sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };
-        
+
     describe 'with an empty brain' => sub {
         describe 'when addressed' => sub {
             before each => sub {
-                $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'happyman: hello');
+                $irc->send_chan(
+                    '#happyman', 'PRIVMSG',
+                    '#happyman', 'happyman: hello'
+                );
             };
-        
+
             it 'tells the sender it does not know enough yet' => sub {
-                my (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 5);
+                my ( undef, undef, $ircmsg )
+                    = wait_on_event_or_timeout( $irc, 'publicmsg', 5 );
                 my $full_text = $ircmsg->{params}->[1];
-                is($full_text, 'HMTest: I don\'t know enough to answer you yet!');
+                is( $full_text,
+                    'HMTest: I don\'t know enough to answer you yet!' );
             };
         };
     };
-    
+
     describe 'with a trained brain' => sub {
         before each => sub {
-            for (1..20) {
-                $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'Are you happy, man?');
-             }
+            for ( 1 .. 20 ) {
+                $irc->send_chan(
+                    '#happyman', 'PRIVMSG',
+                    '#happyman', 'Are you happy, man?'
+                );
+            }
         };
-        
+
         describe 'when addressed' => sub {
             before each => sub {
-                $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'happyman: hello');
+                $irc->send_chan(
+                    '#happyman', 'PRIVMSG',
+                    '#happyman', 'happyman: hello'
+                );
             };
-        
+
             it 'gives the sender an answer' => sub {
-                my (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 30);
+                my ( undef, undef, $ircmsg )
+                    = wait_on_event_or_timeout( $irc, 'publicmsg', 30 );
                 my $full_text = $ircmsg->{params}->[1];
-                is($full_text, 'HMTest: Are you happy, man?');
+                is( $full_text, 'HMTest: Are you happy, man?' );
             };
-        }
+            }
     };
 };
 

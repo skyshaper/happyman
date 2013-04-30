@@ -13,59 +13,72 @@ use_ok('App::Happyman::Plugin::PeekURI');
 describe 'PeekURI' => sub {
     my $happyman;
     my $irc;
-    
+
     before each => sub {
         my $config = load_local_config();
-        $happyman = make_happyman_with_plugin('App::Happyman::Plugin::PeekURI', $config->{PeekURI});
+        $happyman
+            = make_happyman_with_plugin( 'App::Happyman::Plugin::PeekURI',
+            $config->{PeekURI} );
         $irc = make_test_client();
     };
-    
+
     after each => sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };
-    
+
     describe 'when seeing a Wikipedia URI' => sub {
         before sub {
-            $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'http://en.wikipedia.org/wiki/Foo');
+            $irc->send_chan(
+                '#happyman', 'PRIVMSG',
+                '#happyman', 'http://en.wikipedia.org/wiki/Foo'
+            );
         };
-    
+
         it 'does not react' => sub {
-            ok(!wait_on_message_or_timeout($irc, 5));
+            ok( !wait_on_message_or_timeout( $irc, 5 ) );
         };
     };
-    
+
     describe 'when seeing an ibash URI' => sub {
         before sub {
-            $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'http://www.ibash.de/zitat_3591.html');
+            $irc->send_chan(
+                '#happyman', 'PRIVMSG',
+                '#happyman', 'http://www.ibash.de/zitat_3591.html'
+            );
         };
-    
+
         it 'does not react' => sub {
-            ok(!wait_on_message_or_timeout($irc, 5));
+            ok( !wait_on_message_or_timeout( $irc, 5 ) );
         };
     };
-    
+
     describe 'when seeing a URI' => sub {
         before sub {
-            $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'http://chaosdorf.de/~mxey/');
+            $irc->send_chan(
+                '#happyman', 'PRIVMSG',
+                '#happyman', 'http://chaosdorf.de/~mxey/'
+            );
         };
-    
+
         it 'sends the title to the channel' => sub {
-            is(wait_on_message_or_timeout($irc, 5), 'Index of /~mxey/');
+            is( wait_on_message_or_timeout( $irc, 5 ), 'Index of /~mxey/' );
         };
     };
-    
+
     describe 'when seeing a TwitterURI' => sub {
         before sub {
-            $irc->send_chan('#happyman', 'PRIVMSG', '#happyman', 'https://twitter.com/BR3NDA/status/328753576220446720');
+            $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                'https://twitter.com/BR3NDA/status/328753576220446720' );
         };
-    
+
         it 'sends the author and message to the channel' => sub {
-            is(wait_on_message_or_timeout($irc, 5), 'Tweet by @BR3NDA: Remembering that time I went to a Microsoft conference. all their swag clothing came in women\'s style. I had never seen that in open source.');
+            is( wait_on_message_or_timeout( $irc, 5 ),
+                'Tweet by @BR3NDA: Remembering that time I went to a Microsoft conference. all their swag clothing came in women\'s style. I had never seen that in open source.'
+            );
         };
     };
-    
-    
+
 };
 
 runtests unless caller;

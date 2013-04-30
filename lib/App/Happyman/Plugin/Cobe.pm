@@ -30,35 +30,38 @@ sub BUILD { shift->_child }
 sub _spawn_child {
     my ($self) = @_;
 
-    my ($in, $out);
+    my ( $in, $out );
 
-    my $pid = open2($out, $in, './python/bin/python ./python/cobe_pipe.py ' . $self->brain);
+    my $pid = open2( $out, $in,
+        './python/bin/python ./python/cobe_pipe.py ' . $self->brain );
     binmode $out, ':encoding(UTF-8)';
 
-    $self->_in(AnyEvent::Handle->new(fh => $in));
-    $self->_out(AnyEvent::Handle->new(fh => $out));
+    $self->_in( AnyEvent::Handle->new( fh => $in ) );
+    $self->_out( AnyEvent::Handle->new( fh => $out ) );
 
     return AE::child(
         $pid,
         sub {
-            my ($pid, $status) = @_;
+            my ( $pid, $status ) = @_;
             warn "$pid exited with status $status\n";
-            $self->_child($self->_spawn_child);
+            $self->_child( $self->_spawn_child );
         },
     );
 }
 
 sub on_message {
-    my ($self, $msg) = @_;
+    my ( $self, $msg ) = @_;
 
-    $self->_in->push_write('learn ' . $msg->text . "\n");
+    $self->_in->push_write( 'learn ' . $msg->text . "\n" );
 
-    if ($msg->addressed_me) {
-        $self->_in->push_write('reply ' . $msg->text . "\n");
-        $self->_out->push_read(line => sub {
-            my (undef, $line) = @_;
-            $msg->reply($line);
-        });
+    if ( $msg->addressed_me ) {
+        $self->_in->push_write( 'reply ' . $msg->text . "\n" );
+        $self->_out->push_read(
+            line => sub {
+                my ( undef, $line ) = @_;
+                $msg->reply($line);
+            }
+        );
     }
 }
 

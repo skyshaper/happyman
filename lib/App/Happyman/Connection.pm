@@ -56,14 +56,13 @@ has '_plugins' => (
 );
 
 has '_stay_connected' => (
-    is => 'rw',
-    isa => 'Bool',
+    is      => 'rw',
+    isa     => 'Bool',
     default => 1,
 );
 
-
 sub add_plugin {
-    my ($self, $plugin) = @_;
+    my ( $self, $plugin ) = @_;
 
     $plugin->conn($self);
     push $self->_plugins, $plugin;
@@ -82,7 +81,7 @@ sub _connect {
         }
     );
 
-    $self->irc->send_srv('JOIN', $self->channel);
+    $self->irc->send_srv( 'JOIN', $self->channel );
 }
 
 sub _retry_connect {
@@ -103,15 +102,16 @@ sub _build_irc {
 
     $irc->reg_cb(
         publicmsg => sub {
-            my ($irc, $channel, $ircmsg) = @_;
-            my $sender    = prefix_nick($ircmsg->{prefix});
+            my ( $irc, $channel, $ircmsg ) = @_;
+            my $sender    = prefix_nick( $ircmsg->{prefix} );
             my $full_text = $ircmsg->{params}->[1];
 
-            my $msg = App::Happyman::Message->new($self, $sender, $full_text);
-            $self->_trigger_event('on_message', $msg);
+            my $msg
+                = App::Happyman::Message->new( $self, $sender, $full_text );
+            $self->_trigger_event( 'on_message', $msg );
         },
         connect => sub {
-            my ($irc, $err) = @_;
+            my ( $irc, $err ) = @_;
             return if not $err;
 
             say 'Connection failed';
@@ -127,9 +127,9 @@ sub _build_irc {
             $self->_trigger_event('on_registered');
         },
         channel_topic => sub {
-            my ($irc, $channel, $topic, $who) = @_;
+            my ( $irc, $channel, $topic, $who ) = @_;
             say "Topic: $topic";
-            $self->_trigger_event('on_topic', $topic);
+            $self->_trigger_event( 'on_topic', $topic );
         }
     );
 
@@ -161,17 +161,16 @@ sub disconnect_and_wait {
     my ($self) = @_;
     my $cv = AE::cv;
     $self->_stay_connected(0);
-    $self->irc->reg_cb(disconnect => $cv);
+    $self->irc->reg_cb( disconnect => $cv );
     $self->irc->send_srv('QUIT');
     $cv->recv();
     return;
 }
 
-
 sub _trigger_event {
-    my ($self, $name, $msg) = @_;
+    my ( $self, $name, $msg ) = @_;
 
-    foreach my $plugin (@{ $self->_plugins }) {
+    foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
         say "Starting: $plugin $name";
@@ -181,35 +180,34 @@ sub _trigger_event {
 }
 
 sub send_message {
-    my ($self, $body) = @_;
+    my ( $self, $body ) = @_;
 
-    $self->irc->send_long_message('utf-8', 0, 'PRIVMSG', $self->channel,
-        $body);
+    $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
+        $body );
 }
 
 sub send_notice {
-    my ($self, $body) = @_;
+    my ( $self, $body ) = @_;
 
-    $self->irc->send_long_message('utf-8', 0, 'NOTICE', $self->channel,
-        $body);
+    $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
+        $body );
 }
 
 sub send_private_message {
-    my ($self, $nick, $body) = @_;
+    my ( $self, $nick, $body ) = @_;
 
-    $self->irc->send_srv('PRIVMSG', $nick, $body);
+    $self->irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
 sub nick_exists {
-    my ($self, $nick) = @_;
+    my ( $self, $nick ) = @_;
 
-    return defined $self->irc->nick_modes($self->channel, $nick);
+    return defined $self->irc->nick_modes( $self->channel, $nick );
 }
 
 sub set_topic {
-    my ($self, $topic) = @_;
-    $self->irc->send_msg('TOPIC', $self->channel, $topic);
+    my ( $self, $topic ) = @_;
+    $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
 }
-
 
 __PACKAGE__->meta->make_immutable();

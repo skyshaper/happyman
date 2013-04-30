@@ -16,11 +16,12 @@ use_ok('App::Happyman::Connection');
 use_ok('App::Happyman::Plugin::SocketAnnouncer');
 
 describe 'The SocketAnnouncer plugin' => sub {
-    my ($irc, $lwp, $happyman);
-    
+    my ( $irc, $lwp, $happyman );
+
     before all => sub {
-        $irc = make_test_client();
-        $happyman = make_happyman_with_plugin('App::Happyman::Plugin::SocketAnnouncer', {});
+        $irc      = make_test_client();
+        $happyman = make_happyman_with_plugin(
+            'App::Happyman::Plugin::SocketAnnouncer', {} );
         $lwp = LWP::UserAgent->new();
     };
 
@@ -28,58 +29,65 @@ describe 'The SocketAnnouncer plugin' => sub {
         $happyman->disconnect_and_wait();
         disconnect_and_wait($irc);
     };
-    
+
     it 'should accept HTTP requests on its socket' => sub {
         my $response = $lwp->head('http://localhost:6666/');
-        is($response->status_line, '404 Not Found');
+        is( $response->status_line, '404 Not Found' );
     };
-            
+
     describe 'when sent a plain message' => sub {
         before each => sub {
-            $lwp->post('http://localhost:6666/plain', {
-                message => 'Hello World',
-            });
+            $lwp->post(
+                'http://localhost:6666/plain',
+                { message => 'Hello World', }
+            );
         };
-        
+
         it 'should send the message to the channel' => sub {
-            my (undef, undef, $ircmsg) = wait_on_event_or_timeout($irc, 'publicmsg', 5);  
+            my ( undef, undef, $ircmsg )
+                = wait_on_event_or_timeout( $irc, 'publicmsg', 5 );
             if ($ircmsg) {
                 my $full_text = $ircmsg->{params}->[1];
-                is($full_text, 'Hello World');
+                is( $full_text, 'Hello World' );
             }
             else {
                 fail();
             }
         };
     };
-    
+
     describe 'when sent an example GitHub payload' => sub {
-        
-        before each => sub {        
-            my $github_payload = read_file(Data::Handle->new(__PACKAGE__));
-            $lwp->post('http://localhost:6666/github', {payload => $github_payload});
+
+        before each => sub {
+            my $github_payload = read_file( Data::Handle->new(__PACKAGE__) );
+            $lwp->post(
+                'http://localhost:6666/github',
+                { payload => $github_payload }
+            );
         };
-        
+
         it 'should send the 3 commits to the channel' => sub {
             my (@lines);
-            $irc->reg_cb(publicmsg => sub {
-                my (undef, undef, $ircmsg) = @_;
-                push @lines, $ircmsg->{params}->[1];
-            });
+            $irc->reg_cb(
+                publicmsg => sub {
+                    my ( undef, undef, $ircmsg ) = @_;
+                    push @lines, $ircmsg->{params}->[1];
+                }
+            );
             my $cv = AE::cv;
-            my $timer = AE::timer(5, 0, $cv);
+            my $timer = AE::timer( 5, 0, $cv );
             $cv->recv();
-            
+
             my @expected = (
                 'octokitty/testing (master): Garen Torikian - c441029c: Test',
                 'octokitty/testing (master): Garen Torikian - 36c5f224: This is me testing the windows client.',
                 'octokitty/testing (master): Garen Torikian - 1481a2de: Rename madame-bovary.txt to words/madame-bovary.txt',
             );
-            
-            cmp_deeply(\@lines, \@expected);
+
+            cmp_deeply( \@lines, \@expected );
         };
     };
-    
+
 };
 
 runtests unless caller;

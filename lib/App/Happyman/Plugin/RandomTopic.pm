@@ -8,59 +8,65 @@ use AnyEvent;
 use Data::Handle;
 
 has _lines => (
-    is => 'ro',
-    isa => 'ArrayRef[Str]',
+    is      => 'ro',
+    isa     => 'ArrayRef[Str]',
     builder => '_build_lines',
-    lazy => 1,
+    lazy    => 1,
 );
 
 has _timer => (
-    is => 'ro',
+    is      => 'ro',
     builder => '_build_timer',
-    lazy => 1,
+    lazy    => 1,
 );
 
 has _topic_time => (
-    is => 'rw',
+    is  => 'rw',
     isa => 'Int',
 );
 
 has check_interval => (
-    is => 'ro',
-    isa => 'Num',
+    is      => 'ro',
+    isa     => 'Num',
     default => 1800,
 );
 
 has min_line_length => (
-    is => 'ro',
-    isa => 'Int',
+    is      => 'ro',
+    isa     => 'Int',
     default => 12,
 );
 
 has min_topic_age => (
-    is => 'ro',
-    isa => 'Int',
+    is      => 'ro',
+    isa     => 'Int',
     default => 172800,
 );
 
 sub _build_lines {
     my ($self) = @_;
     my $handle = Data::Handle->new(__PACKAGE__);
-    return [ grep { length >= $self->min_line_length } 
-              map { chomp; $_} <$handle> ];
+    return [
+        grep { length >= $self->min_line_length }
+        map { chomp; $_ } <$handle>
+    ];
 }
 
 sub _build_timer {
     my ($self) = @_;
 
-    return AE::timer(0, $self->check_interval, sub {
-        say 'Checking topic';
+    return AE::timer(
+        0,
+        $self->check_interval,
+        sub {
+            say 'Checking topic';
 
-        return if not defined $self->_topic_time();
-        return if (time - $self->_topic_time()) < $self->min_topic_age;
-        
-        $self->_set_random_topic();
-    });
+            return if not defined $self->_topic_time();
+            return if ( time - $self->_topic_time() ) < $self->min_topic_age;
+
+            $self->_set_random_topic();
+        }
+    );
 }
 
 sub BUILD {
@@ -69,26 +75,25 @@ sub BUILD {
 }
 
 sub on_topic {
-    my ($self, $topic) = @_;
+    my ( $self, $topic ) = @_;
     $self->_topic_time(time);
 }
 
 sub on_message {
-    my ($self, $msg) = @_;
+    my ( $self, $msg ) = @_;
 
-    if ($msg->full_text =~ /^\!topic\s*$/) {
+    if ( $msg->full_text =~ /^\!topic\s*$/ ) {
         $self->_set_random_topic();
     }
 }
 
 sub _set_random_topic {
     my ($self) = @_;
-    my $line = $self->_lines->[rand @{$self->_lines}];
+    my $line = $self->_lines->[ rand @{ $self->_lines } ];
     $self->conn->set_topic($line);
 }
 
 __PACKAGE__->meta->make_immutable();
-
 
 __DATA__
 I ride the morning train

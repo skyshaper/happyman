@@ -8,13 +8,13 @@ use Class::Load qw(load_class);
 use Config::INI::Reader;
 
 my %conf = %{ Config::INI::Reader->read_file('happyman.conf') };
-my $conn = App::Happyman::Connection->new($conf{_});
+my $conn = App::Happyman::Connection->new( $conf{_} );
 
 delete $conf{_};
-while (my ($plugin_name, $plugin_conf) = each %conf) {
+while ( my ( $plugin_name, $plugin_conf ) = each %conf ) {
     my $class = "App::Happyman::Plugin::$plugin_name";
     load_class($class);
-    $conn->add_plugin($class->new($plugin_conf));
+    $conn->add_plugin( $class->new($plugin_conf) );
 }
 
 $conn->run();

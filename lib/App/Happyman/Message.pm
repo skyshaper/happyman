@@ -20,9 +20,9 @@ has 'conn' => (
 );
 
 sub BUILDARGS {
-    my ($self, $conn, $sender_nick, $full_text) = @_;
+    my ( $self, $conn, $sender_nick, $full_text ) = @_;
 
-    if ($full_text =~ /^(\w+)[:,]\s+(.+)$/) {
+    if ( $full_text =~ /^(\w+)[:,]\s+(.+)$/ ) {
         return {
             conn           => $conn,
             sender_nick    => $sender_nick,
@@ -44,14 +44,14 @@ sub BUILDARGS {
 sub addressed_me {
     my ($self) = @_;
 
-    return (defined $self->addressed_nick
-            and $self->addressed_nick eq $self->conn->nick);
+    return ( defined $self->addressed_nick
+            and $self->addressed_nick eq $self->conn->nick );
 }
 
 sub reply {
-    my ($self, $text) = @_;
+    my ( $self, $text ) = @_;
 
-    $self->conn->send_message($self->sender_nick . ': ' . $text);
+    $self->conn->send_message( $self->sender_nick . ': ' . $text );
 }
 
 1;
