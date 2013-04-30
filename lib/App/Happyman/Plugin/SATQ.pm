@@ -29,12 +29,6 @@ has '_ua' => (
 
 sub _build_ua {
     return Mojo::UserAgent->new();
-
-    # LWP::UserAgent only sends an authenticated request after it sees a 401
-    # response. SATQ never sends a 401, because HTTP Authentication is not
-    # used by human users
-
-    # return $ua;
 }
 
 sub on_message {
