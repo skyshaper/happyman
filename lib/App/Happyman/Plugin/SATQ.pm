@@ -5,7 +5,6 @@ use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
-use Coro;
 use Mojo::UserAgent;
 use MIME::Base64;
 
