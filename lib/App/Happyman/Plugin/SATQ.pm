@@ -59,12 +59,7 @@ sub _post_quote {
         'quote[raw_quote]' => join("\n", @{ $self->_buffer }),
     });
 
-    if ($resp->code == 302) {
-        return $resp->header('Location');
-    }
-    else {
-        return $resp->status_line;
-    }
+    return $resp->header('Location') || $resp->status_line;
 }
 
 sub on_message {
