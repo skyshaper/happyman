@@ -84,24 +84,12 @@ sub _fetch_html_title {
     
         $self->conn->send_notice($title);
     });
+    
+    return;
 }
 
-sub _find_uris {
-    my ($self, $body) = @_;
-    my @uris;
-    my $finder = URI::Find->new(
-        sub {
-            push @uris, URI->new($_[0]);
-        }
-    );
-    $finder->find(\$body);
-
-    return @uris;
-}
-
-sub _peek_uri {
-    my ($self, $uri) = @_;
-
+sub on_message {
+    my ($self, $msg) = @_;
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
         [ qr/\.wikipedia\.org$/ => \&_ignore_link ],
@@ -109,20 +97,18 @@ sub _peek_uri {
         [ qr/./                 => \&_fetch_html_title ],
     );
 
-    for (@peekers) {
-        my ($pattern, $cb) = @$_;
-        if ($uri->host =~ $pattern) {
-            return $cb->($self, $uri);
+    my $finder = URI::Find->new(
+        sub {
+            my ($uri, undef) = @_;
+            for (@peekers) {
+                my ($pattern, $cb) = @$_;
+                if ($uri->host =~ $pattern) {
+                    return $cb->($self, $uri);
+                }
+            }
         }
-    }
-}
-
-sub on_message {
-    my ($self, $msg) = @_;
-
-    for ($self->_find_uris($msg->text)) {
-        $self->_peek_uri($_);
-    }
+    );
+    $finder->find(\$msg->text);
 }
 
 __PACKAGE__->meta->make_immutable();
