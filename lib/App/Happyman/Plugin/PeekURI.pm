@@ -9,7 +9,6 @@ use AnyEvent::Twitter;
 use Coro;
 use JSON;
 use List::MoreUtils qw(natatime);
-use Try::Tiny;
 use URI;
 use URI::Find;
 use XML::LibXML;

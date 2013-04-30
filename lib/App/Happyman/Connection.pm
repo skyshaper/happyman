@@ -9,7 +9,7 @@ use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
 use Coro;
-use Try::Tiny;
+use TryCatch;
 
 has 'irc' => (
     is      => 'ro',
