@@ -58,11 +58,12 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             it 'posts the last 10 messages to SATQ' => sub {
                 my $req = $http_request_cv->recv();
                 my $raw_quote = $req->parm('quote[raw_quote]');
-                is($raw_quote, join("\r\n", ('<HMTest> Hello World') x 10));
+                is($raw_quote, join("\n", ('<HMTest> Hello World') x 10));
             };
         
             it 'uses the configured credentials' => sub {
                 my $req = $http_request_cv->recv();
+                use Data::Dumper; print Dumper $req->headers;
                 is($req->headers->{authorization}, 'Basic ' . encode_base64('happyman:happypass', ''))
             };
             

@@ -4,11 +4,10 @@ use Moose;
 
 use App::Happyman::Message;
 use AnyEvent;
-use AnyEvent::Impl::Perl;    # we depend on its exception behaviour
 use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
-use Coro;
+use EV;
 use TryCatch;
 
 has 'irc' => (
@@ -175,11 +174,9 @@ sub _trigger_event {
     foreach my $plugin (@{ $self->_plugins }) {
         next unless $plugin->can($name);
 
-        async {
-            say "Starting: $plugin $name";
-            $plugin->$name($msg);
-            say "Done: $plugin $name";
-        };
+        say "Starting: $plugin $name";
+        $plugin->$name($msg);
+        say "Done: $plugin $name";
     }
 }
 
