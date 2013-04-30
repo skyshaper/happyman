@@ -29,12 +29,6 @@ has _twitter => (
 );
 
 
-has '_ua' => (
-    is      => 'ro',
-    isa     => 'Mojo::UserAgent',
-    builder => '_build_ua',
-    lazy    => 1,
-);
 
 method _build_twitter {
     return AnyEvent::Twitter->new(
@@ -45,9 +39,6 @@ method _build_twitter {
     );
 }
 
-method _build_ua {
-    return Mojo::UserAgent->new();
-}
 
 method _ignore_link (Str $uri) {
 }

@@ -21,17 +21,6 @@ has [qw(uri user password)] => (
     required => 1,
 );
 
-has '_ua' => (
-    is      => 'ro',
-    isa     => 'Mojo::UserAgent',
-    builder => '_build_ua',
-    lazy    => 1,
-);
-
-method _build_ua {
-    return Mojo::UserAgent->new();
-}
-
 method on_message (App::Happyman::Message $msg) {
     if ( $msg->full_text =~ /^\!quote\s*$/ ) {
         my $authorization = 'Basic '
