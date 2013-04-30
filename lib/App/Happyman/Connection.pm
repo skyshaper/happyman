@@ -67,7 +67,7 @@ sub add_plugin {
     my ($self, $plugin) = @_;
 
     $plugin->conn($self);
-    push @{ $self->_plugins }, $plugin;
+    push $self->_plugins, $plugin;
 }
 
 sub _connect {
