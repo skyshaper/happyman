@@ -13,6 +13,7 @@ requires 'JSON';
 requires 'List::MoreUtils';
 requires 'LWP::UserAgent';
 requires 'LWP::Protocol::AnyEvent::http';
+requires 'Method::Signatures';
 requires 'Mojolicious';
 requires 'Moose';
 requires 'Net::SSLeay';

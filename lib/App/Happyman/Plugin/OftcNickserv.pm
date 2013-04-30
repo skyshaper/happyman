@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::OftcNickserv;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -10,9 +11,7 @@ has password => (
     required => 1,
 );
 
-sub on_registered {
-    my ($self) = @_;
-
+method on_registered ($payload) {
     $self->conn->send_private_message( 'NickServ',
         join( ' ', 'IDENTIFY', $self->password, $self->conn->nick ) );
 }

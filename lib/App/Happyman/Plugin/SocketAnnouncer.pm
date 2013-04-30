@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::SocketAnnouncer;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -14,8 +15,7 @@ has '_httpd' => (
     builder => '_build_httpd',
 );
 
-sub _build_httpd {
-    my ($self) = @_;
+method _build_httpd {
     my $httpd = AnyEvent::HTTPD->new( host => '127.0.0.1', port => 6666 );
     $httpd->reg_cb(
         '/plain' => sub {

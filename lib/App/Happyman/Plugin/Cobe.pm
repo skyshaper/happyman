@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::Cobe;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -25,10 +26,11 @@ has brain => (
     default => 'cobe.sqlite',
 );
 
-sub BUILD { shift->_child }
+method BUILD (...) { 
+    $self->_child;
+}
 
-sub _spawn_child {
-    my ($self) = @_;
+method _spawn_child {
 
     my ( $in, $out );
 
@@ -49,9 +51,7 @@ sub _spawn_child {
     );
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
-
+method on_message (App::Happyman::Message $msg) {
     $self->_in->push_write( 'learn ' . $msg->text . "\n" );
 
     if ( $msg->addressed_me ) {

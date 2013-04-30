@@ -1,8 +1,10 @@
 package App::Happyman::Connection;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 use App::Happyman::Message;
+use App::Happyman::Plugin;
 use AnyEvent;
 use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
@@ -61,16 +63,12 @@ has '_stay_connected' => (
     default => 1,
 );
 
-sub add_plugin {
-    my ( $self, $plugin ) = @_;
-
+method add_plugin (App::Happyman::Plugin $plugin) {
     $plugin->conn($self);
     push $self->_plugins, $plugin;
 }
 
-sub _connect {
-    my ($self) = @_;
-
+method _connect {
     $self->irc->enable_ssl() if $self->ssl;
     $self->irc->connect(
         $self->host,
@@ -84,9 +82,7 @@ sub _connect {
     $self->irc->send_srv( 'JOIN', $self->channel );
 }
 
-sub _retry_connect {
-    my ($self) = @_;
-
+method _retry_connect {
     my $w;
     $w = AE::timer 5, 0, sub {
         undef $w;
@@ -95,9 +91,7 @@ sub _retry_connect {
     };
 }
 
-sub _build_irc {
-    my ($self) = @_;
-
+method _build_irc {
     my $irc = AnyEvent::IRC::Client->new();
 
     $irc->reg_cb(
@@ -136,15 +130,11 @@ sub _build_irc {
     return $irc;
 }
 
-sub BUILD {
-    my ($self) = @_;
-
+method BUILD (...) { 
     $self->_connect();    # enforce construction
 }
 
-sub run {
-    my ($self) = @_;
-
+method run {
     while (1) {
         try {
             AE::cv->recv();
@@ -157,8 +147,7 @@ sub run {
     }
 }
 
-sub disconnect_and_wait {
-    my ($self) = @_;
+method disconnect_and_wait {
     my $cv = AE::cv;
     $self->_stay_connected(0);
     $self->irc->reg_cb( disconnect => $cv );
@@ -167,9 +156,7 @@ sub disconnect_and_wait {
     return;
 }
 
-sub _trigger_event {
-    my ( $self, $name, $msg ) = @_;
-
+method _trigger_event (Str $name, $msg = undef) {
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
@@ -179,34 +166,25 @@ sub _trigger_event {
     }
 }
 
-sub send_message {
-    my ( $self, $body ) = @_;
-
+method send_message (Str $body) {
     $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
-sub send_notice {
-    my ( $self, $body ) = @_;
-
+method send_notice (Str $body) {
     $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
 }
 
-sub send_private_message {
-    my ( $self, $nick, $body ) = @_;
-
+method send_private_message (Str $nick, Str $body) {
     $self->irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
-sub nick_exists {
-    my ( $self, $nick ) = @_;
-
+method nick_exists (Str $nick) {
     return defined $self->irc->nick_modes( $self->channel, $nick );
 }
 
-sub set_topic {
-    my ( $self, $topic ) = @_;
+method set_topic (Str $topic) {
     $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
 }
 

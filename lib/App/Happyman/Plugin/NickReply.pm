@@ -1,14 +1,13 @@
 package App::Happyman::Plugin::NickReply;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
 use AnyEvent;
 
-sub on_message {
-    my ( $self, $msg ) = @_;
-
+method on_message (App::Happyman::Message $msg) {
     if ( $msg->full_text eq $self->conn->nick ) {
         my $timer;
         $timer = AE::timer rand(2), 0, sub {

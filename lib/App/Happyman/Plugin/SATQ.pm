@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::SATQ;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -27,13 +28,11 @@ has '_ua' => (
     lazy    => 1,
 );
 
-sub _build_ua {
+method _build_ua {
     return Mojo::UserAgent->new();
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
-
+method on_message (App::Happyman::Message $msg) {
     if ( $msg->full_text =~ /^\!quote\s*$/ ) {
         my $authorization = 'Basic '
             . encode_base64( $self->user . ':' . $self->password, '' );

@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::RandomTopic;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -43,8 +44,7 @@ has min_topic_age => (
     default => 172800,
 );
 
-sub _build_lines {
-    my ($self) = @_;
+method _build_lines {
     my $handle = Data::Handle->new(__PACKAGE__);
     return [
         grep { length >= $self->min_line_length }
@@ -52,9 +52,7 @@ sub _build_lines {
     ];
 }
 
-sub _build_timer {
-    my ($self) = @_;
-
+method _build_timer {
     return AE::timer(
         0,
         $self->check_interval,
@@ -69,26 +67,21 @@ sub _build_timer {
     );
 }
 
-sub BUILD {
-    my ($self) = @_;
+method BUILD (...) { 
     $self->_timer();
 }
 
-sub on_topic {
-    my ( $self, $topic ) = @_;
+method on_topic (Str $topic) {
     $self->_topic_time(time);
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
-
+method on_message (App::Happyman::Message $msg) {
     if ( $msg->full_text =~ /^\!topic\s*$/ ) {
         $self->_set_random_topic();
     }
 }
 
-sub _set_random_topic {
-    my ($self) = @_;
+method _set_random_topic {
     my $line = $self->_lines->[ rand @{ $self->_lines } ];
     $self->conn->set_topic($line);
 }

@@ -1,6 +1,7 @@
 package App::Happyman::Plugin::PeekURI;
 use v5.16;
 use Moose;
+use Method::Signatures;
 
 with 'App::Happyman::Plugin';
 
@@ -8,8 +9,8 @@ use AnyEvent::HTTP;
 use AnyEvent::Twitter;
 use JSON;
 use List::MoreUtils qw(natatime);
-use URI;
 use URI::Find;
+use URI::URL;
 use XML::LibXML;
 
 has [
@@ -27,8 +28,7 @@ has _twitter => (
     builder => '_build_twitter',
 );
 
-sub _build_twitter {
-    my ($self) = @_;
+method _build_twitter {
     return AnyEvent::Twitter->new(
         consumer_key    => $self->twitter_consumer_key,
         consumer_secret => $self->twitter_consumer_secret,
@@ -37,11 +37,10 @@ sub _build_twitter {
     );
 }
 
-sub _ignore_link {
+method _ignore_link (Str $uri) {
 }
 
-sub _fetch_tweet_text {
-    my ( $self, $uri ) = @_;
+method _fetch_tweet_text (Str $uri) {
     $uri =~ m{/(\d+)$};
     return unless $1;
 
@@ -58,8 +57,7 @@ sub _fetch_tweet_text {
     );
 }
 
-sub _fetch_html_title {
-    my ( $self, $uri ) = @_;
+method _fetch_html_title (Str $uri) {
     my $request_headers = { Range => 'bytes=0-20000', };
 
     http_get(
@@ -99,8 +97,7 @@ sub _fetch_html_title {
     return;
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
+method on_message (App::Happyman::Message $msg) {
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
         [ qr/\.wikipedia\.org$/ => \&_ignore_link ],
@@ -109,12 +106,11 @@ sub on_message {
     );
 
     my $finder = URI::Find->new(
-        sub {
-            my ( $uri, undef ) = @_;
+        func (URI::URL $uri_obj, Str $uri_str) {
             for (@peekers) {
                 my ( $pattern, $cb ) = @$_;
-                if ( $uri->host =~ $pattern ) {
-                    return $cb->( $self, $uri );
+                if ( $uri_obj->host =~ $pattern ) {
+                    return $cb->( $self, $uri_str );
                 }
             }
         }

@@ -1110,6 +1110,69 @@
          "target" : "B::Hooks::EndOfScope",
          "version" : "0.12"
       },
+      "B::Hooks::OP::Annotation" : {
+         "dist" : "B-Hooks-OP-Annotation-0.44",
+         "mymeta" : {
+            "abstract" : "annotate and delegate hooked OPs",
+            "author" : [
+               "chocolateboy <chocolate@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "B-Hooks-OP-Annotation",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::Depends" : "0.304",
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "ExtUtils::Depends" : "0.304"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "http://github.com/chocolateboy/B-Hooks-OP-Annotation"
+               }
+            },
+            "version" : "0.44"
+         },
+         "name" : "B::Hooks::OP::Annotation",
+         "pathname" : "C/CH/CHOCOLATE/B-Hooks-OP-Annotation-0.44.tar.gz",
+         "provides" : {
+            "B::Hooks::OP::Annotation" : {
+               "file" : "B/Hooks/OP/Annotation.pm",
+               "version" : "0.44"
+            },
+            "B::Hooks::OP::Annotation::Install::Files" : {
+               "file" : "B/Hooks/OP/Annotation/Install/Files.pm"
+            }
+         },
+         "target" : "B::Hooks::OP::Annotation",
+         "version" : "0.44"
+      },
       "B::Hooks::OP::Check" : {
          "dist" : "B-Hooks-OP-Check-0.19",
          "mymeta" : {
@@ -2388,6 +2451,84 @@
          "target" : "Config::INI::Reader",
          "version" : "0.019"
       },
+      "Const::Fast" : {
+         "dist" : "Const-Fast-0.013",
+         "mymeta" : {
+            "abstract" : "Facility for creating read-only scalars, arrays, and hashes",
+            "author" : [
+               "Leon Timmermans <fawaka@gmail.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Dist::Zilla version 4.300021, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Const-Fast",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Data::Dumper" : "0",
+                     "File::Find" : "0",
+                     "File::Temp" : "0",
+                     "Test::Exception" : "0.29",
+                     "Test::More" : "0.88"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.30"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Carp" : "0",
+                     "Scalar::Util" : "0",
+                     "Storable" : "0",
+                     "Sub::Exporter" : "0",
+                     "Sub::Exporter::Progressive" : "0",
+                     "strict" : "0",
+                     "warnings" : "0"
+                  }
+               },
+               "test" : {
+                  "requires" : {
+                     "Data::Dumper" : "0",
+                     "File::Find" : "0",
+                     "File::Temp" : "0",
+                     "Test::Exception" : "0.29",
+                     "Test::More" : "0.88"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "bugtracker" : {
+                  "mailto" : "bug-const-fast at rt.cpan.org",
+                  "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=Const-Fast"
+               },
+               "repository" : {
+                  "type" : "git",
+                  "url" : "git://github.com/Leont/const-fast.git",
+                  "web" : "http://github.com/Leont/const-fast"
+               }
+            },
+            "version" : "0.013"
+         },
+         "name" : "Const::Fast",
+         "pathname" : "L/LE/LEONT/Const-Fast-0.013.tar.gz",
+         "provides" : {
+            "Const::Fast" : {
+               "file" : "Const/Fast.pm",
+               "version" : "0.013"
+            }
+         },
+         "target" : "Const::Fast",
+         "version" : "0.013"
+      },
       "Coro" : {
          "dist" : "Coro-6.23",
          "mymeta" : {
@@ -2544,6 +2685,54 @@
          },
          "target" : "Coro",
          "version" : "6.23"
+      },
+      "Data::Alias" : {
+         "dist" : "Data-Alias-1.16",
+         "mymeta" : {
+            "abstract" : "Comprehensive set of aliasing operations",
+            "author" : [
+               "Matthijs van Duin <xmath@cpan.org>",
+               "Andrew Main (Zefram) <zefram@fysh.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 0.67, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Data-Alias",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "version" : "1.16"
+         },
+         "name" : "Data::Alias",
+         "pathname" : "Z/ZE/ZEFRAM/Data-Alias-1.16.tar.gz",
+         "provides" : {
+            "Data::Alias" : {
+               "file" : "Data/Alias.pm",
+               "version" : "1.16"
+            }
+         },
+         "target" : "Data::Alias",
+         "version" : "1.16"
       },
       "Data::Dump" : {
          "dist" : "Data-Dump-1.21",
@@ -9318,6 +9507,65 @@
          "target" : "Devel::PartialDump",
          "version" : "0.15"
       },
+      "Devel::Pragma" : {
+         "dist" : "Devel-Pragma-0.54",
+         "mymeta" : {
+            "abstract" : "helper functions for developers of lexical pragmas",
+            "author" : [
+               "chocolateboy <chocolate@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Devel-Pragma",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "B::Hooks::OP::Annotation" : "0.43",
+                     "B::Hooks::OP::Check" : "0.18",
+                     "ExtUtils::Depends" : "0.302",
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "B::Hooks::EndOfScope" : "0.09",
+                     "B::Hooks::OP::Annotation" : "0.43",
+                     "B::Hooks::OP::Check" : "0.18"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.54"
+         },
+         "name" : "Devel::Pragma",
+         "pathname" : "C/CH/CHOCOLATE/Devel-Pragma-0.54.tar.gz",
+         "provides" : {
+            "Devel::Pragma" : {
+               "file" : "Devel/Pragma.pm",
+               "version" : "0.54"
+            }
+         },
+         "target" : "Devel::Pragma",
+         "version" : "0.54"
+      },
       "Devel::Symdump" : {
          "dist" : "Devel-Symdump-2.10",
          "mymeta" : {
@@ -12895,6 +13143,102 @@
          },
          "target" : "MRO::Compat",
          "version" : "0.12"
+      },
+      "Method::Signatures" : {
+         "dist" : "Method-Signatures-20130222",
+         "mymeta" : {
+            "abstract" : "method and function declarations with signatures and no source filter",
+            "author" : [
+               "Michael G Schwern <schwern@pobox.com>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Method-Signatures",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Module::Build" : "0.26",
+                     "Test::Builder" : "0.82",
+                     "Test::Exception" : "0.29",
+                     "Test::More" : "0.82",
+                     "Test::Warn" : "0.10"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "Module::Build" : "0.26"
+                  }
+               },
+               "runtime" : {
+                  "recommends" : {
+                     "Moose" : "0.96"
+                  },
+                  "requires" : {
+                     "Any::Moose" : "0.11",
+                     "Const::Fast" : "0.006",
+                     "Data::Alias" : "1.08",
+                     "Devel::Declare" : "0.006002",
+                     "Devel::Declare::MethodInstaller::Simple" : "0.006002",
+                     "Devel::Pragma" : "0.40",
+                     "Mouse" : "0.64",
+                     "PPI" : "1.203",
+                     "Sub::Name" : "0.03",
+                     "perl" : "v5.8.1"
+                  }
+               }
+            },
+            "provides" : {
+               "Method::Signatures" : {
+                  "file" : "lib/Method/Signatures.pm",
+                  "version" : "20130222"
+               },
+               "Method::Signatures::Modifiers" : {
+                  "file" : "lib/Method/Signatures/Modifiers.pm",
+                  "version" : "20130222"
+               },
+               "Method::Signatures::Parser" : {
+                  "file" : "lib/Method/Signatures/Parser.pm",
+                  "version" : "0"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "bugtracker" : {
+                  "web" : "http://rt.cpan.org/NoAuth/Bugs.html?Dist=Method-Signatures"
+               },
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://github.com/schwern/method-signatures/tree"
+               }
+            },
+            "version" : "20130222"
+         },
+         "name" : "Method::Signatures",
+         "pathname" : "B/BA/BAREFOOT/Method-Signatures-20130222.tar.gz",
+         "provides" : {
+            "Method::Signatures" : {
+               "file" : "Method/Signatures.pm",
+               "version" : "20130222"
+            },
+            "Method::Signatures::Modifiers" : {
+               "file" : "Method/Signatures/Modifiers.pm",
+               "version" : "20130222"
+            },
+            "Method::Signatures::Parser" : {
+               "file" : "Method/Signatures/Parser.pm"
+            }
+         },
+         "target" : "Method::Signatures",
+         "version" : "20130222"
       },
       "Mixin::Linewise" : {
          "dist" : "Mixin-Linewise-0.003",
