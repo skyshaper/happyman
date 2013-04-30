@@ -43,29 +43,12 @@ has min_topic_age => (
     default => 172800,
 );
 
-sub BUILD {
-    my ($self) = @_;
-    $self->_timer();
-}
-
-
 sub _build_lines {
     my ($self) = @_;
     my $handle = Data::Handle->new(__PACKAGE__);
     return [ grep { length >= $self->min_line_length } 
               map { chomp; $_} <$handle> ];
 }
-
-sub _random_line {
-    my ($self) = @_;
-    return @{$self->_lines}[rand @{$self->_lines}];
-}
-
-sub on_topic {
-    my ($self, $topic) = @_;
-    $self->_topic_time(time);
-}
-
 
 sub _build_timer {
     my ($self) = @_;
@@ -80,14 +63,15 @@ sub _build_timer {
     });
 }
 
-sub _set_random_topic {
+sub BUILD {
     my ($self) = @_;
-
-    my $line = $self->_random_line();
-    say $line;
-    $self->conn->set_topic($line);
+    $self->_timer();
 }
 
+sub on_topic {
+    my ($self, $topic) = @_;
+    $self->_topic_time(time);
+}
 
 sub on_message {
     my ($self, $msg) = @_;
@@ -97,6 +81,11 @@ sub on_message {
     }
 }
 
+sub _set_random_topic {
+    my ($self) = @_;
+    my $line = $self->_lines->[rand @{$self->_lines}];
+    $self->conn->set_topic($line);
+}
 
 __PACKAGE__->meta->make_immutable();
 
