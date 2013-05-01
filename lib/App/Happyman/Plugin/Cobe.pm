@@ -26,7 +26,7 @@ has brain => (
     default => 'cobe.sqlite',
 );
 
-method BUILD (...) { 
+method BUILD (...) {
     $self->_child;
 }
 

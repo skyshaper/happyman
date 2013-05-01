@@ -21,7 +21,7 @@ method _build_mojo {
         $self->conn->send_notice( $app->param('message') );
         $app->render(text => 'sent');
     };
-    
+
     post '/github' => func($app) {
         my $data;
         try {
@@ -48,7 +48,7 @@ method _build_mojo {
         $app->render(status => 200, text => 'sent');
         return;
     },
-    
+
     my $daemon = Mojo::Server::Daemon->new(app => app, listen => ['http://*:6666']);
     $daemon->start();
     return $daemon;
