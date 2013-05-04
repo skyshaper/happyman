@@ -68,7 +68,7 @@ method _build_timer {
     );
 }
 
-method BUILD (...) { 
+method BUILD (...) {
     $self->_timer();
 }
 

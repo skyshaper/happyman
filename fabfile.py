@@ -9,6 +9,6 @@ def deploy():
         run('git pull')
         run('carton install')
     run('svc -t ~/service/happyman')
-    
+
 def restart():
     run('svc -t ~/service/happyman')

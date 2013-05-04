@@ -131,7 +131,7 @@ method _build_irc {
     return $irc;
 }
 
-method BUILD (...) { 
+method BUILD (...) {
     $self->_connect();    # enforce construction
 }
 
