@@ -16,6 +16,7 @@ requires 'LWP::Protocol::AnyEvent::http';
 requires 'Method::Signatures';
 requires 'Mojolicious';
 requires 'Moose';
+requires 'namespace::autoclean';
 requires 'Net::SSLeay';
 requires 'Test::Spec';
 requires 'TryCatch';

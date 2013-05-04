@@ -2,6 +2,7 @@ package App::Happyman::Message;
 use v5.16;
 use Moose;
 use Method::Signatures;
+use namespace::autoclean;
 
 has [qw(full_text text sender_nick)] => (
     is       => 'ro',

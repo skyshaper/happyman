@@ -2,6 +2,7 @@ package App::Happyman::Connection;
 use v5.16;
 use Moose;
 use Method::Signatures;
+use namespace::autoclean;
 
 use App::Happyman::Message;
 use App::Happyman::Plugin;

@@ -56,6 +56,139 @@
          "target" : "Algorithm::Diff",
          "version" : "1.1902"
       },
+      "Alien::GvaScript" : {
+         "dist" : "Alien-GvaScript-1.42",
+         "mymeta" : {
+            "abstract" : "Gva extension to the prototype javascript framework",
+            "author" : [
+               "Laurent Dami <laurent.dami@justice.ge.ch>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Alien-GvaScript",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "Module::Build" : "0.40"
+                  }
+               },
+               "runtime" : {
+                  "recommends" : {
+                     "Pod::POM" : "0",
+                     "Pod::POM::View" : "0",
+                     "Pod::POM::View::HTML" : "0"
+                  },
+                  "requires" : {
+                     "File::Copy" : "0",
+                     "File::Path" : "0"
+                  }
+               }
+            },
+            "provides" : {
+               "Alien::GvaScript" : {
+                  "file" : "lib/Alien/GvaScript.pm",
+                  "version" : "1.42"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://github.com/damil/Alien-GvaScript"
+               }
+            },
+            "version" : "1.42"
+         },
+         "name" : "Alien::GvaScript",
+         "pathname" : "D/DA/DAMI/Alien-GvaScript-1.42.tar.gz",
+         "provides" : {
+            "Alien::GvaScript" : {
+               "file" : "Alien/GvaScript.pm",
+               "version" : "1.42"
+            }
+         },
+         "target" : "Alien::GvaScript",
+         "version" : "1.42"
+      },
+      "AnnoCPAN::Perldoc" : {
+         "dist" : "AnnoCPAN-Perldoc-0.10",
+         "mymeta" : {
+            "abstract" : "unknown",
+            "author" : [
+               "unknown"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "AnnoCPAN-Perldoc",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "DBD::SQLite" : "1",
+                     "DBI" : "0",
+                     "Digest::MD5" : "0",
+                     "IO::String" : "0",
+                     "Pod::Perldoc" : "3.14"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.10"
+         },
+         "name" : "AnnoCPAN::Perldoc",
+         "pathname" : "I/IT/ITUB/AnnoCPAN-Perldoc-0.10.tar.gz",
+         "provides" : {
+            "AnnoCPAN::Perldoc" : {
+               "file" : "AnnoCPAN/Perldoc.pm",
+               "version" : "0.10"
+            },
+            "AnnoCPAN::Perldoc::Filter" : {
+               "file" : "AnnoCPAN/Perldoc/Filter.pm",
+               "version" : "0.10"
+            },
+            "AnnoCPAN::Perldoc::Parser" : {
+               "file" : "AnnoCPAN/Perldoc/Filter.pm"
+            }
+         },
+         "target" : "AnnoCPAN::Perldoc::Filter",
+         "version" : "0.10"
+      },
       "Any::Moose" : {
          "dist" : "Any-Moose-0.21",
          "mymeta" : {
@@ -1380,6 +1513,65 @@
          "target" : "Business::ISBN::Data",
          "version" : "20120719.001"
       },
+      "CSS::Tiny" : {
+         "dist" : "CSS-Tiny-1.19",
+         "mymeta" : {
+            "abstract" : "Read/Write .css files with as little code as possible",
+            "author" : [
+               "Adam Kennedy <adamk@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "CSS-Tiny",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0.47"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "perl" : "5.004"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "http://svn.ali.as/cpan/trunk/CSS-Tiny"
+               }
+            },
+            "version" : "1.19"
+         },
+         "name" : "CSS::Tiny",
+         "pathname" : "A/AD/ADAMK/CSS-Tiny-1.19.tar.gz",
+         "provides" : {
+            "CSS::Tiny" : {
+               "file" : "CSS/Tiny.pm",
+               "version" : "1.19"
+            }
+         },
+         "target" : "CSS::Tiny",
+         "version" : "1.19"
+      },
       "Carp::Clan" : {
          "dist" : "Carp-Clan-6.04",
          "mymeta" : {
@@ -2192,6 +2384,474 @@
          },
          "target" : "Const::Fast",
          "version" : "0.013"
+      },
+      "DBD::SQLite" : {
+         "dist" : "DBD-SQLite-1.37",
+         "mymeta" : {
+            "abstract" : "Self Contained SQLite RDBMS in a DBI Driver",
+            "author" : [
+               "Adam Kennedy <adamk@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112621, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "DBD-SQLite",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc",
+                  "util"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "DBI" : "1.57",
+                     "ExtUtils::MakeMaker" : "6.48",
+                     "File::Spec" : "0.82"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "DBI" : "1.57",
+                     "File::Spec" : "0.82",
+                     "Test::Builder" : "0.86",
+                     "Test::More" : "0.47",
+                     "Tie::Hash" : "0",
+                     "perl" : "5.006"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "bugtracker" : {
+                  "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=DBD-SQLite"
+               },
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "http://svn.ali.as/cpan/trunk/DBD-SQLite"
+               },
+               "x_MailingList" : "http://lists.scsys.co.uk/cgi-bin/mailman/listinfo/dbd-sqlite"
+            },
+            "version" : "1.37"
+         },
+         "name" : "DBD::SQLite",
+         "pathname" : "A/AD/ADAMK/DBD-SQLite-1.37.tar.gz",
+         "provides" : {
+            "DBD::SQLite" : {
+               "file" : "DBD/SQLite.pm",
+               "version" : "1.37"
+            },
+            "DBD::SQLite::db" : {
+               "file" : "DBD/SQLite.pm"
+            },
+            "DBD::SQLite::dr" : {
+               "file" : "DBD/SQLite.pm"
+            }
+         },
+         "target" : "DBD::SQLite",
+         "version" : "1.37"
+      },
+      "DBI" : {
+         "dist" : "DBI-1.625",
+         "mymeta" : {
+            "abstract" : "Database independent interface for Perl",
+            "author" : [
+               "Tim Bunce (dbi-users@perl.org)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.6501, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "DBI",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.48",
+                     "Test::Simple" : "0.90"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "conflicts" : {
+                     "DBD::Amazon" : "0.10",
+                     "DBD::AnyData" : "0.110",
+                     "DBD::CSV" : "0.36",
+                     "DBD::Google" : "0.51",
+                     "DBD::PO" : "2.10",
+                     "DBD::RAM" : "0.072",
+                     "SQL::Statement" : "1.33"
+                  },
+                  "recommends" : {
+                     "Clone" : "0.34",
+                     "DB_File" : "0",
+                     "MLDBM" : "0",
+                     "Net::Daemon" : "0",
+                     "RPC::PlServer" : "0.2001",
+                     "SQL::Statement" : "1.402"
+                  },
+                  "requires" : {
+                     "perl" : "5.008"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "homepage" : "http://dbi.perl.org/",
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://svn.perl.org/modules/dbi/trunk/"
+               },
+               "x_MailingList" : "mailto:dbi-dev@perl.org"
+            },
+            "version" : "1.625"
+         },
+         "name" : "DBI",
+         "pathname" : "T/TI/TIMB/DBI-1.625.tar.gz",
+         "provides" : {
+            "Bundle::DBI" : {
+               "file" : "Bundle/DBI.pm",
+               "version" : "12.008695"
+            },
+            "DBD::DBM" : {
+               "file" : "DBD/DBM.pm",
+               "version" : "0.08"
+            },
+            "DBD::DBM::Statement" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::Table" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::db" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::dr" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::st" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::ExampleP" : {
+               "file" : "DBD/ExampleP.pm",
+               "version" : "12.014310"
+            },
+            "DBD::ExampleP::db" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::ExampleP::dr" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::ExampleP::st" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::File" : {
+               "file" : "DBD/File.pm",
+               "version" : "0.41"
+            },
+            "DBD::File::DataSource::File" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::DataSource::Stream" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::Statement" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::Table" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::TableSource::FileSystem" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::db" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::dr" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::st" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::Gofer" : {
+               "file" : "DBD/Gofer.pm",
+               "version" : "0.015326"
+            },
+            "DBD::Gofer::Policy::Base" : {
+               "file" : "DBD/Gofer/Policy/Base.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::classic" : {
+               "file" : "DBD/Gofer/Policy/classic.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::pedantic" : {
+               "file" : "DBD/Gofer/Policy/pedantic.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::rush" : {
+               "file" : "DBD/Gofer/Policy/rush.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::Base" : {
+               "file" : "DBD/Gofer/Transport/Base.pm",
+               "version" : "0.014120"
+            },
+            "DBD::Gofer::Transport::corostream" : {
+               "file" : "DBD/Gofer/Transport/corostream.pm"
+            },
+            "DBD::Gofer::Transport::null" : {
+               "file" : "DBD/Gofer/Transport/null.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::pipeone" : {
+               "file" : "DBD/Gofer/Transport/pipeone.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::stream" : {
+               "file" : "DBD/Gofer/Transport/stream.pm",
+               "version" : "0.014598"
+            },
+            "DBD::Gofer::db" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::Gofer::dr" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::Gofer::st" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::NullP" : {
+               "file" : "DBD/NullP.pm",
+               "version" : "12.014714"
+            },
+            "DBD::NullP::db" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::NullP::dr" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::NullP::st" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::Proxy" : {
+               "file" : "DBD/Proxy.pm",
+               "version" : "0.2004"
+            },
+            "DBD::Proxy::RPC::PlClient" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::db" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::dr" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::st" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Sponge" : {
+               "file" : "DBD/Sponge.pm",
+               "version" : "12.010002"
+            },
+            "DBD::Sponge::db" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBD::Sponge::dr" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBD::Sponge::st" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBDI" : {
+               "file" : "DBI/DBD.pm"
+            },
+            "DBI" : {
+               "file" : "DBI.pm",
+               "version" : "1.625"
+            },
+            "DBI::Const::GetInfo::ANSI" : {
+               "file" : "DBI/Const/GetInfo/ANSI.pm",
+               "version" : "2.008696"
+            },
+            "DBI::Const::GetInfo::ODBC" : {
+               "file" : "DBI/Const/GetInfo/ODBC.pm",
+               "version" : "2.011373"
+            },
+            "DBI::Const::GetInfoReturn" : {
+               "file" : "DBI/Const/GetInfoReturn.pm",
+               "version" : "2.008696"
+            },
+            "DBI::Const::GetInfoType" : {
+               "file" : "DBI/Const/GetInfoType.pm",
+               "version" : "2.008696"
+            },
+            "DBI::DBD" : {
+               "file" : "DBI/DBD.pm",
+               "version" : "12.015128"
+            },
+            "DBI::DBD::Metadata" : {
+               "file" : "DBI/DBD/Metadata.pm",
+               "version" : "2.014213"
+            },
+            "DBI::DBD::SqlEngine" : {
+               "file" : "DBI/DBD/SqlEngine.pm",
+               "version" : "0.05"
+            },
+            "DBI::DBD::SqlEngine::DataSource" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::Statement" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::Table" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TableSource" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TieMeta" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TieTables" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::db" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::dr" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::st" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::FAQ" : {
+               "file" : "DBI/FAQ.pm",
+               "version" : "1.014934"
+            },
+            "DBI::Gofer::Execute" : {
+               "file" : "DBI/Gofer/Execute.pm",
+               "version" : "0.014282"
+            },
+            "DBI::Gofer::Request" : {
+               "file" : "DBI/Gofer/Request.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Response" : {
+               "file" : "DBI/Gofer/Response.pm",
+               "version" : "0.011565"
+            },
+            "DBI::Gofer::Serializer::Base" : {
+               "file" : "DBI/Gofer/Serializer/Base.pm",
+               "version" : "0.009949"
+            },
+            "DBI::Gofer::Serializer::DataDumper" : {
+               "file" : "DBI/Gofer/Serializer/DataDumper.pm",
+               "version" : "0.009949"
+            },
+            "DBI::Gofer::Serializer::Storable" : {
+               "file" : "DBI/Gofer/Serializer/Storable.pm",
+               "version" : "0.015585"
+            },
+            "DBI::Gofer::Transport::Base" : {
+               "file" : "DBI/Gofer/Transport/Base.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Transport::pipeone" : {
+               "file" : "DBI/Gofer/Transport/pipeone.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Transport::stream" : {
+               "file" : "DBI/Gofer/Transport/stream.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Profile" : {
+               "file" : "DBI/Profile.pm",
+               "version" : "2.015064"
+            },
+            "DBI::ProfileData" : {
+               "file" : "DBI/ProfileData.pm",
+               "version" : "2.010007"
+            },
+            "DBI::ProfileDumper" : {
+               "file" : "DBI/ProfileDumper.pm",
+               "version" : "2.015324"
+            },
+            "DBI::ProfileDumper::Apache" : {
+               "file" : "DBI/ProfileDumper/Apache.pm",
+               "version" : "2.014120"
+            },
+            "DBI::ProfileSubs" : {
+               "file" : "DBI/ProfileSubs.pm",
+               "version" : "0.009395"
+            },
+            "DBI::ProxyServer" : {
+               "file" : "DBI/ProxyServer.pm",
+               "version" : "0.3005"
+            },
+            "DBI::ProxyServer::db" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::ProxyServer::dr" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::ProxyServer::st" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::PurePerl" : {
+               "file" : "DBI/PurePerl.pm",
+               "version" : "2.014285"
+            },
+            "DBI::SQL::Nano" : {
+               "file" : "DBI/SQL/Nano.pm",
+               "version" : "1.015542"
+            },
+            "DBI::SQL::Nano::Statement_" : {
+               "file" : "DBI/SQL/Nano.pm"
+            },
+            "DBI::SQL::Nano::Table_" : {
+               "file" : "DBI/SQL/Nano.pm"
+            },
+            "DBI::Util::CacheMemory" : {
+               "file" : "DBI/Util/CacheMemory.pm",
+               "version" : "0.010314"
+            },
+            "DBI::common" : {
+               "file" : "DBI.pm"
+            }
+         },
+         "target" : "DBI",
+         "version" : "1.625"
       },
       "Data::Alias" : {
          "dist" : "Data-Alias-1.16",
@@ -11647,6 +12307,153 @@
          "target" : "List::MoreUtils",
          "version" : "0.33"
       },
+      "MIME::Types" : {
+         "dist" : "MIME-Types-1.38",
+         "mymeta" : {
+            "abstract" : "Definition of MIME types",
+            "author" : [
+               "Mark Overmeer"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "MIME-Types",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Test::More" : "0.47"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "1.38"
+         },
+         "name" : "MIME::Types",
+         "pathname" : "M/MA/MARKOV/MIME-Types-1.38.tar.gz",
+         "provides" : {
+            "MIME::Type" : {
+               "file" : "MIME/Type.pm",
+               "version" : "1.38"
+            },
+            "MIME::Types" : {
+               "file" : "MIME/Types.pm",
+               "version" : "1.38"
+            }
+         },
+         "target" : "MIME::Types",
+         "version" : "1.38"
+      },
+      "MLDBM" : {
+         "dist" : "MLDBM-2.05",
+         "mymeta" : {
+            "abstract" : "store multi-level Perl hash structure in single level tied hash",
+            "author" : [
+               "Gurusamy Sarathy <gsar@umich.edu>",
+               "Alexandr Ciornii (alexchorny@gmail.com)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "MLDBM",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Carp" : "0",
+                     "Data::Dumper" : "2.08",
+                     "perl" : "5.005"
+                  }
+               }
+            },
+            "provides" : {
+               "MLDBM" : {
+                  "file" : "lib/MLDBM.pm",
+                  "version" : "2.05"
+               },
+               "MLDBM::Serializer" : {
+                  "file" : "lib/MLDBM.pm",
+                  "version" : "2.05"
+               },
+               "MLDBM::Serializer::Data::Dumper" : {
+                  "file" : "lib/MLDBM/Serializer/Data/Dumper.pm",
+                  "version" : "0"
+               },
+               "MLDBM::Serializer::FreezeThaw" : {
+                  "file" : "lib/MLDBM/Serializer/FreezeThaw.pm",
+                  "version" : "0"
+               },
+               "MLDBM::Serializer::Storable" : {
+                  "file" : "lib/MLDBM/Serializer/Storable.pm",
+                  "version" : "0"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "http://github.com/chorny/MLDBM/"
+               }
+            },
+            "version" : "2.05"
+         },
+         "name" : "MLDBM",
+         "pathname" : "C/CH/CHORNY/MLDBM-2.05.tar.gz",
+         "provides" : {
+            "MLDBM" : {
+               "file" : "MLDBM.pm",
+               "version" : "2.05"
+            },
+            "MLDBM::Serializer" : {
+               "file" : "MLDBM.pm",
+               "version" : "2.05"
+            },
+            "MLDBM::Serializer::Data::Dumper" : {
+               "file" : "MLDBM/Serializer/Data/Dumper.pm"
+            },
+            "MLDBM::Serializer::FreezeThaw" : {
+               "file" : "MLDBM/Serializer/FreezeThaw.pm"
+            },
+            "MLDBM::Serializer::Storable" : {
+               "file" : "MLDBM/Serializer/Storable.pm"
+            }
+         },
+         "target" : "MLDBM",
+         "version" : "2.05"
+      },
       "MRO::Compat" : {
          "dist" : "MRO-Compat-0.12",
          "mymeta" : {
@@ -13972,6 +14779,72 @@
          "target" : "Mozilla::CA",
          "version" : "20130114"
       },
+      "Net::Daemon" : {
+         "dist" : "Net-Daemon-0.48",
+         "mymeta" : {
+            "abstract" : "Perl extension for portable daemons",
+            "author" : [
+               "Jochen Wiedmann (joe@ispsoft.de)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Net-Daemon",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.48"
+         },
+         "name" : "Net::Daemon",
+         "pathname" : "M/MN/MNOONING/Net-Daemon-0.48.tar.gz",
+         "provides" : {
+            "Net::Daemon" : {
+               "file" : "Net/Daemon.pm",
+               "version" : "0.48"
+            },
+            "Net::Daemon::Log" : {
+               "file" : "Net/Daemon/Log.pm",
+               "version" : "0.01"
+            },
+            "Net::Daemon::Test" : {
+               "file" : "Net/Daemon/Test.pm",
+               "version" : "0.03"
+            },
+            "Net::Daemon::Test::Fork" : {
+               "file" : "Net/Daemon/Test.pm"
+            },
+            "Net::Daemon::Test::Win32" : {
+               "file" : "Net/Daemon/Test.pm"
+            }
+         },
+         "target" : "Net::Daemon",
+         "version" : "0.48"
+      },
       "Net::HTTP" : {
          "dist" : "Net-HTTP-6.06",
          "mymeta" : {
@@ -14846,6 +15719,78 @@
          },
          "target" : "PPI",
          "version" : "1.215"
+      },
+      "PPI::HTML" : {
+         "dist" : "PPI-HTML-1.08",
+         "mymeta" : {
+            "abstract" : "Generate syntax-hightlighted HTML for Perl using PPI",
+            "author" : [
+               "Adam Kennedy <adamk@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 0.91, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "PPI-HTML",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "CSS::Tiny" : "1.10",
+                     "ExtUtils::MakeMaker" : "6.42",
+                     "File::Spec" : "0.80",
+                     "PPI" : "0.990",
+                     "Params::Util" : "0.05",
+                     "Test::More" : "0.47"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "http://svn.ali.as/cpan/trunk/PPI-HTML"
+               },
+               "x_ChangeLog" : "http://fisheye2.atlassian.com/changelog/cpan/trunk/PPI-HTML"
+            },
+            "version" : "1.08"
+         },
+         "name" : "PPI::HTML",
+         "pathname" : "A/AD/ADAMK/PPI-HTML-1.08.tar.gz",
+         "provides" : {
+            "PPI::HTML" : {
+               "file" : "PPI/HTML.pm",
+               "version" : "1.08"
+            },
+            "PPI::HTML::Fragment" : {
+               "file" : "PPI/HTML/Fragment.pm",
+               "version" : "1.08"
+            }
+         },
+         "target" : "PPI::HTML",
+         "version" : "1.08"
       },
       "Package::DeprecationManager" : {
          "dist" : "Package-DeprecationManager-0.13",
@@ -15976,6 +16921,553 @@
          "target" : "Perl::Tidy",
          "version" : "20121207"
       },
+      "Pod::POM" : {
+         "dist" : "Pod-POM-0.27",
+         "mymeta" : {
+            "abstract" : "POD Object Model",
+            "author" : [
+               "Andy Wardley <abw@kfs.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 0.91, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Pod-POM",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Encode" : "0",
+                     "ExtUtils::MakeMaker" : "6.42",
+                     "File::Slurp" : "0",
+                     "Test::More" : "0",
+                     "Text::Wrap" : "2001.0929",
+                     "parent" : "0"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ]
+            },
+            "version" : "0.27"
+         },
+         "name" : "Pod::POM",
+         "pathname" : "A/AN/ANDREWF/Pod-POM-0.27.tar.gz",
+         "provides" : {
+            "Pod::POM" : {
+               "file" : "Pod/POM.pm",
+               "version" : "0.27"
+            },
+            "Pod::POM::Constants" : {
+               "file" : "Pod/POM/Constants.pm",
+               "version" : "1.01"
+            },
+            "Pod::POM::Node" : {
+               "file" : "Pod/POM/Node.pm",
+               "version" : "1.05"
+            },
+            "Pod::POM::Node::Begin" : {
+               "file" : "Pod/POM/Node/Begin.pm"
+            },
+            "Pod::POM::Node::Code" : {
+               "file" : "Pod/POM/Node/Code.pm"
+            },
+            "Pod::POM::Node::Content" : {
+               "file" : "Pod/POM/Node/Content.pm"
+            },
+            "Pod::POM::Node::For" : {
+               "file" : "Pod/POM/Node/For.pm"
+            },
+            "Pod::POM::Node::Head1" : {
+               "file" : "Pod/POM/Node/Head1.pm"
+            },
+            "Pod::POM::Node::Head2" : {
+               "file" : "Pod/POM/Node/Head2.pm"
+            },
+            "Pod::POM::Node::Head3" : {
+               "file" : "Pod/POM/Node/Head3.pm"
+            },
+            "Pod::POM::Node::Head4" : {
+               "file" : "Pod/POM/Node/Head4.pm"
+            },
+            "Pod::POM::Node::Item" : {
+               "file" : "Pod/POM/Node/Item.pm"
+            },
+            "Pod::POM::Node::Over" : {
+               "file" : "Pod/POM/Node/Over.pm"
+            },
+            "Pod::POM::Node::Pod" : {
+               "file" : "Pod/POM/Node/Pod.pm"
+            },
+            "Pod::POM::Node::Sequence" : {
+               "file" : "Pod/POM/Node/Sequence.pm"
+            },
+            "Pod::POM::Node::Text" : {
+               "file" : "Pod/POM/Node/Text.pm"
+            },
+            "Pod::POM::Node::Verbatim" : {
+               "file" : "Pod/POM/Node/Verbatim.pm"
+            },
+            "Pod::POM::Nodes" : {
+               "file" : "Pod/POM/Nodes.pm",
+               "version" : "1.03"
+            },
+            "Pod::POM::Test" : {
+               "file" : "Pod/POM/Test.pm",
+               "version" : "1.01"
+            },
+            "Pod::POM::View" : {
+               "file" : "Pod/POM/View.pm",
+               "version" : "1.04"
+            },
+            "Pod::POM::View::HTML" : {
+               "file" : "Pod/POM/View/HTML.pm",
+               "version" : "1.06"
+            },
+            "Pod::POM::View::Pod" : {
+               "file" : "Pod/POM/View/Pod.pm",
+               "version" : "1.03"
+            },
+            "Pod::POM::View::Text" : {
+               "file" : "Pod/POM/View/Text.pm",
+               "version" : "1.03"
+            }
+         },
+         "target" : "Pod::POM",
+         "version" : "0.27"
+      },
+      "Pod::POM::Web" : {
+         "dist" : "Pod-POM-Web-1.19",
+         "mymeta" : {
+            "abstract" : "HTML Perldoc server",
+            "author" : [
+               "Laurent Dami <laurent.d...@justice.ge.ch>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Pod-POM-Web",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "Module::Build" : "0.40"
+                  }
+               },
+               "runtime" : {
+                  "recommends" : {
+                     "AnnoCPAN::Perldoc::Filter" : "0",
+                     "PPI::HTML" : "0",
+                     "Search::Indexer" : "0.75"
+                  },
+                  "requires" : {
+                     "Alien::GvaScript" : "1.021",
+                     "Config" : "0",
+                     "Encode::Guess" : "0",
+                     "HTTP::Daemon" : "0",
+                     "List::MoreUtils" : "0",
+                     "List::Util" : "0",
+                     "MIME::Types" : "0",
+                     "Module::CoreList" : "0",
+                     "POSIX" : "0",
+                     "Pod::POM" : "0.25",
+                     "Pod::POM::View::HTML" : "0",
+                     "Time::HiRes" : "0",
+                     "URI" : "0",
+                     "URI::QueryParam" : "0",
+                     "parent" : "0"
+                  }
+               }
+            },
+            "provides" : {
+               "Pod::POM::Web" : {
+                  "file" : "lib/Pod/POM/Web.pm",
+                  "version" : "1.19"
+               },
+               "Pod::POM::Web::Indexer" : {
+                  "file" : "lib/Pod/POM/Web/Indexer.pm",
+                  "version" : "1.19"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://github.com/damil/Pod-POM-Web"
+               }
+            },
+            "version" : "1.19"
+         },
+         "name" : "Pod::POM::Web",
+         "pathname" : "D/DA/DAMI/Pod-POM-Web-1.19.tar.gz",
+         "provides" : {
+            "Pod::POM::Web" : {
+               "file" : "Pod/POM/Web.pm",
+               "version" : "1.19"
+            },
+            "Pod::POM::Web::Indexer" : {
+               "file" : "Pod/POM/Web/Indexer.pm",
+               "version" : "1.19"
+            }
+         },
+         "target" : "Pod::POM::Web",
+         "version" : "1.19"
+      },
+      "RPC::PlServer" : {
+         "dist" : "PlRPC-0.2020",
+         "mymeta" : {
+            "abstract" : "Perl Remote Method Invocation",
+            "author" : [
+               "Jochen Wiedmann (jochen.wiedmann@freenet.de)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "PlRPC",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "Net::Daemon" : "0.13",
+                     "Storable" : "0"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.2020"
+         },
+         "name" : "RPC::PlServer",
+         "pathname" : "M/MN/MNOONING/PlRPC/PlRPC-0.2020.tar.gz",
+         "provides" : {
+            "Bundle::PlRPC" : {
+               "file" : "Bundle/PlRPC.pm",
+               "version" : "0.03"
+            },
+            "RPC::PlClient" : {
+               "file" : "RPC/PlClient.pm",
+               "version" : "0.2020"
+            },
+            "RPC::PlClient::Comm" : {
+               "file" : "RPC/PlClient/Comm.pm",
+               "version" : "0.1002"
+            },
+            "RPC::PlClient::Object" : {
+               "file" : "RPC/PlClient.pm"
+            },
+            "RPC::PlServer" : {
+               "file" : "RPC/PlServer.pm",
+               "version" : "0.2020"
+            },
+            "RPC::PlServer::Comm" : {
+               "file" : "RPC/PlServer/Comm.pm",
+               "version" : "0.1003"
+            },
+            "RPC::PlServer::Test" : {
+               "file" : "RPC/PlServer/Test.pm",
+               "version" : "0.01"
+            }
+         },
+         "target" : "RPC::PlServer",
+         "version" : "0.2020"
+      },
+      "SQL::Statement" : {
+         "dist" : "SQL-Statement-1.402",
+         "mymeta" : {
+            "abstract" : "SQL parsing and processing engine",
+            "author" : [
+               "Jeff Zucker <jeff@vpservices.com>, Jens Rehsack <rehsack@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "SQL-Statement",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Math::BigInt" : "1.88",
+                     "Math::Complex" : "1.56",
+                     "Test::Simple" : "0.90"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "recommends" : {
+                     "Math::BigInt" : "1.88",
+                     "Math::Complex" : "1.56"
+                  },
+                  "requires" : {
+                     "Carp" : "0",
+                     "Clone" : "0.30",
+                     "Data::Dumper" : "0",
+                     "Params::Util" : "1.00",
+                     "Scalar::Util" : "1.0",
+                     "perl" : "5.008"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://svn.perl.org/modules/SQL-Statement/trunk/"
+               },
+               "x_MailingList" : "mailto:dbi-dev@perl.org"
+            },
+            "version" : "1.402"
+         },
+         "name" : "SQL::Statement",
+         "pathname" : "R/RE/REHSACK/SQL-Statement-1.402.tar.gz",
+         "provides" : {
+            "SQL::Dialects::ANSI" : {
+               "file" : "SQL/Dialects/ANSI.pm",
+               "version" : "1.402"
+            },
+            "SQL::Dialects::AnyData" : {
+               "file" : "SQL/Dialects/AnyData.pm",
+               "version" : "1.402"
+            },
+            "SQL::Dialects::CSV" : {
+               "file" : "SQL/Dialects/CSV.pm",
+               "version" : "1.402"
+            },
+            "SQL::Dialects::Role" : {
+               "file" : "SQL/Dialects/Role.pm",
+               "version" : "1.402"
+            },
+            "SQL::Eval" : {
+               "file" : "SQL/Eval.pm",
+               "version" : "1.402"
+            },
+            "SQL::Eval::Table" : {
+               "file" : "SQL/Eval.pm"
+            },
+            "SQL::Parser" : {
+               "file" : "SQL/Parser.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement" : {
+               "file" : "SQL/Statement.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Aggregate" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::ColumnValue" : {
+               "file" : "SQL/Statement/Term.pm"
+            },
+            "SQL::Statement::ConstantTerm" : {
+               "file" : "SQL/Statement/Term.pm"
+            },
+            "SQL::Statement::Function" : {
+               "file" : "SQL/Statement/Function.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Function::NumericEval" : {
+               "file" : "SQL/Statement/Function.pm"
+            },
+            "SQL::Statement::Function::StrConcat" : {
+               "file" : "SQL/Statement/Function.pm"
+            },
+            "SQL::Statement::Function::SubString" : {
+               "file" : "SQL/Statement/Function.pm"
+            },
+            "SQL::Statement::Function::Trim" : {
+               "file" : "SQL/Statement/Function.pm"
+            },
+            "SQL::Statement::Function::UserFunc" : {
+               "file" : "SQL/Statement/Function.pm"
+            },
+            "SQL::Statement::Functions" : {
+               "file" : "SQL/Statement/Functions.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::GetInfo" : {
+               "file" : "SQL/Statement/GetInfo.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Group" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::Limit" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::Operation" : {
+               "file" : "SQL/Statement/Operation.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Operation::ANSI::Is" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::And" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Between" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Clike" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Contains" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Equal" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Equality" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Greater" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::GreaterEqual" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Is" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Like" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Lower" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::LowerEqual" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Neg" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::NotEqual" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Or" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Regexp" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Operation::Rlike" : {
+               "file" : "SQL/Statement/Operation.pm"
+            },
+            "SQL::Statement::Order" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::Param" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::Placeholder" : {
+               "file" : "SQL/Statement/Placeholder.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::RAM" : {
+               "file" : "SQL/Statement/RAM.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::RAM::Table" : {
+               "file" : "SQL/Statement/RAM.pm"
+            },
+            "SQL::Statement::Table" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::TempTable" : {
+               "file" : "SQL/Statement.pm"
+            },
+            "SQL::Statement::Term" : {
+               "file" : "SQL/Statement/Term.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::TermFactory" : {
+               "file" : "SQL/Statement/TermFactory.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Util" : {
+               "file" : "SQL/Statement/Util.pm",
+               "version" : "1.402"
+            },
+            "SQL::Statement::Util::Column" : {
+               "file" : "SQL/Statement/Util.pm"
+            },
+            "SQL::Statement::Util::Function" : {
+               "file" : "SQL/Statement/Util.pm"
+            }
+         },
+         "target" : "SQL::Statement",
+         "version" : "1.402"
+      },
       "Scope::Upper" : {
          "dist" : "Scope-Upper-0.22",
          "mymeta" : {
@@ -16050,6 +17542,58 @@
          },
          "target" : "Scope::Upper",
          "version" : "0.22"
+      },
+      "Search::QueryParser" : {
+         "dist" : "Search-QueryParser-0.94",
+         "mymeta" : {
+            "abstract" : "parses a query string into a data structure",
+            "author" : [
+               "Laurent Dami <laurent.dami AT etat ge ch>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.52, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Search-QueryParser",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "version" : "0.94"
+         },
+         "name" : "Search::QueryParser",
+         "pathname" : "D/DA/DAMI/Search-QueryParser-0.94.tar.gz",
+         "provides" : {
+            "Search::QueryParser" : {
+               "file" : "Search/QueryParser.pm",
+               "version" : "0.94"
+            }
+         },
+         "target" : "Search::QueryParser",
+         "version" : "0.94"
       },
       "Software::License" : {
          "dist" : "Software-License-0.103005",

@@ -2,6 +2,7 @@ package App::Happyman::Plugin::PeekURI;
 use v5.16;
 use Moose;
 use Method::Signatures;
+use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
