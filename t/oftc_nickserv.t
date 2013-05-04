@@ -2,7 +2,6 @@ use v5.16;
 use warnings;
 
 use App::Happyman::Test;
-use AnyEvent;
 use Test::Spec;
 
 use_ok('App::Happyman::Connection');

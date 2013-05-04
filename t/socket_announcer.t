@@ -3,12 +3,10 @@ use warnings;
 
 use App::Happyman::Test;
 use AnyEvent;
-use AnyEvent::IRC::Client;
-use AnyEvent::IRC::Util qw(prefix_nick);
 use Data::Handle;
 use File::Slurp;
 use LWP::Protocol::AnyEvent::http;
-use LWP::Simple;
+use LWP::UserAgent;
 use Test::Deep;
 use Test::Spec;
 
@@ -92,7 +90,7 @@ __DATA__
    "commits":[
       {
          "added":[
- 
+
          ],
          "author":{
             "email":"lolwut@noway.biz",
@@ -111,14 +109,14 @@ __DATA__
             "README.md"
          ],
          "removed":[
- 
+
          ],
          "timestamp":"2013-02-22T13:50:07-08:00",
          "url":"https://github.com/octokitty/testing/commit/c441029cf673f84c8b7db52d0a5944ee5c52ff89"
       },
       {
          "added":[
- 
+
          ],
          "author":{
             "email":"lolwut@noway.biz",
@@ -137,7 +135,7 @@ __DATA__
             "README.md"
          ],
          "removed":[
- 
+
          ],
          "timestamp":"2013-02-22T14:07:13-08:00",
          "url":"https://github.com/octokitty/testing/commit/36c5f2243ed24de58284a96f2a643bed8c028658"
@@ -160,7 +158,7 @@ __DATA__
          "id":"1481a2de7b2a7d02428ad93446ab166be7793fbb",
          "message":"Rename madame-bovary.txt to words/madame-bovary.txt",
          "modified":[
- 
+
          ],
          "removed":[
             "madame-bovary.txt"
@@ -191,7 +189,7 @@ __DATA__
       "id":"1481a2de7b2a7d02428ad93446ab166be7793fbb",
       "message":"Rename madame-bovary.txt to words/madame-bovary.txt",
       "modified":[
- 
+
       ],
       "removed":[
          "madame-bovary.txt"

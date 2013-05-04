@@ -2,9 +2,6 @@ use v5.16;
 use warnings;
 
 use App::Happyman::Test;
-use AnyEvent;
-use AnyEvent::IRC::Client;
-use AnyEvent::IRC::Util qw(prefix_nick);
 use Test::Spec;
 
 use_ok('App::Happyman::Connection');

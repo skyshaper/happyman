@@ -2,10 +2,6 @@ use v5.16;
 use warnings;
 
 use App::Happyman::Test;
-use AnyEvent;
-use AnyEvent::IRC::Client;
-use AnyEvent::IRC::Util qw(prefix_nick);
-use File::Slurp qw(read_file);
 use File::Temp;
 use Test::Spec;
 
