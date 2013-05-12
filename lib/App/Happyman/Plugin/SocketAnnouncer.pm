@@ -24,15 +24,7 @@ method _build_mojo {
     };
 
     post '/github' => func($app) {
-        my $data;
-        try {
-            $data = decode_json( $app->param('payload') );
-        }
-        catch ($err) {
-            $app->render(status => 400, text => "JSON parsing failed: $err");
-            say "JSON parsing failed: $err";
-            return;
-        }
+        my $data = decode_json( $app->param('payload') );
 
         foreach my $commit ( @{ $data->{commits} } ) {
             my $message = sprintf(
