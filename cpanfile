@@ -9,7 +9,7 @@ requires 'Config::INI::Reader';
 requires 'Data::Handle';
 requires 'EV';
 requires 'File::Slurp';
-requires 'JSON';
+requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'LWP::UserAgent';
 requires 'LWP::Protocol::AnyEvent::http';

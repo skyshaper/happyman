@@ -71,7 +71,7 @@ describe 'The SocketAnnouncer plugin' => sub {
             my @expected = (
                 'octokitty/testing (master): Garen Torikian - c441029c: Test',
                 'octokitty/testing (master): Garen Torikian - 36c5f224: This is me testing the windows client.',
-                'octokitty/testing (master): Garen Torikian - 1481a2de: Rename madame-bovary.txt to words/madame-bovary.txt',
+                'octokitty/testing (master): Maximilian Gaß - 1481a2de: Rename madame-bovary.txt to words/madame-bovary.txt',
             );
 
             cmp_deeply( \@lines, \@expected );
@@ -146,12 +146,12 @@ __DATA__
          ],
          "author":{
             "email":"lolwut@noway.biz",
-            "name":"Garen Torikian",
+            "name":"Maximilian Gaß",
             "username":"octokitty"
          },
          "committer":{
             "email":"lolwut@noway.biz",
-            "name":"Garen Torikian",
+            "name":"Maximilian Gaß",
             "username":"octokitty"
          },
          "distinct":true,

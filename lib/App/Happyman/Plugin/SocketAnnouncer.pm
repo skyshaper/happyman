@@ -6,7 +6,7 @@ use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
-use JSON;
+use JSON::XS;
 use Mojolicious::Lite;
 use TryCatch;
 
@@ -24,7 +24,7 @@ method _build_mojo {
     };
 
     post '/github' => func($app) {
-        my $data = decode_json( $app->param('payload') );
+        my $data = JSON::XS->new->decode( $app->param('payload') );
 
         foreach my $commit ( @{ $data->{commits} } ) {
             my $message = sprintf(
