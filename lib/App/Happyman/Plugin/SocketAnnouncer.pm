@@ -30,6 +30,7 @@ method _build_mojo {
         }
         catch ($err) {
             $app->render(status => 400, text => "JSON parsing failed: $err");
+            say "JSON parsing failed: $err";
             return;
         }
 
