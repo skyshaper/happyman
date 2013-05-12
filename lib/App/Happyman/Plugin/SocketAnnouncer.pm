@@ -28,8 +28,8 @@ method _build_mojo {
         try {
             $data = decode_json( $app->param('payload') );
         }
-        catch {
-            $app->render(status => 400, text => 'JSON parsing failed');
+        catch ($err) {
+            $app->render(status => 400, text => "JSON parsing failed: $err");
             return;
         }
 
