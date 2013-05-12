@@ -14,13 +14,29 @@ use URI::Find;
 use URI::URL;
 use XML::LibXML;
 
-has [
-    qw(twitter_consumer_key twitter_consumer_secret twitter_token twitter_token_secret)
-    ] => (
+has twitter_consumer_key => (
     is       => 'ro',
     isa      => 'Str',
-    required => 1,
-    );
+    default  => 'B7uwUIJRlaQJ3RHYslZuNw',
+);
+
+has twitter_consumer_secret => (
+    is       => 'ro',
+    isa      => 'Str',
+    default  => 'KE3aHkVjT0HTupQICckWyOqmPbXHMC9cg4z9pZnVQk',
+);
+
+has twitter_token => (
+    is       => 'ro',
+    isa      => 'Str',
+    default  => '1423133221-8czqhTAF92WBeZzuxW8k9uH7dQlhTn2WHKv2wcP',
+);
+
+has twitter_token_secret => (
+    is       => 'ro',
+    isa      => 'Str',
+    default  => 'EyRxoN5ivGYQayPn8DXjNOdxWtDksEeDJxjYwuEBrnE',
+);
 
 has _twitter => (
     is      => 'ro',
@@ -50,12 +66,18 @@ method _fetch_tweet_text (Str $uri) {
 
     $self->_twitter->get(
         "statuses/show/$1",
-        func ( $header, $response, $reason ) {
-            return unless $response->{text};
+        func ( $header, $response, $reason, $error_response = undef ) {
 
-            $self->conn->send_notice( 'Tweet by @'
+            if ($response) {
+                $self->conn->send_notice( 'Tweet by @'
                     . $response->{user}{screen_name} . ': '
                     . $response->{text} );
+            }
+            else {
+                for my $error ( @{ $error_response->{errors} } ) {
+                     $self->conn->send_notice("Twitter: $error->{code}: $error->{message}");
+                }
+            }
         }
     );
 }
