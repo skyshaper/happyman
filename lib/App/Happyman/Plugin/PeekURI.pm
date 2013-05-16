@@ -64,6 +64,7 @@ method _fetch_tweet_text (Str $uri) {
     $uri =~ m{/(\d+)$};
     return unless $1;
 
+    $self->logger->log_debug("Fetching $uri");
     $self->_twitter->get(
         "statuses/show/$1",
         func ( $header, $response, $reason, $error_response = undef ) {
@@ -83,6 +84,7 @@ method _fetch_tweet_text (Str $uri) {
 }
 
 method _fetch_html_title (Str $uri) {
+    $self->logger->log_debug("Fetching $uri");
     $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
         if ( !$tx->success ) {
             my ($err, $code) = $tx->error;
@@ -107,6 +109,7 @@ method on_message (App::Happyman::Message $msg) {
 
     my $finder = URI::Find->new(
         func (URI::URL $uri_obj, Str $uri_str) {
+            $self->logger->log("Found URI: $uri_str");
             for (@peekers) {
                 my ( $pattern, $cb ) = @$_;
                 if ( $uri_obj->host =~ $pattern ) {
