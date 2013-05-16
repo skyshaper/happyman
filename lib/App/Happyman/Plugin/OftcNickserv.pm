@@ -13,6 +13,7 @@ has password => (
 );
 
 method on_registered ($payload) {
+    $self->logger->log('Claiming my nick from NickServ');
     $self->conn->send_private_message( 'NickServ',
         join( ' ', 'IDENTIFY', $self->password, $self->conn->nick ) );
 }
