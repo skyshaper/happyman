@@ -11,6 +11,7 @@ use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
 use EV;
+use Log::Dispatchouli;
 use TryCatch;
 
 has 'irc' => (
@@ -63,6 +64,21 @@ has '_stay_connected' => (
     isa     => 'Bool',
     default => 1,
 );
+
+has _logger => (
+    is      => 'ro',
+    isa     => 'Log::Dispatchouli',
+    builder => '_build_logger',
+);
+
+method _build_logger {
+    return Log::Dispatchouli->new({
+      ident     => 'happyman',
+      facility  => 'daemon',
+      to_stdout => 1,
+      debug     => 1,
+    });
+}
 
 method add_plugin (App::Happyman::Plugin $plugin) {
     $plugin->conn($self);
