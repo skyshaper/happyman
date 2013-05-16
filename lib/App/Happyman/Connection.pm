@@ -81,7 +81,6 @@ has _logger => (
 method _build_logger {
     return Log::Dispatchouli->new({
       ident     => 'happyman',
-      facility  => 'daemon',
       to_stdout => 1,
       debug     => $self->debug,
     });
