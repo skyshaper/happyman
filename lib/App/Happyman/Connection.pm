@@ -52,6 +52,12 @@ has 'channel' => (
     required => 1,
 );
 
+has 'debug' => (
+    is       => 'ro',
+    isa      => 'Bool',
+    default  => 0,
+);
+
 has '_plugins' => (
     traits  => ['Array'],
     is      => 'ro',
@@ -69,6 +75,7 @@ has _logger => (
     is      => 'ro',
     isa     => 'Log::Dispatchouli',
     builder => '_build_logger',
+    lazy    => 1,
 );
 
 method _build_logger {
@@ -76,7 +83,7 @@ method _build_logger {
       ident     => 'happyman',
       facility  => 'daemon',
       to_stdout => 1,
-      debug     => 0,
+      debug     => $self->debug,
     });
 }
 

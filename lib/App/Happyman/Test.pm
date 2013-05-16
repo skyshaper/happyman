@@ -17,6 +17,7 @@ func make_happyman_with_plugin (Str $plugin_name, HashRef $plugin_params) {
         host    => 'localhost',
         port    => 6667,
         channel => '#happyman',
+        debug   => 1,
     );
     my $plugin = $plugin_name->new($plugin_params);
     $happyman->add_plugin($plugin);
