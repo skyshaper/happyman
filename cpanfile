@@ -11,6 +11,7 @@ requires 'EV';
 requires 'File::Slurp';
 requires 'JSON::XS';
 requires 'List::MoreUtils';
+requires 'Log::Dispatchouli';
 requires 'LWP::UserAgent';
 requires 'LWP::Protocol::AnyEvent::http';
 requires 'Method::Signatures';
