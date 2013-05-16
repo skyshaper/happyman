@@ -33,12 +33,14 @@ describe 'PeekURI' => sub {
             before sub {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
-                    '#happyman', 'http://en.wikipedia.org/wiki/Foo'
+                    '#happyman', 'http://en.wikipedia.org/wiki/Perl'
                 );
             };
 
-            it 'does not react' => sub {
-                ok( !wait_on_message_or_timeout( $irc, 5 ) );
+            it 'sends the first paragraph to the channel' => sub {
+                like( wait_on_message_or_timeout( $irc, 5 ),
+                    qr/Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages/
+                );
             };
         };
 

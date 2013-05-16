@@ -99,10 +99,27 @@ method _fetch_html_title (Str $uri) {
     return;
 }
 
+method _fetch_wikipedia_title (Str $uri) {
+    $self->logger->log_debug("Fetching $uri");
+    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
+        if ( !$tx->success ) {
+            my ($err, $code) = $tx->error;
+            return "$code err";
+        }
+
+        return if $tx->res->headers->content_type !~ /html/;
+
+        $self->conn->send_notice($tx->res->dom->at('#mw-content-text p')->all_text);
+    });
+
+    return;
+}
+
+
 method on_message (App::Happyman::Message $msg) {
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
-        [ qr/\.wikipedia\.org$/ => \&_ignore_link ],
+        [ qr/\.wikipedia\.org$/ => \&_fetch_wikipedia_title ],
         [ qr/^twitter\.com$/    => \&_fetch_tweet_text ],
         [ qr/./                 => \&_fetch_html_title ],
     );
