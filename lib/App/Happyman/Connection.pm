@@ -103,7 +103,7 @@ method _retry_connect {
     my $w;
     $w = AE::timer 5, 0, sub {
         undef $w;
-        say 'Retrying connect';
+        $self->_logger->log('Retrying connect');
         $self->_connect();
     };
 }
@@ -125,21 +125,21 @@ method _build_irc {
             my ( $irc, $err ) = @_;
             return if not $err;
 
-            say 'Connection failed';
+            $self->_logger->log('Connection failed');
             $self->_retry_connect();
         },
         disconnect => sub {
-            say 'Disconnected';
+            $self->_logger->log('Disconnected');
             $self->_retry_connect() if $self->_stay_connected;
         },
         registered => sub {
-            say 'Registered';
+            $self->_logger->log('Registered');
             $irc->enable_ping(60);
             $self->_trigger_event('on_registered');
         },
         channel_topic => sub {
             my ( $irc, $channel, $topic, $who ) = @_;
-            say "Topic: $topic";
+            $self->_logger->log("Topic: $topic");
             $self->_trigger_event( 'on_topic', $topic );
         }
     );
@@ -159,7 +159,7 @@ method run {
         catch {
             chomp;
             $self->send_notice("Caught exception: $_");
-            STDERR->say("Caught exception: $_");
+            $self->_logger->log("Caught exception: $_");
         }
     }
 }
@@ -177,9 +177,9 @@ method _trigger_event (Str $name, $msg = undef) {
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
-        say "Starting: $plugin $name";
+        $self->_logger->debug("Starting: $plugin $name");
         $plugin->$name($msg);
-        say "Done: $plugin $name";
+        $self->_logger->debug("Done: $plugin $name");
     }
 }
 
