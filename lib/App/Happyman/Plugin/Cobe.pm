@@ -53,13 +53,16 @@ method _spawn_child {
 }
 
 method on_message (App::Happyman::Message $msg) {
+    $self->logger->log_debug('Learning: ' . $msg->text);
     $self->_in->push_write( 'learn ' . $msg->text . "\n" );
 
     if ( $msg->addressed_me ) {
+        $self->logger->log_debug('Sending to Python: ' . $msg->text);
         $self->_in->push_write( 'reply ' . $msg->text . "\n" );
         $self->_out->push_read(
             line => sub {
                 my ( undef, $line ) = @_;
+                $self->logger->log('Replying to ' . $msg->sender_nick . ': ' . $line);
                 $msg->reply($line);
             }
         );
