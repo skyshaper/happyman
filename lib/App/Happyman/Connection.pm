@@ -81,7 +81,8 @@ has _logger => (
 method _build_logger {
     return Log::Dispatchouli->new({
       ident     => 'happyman',
-      to_stdout => 1,
+      to_file   => 1,
+      log_path  => 'log/',
       debug     => $self->debug,
     });
 }
