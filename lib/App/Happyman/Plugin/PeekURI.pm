@@ -83,7 +83,7 @@ method _fetch_tweet_text (Str $uri) {
     );
 }
 
-method _fetch_html_title (Str $uri) {
+method _fetch_and_extract_from_dom (Str $uri, Str $selector) {
     $self->logger->log_debug("Fetching $uri");
     $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
         if ( !$tx->success ) {
@@ -93,26 +93,18 @@ method _fetch_html_title (Str $uri) {
 
         return if $tx->res->headers->content_type !~ /html/;
 
-        $self->conn->send_notice($tx->res->dom->html->head->title->text);
+        $self->conn->send_notice($tx->res->dom->at($selector)->all_text);
     });
 
     return;
 }
 
+method _fetch_html_title (Str $uri) {
+    $self->_fetch_and_extract_from_dom($uri, 'title');
+}
+
 method _fetch_wikipedia_title (Str $uri) {
-    $self->logger->log_debug("Fetching $uri");
-    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
-        if ( !$tx->success ) {
-            my ($err, $code) = $tx->error;
-            return "$code err";
-        }
-
-        return if $tx->res->headers->content_type !~ /html/;
-
-        $self->conn->send_notice($tx->res->dom->at('#mw-content-text p')->all_text);
-    });
-
-    return;
+    $self->_fetch_and_extract_from_dom($uri, '#mw-content-text p');
 }
 
 
