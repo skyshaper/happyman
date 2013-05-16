@@ -82,6 +82,7 @@ method _build_logger {
 
 method add_plugin (App::Happyman::Plugin $plugin) {
     $plugin->conn($self);
+    $plugin->logger($self->_logger->proxy({ proxy_prefix => "[$plugin] " }));
     push $self->_plugins, $plugin;
 }
 
