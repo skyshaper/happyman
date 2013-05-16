@@ -9,6 +9,11 @@ has 'conn' => (
     isa => 'App::Happyman::Connection',
 );
 
+has logger => (
+    is  => 'rw',
+    isa => 'Log::Dispatchouli::Proxy',
+);
+
 has '_ua' => (
     is      => 'ro',
     isa     => 'Mojo::UserAgent',

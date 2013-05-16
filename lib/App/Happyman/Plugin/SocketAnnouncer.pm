@@ -18,12 +18,13 @@ has '_mojo' => (
 
 method _build_mojo {
     post '/plain' => func($app) {
-        say 'Receiving /plain';
+        $self->logger->log('Receiving /plain: ' . $app->param('message'));
         $self->conn->send_notice( $app->param('message') );
         $app->render(text => 'sent');
     };
 
     post '/github' => func($app) {
+        $self->logger->debug($app->param('payload'));
         my $data = JSON::XS->new->decode( $app->param('payload') );
 
         foreach my $commit ( @{ $data->{commits} } ) {
@@ -36,6 +37,7 @@ method _build_mojo {
                 substr( $commit->{id}, 0, 8 ),
                 ( split( qr{\n}, $commit->{message} ) )[0],
             );
+            $self->logger->log("Sending GitHub commit: $message");
             $self->conn->send_notice($message);
         }
 
