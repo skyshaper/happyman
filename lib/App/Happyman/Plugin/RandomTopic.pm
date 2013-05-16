@@ -46,6 +46,7 @@ has min_topic_age => (
 );
 
 method _build_lines {
+    $self->logger->log_debug('Loading topic lines');
     my $handle = Data::Handle->new(__PACKAGE__);
     return [
         grep { length >= $self->min_line_length }
@@ -58,7 +59,7 @@ method _build_timer {
         0,
         $self->check_interval,
         sub {
-            say 'Checking topic';
+            $self->logger->log_debug('Checking topic');
 
             return if not defined $self->_topic_time();
             return if ( time - $self->_topic_time() ) < $self->min_topic_age;
@@ -73,17 +74,20 @@ method BUILD (...) {
 }
 
 method on_topic (Str $topic) {
+    $self->logger->log_debug('Updating topic time');
     $self->_topic_time(time);
 }
 
 method on_message (App::Happyman::Message $msg) {
     if ( $msg->full_text =~ /^\!topic\s*$/ ) {
+        $self->logger->log_debug('Received !topic command');
         $self->_set_random_topic();
     }
 }
 
 method _set_random_topic {
     my $line = $self->_lines->[ rand @{ $self->_lines } ];
+    $self->logger->log_debug("Setting topic: $line");
     $self->conn->set_topic($line);
 }
 
