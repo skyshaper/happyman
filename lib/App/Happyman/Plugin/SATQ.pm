@@ -28,6 +28,7 @@ method on_message (App::Happyman::Message $msg) {
         my $headers = { Authorization => $authorization };
         my $form
             = { 'quote[raw_quote]' => join( "\n", @{ $self->_buffer } ) };
+        $self->logger->log_debug(['Posting quote: %s', $form]);
 
         $self->_ua->post(
             $self->uri,
@@ -35,6 +36,7 @@ method on_message (App::Happyman::Message $msg) {
             form => $form,
             sub {
                 my ( undef, $tx ) = @_;
+                $self->logger->log( $tx->res->headers->location || $tx->res->code );
                 $msg->reply( $tx->res->headers->location || $tx->res->code );
             }
         );
@@ -44,6 +46,7 @@ method on_message (App::Happyman::Message $msg) {
     if ( @{ $self->_buffer } >= 10 ) {
         shift $self->_buffer;
     }
+    $self->logger->log_debug("Buffering: $line");
     push $self->_buffer, $line;
 }
 
