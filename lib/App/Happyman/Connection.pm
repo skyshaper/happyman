@@ -142,7 +142,15 @@ method _build_irc {
             my ( $irc, $channel, $topic, $who ) = @_;
             $self->_logger->log("Topic: $topic");
             $self->_trigger_event( 'on_topic', $topic );
-        }
+        },
+        debug_recv => sub {
+           my ($irc, $msg) = @_;
+           $self->_logger->log_debug(['In: %s', $msg]);
+        },
+        debug_send => sub {
+           my ($irc, @msg) = @_;
+           $self->_logger->log_debug(['Out: %s', \@msg]);
+        },
     );
 
     return $irc;
@@ -185,16 +193,19 @@ method _trigger_event (Str $name, $msg = undef) {
 }
 
 method send_message (Str $body) {
+    $self->_logger->log_debug("Sending message to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
 method send_notice (Str $body) {
+    $self->_logger->log_debug("Sending notice to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
 }
 
 method send_private_message (Str $nick, Str $body) {
+    $self->_logger->log_debug("Sending privately to $nick: $body");
     $self->irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
@@ -203,6 +214,7 @@ method nick_exists (Str $nick) {
 }
 
 method set_topic (Str $topic) {
+    $self->_logger->log_debug("Setting topic: $topic");
     $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
 }
 
