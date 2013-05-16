@@ -76,7 +76,7 @@ method _build_logger {
       ident     => 'happyman',
       facility  => 'daemon',
       to_stdout => 1,
-      debug     => 1,
+      debug     => 0,
     });
 }
 
