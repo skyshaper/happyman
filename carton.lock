@@ -3192,7 +3192,7 @@
                "version" : "1.03"
             }
          },
-         "target" : "DateTime::Duration",
+         "target" : "DateTime",
          "version" : "1.03"
       },
       "DateTime::Locale" : {
@@ -9723,7 +9723,7 @@
                "version" : "3.69"
             }
          },
-         "target" : "HTML::Entities",
+         "target" : "HTML::HeadParser",
          "version" : "3.70"
       },
       "HTML::Tagset" : {
@@ -10081,7 +10081,7 @@
                "version" : "6.03"
             }
          },
-         "target" : "HTTP::Request::Common",
+         "target" : "HTTP::Response",
          "version" : "6.06"
       },
       "HTTP::Negotiate" : {
@@ -11152,7 +11152,7 @@
                "version" : "2.39"
             }
          },
-         "target" : "Log::Dispatch::Screen",
+         "target" : "Log::Dispatch::Syslog",
          "version" : "2.39"
       },
       "Log::Dispatch::Array" : {
@@ -11755,7 +11755,7 @@
                "version" : "0.003"
             }
          },
-         "target" : "Mixin::Linewise::Writers",
+         "target" : "Mixin::Linewise::Readers",
          "version" : "0.003"
       },
       "Module::Implementation" : {
@@ -13101,7 +13101,7 @@
                "version" : "2.0801"
             }
          },
-         "target" : "Moose",
+         "target" : "Moose::Role",
          "version" : "2.0801"
       },
       "MooseX::Traits" : {
@@ -13272,7 +13272,7 @@
                "version" : "0.35"
             }
          },
-         "target" : "MooseX::Types::Moose",
+         "target" : "MooseX::Types",
          "version" : "0.35"
       },
       "MooseX::Types::DateTime" : {
@@ -18613,7 +18613,7 @@
                "version" : "0.11"
             }
          },
-         "target" : "Test::use::ok",
+         "target" : "ok",
          "version" : "0.11"
       },
       "Text::Diff" : {
