@@ -1,5 +1,5 @@
 package App::Happyman::Plugin;
-use v5.16;
+use v5.18;
 use Moose::Role;
 use Method::Signatures;
 use namespace::autoclean;

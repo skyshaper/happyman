@@ -1,5 +1,5 @@
 package App::Happyman::Plugin::SATQ;
-use v5.16;
+use v5.18;
 use Moose;
 use Method::Signatures;
 use namespace::autoclean;
