@@ -7,7 +7,7 @@ env.hosts = [
 def deploy():
     with cd('happyman'):
         run('git pull')
-        run('carton install')
+        run('carton install --deployment')
     run('svc -t ~/service/happyman')
 
 def restart():
