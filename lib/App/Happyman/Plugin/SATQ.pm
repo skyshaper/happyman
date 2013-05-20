@@ -36,6 +36,10 @@ method on_message (App::Happyman::Message $msg) {
             form => $form,
             sub {
                 my ( undef, $tx ) = @_;
+                if ($tx->error) {
+                    $self->logger->log( $tx->error );
+                    $msg->reply( $tx->error );
+                }
                 $self->logger->log( $tx->res->headers->location || $tx->res->code );
                 $msg->reply( $tx->res->headers->location || $tx->res->code );
             }
