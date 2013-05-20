@@ -89,7 +89,7 @@
                },
                "runtime" : {
                   "requires" : {
-                     "Moose" : "0"
+                     "Mouse" : "0.40"
                   }
                }
             },
@@ -3192,7 +3192,7 @@
                "version" : "1.03"
             }
          },
-         "target" : "DateTime",
+         "target" : "DateTime::Duration",
          "version" : "1.03"
       },
       "DateTime::Locale" : {
@@ -8390,7 +8390,7 @@
                "version" : "0.006011"
             }
          },
-         "target" : "Devel::Declare",
+         "target" : "Devel::Declare::MethodInstaller::Simple",
          "version" : "0.006011"
       },
       "Devel::GlobalDestruction" : {
@@ -10828,7 +10828,7 @@
                "version" : "6.05"
             }
          },
-         "target" : "LWP::UserAgent",
+         "target" : "LWP::Simple",
          "version" : "6.05"
       },
       "LWP::MediaTypes" : {
@@ -11152,7 +11152,7 @@
                "version" : "2.39"
             }
          },
-         "target" : "Log::Dispatch::Syslog",
+         "target" : "Log::Dispatch",
          "version" : "2.39"
       },
       "Log::Dispatch::Array" : {
@@ -11755,7 +11755,7 @@
                "version" : "0.003"
             }
          },
-         "target" : "Mixin::Linewise::Readers",
+         "target" : "Mixin::Linewise::Writers",
          "version" : "0.003"
       },
       "Module::Implementation" : {
@@ -13101,7 +13101,7 @@
                "version" : "2.0801"
             }
          },
-         "target" : "Moose::Role",
+         "target" : "Class::MOP",
          "version" : "2.0801"
       },
       "MooseX::Traits" : {
@@ -18613,7 +18613,7 @@
                "version" : "0.11"
             }
          },
-         "target" : "ok",
+         "target" : "Test::use::ok",
          "version" : "0.11"
       },
       "Text::Diff" : {
@@ -19203,7 +19203,7 @@
                "file" : "URI/urn/oid.pm"
             }
          },
-         "target" : "URI::Escape",
+         "target" : "URI",
          "version" : "1.60"
       },
       "URI::Find" : {
