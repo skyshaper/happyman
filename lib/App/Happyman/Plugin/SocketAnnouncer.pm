@@ -43,7 +43,16 @@ method _build_mojo {
 
         $app->render(status => 200, text => 'sent');
         return;
-    },
+    };
+
+    post '/heroku' => func($app) {
+        # $self->logger->log(['Receiving /heroku: %s', $app->param]);
+        my $message = sprintf('%s deployed %s to %s', $app->param('user'), 
+            $app->param('head'), $app->param('url'));
+        $self->logger->log("Sending Heroku message: $message");
+        $self->conn->send_notice( $message );
+        $app->render(status => 200, text => 'sent');
+    };
 
     my $daemon = Mojo::Server::Daemon->new(app => app, listen => ['http://*:6666']);
     $daemon->start();
