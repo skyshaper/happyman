@@ -52,9 +52,9 @@ has 'channel' => (
 );
 
 has 'debug' => (
-    is       => 'ro',
-    isa      => 'Bool',
-    default  => 0,
+    is      => 'ro',
+    isa     => 'Bool',
+    default => 0,
 );
 
 has '_plugins' => (
@@ -79,18 +79,20 @@ has _logger => (
 
 sub _build_logger {
     my ($self) = @_;
-    return Log::Dispatchouli->new({
-      ident     => 'happyman',
-      to_file   => 1,
-      log_path  => 'log/',
-      debug     => $self->debug,
-    });
+    return Log::Dispatchouli->new(
+        {   ident    => 'happyman',
+            to_file  => 1,
+            log_path => 'log/',
+            debug    => $self->debug,
+        }
+    );
 }
 
 sub add_plugin {
-    my ($self, $plugin) = @_;
+    my ( $self, $plugin ) = @_;
     $plugin->conn($self);
-    $plugin->logger($self->_logger->proxy({ proxy_prefix => "[$plugin] " }));
+    $plugin->logger(
+        $self->_logger->proxy( { proxy_prefix => "[$plugin] " } ) );
     push $self->_plugins, $plugin;
 }
 
@@ -155,12 +157,12 @@ sub _build_irc {
             $self->_trigger_event( 'on_topic', $topic );
         },
         debug_recv => sub {
-           my ($irc, $msg) = @_;
-           $self->_logger->log_debug(['In: %s', $msg]);
+            my ( $irc, $msg ) = @_;
+            $self->_logger->log_debug( [ 'In: %s', $msg ] );
         },
         debug_send => sub {
-           my ($irc, @msg) = @_;
-           $self->_logger->log_debug(['Out: %s', \@msg]);
+            my ( $irc, @msg ) = @_;
+            $self->_logger->log_debug( [ 'Out: %s', \@msg ] );
         },
     );
 
@@ -197,7 +199,7 @@ sub disconnect_and_wait {
 }
 
 sub _trigger_event {
-    my ($self, $name, $msg) = @_;
+    my ( $self, $name, $msg ) = @_;
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
@@ -208,32 +210,32 @@ sub _trigger_event {
 }
 
 sub send_message {
-    my ($self, $body) = @_;
+    my ( $self, $body ) = @_;
     $self->_logger->log_debug("Sending message to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
 sub send_notice {
-    my ($self, $body) = @_;
+    my ( $self, $body ) = @_;
     $self->_logger->log_debug("Sending notice to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
 }
 
 sub send_private_message {
-    my ($self, $nick, $body) = @_;
+    my ( $self, $nick, $body ) = @_;
     $self->_logger->log_debug("Sending privately to $nick: $body");
     $self->irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
 sub nick_exists {
-    my ($self, $nick) = @_;
+    my ( $self, $nick ) = @_;
     return defined $self->irc->nick_modes( $self->channel, $nick );
 }
 
 sub set_topic {
-    my ($self, $topic) = @_;
+    my ( $self, $topic ) = @_;
     $self->_logger->log_debug("Setting topic: $topic");
     $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
 }

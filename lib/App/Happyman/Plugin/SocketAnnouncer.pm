@@ -19,14 +19,14 @@ sub _build_mojo {
     my ($self) = @_;
     post '/plain' => sub {
         my ($app) = @_;
-        $self->logger->log('Receiving /plain: ' . $app->param('message'));
+        $self->logger->log( 'Receiving /plain: ' . $app->param('message') );
         $self->conn->send_notice( $app->param('message') );
-        $app->render(text => 'sent');
+        $app->render( text => 'sent' );
     };
 
     post '/github' => sub {
         my ($app) = @_;
-        $self->logger->debug($app->param('payload'));
+        $self->logger->debug( $app->param('payload') );
         my $data = JSON::XS->new->decode( $app->param('payload') );
 
         foreach my $commit ( @{ $data->{commits} } ) {
@@ -43,21 +43,25 @@ sub _build_mojo {
             $self->conn->send_notice($message);
         }
 
-        $app->render(status => 200, text => 'sent');
+        $app->render( status => 200, text => 'sent' );
         return;
     };
 
     post '/heroku' => sub {
         my ($app) = @_;
+
         # $self->logger->log(['Receiving /heroku: %s', $app->param]);
-        my $message = sprintf('%s deployed %s to %s', $app->param('user'), 
-            $app->param('head'), $app->param('url'));
+        my $message = sprintf( '%s deployed %s to %s',
+            $app->param('user'), $app->param('head'), $app->param('url') );
         $self->logger->log("Sending Heroku message: $message");
-        $self->conn->send_notice( $message );
-        $app->render(status => 200, text => 'sent');
+        $self->conn->send_notice($message);
+        $app->render( status => 200, text => 'sent' );
     };
 
-    my $daemon = Mojo::Server::Daemon->new(app => app, listen => ['http://*:6666']);
+    my $daemon = Mojo::Server::Daemon->new(
+        app    => app,
+        listen => ['http://*:6666']
+    );
     $daemon->start();
     return $daemon;
 }

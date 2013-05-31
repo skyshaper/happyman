@@ -76,13 +76,13 @@ sub BUILD {
 }
 
 sub on_topic {
-    my ($self, $topic) = @_;
+    my ( $self, $topic ) = @_;
     $self->logger->log_debug('Updating topic time');
     $self->_topic_time(time);
 }
 
 sub on_message {
-    my ($self, $msg) = @_;
+    my ( $self, $msg ) = @_;
     if ( $msg->full_text =~ /^\!topic\s*$/ ) {
         $self->logger->log_debug('Received !topic command');
         $self->_set_random_topic();

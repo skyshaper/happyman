@@ -2,7 +2,6 @@ package App::Happyman::Test;
 use v5.18;
 use warnings;
 
-
 use parent 'Exporter';
 our @EXPORT
     = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait wait_on_message_or_timeout load_local_config async_sleep);
@@ -12,7 +11,7 @@ use AnyEvent::IRC::Client;
 use Config::INI::Reader;
 
 sub make_happyman_with_plugin {
-    my ($plugin_name, $plugin_params) = @_;
+    my ( $plugin_name, $plugin_params ) = @_;
     my $happyman = App::Happyman::Connection->new(
         nick    => 'happyman',
         host    => 'localhost',
@@ -41,7 +40,7 @@ sub make_test_client {
 }
 
 sub wait_on_event_or_timeout {
-    my ($irc, $event, $timeout) = @_;
+    my ( $irc, $event, $timeout ) = @_;
     my $cv = AE::cv;
     $irc->reg_cb( $event => $cv );
     my $timer = AE::timer( $timeout, 0, $cv );
@@ -49,14 +48,14 @@ sub wait_on_event_or_timeout {
 }
 
 sub wait_on_message_or_timeout {
-    my ($irc, $timeout) = @_;
+    my ( $irc, $timeout ) = @_;
     my ( undef, undef, $ircmsg )
         = wait_on_event_or_timeout( $irc, 'publicmsg', $timeout );
     return $ircmsg ? $ircmsg->{params}->[1] : undef;
 }
 
 sub disconnect_and_wait {
-    my ($irc, $timeout) = @_;
+    my ( $irc, $timeout ) = @_;
     my $cv = AE::cv;
     $irc->reg_cb( disconnect => $cv );
     $irc->send_srv('QUIT');

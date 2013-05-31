@@ -21,7 +21,7 @@ has 'conn' => (
 );
 
 sub BUILDARGS {
-    my ($self, $conn, $sender_nick, $full_text) = @_;
+    my ( $self, $conn, $sender_nick, $full_text ) = @_;
     if ( $full_text =~ /^(\w+)[:,]\s+(.+)$/ ) {
         return {
             conn           => $conn,
@@ -48,7 +48,7 @@ sub addressed_me {
 }
 
 sub reply {
-    my ($self, $text) = @_;
+    my ( $self, $text ) = @_;
     $self->conn->send_message( $self->sender_nick . ': ' . $text );
 }
 

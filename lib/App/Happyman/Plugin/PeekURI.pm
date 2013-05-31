@@ -14,27 +14,27 @@ use URI::URL;
 use XML::LibXML;
 
 has twitter_consumer_key => (
-    is       => 'ro',
-    isa      => 'Str',
-    default  => 'B7uwUIJRlaQJ3RHYslZuNw',
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'B7uwUIJRlaQJ3RHYslZuNw',
 );
 
 has twitter_consumer_secret => (
-    is       => 'ro',
-    isa      => 'Str',
-    default  => 'KE3aHkVjT0HTupQICckWyOqmPbXHMC9cg4z9pZnVQk',
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'KE3aHkVjT0HTupQICckWyOqmPbXHMC9cg4z9pZnVQk',
 );
 
 has twitter_token => (
-    is       => 'ro',
-    isa      => 'Str',
-    default  => '1423133221-8czqhTAF92WBeZzuxW8k9uH7dQlhTn2WHKv2wcP',
+    is      => 'ro',
+    isa     => 'Str',
+    default => '1423133221-8czqhTAF92WBeZzuxW8k9uH7dQlhTn2WHKv2wcP',
 );
 
 has twitter_token_secret => (
-    is       => 'ro',
-    isa      => 'Str',
-    default  => 'EyRxoN5ivGYQayPn8DXjNOdxWtDksEeDJxjYwuEBrnE',
+    is      => 'ro',
+    isa     => 'Str',
+    default => 'EyRxoN5ivGYQayPn8DXjNOdxWtDksEeDJxjYwuEBrnE',
 );
 
 has _twitter => (
@@ -43,8 +43,6 @@ has _twitter => (
     lazy    => 1,
     builder => '_build_twitter',
 );
-
-
 
 sub _build_twitter {
     my ($self) = @_;
@@ -56,29 +54,30 @@ sub _build_twitter {
     );
 }
 
-
 sub _ignore_link {
-    my ($self, $uri) = @_;
+    my ( $self, $uri ) = @_;
 }
 
 sub _fetch_tweet_text {
-    my ($self, $uri) = @_;
+    my ( $self, $uri ) = @_;
     $uri =~ m{/(\d+)$};
     return unless $1;
 
     $self->logger->log_debug("Fetching $uri");
     $self->_twitter->get(
-        "statuses/show/$1", sub {
+        "statuses/show/$1",
+        sub {
             my ( $header, $response, $reason, $error_response ) = @_;
 
             if ($response) {
                 $self->conn->send_notice( 'Tweet by @'
-                    . $response->{user}{screen_name} . ': '
-                    . $response->{text} );
+                        . $response->{user}{screen_name} . ': '
+                        . $response->{text} );
             }
             else {
                 for my $error ( @{ $error_response->{errors} } ) {
-                     $self->conn->send_notice("Twitter: $error->{code}: $error->{message}");
+                    $self->conn->send_notice(
+                        "Twitter: $error->{code}: $error->{message}");
                 }
             }
         }
@@ -86,36 +85,40 @@ sub _fetch_tweet_text {
 }
 
 sub _fetch_and_extract_from_dom {
-    my ($self, $uri, $selector) = @_;
+    my ( $self, $uri, $selector ) = @_;
     $self->logger->log_debug("Fetching $uri");
-    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, sub  {
-        my ($ua, $tx) = @_;
-        if ( !$tx->success ) {
-            my ($err, $code) = $tx->error;
-            return "$code err";
+    $self->_ua->get(
+        $uri,
+        { Range => 'bytes=0-20000' },
+        sub {
+            my ( $ua, $tx ) = @_;
+            if ( !$tx->success ) {
+                my ( $err, $code ) = $tx->error;
+                return "$code err";
+            }
+
+            return if $tx->res->headers->content_type !~ /html/;
+
+            $self->conn->send_notice(
+                $tx->res->dom->at($selector)->all_text );
         }
-
-        return if $tx->res->headers->content_type !~ /html/;
-
-        $self->conn->send_notice($tx->res->dom->at($selector)->all_text);
-    });
+    );
 
     return;
 }
 
 sub _fetch_html_title {
-    my ($self, $uri) = @_;
-    $self->_fetch_and_extract_from_dom($uri, 'title');
+    my ( $self, $uri ) = @_;
+    $self->_fetch_and_extract_from_dom( $uri, 'title' );
 }
 
 sub _fetch_wikipedia_title {
-    my ($self, $uri) = @_;
-    $self->_fetch_and_extract_from_dom($uri, '#mw-content-text p');
+    my ( $self, $uri ) = @_;
+    $self->_fetch_and_extract_from_dom( $uri, '#mw-content-text p' );
 }
 
-
 sub on_message {
-    my ($self, $msg) = @_;
+    my ( $self, $msg ) = @_;
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
         [ qr/\.wikipedia\.org$/ => \&_fetch_wikipedia_title ],
@@ -124,8 +127,8 @@ sub on_message {
     );
 
     my $finder = URI::Find->new(
-        sub  {
-            my ($uri_obj, $uri_str) = @_;
+        sub {
+            my ( $uri_obj, $uri_str ) = @_;
             $self->logger->log("Found URI: $uri_str");
             for (@peekers) {
                 my ( $pattern, $cb ) = @$_;

@@ -21,14 +21,14 @@ has [qw(uri user password)] => (
 );
 
 sub on_message {
-    my ($self, $msg) = @_;
+    my ( $self, $msg ) = @_;
     if ( $msg->full_text =~ /^\!quote\s*$/ ) {
         my $authorization = 'Basic '
             . encode_base64( $self->user . ':' . $self->password, '' );
         my $headers = { Authorization => $authorization };
         my $form
             = { 'quote[raw_quote]' => join( "\n", @{ $self->_buffer } ) };
-        $self->logger->log_debug(['Posting quote: %s', $form]);
+        $self->logger->log_debug( [ 'Posting quote: %s', $form ] );
 
         $self->_ua->post(
             $self->uri,
@@ -36,11 +36,12 @@ sub on_message {
             form => $form,
             sub {
                 my ( undef, $tx ) = @_;
-                if ($tx->error) {
+                if ( $tx->error ) {
                     $self->logger->log( $tx->error );
                     $msg->reply( $tx->error );
                 }
-                $self->logger->log( $tx->res->headers->location || $tx->res->code );
+                $self->logger->log( $tx->res->headers->location
+                        || $tx->res->code );
                 $msg->reply( $tx->res->headers->location || $tx->res->code );
             }
         );
