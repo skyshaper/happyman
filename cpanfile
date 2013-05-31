@@ -18,6 +18,7 @@ requires 'LWP::Protocol::AnyEvent::http';
 requires 'Mojolicious';
 requires 'Moose';
 requires 'namespace::autoclean';
+requires 'Perl::Critic';
 requires 'Perl::Tidy';
 requires 'Net::SSLeay';
 requires 'Test::Spec';

@@ -1,0 +1,2 @@
+#!/usr/bin/env zsh
+exec carton exec -- perlcritic -4 lib/**/*.pm t/*.t happyman
