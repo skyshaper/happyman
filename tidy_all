@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+carton exec perltidy lib/**/*.pm happyman
+rm **/*.bak 

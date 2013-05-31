@@ -15757,6 +15757,109 @@
          "target" : "Parse::Method::Signatures",
          "version" : "1.003015"
       },
+      "Perl::Tidy" : {
+         "dist" : "Perl-Tidy-20121207",
+         "mymeta" : {
+            "abstract" : "indent and reformat perl scripts",
+            "author" : [
+               "Steve Hancock <perltidy@perltidy.sourceforge.net>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.55_02, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Perl-Tidy",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "version" : "20121207"
+         },
+         "name" : "Perl::Tidy",
+         "pathname" : "S/SH/SHANCOCK/Perl-Tidy-20121207.tar.gz",
+         "provides" : {
+            "Perl::Tidy" : {
+               "file" : "Perl/Tidy.pm",
+               "version" : "20121207"
+            },
+            "Perl::Tidy::Debugger" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::DevNull" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::Diagnostics" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::FileWriter" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::Formatter" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::HtmlWriter" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::IOScalar" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::IOScalarArray" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::IndentationItem" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::LineBuffer" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::LineSink" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::LineSource" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::Logger" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::Tokenizer" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::VerticalAligner" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::VerticalAligner::Alignment" : {
+               "file" : "Perl/Tidy.pm"
+            },
+            "Perl::Tidy::VerticalAligner::Line" : {
+               "file" : "Perl/Tidy.pm"
+            }
+         },
+         "target" : "Perl::Tidy",
+         "version" : "20121207"
+      },
       "Scope::Upper" : {
          "dist" : "Scope-Upper-0.22",
          "mymeta" : {
