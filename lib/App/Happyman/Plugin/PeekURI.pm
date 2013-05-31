@@ -93,8 +93,8 @@ sub _fetch_and_extract_from_dom {
         sub {
             my ( $ua, $tx ) = @_;
             if ( !$tx->success ) {
-                my ( $err, $code ) = $tx->error;
-                return "$code err";
+                $self->conn->send_notice( $tx->error );
+                return;
             }
 
             return if $tx->res->headers->content_type !~ /html/;

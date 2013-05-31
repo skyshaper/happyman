@@ -22,7 +22,9 @@ describe 'PeekURI' => sub {
         my $happyman;
 
         before sub {
-            $happyman = make_happyman_with_plugin( 'App::Happyman::Plugin::PeekURI', {} );
+            $happyman
+                = make_happyman_with_plugin( 'App::Happyman::Plugin::PeekURI',
+                {} );
         };
 
         after sub {
@@ -38,7 +40,8 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the first paragraph to the channel' => sub {
-                like( wait_on_message_or_timeout( $irc, 5 ),
+                like(
+                    wait_on_message_or_timeout( $irc, 5 ),
                     qr/Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages/
                 );
             };
@@ -66,7 +69,34 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the title to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ), 'Index of /~mxey/' );
+                is( wait_on_message_or_timeout( $irc, 5 ),
+                    'Index of /~mxey/' );
+            };
+        };
+
+        describe 'when seeing a broken URI' => sub {
+            before sub {
+                $irc->send_chan(
+                    '#happyman', 'PRIVMSG',
+                    '#happyman', 'http://doesnotexist.example.com/'
+                );
+            };
+
+            it 'sends the error to the channel' => sub {
+                is( wait_on_message_or_timeout( $irc, 5 ),
+                    "Couldn't connect" );
+            };
+        };
+
+        describe 'when seeing a URI that leads to a 404' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG',
+                    '#happyman',
+                    'http://chaosdorf.de/~mxey/nonexistingfile' );
+            };
+
+            it 'sends the error to the channel' => sub {
+                is( wait_on_message_or_timeout( $irc, 5 ), 'Not Found' );
             };
         };
 
@@ -83,14 +113,15 @@ describe 'PeekURI' => sub {
             };
         };
     };
-    
+
     describe 'with incorrect Twitter authentication' => sub {
         my $happyman;
 
         before sub {
-            $happyman = make_happyman_with_plugin( 'App::Happyman::Plugin::PeekURI', {
-                twitter_consumer_key => 'foo',
-            } );
+            $happyman = make_happyman_with_plugin(
+                'App::Happyman::Plugin::PeekURI',
+                { twitter_consumer_key => 'foo', }
+            );
         };
 
         after sub {
@@ -112,7 +143,5 @@ describe 'PeekURI' => sub {
     };
 
 };
-
-
 
 runtests unless caller;
