@@ -1,7 +1,6 @@
 package App::Happyman::Message;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 has [qw(full_text text sender_nick)] => (
@@ -21,7 +20,8 @@ has 'conn' => (
     required => 1,
 );
 
-method BUILDARGS (App::Happyman::Connection $conn, Str $sender_nick, Str $full_text) {
+sub BUILDARGS {
+    my ($self, $conn, $sender_nick, $full_text) = @_;
     if ( $full_text =~ /^(\w+)[:,]\s+(.+)$/ ) {
         return {
             conn           => $conn,
@@ -41,12 +41,14 @@ method BUILDARGS (App::Happyman::Connection $conn, Str $sender_nick, Str $full_t
     }
 }
 
-method addressed_me {
+sub addressed_me {
+    my ($self) = @_;
     return ( defined $self->addressed_nick
             and $self->addressed_nick eq $self->conn->nick );
 }
 
-method reply (Str $text) {
+sub reply {
+    my ($self, $text) = @_;
     $self->conn->send_message( $self->sender_nick . ': ' . $text );
 }
 

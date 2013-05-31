@@ -1,14 +1,14 @@
 package App::Happyman::Plugin::NickReply;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
 use AnyEvent;
 
-method on_message (App::Happyman::Message $msg) {
+sub on_message {
+    my ($self, $msg) = @_;
     if ( $msg->full_text eq $self->conn->nick ) {
         $self->logger->log("Triggered by " . $msg->sender_nick);
         

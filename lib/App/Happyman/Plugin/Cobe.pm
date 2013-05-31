@@ -1,7 +1,6 @@
 package App::Happyman::Plugin::Cobe;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
@@ -27,11 +26,13 @@ has brain => (
     default => 'cobe.sqlite',
 );
 
-method BUILD (...) {
+sub BUILD { 
+    my ($self) = @_;
     $self->_child;
 }
 
-method _spawn_child {
+sub _spawn_child {
+    my ($self) = @_;
 
     my ( $in, $out );
 
@@ -52,7 +53,8 @@ method _spawn_child {
     );
 }
 
-method on_message (App::Happyman::Message $msg) {
+sub on_message {
+    my ($self, $msg) = @_;
     $self->logger->log_debug('Learning: ' . $msg->text);
     $self->_in->push_write( 'learn ' . $msg->text . "\n" );
 

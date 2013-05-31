@@ -1,7 +1,6 @@
 package App::Happyman::Plugin::PeekURI;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
@@ -47,7 +46,8 @@ has _twitter => (
 
 
 
-method _build_twitter {
+sub _build_twitter {
+    my ($self) = @_;
     return AnyEvent::Twitter->new(
         consumer_key    => $self->twitter_consumer_key,
         consumer_secret => $self->twitter_consumer_secret,
@@ -57,17 +57,19 @@ method _build_twitter {
 }
 
 
-method _ignore_link (Str $uri) {
+sub _ignore_link {
+    my ($self, $uri) = @_;
 }
 
-method _fetch_tweet_text (Str $uri) {
+sub _fetch_tweet_text {
+    my ($self, $uri) = @_;
     $uri =~ m{/(\d+)$};
     return unless $1;
 
     $self->logger->log_debug("Fetching $uri");
     $self->_twitter->get(
-        "statuses/show/$1",
-        func ( $header, $response, $reason, $error_response = undef ) {
+        "statuses/show/$1", sub {
+            my ( $header, $response, $reason, $error_response ) = @_;
 
             if ($response) {
                 $self->conn->send_notice( 'Tweet by @'
@@ -83,9 +85,11 @@ method _fetch_tweet_text (Str $uri) {
     );
 }
 
-method _fetch_and_extract_from_dom (Str $uri, Str $selector) {
+sub _fetch_and_extract_from_dom {
+    my ($self, $uri, $selector) = @_;
     $self->logger->log_debug("Fetching $uri");
-    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, func ($ua, $tx) {
+    $self->_ua->get($uri, { Range => 'bytes=0-20000' }, sub  {
+        my ($ua, $tx) = @_;
         if ( !$tx->success ) {
             my ($err, $code) = $tx->error;
             return "$code err";
@@ -99,16 +103,19 @@ method _fetch_and_extract_from_dom (Str $uri, Str $selector) {
     return;
 }
 
-method _fetch_html_title (Str $uri) {
+sub _fetch_html_title {
+    my ($self, $uri) = @_;
     $self->_fetch_and_extract_from_dom($uri, 'title');
 }
 
-method _fetch_wikipedia_title (Str $uri) {
+sub _fetch_wikipedia_title {
+    my ($self, $uri) = @_;
     $self->_fetch_and_extract_from_dom($uri, '#mw-content-text p');
 }
 
 
-method on_message (App::Happyman::Message $msg) {
+sub on_message {
+    my ($self, $msg) = @_;
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
         [ qr/\.wikipedia\.org$/ => \&_fetch_wikipedia_title ],
@@ -117,7 +124,8 @@ method on_message (App::Happyman::Message $msg) {
     );
 
     my $finder = URI::Find->new(
-        func (URI::URL $uri_obj, Str $uri_str) {
+        sub  {
+            my ($uri_obj, $uri_str) = @_;
             $self->logger->log("Found URI: $uri_str");
             for (@peekers) {
                 my ( $pattern, $cb ) = @$_;

@@ -1,7 +1,6 @@
 package App::Happyman::Test;
 use v5.18;
 use warnings;
-use Method::Signatures;
 
 
 use parent 'Exporter';
@@ -9,9 +8,11 @@ our @EXPORT
     = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait wait_on_message_or_timeout load_local_config async_sleep);
 
 use AnyEvent;
+use AnyEvent::IRC::Client;
 use Config::INI::Reader;
 
-func make_happyman_with_plugin (Str $plugin_name, HashRef $plugin_params) {
+sub make_happyman_with_plugin {
+    my ($plugin_name, $plugin_params) = @_;
     my $happyman = App::Happyman::Connection->new(
         nick    => 'happyman',
         host    => 'localhost',
@@ -24,7 +25,9 @@ func make_happyman_with_plugin (Str $plugin_name, HashRef $plugin_params) {
     return $happyman;
 }
 
-func make_test_client ($nick = 'HMTest') {
+sub make_test_client {
+    my ($nick) = @_;
+    $nick ||= 'HMTest';
     my $irc = AnyEvent::IRC::Client->new();
     my $cv  = AE::cv;
     $irc->reg_cb( connect => $cv );
@@ -37,20 +40,23 @@ func make_test_client ($nick = 'HMTest') {
     return $irc;
 }
 
-func wait_on_event_or_timeout (AnyEvent::IRC::Client $irc, Str $event, Num $timeout) {
+sub wait_on_event_or_timeout {
+    my ($irc, $event, $timeout) = @_;
     my $cv = AE::cv;
     $irc->reg_cb( $event => $cv );
     my $timer = AE::timer( $timeout, 0, $cv );
     return $cv->recv();
 }
 
-func wait_on_message_or_timeout (AnyEvent::IRC::Client $irc, Num $timeout) {
+sub wait_on_message_or_timeout {
+    my ($irc, $timeout) = @_;
     my ( undef, undef, $ircmsg )
         = wait_on_event_or_timeout( $irc, 'publicmsg', $timeout );
     return $ircmsg ? $ircmsg->{params}->[1] : undef;
 }
 
-func disconnect_and_wait (AnyEvent::IRC::Client $irc) {
+sub disconnect_and_wait {
+    my ($irc, $timeout) = @_;
     my $cv = AE::cv;
     $irc->reg_cb( disconnect => $cv );
     $irc->send_srv('QUIT');
@@ -58,11 +64,12 @@ func disconnect_and_wait (AnyEvent::IRC::Client $irc) {
     return;
 }
 
-func load_local_config {
+sub load_local_config {
     return Config::INI::Reader->read_file('happyman.conf');
 }
 
-func async_sleep (Num $seconds) {
+sub async_sleep {
+    my ($seconds) = @_;
     my $cv = AE::cv;
     my $timer = AE::timer $seconds, 0, $cv;
     $cv->recv();

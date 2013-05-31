@@ -1,7 +1,6 @@
 package App::Happyman::Plugin;
 use v5.18;
 use Moose::Role;
-use Method::Signatures;
 use namespace::autoclean;
 
 has 'conn' => (
@@ -21,7 +20,8 @@ has '_ua' => (
     lazy    => 1,
 );
 
-method _build_ua {
+sub _build_ua {
+    my ($self) = @_;
     return Mojo::UserAgent->new();
 }
 

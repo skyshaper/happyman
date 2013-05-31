@@ -1,7 +1,6 @@
 package App::Happyman::Connection;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 use App::Happyman::Message;
@@ -78,7 +77,8 @@ has _logger => (
     lazy    => 1,
 );
 
-method _build_logger {
+sub _build_logger {
+    my ($self) = @_;
     return Log::Dispatchouli->new({
       ident     => 'happyman',
       to_file   => 1,
@@ -87,13 +87,15 @@ method _build_logger {
     });
 }
 
-method add_plugin (App::Happyman::Plugin $plugin) {
+sub add_plugin {
+    my ($self, $plugin) = @_;
     $plugin->conn($self);
     $plugin->logger($self->_logger->proxy({ proxy_prefix => "[$plugin] " }));
     push $self->_plugins, $plugin;
 }
 
-method _connect {
+sub _connect {
+    my ($self) = @_;
     $self->irc->enable_ssl() if $self->ssl;
     $self->irc->connect(
         $self->host,
@@ -107,7 +109,8 @@ method _connect {
     $self->irc->send_srv( 'JOIN', $self->channel );
 }
 
-method _retry_connect {
+sub _retry_connect {
+    my ($self) = @_;
     my $w;
     $w = AE::timer 5, 0, sub {
         undef $w;
@@ -116,7 +119,8 @@ method _retry_connect {
     };
 }
 
-method _build_irc {
+sub _build_irc {
+    my ($self) = @_;
     my $irc = AnyEvent::IRC::Client->new();
 
     $irc->reg_cb(
@@ -163,11 +167,13 @@ method _build_irc {
     return $irc;
 }
 
-method BUILD (...) {
+sub BUILD {
+    my ($self) = @_;
     $self->_connect();    # enforce construction
 }
 
-method run {
+sub run {
+    my ($self) = @_;
     while (1) {
         try {
             AE::cv->recv();
@@ -180,7 +186,8 @@ method run {
     }
 }
 
-method disconnect_and_wait {
+sub disconnect_and_wait {
+    my ($self) = @_;
     my $cv = AE::cv;
     $self->_stay_connected(0);
     $self->irc->reg_cb( disconnect => $cv );
@@ -189,7 +196,8 @@ method disconnect_and_wait {
     return;
 }
 
-method _trigger_event (Str $name, $msg = undef) {
+sub _trigger_event {
+    my ($self, $name, $msg) = @_;
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
 
@@ -199,28 +207,33 @@ method _trigger_event (Str $name, $msg = undef) {
     }
 }
 
-method send_message (Str $body) {
+sub send_message {
+    my ($self, $body) = @_;
     $self->_logger->log_debug("Sending message to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
-method send_notice (Str $body) {
+sub send_notice {
+    my ($self, $body) = @_;
     $self->_logger->log_debug("Sending notice to channel: $body");
     $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
 }
 
-method send_private_message (Str $nick, Str $body) {
+sub send_private_message {
+    my ($self, $nick, $body) = @_;
     $self->_logger->log_debug("Sending privately to $nick: $body");
     $self->irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
-method nick_exists (Str $nick) {
+sub nick_exists {
+    my ($self, $nick) = @_;
     return defined $self->irc->nick_modes( $self->channel, $nick );
 }
 
-method set_topic (Str $topic) {
+sub set_topic {
+    my ($self, $topic) = @_;
     $self->_logger->log_debug("Setting topic: $topic");
     $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
 }

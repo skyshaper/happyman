@@ -1,7 +1,6 @@
 package App::Happyman::Plugin::SocketAnnouncer;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
@@ -16,14 +15,17 @@ has '_mojo' => (
     builder => '_build_mojo',
 );
 
-method _build_mojo {
-    post '/plain' => func($app) {
+sub _build_mojo {
+    my ($self) = @_;
+    post '/plain' => sub {
+        my ($app) = @_;
         $self->logger->log('Receiving /plain: ' . $app->param('message'));
         $self->conn->send_notice( $app->param('message') );
         $app->render(text => 'sent');
     };
 
-    post '/github' => func($app) {
+    post '/github' => sub {
+        my ($app) = @_;
         $self->logger->debug($app->param('payload'));
         my $data = JSON::XS->new->decode( $app->param('payload') );
 
@@ -45,7 +47,8 @@ method _build_mojo {
         return;
     };
 
-    post '/heroku' => func($app) {
+    post '/heroku' => sub {
+        my ($app) = @_;
         # $self->logger->log(['Receiving /heroku: %s', $app->param]);
         my $message = sprintf('%s deployed %s to %s', $app->param('user'), 
             $app->param('head'), $app->param('url'));

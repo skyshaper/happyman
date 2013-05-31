@@ -1,7 +1,6 @@
 package App::Happyman::Plugin::RandomTopic;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
@@ -45,7 +44,8 @@ has min_topic_age => (
     default => 172800,
 );
 
-method _build_lines {
+sub _build_lines {
+    my ($self) = @_;
     $self->logger->log_debug('Loading topic lines');
     my $handle = Data::Handle->new(__PACKAGE__);
     return [
@@ -54,7 +54,8 @@ method _build_lines {
     ];
 }
 
-method _build_timer {
+sub _build_timer {
+    my ($self) = @_;
     return AE::timer(
         0,
         $self->check_interval,
@@ -69,23 +70,27 @@ method _build_timer {
     );
 }
 
-method BUILD (...) {
+sub BUILD {
+    my ($self) = @_;
     $self->_timer();
 }
 
-method on_topic (Str $topic) {
+sub on_topic {
+    my ($self, $topic) = @_;
     $self->logger->log_debug('Updating topic time');
     $self->_topic_time(time);
 }
 
-method on_message (App::Happyman::Message $msg) {
+sub on_message {
+    my ($self, $msg) = @_;
     if ( $msg->full_text =~ /^\!topic\s*$/ ) {
         $self->logger->log_debug('Received !topic command');
         $self->_set_random_topic();
     }
 }
 
-method _set_random_topic {
+sub _set_random_topic {
+    my ($self) = @_;
     my $line = $self->_lines->[ rand @{ $self->_lines } ];
     $self->logger->log_debug("Setting topic: $line");
     $self->conn->set_topic($line);

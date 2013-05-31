@@ -15,7 +15,6 @@ requires 'List::MoreUtils';
 requires 'Log::Dispatchouli';
 requires 'LWP::UserAgent';
 requires 'LWP::Protocol::AnyEvent::http';
-requires 'Method::Signatures';
 requires 'Mojolicious';
 requires 'Moose';
 requires 'namespace::autoclean';

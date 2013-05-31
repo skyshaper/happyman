@@ -1,7 +1,6 @@
 package App::Happyman::Plugin::SATQ;
 use v5.18;
 use Moose;
-use Method::Signatures;
 use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
@@ -21,7 +20,8 @@ has [qw(uri user password)] => (
     required => 1,
 );
 
-method on_message (App::Happyman::Message $msg) {
+sub on_message {
+    my ($self, $msg) = @_;
     if ( $msg->full_text =~ /^\!quote\s*$/ ) {
         my $authorization = 'Basic '
             . encode_base64( $self->user . ':' . $self->password, '' );
