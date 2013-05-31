@@ -90,8 +90,7 @@ describe 'PeekURI' => sub {
 
         describe 'when seeing a URI that leads to a 404' => sub {
             before sub {
-                $irc->send_chan( '#happyman', 'PRIVMSG',
-                    '#happyman',
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
                     'http://chaosdorf.de/~mxey/nonexistingfile' );
             };
 

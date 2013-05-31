@@ -1,0 +1,5 @@
+#!/bin/sh -e
+curl -L http://cpanmin.us | perl - App::cpanminus
+cpanm Carton
+carton install
+ln -fs ../../script/tidy_all .git/hooks/pre-commit
