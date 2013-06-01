@@ -1,0 +1,2 @@
+#!/bin/sh -e
+carton exec ./happyman
