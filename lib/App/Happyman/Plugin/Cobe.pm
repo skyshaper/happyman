@@ -55,16 +55,16 @@ sub _spawn_child {
 
 sub on_message {
     my ( $self, $msg ) = @_;
-    $self->logger->log_debug( 'Learning: ' . $msg->text );
+    $self->_log_debug( 'Learning: ' . $msg->text );
     $self->_in->push_write( 'learn ' . $msg->text . "\n" );
 
     if ( $msg->addressed_me ) {
-        $self->logger->log_debug( 'Sending to Python: ' . $msg->text );
+        $self->_log_debug( 'Sending to Python: ' . $msg->text );
         $self->_in->push_write( 'reply ' . $msg->text . "\n" );
         $self->_out->push_read(
             line => sub {
                 my ( undef, $line ) = @_;
-                $self->logger->log(
+                $self->_log(
                     'Replying to ' . $msg->sender_nick . ': ' . $line );
                 $msg->reply($line);
             }

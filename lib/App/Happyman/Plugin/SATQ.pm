@@ -5,6 +5,7 @@ use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
+use Data::Dumper::Concise;
 use Mojo::UserAgent;
 use MIME::Base64;
 
@@ -28,7 +29,7 @@ sub on_message {
         my $headers = { Authorization => $authorization };
         my $form
             = { 'quote[raw_quote]' => join( "\n", @{ $self->_buffer } ) };
-        $self->logger->log_debug( [ 'Posting quote: %s', $form ] );
+        $self->_log_debug( 'Posting quote: ' . Dumper($form) );
 
         $self->_ua->post(
             $self->uri,
@@ -37,11 +38,10 @@ sub on_message {
             sub {
                 my ( undef, $tx ) = @_;
                 if ( $tx->error ) {
-                    $self->logger->log( $tx->error );
+                    $self->_log( $tx->error );
                     $msg->reply( $tx->error );
                 }
-                $self->logger->log( $tx->res->headers->location
-                        || $tx->res->code );
+                $self->_log( $tx->res->headers->location || $tx->res->code );
                 $msg->reply( $tx->res->headers->location || $tx->res->code );
             }
         );
@@ -51,7 +51,7 @@ sub on_message {
     if ( @{ $self->_buffer } >= 10 ) {
         shift $self->_buffer;
     }
-    $self->logger->log_debug("Buffering: $line");
+    $self->_log_debug("Buffering: $line");
     push $self->_buffer, $line;
 }
 

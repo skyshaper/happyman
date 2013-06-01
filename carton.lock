@@ -2084,6 +2084,394 @@
          "target" : "Const::Fast",
          "version" : "0.013"
       },
+      "DBI" : {
+         "dist" : "DBI-1.627",
+         "mymeta" : {
+            "abstract" : "Database independent interface for Perl",
+            "author" : [
+               "Tim Bunce (dbi-users@perl.org)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "DBI",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.48",
+                     "Test::Simple" : "0.90"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "conflicts" : {
+                     "DBD::Amazon" : "0.10",
+                     "DBD::AnyData" : "0.110",
+                     "DBD::CSV" : "0.36",
+                     "DBD::Google" : "0.51",
+                     "DBD::PO" : "2.10",
+                     "DBD::RAM" : "0.072",
+                     "SQL::Statement" : "1.33"
+                  },
+                  "recommends" : {
+                     "Clone" : "0.34",
+                     "DB_File" : "0",
+                     "MLDBM" : "0",
+                     "Net::Daemon" : "0",
+                     "RPC::PlServer" : "0.2001",
+                     "SQL::Statement" : "1.402"
+                  },
+                  "requires" : {
+                     "perl" : "5.008"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "homepage" : "http://dbi.perl.org/",
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "url" : "https://github.com/perl5-dbi/dbi"
+               },
+               "x_MailingList" : "mailto:dbi-dev@perl.org"
+            },
+            "version" : "1.627"
+         },
+         "name" : "DBI",
+         "pathname" : "T/TI/TIMB/DBI-1.627.tar.gz",
+         "provides" : {
+            "Bundle::DBI" : {
+               "file" : "Bundle/DBI.pm",
+               "version" : "12.008695"
+            },
+            "DBD::DBM" : {
+               "file" : "DBD/DBM.pm",
+               "version" : "0.08"
+            },
+            "DBD::DBM::Statement" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::Table" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::db" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::dr" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::DBM::st" : {
+               "file" : "DBD/DBM.pm"
+            },
+            "DBD::ExampleP" : {
+               "file" : "DBD/ExampleP.pm",
+               "version" : "12.014310"
+            },
+            "DBD::ExampleP::db" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::ExampleP::dr" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::ExampleP::st" : {
+               "file" : "DBD/ExampleP.pm"
+            },
+            "DBD::File" : {
+               "file" : "DBD/File.pm",
+               "version" : "0.41"
+            },
+            "DBD::File::DataSource::File" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::DataSource::Stream" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::Statement" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::Table" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::TableSource::FileSystem" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::db" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::dr" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::File::st" : {
+               "file" : "DBD/File.pm"
+            },
+            "DBD::Gofer" : {
+               "file" : "DBD/Gofer.pm",
+               "version" : "0.015326"
+            },
+            "DBD::Gofer::Policy::Base" : {
+               "file" : "DBD/Gofer/Policy/Base.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::classic" : {
+               "file" : "DBD/Gofer/Policy/classic.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::pedantic" : {
+               "file" : "DBD/Gofer/Policy/pedantic.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Policy::rush" : {
+               "file" : "DBD/Gofer/Policy/rush.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::Base" : {
+               "file" : "DBD/Gofer/Transport/Base.pm",
+               "version" : "0.014120"
+            },
+            "DBD::Gofer::Transport::corostream" : {
+               "file" : "DBD/Gofer/Transport/corostream.pm"
+            },
+            "DBD::Gofer::Transport::null" : {
+               "file" : "DBD/Gofer/Transport/null.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::pipeone" : {
+               "file" : "DBD/Gofer/Transport/pipeone.pm",
+               "version" : "0.010087"
+            },
+            "DBD::Gofer::Transport::stream" : {
+               "file" : "DBD/Gofer/Transport/stream.pm",
+               "version" : "0.014598"
+            },
+            "DBD::Gofer::db" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::Gofer::dr" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::Gofer::st" : {
+               "file" : "DBD/Gofer.pm"
+            },
+            "DBD::NullP" : {
+               "file" : "DBD/NullP.pm",
+               "version" : "12.014714"
+            },
+            "DBD::NullP::db" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::NullP::dr" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::NullP::st" : {
+               "file" : "DBD/NullP.pm"
+            },
+            "DBD::Proxy" : {
+               "file" : "DBD/Proxy.pm",
+               "version" : "0.2004"
+            },
+            "DBD::Proxy::RPC::PlClient" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::db" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::dr" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Proxy::st" : {
+               "file" : "DBD/Proxy.pm"
+            },
+            "DBD::Sponge" : {
+               "file" : "DBD/Sponge.pm",
+               "version" : "12.010002"
+            },
+            "DBD::Sponge::db" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBD::Sponge::dr" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBD::Sponge::st" : {
+               "file" : "DBD/Sponge.pm"
+            },
+            "DBDI" : {
+               "file" : "DBI/DBD.pm"
+            },
+            "DBI" : {
+               "file" : "DBI.pm",
+               "version" : "1.627"
+            },
+            "DBI::Const::GetInfo::ANSI" : {
+               "file" : "DBI/Const/GetInfo/ANSI.pm",
+               "version" : "2.008696"
+            },
+            "DBI::Const::GetInfo::ODBC" : {
+               "file" : "DBI/Const/GetInfo/ODBC.pm",
+               "version" : "2.011373"
+            },
+            "DBI::Const::GetInfoReturn" : {
+               "file" : "DBI/Const/GetInfoReturn.pm",
+               "version" : "2.008696"
+            },
+            "DBI::Const::GetInfoType" : {
+               "file" : "DBI/Const/GetInfoType.pm",
+               "version" : "2.008696"
+            },
+            "DBI::DBD" : {
+               "file" : "DBI/DBD.pm",
+               "version" : "12.015128"
+            },
+            "DBI::DBD::Metadata" : {
+               "file" : "DBI/DBD/Metadata.pm",
+               "version" : "2.014213"
+            },
+            "DBI::DBD::SqlEngine" : {
+               "file" : "DBI/DBD/SqlEngine.pm",
+               "version" : "0.06"
+            },
+            "DBI::DBD::SqlEngine::DataSource" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::Statement" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::Table" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TableSource" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TieMeta" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::TieTables" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::db" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::dr" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::DBD::SqlEngine::st" : {
+               "file" : "DBI/DBD/SqlEngine.pm"
+            },
+            "DBI::FAQ" : {
+               "file" : "DBI/FAQ.pm",
+               "version" : "1.014934"
+            },
+            "DBI::Gofer::Execute" : {
+               "file" : "DBI/Gofer/Execute.pm",
+               "version" : "0.014282"
+            },
+            "DBI::Gofer::Request" : {
+               "file" : "DBI/Gofer/Request.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Response" : {
+               "file" : "DBI/Gofer/Response.pm",
+               "version" : "0.011565"
+            },
+            "DBI::Gofer::Serializer::Base" : {
+               "file" : "DBI/Gofer/Serializer/Base.pm",
+               "version" : "0.009949"
+            },
+            "DBI::Gofer::Serializer::DataDumper" : {
+               "file" : "DBI/Gofer/Serializer/DataDumper.pm",
+               "version" : "0.009949"
+            },
+            "DBI::Gofer::Serializer::Storable" : {
+               "file" : "DBI/Gofer/Serializer/Storable.pm",
+               "version" : "0.015585"
+            },
+            "DBI::Gofer::Transport::Base" : {
+               "file" : "DBI/Gofer/Transport/Base.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Transport::pipeone" : {
+               "file" : "DBI/Gofer/Transport/pipeone.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Gofer::Transport::stream" : {
+               "file" : "DBI/Gofer/Transport/stream.pm",
+               "version" : "0.012536"
+            },
+            "DBI::Profile" : {
+               "file" : "DBI/Profile.pm",
+               "version" : "2.015064"
+            },
+            "DBI::ProfileData" : {
+               "file" : "DBI/ProfileData.pm",
+               "version" : "2.010007"
+            },
+            "DBI::ProfileDumper" : {
+               "file" : "DBI/ProfileDumper.pm",
+               "version" : "2.015324"
+            },
+            "DBI::ProfileDumper::Apache" : {
+               "file" : "DBI/ProfileDumper/Apache.pm",
+               "version" : "2.014120"
+            },
+            "DBI::ProfileSubs" : {
+               "file" : "DBI/ProfileSubs.pm",
+               "version" : "0.009395"
+            },
+            "DBI::ProxyServer" : {
+               "file" : "DBI/ProxyServer.pm",
+               "version" : "0.3005"
+            },
+            "DBI::ProxyServer::db" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::ProxyServer::dr" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::ProxyServer::st" : {
+               "file" : "DBI/ProxyServer.pm"
+            },
+            "DBI::PurePerl" : {
+               "file" : "DBI/PurePerl.pm",
+               "version" : "2.014285"
+            },
+            "DBI::SQL::Nano" : {
+               "file" : "DBI/SQL/Nano.pm",
+               "version" : "1.015543"
+            },
+            "DBI::SQL::Nano::Statement_" : {
+               "file" : "DBI/SQL/Nano.pm"
+            },
+            "DBI::SQL::Nano::Table_" : {
+               "file" : "DBI/SQL/Nano.pm"
+            },
+            "DBI::Util::CacheMemory" : {
+               "file" : "DBI/Util/CacheMemory.pm",
+               "version" : "0.010314"
+            },
+            "DBI::common" : {
+               "file" : "DBI.pm"
+            }
+         },
+         "target" : "DBI",
+         "version" : "1.627"
+      },
       "Data::Alias" : {
          "dist" : "Data-Alias-1.16",
          "mymeta" : {
@@ -2210,6 +2598,72 @@
          },
          "target" : "Data::Dump",
          "version" : "1.21"
+      },
+      "Data::Dumper::Concise" : {
+         "dist" : "Data-Dumper-Concise-2.020",
+         "mymeta" : {
+            "abstract" : "Less indentation and newlines plus sub deparsing",
+            "author" : [
+               "mst - Matt S. Trout <mst@shadowcat.co.uk>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 1.00, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Data-Dumper-Concise",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.42"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "perl" : "5.006"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ]
+            },
+            "version" : "2.020",
+            "x_module_name" : "Data::Dumper::Concise"
+         },
+         "name" : "Data::Dumper::Concise",
+         "pathname" : "F/FR/FREW/Data-Dumper-Concise-2.020.tar.gz",
+         "provides" : {
+            "Data::Dumper::Concise" : {
+               "file" : "Data/Dumper/Concise.pm",
+               "version" : "2.020"
+            },
+            "Data::Dumper::Concise::Sugar" : {
+               "file" : "Data/Dumper/Concise/Sugar.pm"
+            },
+            "Devel::Dwarn" : {
+               "file" : "Devel/Dwarn.pm"
+            }
+         },
+         "target" : "Data::Dumper::Concise",
+         "version" : "2.020"
       },
       "Data::Handle" : {
          "dist" : "Data-Handle-0.02001002",
@@ -9716,6 +10170,61 @@
          "target" : "Exception::Class",
          "version" : "1.37"
       },
+      "Expect" : {
+         "dist" : "Expect-1.21",
+         "mymeta" : {
+            "abstract" : "unknown",
+            "author" : [
+               "unknown"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.66, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Expect",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "IO::Pty" : "1.03",
+                     "IO::Tty" : "1.03"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "version" : "1.21"
+         },
+         "name" : "Expect",
+         "pathname" : "R/RG/RGIERSIG/Expect-1.21.tar.gz",
+         "provides" : {
+            "Expect" : {
+               "file" : "Expect.pm",
+               "version" : "1.21"
+            }
+         },
+         "target" : "Expect",
+         "version" : "1.21"
+      },
       "ExtUtils::Depends" : {
          "dist" : "ExtUtils-Depends-0.304",
          "mymeta" : {
@@ -10928,6 +11437,70 @@
          },
          "target" : "IO::String",
          "version" : "1.08"
+      },
+      "IO::Tty" : {
+         "dist" : "IO-Tty-1.10",
+         "mymeta" : {
+            "abstract" : "Pseudo ttys and constants",
+            "author" : [
+               "Roland Giersig <RGiersig@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "IO-Tty",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {}
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "https://expectperl.svn.sourceforge.net/svnroot/expectperl/IO-Tty/trunk"
+               }
+            },
+            "version" : "1.10"
+         },
+         "name" : "IO::Tty",
+         "pathname" : "T/TO/TODDR/IO-Tty-1.10.tar.gz",
+         "provides" : {
+            "IO::Pty" : {
+               "file" : "IO/Pty.pm",
+               "version" : "1.10"
+            },
+            "IO::Tty" : {
+               "file" : "IO/Tty.pm",
+               "version" : "1.10"
+            },
+            "IO::Tty::Constant" : {
+               "file" : "IO/Tty/Constant.pm"
+            }
+         },
+         "target" : "IO::Pty",
+         "version" : "1.10"
       },
       "JSON" : {
          "dist" : "JSON-2.57",
@@ -14579,6 +15152,118 @@
          },
          "target" : "Net::OAuth",
          "version" : "0.28"
+      },
+      "Net::SSH2" : {
+         "dist" : "Net-SSH2-0.48",
+         "mymeta" : {
+            "abstract" : "Support for the SSH 2 protocol via libssh2.",
+            "author" : [
+               "David B. Robins, <dbrobins@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Net-SSH2",
+            "no_index" : {
+               "directory" : [
+                  "example",
+                  "inc",
+                  "t"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "perl" : "5.006"
+                  }
+               }
+            },
+            "provides" : {
+               "Net::SSH2" : {
+                  "file" : "lib/Net/SSH2.pm",
+                  "version" : "0.48"
+               },
+               "Net::SSH2::Channel" : {
+                  "file" : "lib/Net/SSH2/Channel.pm",
+                  "version" : "0"
+               },
+               "Net::SSH2::Dir" : {
+                  "file" : "lib/Net/SSH2/Dir.pm",
+                  "version" : "0"
+               },
+               "Net::SSH2::File" : {
+                  "file" : "lib/Net/SSH2/File.pm",
+                  "version" : "0"
+               },
+               "Net::SSH2::Listener" : {
+                  "file" : "lib/Net/SSH2/Listener.pm",
+                  "version" : "0"
+               },
+               "Net::SSH2::PublicKey" : {
+                  "file" : "lib/Net/SSH2/PublicKey.pm",
+                  "version" : "0"
+               },
+               "Net::SSH2::SFTP" : {
+                  "file" : "lib/Net/SSH2/SFTP.pm",
+                  "version" : "0"
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ],
+               "repository" : {
+                  "type" : "git",
+                  "url" : "git://github.com/rkitover/net-ssh2.git"
+               }
+            },
+            "version" : "0.48"
+         },
+         "name" : "Net::SSH2",
+         "pathname" : "R/RK/RKITOVER/Net-SSH2-0.48.tar.gz",
+         "provides" : {
+            "Net::SSH2" : {
+               "file" : "Net/SSH2.pm",
+               "version" : "0.48"
+            },
+            "Net::SSH2::Channel" : {
+               "file" : "Net/SSH2/Channel.pm"
+            },
+            "Net::SSH2::Dir" : {
+               "file" : "Net/SSH2/Dir.pm"
+            },
+            "Net::SSH2::File" : {
+               "file" : "Net/SSH2/File.pm"
+            },
+            "Net::SSH2::Listener" : {
+               "file" : "Net/SSH2/Listener.pm"
+            },
+            "Net::SSH2::PublicKey" : {
+               "file" : "Net/SSH2/PublicKey.pm"
+            },
+            "Net::SSH2::SFTP" : {
+               "file" : "Net/SSH2/SFTP.pm"
+            }
+         },
+         "target" : "Net::SSH2",
+         "version" : "0.48"
       },
       "Net::SSLeay" : {
          "dist" : "Net-SSLeay-1.54",
@@ -18739,6 +19424,744 @@
          "target" : "Readonly",
          "version" : "1.03"
       },
+      "Rex" : {
+         "dist" : "Rex-0.41.3",
+         "mymeta" : {
+            "abstract" : "unknown",
+            "author" : [
+               "unknown"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.62, CPAN::Meta::Converter version 2.112150, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "unknown"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "Rex",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "DBI" : "0",
+                     "Digest::HMAC_SHA1" : "0",
+                     "Expect" : "0",
+                     "HTTP::Date" : "0",
+                     "IPC::Open3" : "0",
+                     "JSON::XS" : "0",
+                     "LWP::Simple" : "0",
+                     "LWP::UserAgent" : "0",
+                     "MIME::Base64" : "0",
+                     "Net::SSH2" : "0.33",
+                     "Storable" : "0",
+                     "XML::Simple" : "0",
+                     "YAML" : "0"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "https://github.com/krimdomu/Rex"
+               }
+            },
+            "version" : "v0.41.3"
+         },
+         "name" : "Rex",
+         "pathname" : "J/JF/JFRIED/Rex-0.41.3.tar.gz",
+         "provides" : {
+            "Rex" : {
+               "file" : "Rex.pm",
+               "version" : "v0.41.3"
+            },
+            "Rex::Args" : {
+               "file" : "Rex/Args.pm"
+            },
+            "Rex::Args::Integer" : {
+               "file" : "Rex/Args/Integer.pm"
+            },
+            "Rex::Args::Single" : {
+               "file" : "Rex/Args/Single.pm"
+            },
+            "Rex::Args::String" : {
+               "file" : "Rex/Args/String.pm"
+            },
+            "Rex::Batch" : {
+               "file" : "Rex/Batch.pm"
+            },
+            "Rex::Box" : {
+               "file" : "Rex/Box.pm"
+            },
+            "Rex::Box::Amazon" : {
+               "file" : "Rex/Box/Amazon.pm"
+            },
+            "Rex::Box::Base" : {
+               "file" : "Rex/Box/Base.pm"
+            },
+            "Rex::Box::VBox" : {
+               "file" : "Rex/Box/VBox.pm"
+            },
+            "Rex::CLI" : {
+               "file" : "Rex/CLI.pm"
+            },
+            "Rex::CMDB" : {
+               "file" : "Rex/CMDB.pm"
+            },
+            "Rex::CMDB::YAML" : {
+               "file" : "Rex/CMDB/YAML.pm"
+            },
+            "Rex::Cache" : {
+               "file" : "Rex/Cache.pm"
+            },
+            "Rex::Cloud" : {
+               "file" : "Rex/Cloud.pm"
+            },
+            "Rex::Cloud::Amazon" : {
+               "file" : "Rex/Cloud/Amazon.pm"
+            },
+            "Rex::Cloud::Base" : {
+               "file" : "Rex/Cloud/Base.pm"
+            },
+            "Rex::Cloud::Jiffybox" : {
+               "file" : "Rex/Cloud/Jiffybox.pm"
+            },
+            "Rex::Commands" : {
+               "file" : "Rex/Commands.pm"
+            },
+            "Rex::Commands::Box" : {
+               "file" : "Rex/Commands/Box.pm"
+            },
+            "Rex::Commands::Cloud" : {
+               "file" : "Rex/Commands/Cloud.pm"
+            },
+            "Rex::Commands::Cron" : {
+               "file" : "Rex/Commands/Cron.pm"
+            },
+            "Rex::Commands::DB" : {
+               "file" : "Rex/Commands/DB.pm"
+            },
+            "Rex::Commands::Download" : {
+               "file" : "Rex/Commands/Download.pm"
+            },
+            "Rex::Commands::File" : {
+               "file" : "Rex/Commands/File.pm"
+            },
+            "Rex::Commands::Fs" : {
+               "file" : "Rex/Commands/Fs.pm"
+            },
+            "Rex::Commands::Gather" : {
+               "file" : "Rex/Commands/Gather.pm"
+            },
+            "Rex::Commands::Host" : {
+               "file" : "Rex/Commands/Host.pm"
+            },
+            "Rex::Commands::Inventory" : {
+               "file" : "Rex/Commands/Inventory.pm"
+            },
+            "Rex::Commands::Iptables" : {
+               "file" : "Rex/Commands/Iptables.pm"
+            },
+            "Rex::Commands::Kernel" : {
+               "file" : "Rex/Commands/Kernel.pm"
+            },
+            "Rex::Commands::LVM" : {
+               "file" : "Rex/Commands/LVM.pm"
+            },
+            "Rex::Commands::MD5" : {
+               "file" : "Rex/Commands/MD5.pm"
+            },
+            "Rex::Commands::Network" : {
+               "file" : "Rex/Commands/Network.pm"
+            },
+            "Rex::Commands::Partition" : {
+               "file" : "Rex/Commands/Partition.pm"
+            },
+            "Rex::Commands::Pkg" : {
+               "file" : "Rex/Commands/Pkg.pm"
+            },
+            "Rex::Commands::Process" : {
+               "file" : "Rex/Commands/Process.pm"
+            },
+            "Rex::Commands::Rsync" : {
+               "file" : "Rex/Commands/Rsync.pm"
+            },
+            "Rex::Commands::Run" : {
+               "file" : "Rex/Commands/Run.pm"
+            },
+            "Rex::Commands::SCM" : {
+               "file" : "Rex/Commands/SCM.pm"
+            },
+            "Rex::Commands::Service" : {
+               "file" : "Rex/Commands/Service.pm"
+            },
+            "Rex::Commands::SimpleCheck" : {
+               "file" : "Rex/Commands/SimpleCheck.pm"
+            },
+            "Rex::Commands::Sync" : {
+               "file" : "Rex/Commands/Sync.pm"
+            },
+            "Rex::Commands::Sysctl" : {
+               "file" : "Rex/Commands/Sysctl.pm"
+            },
+            "Rex::Commands::Tail" : {
+               "file" : "Rex/Commands/Tail.pm"
+            },
+            "Rex::Commands::Upload" : {
+               "file" : "Rex/Commands/Upload.pm"
+            },
+            "Rex::Commands::User" : {
+               "file" : "Rex/Commands/User.pm"
+            },
+            "Rex::Commands::Virtualization" : {
+               "file" : "Rex/Commands/Virtualization.pm"
+            },
+            "Rex::Config" : {
+               "file" : "Rex/Config.pm"
+            },
+            "Rex::Cron" : {
+               "file" : "Rex/Cron.pm"
+            },
+            "Rex::Cron::Base" : {
+               "file" : "Rex/Cron/Base.pm"
+            },
+            "Rex::Cron::Linux" : {
+               "file" : "Rex/Cron/Linux.pm"
+            },
+            "Rex::Cron::SunOS" : {
+               "file" : "Rex/Cron/SunOS.pm"
+            },
+            "Rex::Exporter" : {
+               "file" : "Rex/Exporter.pm"
+            },
+            "Rex::FS::File" : {
+               "file" : "Rex/FS/File.pm"
+            },
+            "Rex::File::Parser::Data" : {
+               "file" : "Rex/File/Parser/Data.pm"
+            },
+            "Rex::File::Parser::Ini" : {
+               "file" : "Rex/File/Parser/Ini.pm"
+            },
+            "Rex::Fork::Manager" : {
+               "file" : "Rex/Fork/Manager.pm"
+            },
+            "Rex::Fork::Task" : {
+               "file" : "Rex/Fork/Task.pm"
+            },
+            "Rex::Group" : {
+               "file" : "Rex/Group.pm"
+            },
+            "Rex::Group::Entry::Server" : {
+               "file" : "Rex/Group/Entry/Server.pm"
+            },
+            "Rex::Group::Lookup::File" : {
+               "file" : "Rex/Group/Lookup/File.pm"
+            },
+            "Rex::Group::Lookup::INI" : {
+               "file" : "Rex/Group/Lookup/INI.pm"
+            },
+            "Rex::Hardware" : {
+               "file" : "Rex/Hardware.pm"
+            },
+            "Rex::Hardware::Host" : {
+               "file" : "Rex/Hardware/Host.pm"
+            },
+            "Rex::Hardware::Kernel" : {
+               "file" : "Rex/Hardware/Kernel.pm"
+            },
+            "Rex::Hardware::Memory" : {
+               "file" : "Rex/Hardware/Memory.pm"
+            },
+            "Rex::Hardware::Network" : {
+               "file" : "Rex/Hardware/Network.pm"
+            },
+            "Rex::Hardware::Network::FreeBSD" : {
+               "file" : "Rex/Hardware/Network/FreeBSD.pm"
+            },
+            "Rex::Hardware::Network::Linux" : {
+               "file" : "Rex/Hardware/Network/Linux.pm"
+            },
+            "Rex::Hardware::Network::NetBSD" : {
+               "file" : "Rex/Hardware/Network/NetBSD.pm"
+            },
+            "Rex::Hardware::Network::OpenBSD" : {
+               "file" : "Rex/Hardware/Network/OpenBSD.pm"
+            },
+            "Rex::Hardware::Network::Solaris" : {
+               "file" : "Rex/Hardware/Network/Solaris.pm"
+            },
+            "Rex::Hardware::Swap" : {
+               "file" : "Rex/Hardware/Swap.pm"
+            },
+            "Rex::Hardware::VirtInfo" : {
+               "file" : "Rex/Hardware/VirtInfo.pm"
+            },
+            "Rex::Helper::Array" : {
+               "file" : "Rex/Helper/Array.pm"
+            },
+            "Rex::Helper::Encode" : {
+               "file" : "Rex/Helper/Encode.pm"
+            },
+            "Rex::Helper::Hash" : {
+               "file" : "Rex/Helper/Hash.pm"
+            },
+            "Rex::Helper::Path" : {
+               "file" : "Rex/Helper/Path.pm"
+            },
+            "Rex::Helper::SSH2" : {
+               "file" : "Rex/Helper/SSH2.pm"
+            },
+            "Rex::Helper::SSH2::Expect" : {
+               "file" : "Rex/Helper/SSH2/Expect.pm",
+               "version" : "0.1"
+            },
+            "Rex::Helper::System" : {
+               "file" : "Rex/Helper/System.pm"
+            },
+            "Rex::Interface::Connection" : {
+               "file" : "Rex/Interface/Connection.pm"
+            },
+            "Rex::Interface::Connection::Base" : {
+               "file" : "Rex/Interface/Connection/Base.pm"
+            },
+            "Rex::Interface::Connection::Fake" : {
+               "file" : "Rex/Interface/Connection/Fake.pm"
+            },
+            "Rex::Interface::Connection::HTTP" : {
+               "file" : "Rex/Interface/Connection/HTTP.pm"
+            },
+            "Rex::Interface::Connection::HTTPS" : {
+               "file" : "Rex/Interface/Connection/HTTPS.pm"
+            },
+            "Rex::Interface::Connection::Local" : {
+               "file" : "Rex/Interface/Connection/Local.pm"
+            },
+            "Rex::Interface::Connection::SSH" : {
+               "file" : "Rex/Interface/Connection/SSH.pm"
+            },
+            "Rex::Interface::Exec" : {
+               "file" : "Rex/Interface/Exec.pm"
+            },
+            "Rex::Interface::Exec::Base" : {
+               "file" : "Rex/Interface/Exec/Base.pm"
+            },
+            "Rex::Interface::Exec::HTTP" : {
+               "file" : "Rex/Interface/Exec/HTTP.pm"
+            },
+            "Rex::Interface::Exec::Local" : {
+               "file" : "Rex/Interface/Exec/Local.pm"
+            },
+            "Rex::Interface::Exec::SSH" : {
+               "file" : "Rex/Interface/Exec/SSH.pm"
+            },
+            "Rex::Interface::Exec::Sudo" : {
+               "file" : "Rex/Interface/Exec/Sudo.pm"
+            },
+            "Rex::Interface::Executor" : {
+               "file" : "Rex/Interface/Executor.pm"
+            },
+            "Rex::Interface::Executor::Base" : {
+               "file" : "Rex/Interface/Executor/Base.pm"
+            },
+            "Rex::Interface::Executor::Default" : {
+               "file" : "Rex/Interface/Executor/Default.pm"
+            },
+            "Rex::Interface::File" : {
+               "file" : "Rex/Interface/File.pm"
+            },
+            "Rex::Interface::File::Base" : {
+               "file" : "Rex/Interface/File/Base.pm"
+            },
+            "Rex::Interface::File::HTTP" : {
+               "file" : "Rex/Interface/File/HTTP.pm"
+            },
+            "Rex::Interface::File::Local" : {
+               "file" : "Rex/Interface/File/Local.pm"
+            },
+            "Rex::Interface::File::SSH" : {
+               "file" : "Rex/Interface/File/SSH.pm"
+            },
+            "Rex::Interface::File::Sudo" : {
+               "file" : "Rex/Interface/File/Sudo.pm"
+            },
+            "Rex::Interface::Fs" : {
+               "file" : "Rex/Interface/Fs.pm"
+            },
+            "Rex::Interface::Fs::Base" : {
+               "file" : "Rex/Interface/Fs/Base.pm"
+            },
+            "Rex::Interface::Fs::HTTP" : {
+               "file" : "Rex/Interface/Fs/HTTP.pm"
+            },
+            "Rex::Interface::Fs::Local" : {
+               "file" : "Rex/Interface/Fs/Local.pm"
+            },
+            "Rex::Interface::Fs::SSH" : {
+               "file" : "Rex/Interface/Fs/SSH.pm"
+            },
+            "Rex::Interface::Fs::Sudo" : {
+               "file" : "Rex/Interface/Fs/Sudo.pm"
+            },
+            "Rex::Inventory" : {
+               "file" : "Rex/Inventory.pm"
+            },
+            "Rex::Inventory::Bios" : {
+               "file" : "Rex/Inventory/Bios.pm"
+            },
+            "Rex::Inventory::DMIDecode" : {
+               "file" : "Rex/Inventory/DMIDecode.pm"
+            },
+            "Rex::Inventory::DMIDecode::BaseBoard" : {
+               "file" : "Rex/Inventory/DMIDecode/BaseBoard.pm"
+            },
+            "Rex::Inventory::DMIDecode::Bios" : {
+               "file" : "Rex/Inventory/DMIDecode/Bios.pm"
+            },
+            "Rex::Inventory::DMIDecode::CPU" : {
+               "file" : "Rex/Inventory/DMIDecode/CPU.pm"
+            },
+            "Rex::Inventory::DMIDecode::Memory" : {
+               "file" : "Rex/Inventory/DMIDecode/Memory.pm"
+            },
+            "Rex::Inventory::DMIDecode::MemoryArray" : {
+               "file" : "Rex/Inventory/DMIDecode/MemoryArray.pm"
+            },
+            "Rex::Inventory::DMIDecode::Section" : {
+               "file" : "Rex/Inventory/DMIDecode/Section.pm"
+            },
+            "Rex::Inventory::DMIDecode::SystemInformation" : {
+               "file" : "Rex/Inventory/DMIDecode/SystemInformation.pm"
+            },
+            "Rex::Inventory::HP::ACU" : {
+               "file" : "Rex/Inventory/HP/ACU.pm"
+            },
+            "Rex::Inventory::Hal" : {
+               "file" : "Rex/Inventory/Hal.pm"
+            },
+            "Rex::Inventory::Hal::Object" : {
+               "file" : "Rex/Inventory/Hal/Object.pm"
+            },
+            "Rex::Inventory::Hal::Object::Net" : {
+               "file" : "Rex/Inventory/Hal/Object/Net.pm"
+            },
+            "Rex::Inventory::Hal::Object::Storage" : {
+               "file" : "Rex/Inventory/Hal/Object/Storage.pm"
+            },
+            "Rex::Inventory::Hal::Object::Volume" : {
+               "file" : "Rex/Inventory/Hal/Object/Volume.pm"
+            },
+            "Rex::Inventory::SMBios" : {
+               "file" : "Rex/Inventory/SMBios.pm"
+            },
+            "Rex::Inventory::SMBios::BaseBoard" : {
+               "file" : "Rex/Inventory/SMBios/BaseBoard.pm"
+            },
+            "Rex::Inventory::SMBios::Bios" : {
+               "file" : "Rex/Inventory/SMBios/Bios.pm"
+            },
+            "Rex::Inventory::SMBios::CPU" : {
+               "file" : "Rex/Inventory/SMBios/CPU.pm"
+            },
+            "Rex::Inventory::SMBios::Memory" : {
+               "file" : "Rex/Inventory/SMBios/Memory.pm"
+            },
+            "Rex::Inventory::SMBios::MemoryArray" : {
+               "file" : "Rex/Inventory/SMBios/MemoryArray.pm"
+            },
+            "Rex::Inventory::SMBios::Section" : {
+               "file" : "Rex/Inventory/SMBios/Section.pm"
+            },
+            "Rex::Inventory::SMBios::SystemInformation" : {
+               "file" : "Rex/Inventory/SMBios/SystemInformation.pm"
+            },
+            "Rex::Logger" : {
+               "file" : "Rex/Logger.pm"
+            },
+            "Rex::Output" : {
+               "file" : "Rex/Output.pm"
+            },
+            "Rex::Output::JUnit" : {
+               "file" : "Rex/Output/JUnit.pm"
+            },
+            "Rex::Pkg" : {
+               "file" : "Rex/Pkg.pm"
+            },
+            "Rex::Pkg::ALT" : {
+               "file" : "Rex/Pkg/ALT.pm"
+            },
+            "Rex::Pkg::Base" : {
+               "file" : "Rex/Pkg/Base.pm"
+            },
+            "Rex::Pkg::Debian" : {
+               "file" : "Rex/Pkg/Debian.pm"
+            },
+            "Rex::Pkg::FreeBSD" : {
+               "file" : "Rex/Pkg/FreeBSD.pm"
+            },
+            "Rex::Pkg::Gentoo" : {
+               "file" : "Rex/Pkg/Gentoo.pm"
+            },
+            "Rex::Pkg::Mageia" : {
+               "file" : "Rex/Pkg/Mageia.pm"
+            },
+            "Rex::Pkg::NetBSD" : {
+               "file" : "Rex/Pkg/NetBSD.pm"
+            },
+            "Rex::Pkg::OpenBSD" : {
+               "file" : "Rex/Pkg/OpenBSD.pm"
+            },
+            "Rex::Pkg::Redhat" : {
+               "file" : "Rex/Pkg/Redhat.pm"
+            },
+            "Rex::Pkg::SuSE" : {
+               "file" : "Rex/Pkg/SuSE.pm"
+            },
+            "Rex::Pkg::SunOS" : {
+               "file" : "Rex/Pkg/SunOS.pm"
+            },
+            "Rex::Pkg::SunOS::Blastwave" : {
+               "file" : "Rex/Pkg/SunOS/Blastwave.pm"
+            },
+            "Rex::Pkg::SunOS::OpenCSW" : {
+               "file" : "Rex/Pkg/SunOS/OpenCSW.pm"
+            },
+            "Rex::Pkg::SunOS::pkg" : {
+               "file" : "Rex/Pkg/SunOS/pkg.pm"
+            },
+            "Rex::Pkg::Ubuntu" : {
+               "file" : "Rex/Pkg/Ubuntu.pm"
+            },
+            "Rex::Profiler" : {
+               "file" : "Rex/Profiler.pm"
+            },
+            "Rex::Report" : {
+               "file" : "Rex/Report.pm"
+            },
+            "Rex::Report::Base" : {
+               "file" : "Rex/Report/Base.pm"
+            },
+            "Rex::SCM::Git" : {
+               "file" : "Rex/SCM/Git.pm"
+            },
+            "Rex::SCM::Subversion" : {
+               "file" : "Rex/SCM/Subversion.pm"
+            },
+            "Rex::Service" : {
+               "file" : "Rex/Service.pm"
+            },
+            "Rex::Service::ALT" : {
+               "file" : "Rex/Service/ALT.pm"
+            },
+            "Rex::Service::ALT::systemd" : {
+               "file" : "Rex/Service/ALT/systemd.pm"
+            },
+            "Rex::Service::Debian" : {
+               "file" : "Rex/Service/Debian.pm"
+            },
+            "Rex::Service::FreeBSD" : {
+               "file" : "Rex/Service/FreeBSD.pm"
+            },
+            "Rex::Service::Gentoo" : {
+               "file" : "Rex/Service/Gentoo.pm"
+            },
+            "Rex::Service::Mageia" : {
+               "file" : "Rex/Service/Mageia.pm"
+            },
+            "Rex::Service::NetBSD" : {
+               "file" : "Rex/Service/NetBSD.pm"
+            },
+            "Rex::Service::OpenBSD" : {
+               "file" : "Rex/Service/OpenBSD.pm"
+            },
+            "Rex::Service::Redhat" : {
+               "file" : "Rex/Service/Redhat.pm"
+            },
+            "Rex::Service::Redhat::systemd" : {
+               "file" : "Rex/Service/Redhat/systemd.pm"
+            },
+            "Rex::Service::SuSE" : {
+               "file" : "Rex/Service/SuSE.pm"
+            },
+            "Rex::Service::SuSE::systemd" : {
+               "file" : "Rex/Service/SuSE/systemd.pm"
+            },
+            "Rex::Service::SunOS" : {
+               "file" : "Rex/Service/SunOS.pm"
+            },
+            "Rex::Service::SunOS::svcadm" : {
+               "file" : "Rex/Service/SunOS/svcadm.pm"
+            },
+            "Rex::Service::Ubuntu" : {
+               "file" : "Rex/Service/Ubuntu.pm"
+            },
+            "Rex::Shared::Var" : {
+               "file" : "Rex/Shared/Var.pm"
+            },
+            "Rex::Shared::Var::Array" : {
+               "file" : "Rex/Shared/Var/Array.pm"
+            },
+            "Rex::Shared::Var::Hash" : {
+               "file" : "Rex/Shared/Var/Hash.pm"
+            },
+            "Rex::Shared::Var::Scalar" : {
+               "file" : "Rex/Shared/Var/Scalar.pm"
+            },
+            "Rex::Sudo::File" : {
+               "file" : "Rex/Sudo/File.pm"
+            },
+            "Rex::Task" : {
+               "file" : "Rex/Task.pm"
+            },
+            "Rex::TaskList" : {
+               "file" : "Rex/TaskList.pm"
+            },
+            "Rex::TaskList::Base" : {
+               "file" : "Rex/TaskList/Base.pm"
+            },
+            "Rex::Template" : {
+               "file" : "Rex/Template.pm"
+            },
+            "Rex::Transaction" : {
+               "file" : "Rex/Transaction.pm"
+            },
+            "Rex::User" : {
+               "file" : "Rex/User.pm"
+            },
+            "Rex::User::FreeBSD" : {
+               "file" : "Rex/User/FreeBSD.pm"
+            },
+            "Rex::User::Linux" : {
+               "file" : "Rex/User/Linux.pm"
+            },
+            "Rex::User::NetBSD" : {
+               "file" : "Rex/User/NetBSD.pm"
+            },
+            "Rex::User::OpenBSD" : {
+               "file" : "Rex/User/OpenBSD.pm"
+            },
+            "Rex::User::SunOS" : {
+               "file" : "Rex/User/SunOS.pm"
+            },
+            "Rex::Value" : {
+               "file" : "Rex/Value.pm"
+            },
+            "Rex::Virtualization" : {
+               "file" : "Rex/Virtualization.pm"
+            },
+            "Rex::Virtualization::Base" : {
+               "file" : "Rex/Virtualization/Base.pm"
+            },
+            "Rex::Virtualization::LibVirt" : {
+               "file" : "Rex/Virtualization/LibVirt.pm"
+            },
+            "Rex::Virtualization::LibVirt::blklist" : {
+               "file" : "Rex/Virtualization/LibVirt/blklist.pm"
+            },
+            "Rex::Virtualization::LibVirt::create" : {
+               "file" : "Rex/Virtualization/LibVirt/create.pm"
+            },
+            "Rex::Virtualization::LibVirt::delete" : {
+               "file" : "Rex/Virtualization/LibVirt/delete.pm"
+            },
+            "Rex::Virtualization::LibVirt::destroy" : {
+               "file" : "Rex/Virtualization/LibVirt/destroy.pm"
+            },
+            "Rex::Virtualization::LibVirt::dumpxml" : {
+               "file" : "Rex/Virtualization/LibVirt/dumpxml.pm"
+            },
+            "Rex::Virtualization::LibVirt::hypervisor" : {
+               "file" : "Rex/Virtualization/LibVirt/hypervisor.pm"
+            },
+            "Rex::Virtualization::LibVirt::iflist" : {
+               "file" : "Rex/Virtualization/LibVirt/iflist.pm"
+            },
+            "Rex::Virtualization::LibVirt::info" : {
+               "file" : "Rex/Virtualization/LibVirt/info.pm"
+            },
+            "Rex::Virtualization::LibVirt::list" : {
+               "file" : "Rex/Virtualization/LibVirt/list.pm"
+            },
+            "Rex::Virtualization::LibVirt::option" : {
+               "file" : "Rex/Virtualization/LibVirt/option.pm"
+            },
+            "Rex::Virtualization::LibVirt::reboot" : {
+               "file" : "Rex/Virtualization/LibVirt/reboot.pm"
+            },
+            "Rex::Virtualization::LibVirt::shutdown" : {
+               "file" : "Rex/Virtualization/LibVirt/shutdown.pm"
+            },
+            "Rex::Virtualization::LibVirt::start" : {
+               "file" : "Rex/Virtualization/LibVirt/start.pm"
+            },
+            "Rex::Virtualization::LibVirt::vncdisplay" : {
+               "file" : "Rex/Virtualization/LibVirt/vncdisplay.pm"
+            },
+            "Rex::Virtualization::VBox" : {
+               "file" : "Rex/Virtualization/VBox.pm"
+            },
+            "Rex::Virtualization::VBox::create" : {
+               "file" : "Rex/Virtualization/VBox/create.pm"
+            },
+            "Rex::Virtualization::VBox::delete" : {
+               "file" : "Rex/Virtualization/VBox/delete.pm"
+            },
+            "Rex::Virtualization::VBox::destroy" : {
+               "file" : "Rex/Virtualization/VBox/destroy.pm"
+            },
+            "Rex::Virtualization::VBox::forward_port" : {
+               "file" : "Rex/Virtualization/VBox/forward_port.pm"
+            },
+            "Rex::Virtualization::VBox::guestinfo" : {
+               "file" : "Rex/Virtualization/VBox/guestinfo.pm"
+            },
+            "Rex::Virtualization::VBox::import" : {
+               "file" : "Rex/Virtualization/VBox/import.pm"
+            },
+            "Rex::Virtualization::VBox::info" : {
+               "file" : "Rex/Virtualization/VBox/info.pm"
+            },
+            "Rex::Virtualization::VBox::list" : {
+               "file" : "Rex/Virtualization/VBox/list.pm"
+            },
+            "Rex::Virtualization::VBox::option" : {
+               "file" : "Rex/Virtualization/VBox/option.pm"
+            },
+            "Rex::Virtualization::VBox::reboot" : {
+               "file" : "Rex/Virtualization/VBox/reboot.pm"
+            },
+            "Rex::Virtualization::VBox::share_folder" : {
+               "file" : "Rex/Virtualization/VBox/share_folder.pm"
+            },
+            "Rex::Virtualization::VBox::shutdown" : {
+               "file" : "Rex/Virtualization/VBox/shutdown.pm"
+            },
+            "Rex::Virtualization::VBox::start" : {
+               "file" : "Rex/Virtualization/VBox/start.pm"
+            },
+            "Rex::Virtualization::VBox::status" : {
+               "file" : "Rex/Virtualization/VBox/status.pm"
+            }
+         },
+         "target" : "Rex",
+         "version" : "v0.41.3"
+      },
       "Scope::Upper" : {
          "dist" : "Scope-Upper-0.22",
          "mymeta" : {
@@ -22798,6 +24221,85 @@
          "target" : "XML::NamespaceSupport",
          "version" : "1.11"
       },
+      "XML::Parser" : {
+         "dist" : "XML-Parser-2.41",
+         "mymeta" : {
+            "abstract" : "A perl module for parsing XML documents",
+            "author" : [
+               "Clark Cooper (coopercc@netheaven.com)"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.56, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "XML-Parser",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "LWP" : "0",
+                     "perl" : "5.00405"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "http://github.com/chorny/XML-Parser"
+               }
+            },
+            "version" : "2.41"
+         },
+         "name" : "XML::Parser",
+         "pathname" : "T/TO/TODDR/XML-Parser-2.41.tar.gz",
+         "provides" : {
+            "XML::Parser" : {
+               "file" : "XML/Parser.pm",
+               "version" : "2.41"
+            },
+            "XML::Parser::Expat" : {
+               "file" : "XML/Parser/Expat.pm",
+               "version" : "2.41"
+            },
+            "XML::Parser::Style::Debug" : {
+               "file" : "XML/Parser/Style/Debug.pm"
+            },
+            "XML::Parser::Style::Objects" : {
+               "file" : "XML/Parser/Style/Objects.pm"
+            },
+            "XML::Parser::Style::Stream" : {
+               "file" : "XML/Parser/Style/Stream.pm"
+            },
+            "XML::Parser::Style::Subs" : {
+               "file" : "XML/Parser/Style/Subs.pm"
+            },
+            "XML::Parser::Style::Tree" : {
+               "file" : "XML/Parser/Style/Tree.pm"
+            }
+         },
+         "target" : "XML::Parser",
+         "version" : "2.41"
+      },
       "XML::SAX" : {
          "dist" : "XML-SAX-0.99",
          "mymeta" : {
@@ -22951,6 +24453,272 @@
          },
          "target" : "XML::SAX::Base",
          "version" : "1.08"
+      },
+      "XML::SAX::Expat" : {
+         "dist" : "XML-SAX-Expat-0.50",
+         "mymeta" : {
+            "abstract" : "SAX Driver for Expat",
+            "author" : [
+               "Robin Berjon"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "XML-SAX-Expat",
+            "no_index" : {
+               "directory" : [
+                  "t",
+                  "inc"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "0"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "XML::NamespaceSupport" : "0.03",
+                     "XML::Parser" : "2.27",
+                     "XML::SAX" : "0.03",
+                     "XML::SAX::Base" : "1.00"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "url" : "https://github.com/hoehrmann/XML-SAX-Expat"
+               }
+            },
+            "version" : "0.50"
+         },
+         "name" : "XML::SAX::Expat",
+         "pathname" : "B/BJ/BJOERN/XML-SAX-Expat-0.50.tar.gz",
+         "provides" : {
+            "XML::SAX::Expat" : {
+               "file" : "XML/SAX/Expat.pm",
+               "version" : "0.50"
+            }
+         },
+         "target" : "XML::SAX::Expat",
+         "version" : "0.50"
+      },
+      "XML::Simple" : {
+         "dist" : "XML-Simple-2.20",
+         "mymeta" : {
+            "abstract" : "Easily read/write XML (esp config files)",
+            "author" : [
+               "Grant McLean <grantm@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Dist::Zilla version 4.200004, CPAN::Meta::Converter version 2.101670, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "XML-Simple",
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "Test::More" : "0.88"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.31"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "XML::NamespaceSupport" : "1.04",
+                     "XML::SAX" : "0.15",
+                     "XML::SAX::Expat" : "0"
+                  }
+               },
+               "test" : {
+                  "requires" : {
+                     "Test::More" : "0.88"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "repository" : {
+                  "type" : "git",
+                  "url" : "git://github.com/grantm/xml-simple.git",
+                  "web" : "http://github.com/grantm/xml-simple"
+               }
+            },
+            "version" : "2.20"
+         },
+         "name" : "XML::Simple",
+         "pathname" : "G/GR/GRANTM/XML-Simple-2.20.tar.gz",
+         "provides" : {
+            "XML::Simple" : {
+               "file" : "XML/Simple.pm",
+               "version" : "2.20"
+            }
+         },
+         "target" : "XML::Simple",
+         "version" : "2.20"
+      },
+      "YAML" : {
+         "dist" : "YAML-0.84",
+         "mymeta" : {
+            "abstract" : "YAML Ain't Markup Language (tm)",
+            "author" : [
+               "Ingy döt Net <ingy@cpan.org>"
+            ],
+            "dynamic_config" : 0,
+            "generated_by" : "Module::Install version 1.06, CPAN::Meta::Converter version 2.120921",
+            "license" : [
+               "perl_5"
+            ],
+            "meta-spec" : {
+               "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+               "version" : "2"
+            },
+            "name" : "YAML",
+            "no_index" : {
+               "directory" : [
+                  "inc",
+                  "t",
+                  "xt"
+               ]
+            },
+            "prereqs" : {
+               "build" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59"
+                  }
+               },
+               "configure" : {
+                  "requires" : {
+                     "ExtUtils::MakeMaker" : "6.59"
+                  }
+               },
+               "runtime" : {
+                  "requires" : {
+                     "perl" : "5.008001"
+                  }
+               }
+            },
+            "release_status" : "stable",
+            "resources" : {
+               "homepage" : "https://github.com/ingydotnet/yaml-pm/tree",
+               "license" : [
+                  "http://dev.perl.org/licenses/"
+               ]
+            },
+            "version" : "0.84",
+            "x_module_name" : "YAML"
+         },
+         "name" : "YAML",
+         "pathname" : "M/MS/MSTROUT/YAML-0.84.tar.gz",
+         "provides" : {
+            "Test::YAML" : {
+               "file" : "Test/YAML.pm",
+               "version" : "0.84"
+            },
+            "Test::YAML::Filter" : {
+               "file" : "Test/YAML.pm"
+            },
+            "YAML" : {
+               "file" : "YAML.pm",
+               "version" : "0.84"
+            },
+            "YAML::Any" : {
+               "file" : "YAML/Any.pm",
+               "version" : "0.84"
+            },
+            "YAML::Dumper" : {
+               "file" : "YAML/Dumper.pm",
+               "version" : "0.84"
+            },
+            "YAML::Dumper::Base" : {
+               "file" : "YAML/Dumper/Base.pm",
+               "version" : "0.84"
+            },
+            "YAML::Error" : {
+               "file" : "YAML/Error.pm",
+               "version" : "0.84"
+            },
+            "YAML::Loader" : {
+               "file" : "YAML/Loader.pm",
+               "version" : "0.84"
+            },
+            "YAML::Loader::Base" : {
+               "file" : "YAML/Loader/Base.pm",
+               "version" : "0.84"
+            },
+            "YAML::Marshall" : {
+               "file" : "YAML/Marshall.pm",
+               "version" : "0.84"
+            },
+            "YAML::Mo" : {
+               "file" : "YAML/Mo.pm"
+            },
+            "YAML::Node" : {
+               "file" : "YAML/Node.pm",
+               "version" : "0.84"
+            },
+            "YAML::Tag" : {
+               "file" : "YAML/Tag.pm",
+               "version" : "0.84"
+            },
+            "YAML::Type::blessed" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Type::code" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Type::glob" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Type::ref" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Type::regexp" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Type::undef" : {
+               "file" : "YAML/Types.pm"
+            },
+            "YAML::Types" : {
+               "file" : "YAML/Types.pm",
+               "version" : "0.84"
+            },
+            "YAML::Warning" : {
+               "file" : "YAML/Error.pm"
+            },
+            "yaml_mapping" : {
+               "file" : "YAML/Node.pm"
+            },
+            "yaml_scalar" : {
+               "file" : "YAML/Node.pm"
+            },
+            "yaml_sequence" : {
+               "file" : "YAML/Node.pm"
+            }
+         },
+         "target" : "YAML",
+         "version" : "0.84"
       },
       "aliased" : {
          "dist" : "aliased-0.31",

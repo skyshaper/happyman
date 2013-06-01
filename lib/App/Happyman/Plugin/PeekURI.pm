@@ -63,7 +63,7 @@ sub _fetch_tweet_text {
     $uri =~ m{/(\d+)$};
     return unless $1;
 
-    $self->logger->log_debug("Fetching $uri");
+    $self->_log_debug("Fetching $uri");
     $self->_twitter->get(
         "statuses/show/$1",
         sub {
@@ -86,7 +86,7 @@ sub _fetch_tweet_text {
 
 sub _fetch_and_extract_from_dom {
     my ( $self, $uri, $selector ) = @_;
-    $self->logger->log_debug("Fetching $uri");
+    $self->_log_debug("Fetching $uri");
     $self->_ua->get(
         $uri,
         { Range => 'bytes=0-20000' },
@@ -129,7 +129,7 @@ sub on_message {
     my $finder = URI::Find->new(
         sub {
             my ( $uri_obj, $uri_str ) = @_;
-            $self->logger->log("Found URI: $uri_str");
+            $self->_log("Found URI: $uri_str");
             for (@peekers) {
                 my ( $pattern, $cb ) = @$_;
                 if ( $uri_obj->host =~ $pattern ) {

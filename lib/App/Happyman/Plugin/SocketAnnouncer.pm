@@ -5,6 +5,7 @@ use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
+use Data::Dumper::Concise;
 use JSON::XS;
 use Mojolicious::Lite;
 use TryCatch;
@@ -19,14 +20,14 @@ sub _build_mojo {
     my ($self) = @_;
     post '/plain' => sub {
         my ($app) = @_;
-        $self->logger->log( 'Receiving /plain: ' . $app->param('message') );
+        $self->_log( 'Receiving /plain: ' . $app->param('message') );
         $self->conn->send_notice( $app->param('message') );
         $app->render( text => 'sent' );
     };
 
     post '/github' => sub {
         my ($app) = @_;
-        $self->logger->debug( $app->param('payload') );
+        $self->_log_debug( Dumper( $app->param('payload') ) );
         my $data = JSON::XS->new->decode( $app->param('payload') );
 
         foreach my $commit ( @{ $data->{commits} } ) {
@@ -39,7 +40,7 @@ sub _build_mojo {
                 substr( $commit->{id}, 0, 8 ),
                 ( split( qr{\n}, $commit->{message} ) )[0],
             );
-            $self->logger->log("Sending GitHub commit: $message");
+            $self->_log("Sending GitHub commit: $message");
             $self->conn->send_notice($message);
         }
 
@@ -50,10 +51,10 @@ sub _build_mojo {
     post '/heroku' => sub {
         my ($app) = @_;
 
-        # $self->logger->log(['Receiving /heroku: %s', $app->param]);
+        # $self->_log(['Receiving /heroku: %s', $app->param]);
         my $message = sprintf( '%s deployed %s to %s',
             $app->param('user'), $app->param('head'), $app->param('url') );
-        $self->logger->log("Sending Heroku message: $message");
+        $self->_log("Sending Heroku message: $message");
         $self->conn->send_notice($message);
         $app->render( status => 200, text => 'sent' );
     };

@@ -46,7 +46,7 @@ has min_topic_age => (
 
 sub _build_lines {
     my ($self) = @_;
-    $self->logger->log_debug('Loading topic lines');
+    $self->_log_debug('Loading topic lines');
     my $handle = Data::Handle->new(__PACKAGE__);
     return [
         grep { length >= $self->min_line_length }
@@ -60,7 +60,7 @@ sub _build_timer {
         0,
         $self->check_interval,
         sub {
-            $self->logger->log_debug('Checking topic');
+            $self->_log_debug('Checking topic');
 
             return if not defined $self->_topic_time();
             return if ( time - $self->_topic_time() ) < $self->min_topic_age;
@@ -77,14 +77,14 @@ sub BUILD {
 
 sub on_topic {
     my ( $self, $topic ) = @_;
-    $self->logger->log_debug('Updating topic time');
+    $self->_log_debug('Updating topic time');
     $self->_topic_time(time);
 }
 
 sub on_message {
     my ( $self, $msg ) = @_;
     if ( $msg->full_text =~ /^\!topic\s*$/ ) {
-        $self->logger->log_debug('Received !topic command');
+        $self->_log_debug('Received !topic command');
         $self->_set_random_topic();
     }
 }
@@ -92,7 +92,7 @@ sub on_message {
 sub _set_random_topic {
     my ($self) = @_;
     my $line = $self->_lines->[ rand @{ $self->_lines } ];
-    $self->logger->log_debug("Setting topic: $line");
+    $self->_log_debug("Setting topic: $line");
     $self->conn->set_topic($line);
 }
 
