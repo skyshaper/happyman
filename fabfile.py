@@ -5,6 +5,7 @@ env.hosts = [
 ]
 
 def deploy():
+    local('git push')
     with cd('happyman'):
         run('git pull')
         run('carton install --deployment')
