@@ -1,2 +1,6 @@
 #!/bin/sh
-carton exec prove -Ilib t/*.t
+if [ -z "${1}" ]; then
+  carton exec prove -I lib t/*.t
+else
+  carton exec perl -I lib "${1}"
+fi
