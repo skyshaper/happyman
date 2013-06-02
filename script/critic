@@ -1,2 +1,2 @@
-#!/usr/bin/env zsh
-exec carton exec -- perlcritic -4 lib/**/*.pm t/*.t happyman
+#!/bin/sh -e
+(find lib -name '*.pm'; find t -name '*.t'; echo happyman) | exec carton exec -- xargs perlcritic -4
