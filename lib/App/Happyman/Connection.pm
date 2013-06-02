@@ -14,7 +14,7 @@ use EV;
 use Mojo::Log;
 use TryCatch;
 
-has 'irc' => (
+has irc => (
     is      => 'ro',
     isa     => 'AnyEvent::IRC::Client',
     lazy    => 1,
@@ -22,50 +22,50 @@ has 'irc' => (
     handles => { send => 'send_srv', },
 );
 
-has 'nick' => (
+has nick => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
 );
 
-has 'host' => (
+has host => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
 );
 
-has 'port' => (
+has port => (
     is      => 'ro',
     isa     => 'Int',
     default => 6667,
 );
 
-has 'ssl' => (
+has ssl => (
     is      => 'ro',
     isa     => 'Bool',
     default => 0,
 );
 
-has 'channel' => (
+has channel => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
 );
 
-has 'debug' => (
+has debug => (
     is      => 'ro',
     isa     => 'Bool',
     default => 0,
 );
 
-has '_plugins' => (
+has _plugins => (
     traits  => ['Array'],
     is      => 'ro',
     isa     => 'ArrayRef[App::Happyman::Plugin]',
     default => sub { [] },
 );
 
-has '_stay_connected' => (
+has _stay_connected => (
     is      => 'rw',
     isa     => 'Bool',
     default => 1,

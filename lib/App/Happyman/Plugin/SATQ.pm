@@ -9,7 +9,7 @@ use Data::Dumper::Concise;
 use Mojo::UserAgent;
 use MIME::Base64;
 
-has '_buffer' => (
+has _buffer => (
     is      => 'ro',
     isa     => 'ArrayRef[Str]',
     default => sub { [] },

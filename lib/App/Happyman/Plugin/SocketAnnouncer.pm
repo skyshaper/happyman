@@ -10,7 +10,7 @@ use JSON::XS;
 use Mojolicious::Lite;
 use TryCatch;
 
-has '_mojo' => (
+has _mojo => (
     is      => 'ro',
     isa     => 'Mojo::Server::Daemon',
     builder => '_build_mojo',
