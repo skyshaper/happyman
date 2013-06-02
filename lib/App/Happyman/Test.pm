@@ -19,8 +19,7 @@ sub make_happyman_with_plugin {
         channel => '#happyman',
         debug   => 1,
     );
-    my $plugin = $plugin_name->new($plugin_params);
-    $happyman->add_plugin($plugin);
+    $happyman->load_plugin($plugin_name, $plugin_params);
     return $happyman;
 }
 

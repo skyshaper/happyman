@@ -19,7 +19,7 @@ describe 'The SocketAnnouncer plugin' => sub {
     before all => sub {
         $irc      = make_test_client();
         $happyman = make_happyman_with_plugin(
-            'App::Happyman::Plugin::SocketAnnouncer', {} );
+            'SocketAnnouncer', {} );
         $lwp = LWP::UserAgent->new();
     };
 

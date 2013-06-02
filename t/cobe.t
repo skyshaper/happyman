@@ -14,7 +14,7 @@ describe 'The Cobe plugin' => sub {
     before sub {
         $irc      = make_test_client();
         $tempdir  = File::Temp->newdir();
-        $happyman = make_happyman_with_plugin( 'App::Happyman::Plugin::Cobe',
+        $happyman = make_happyman_with_plugin( 'Cobe',
             { brain => "$tempdir/cobe_test.sqlite" } );
     };
 

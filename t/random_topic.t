@@ -26,7 +26,7 @@ describe 'The RandomTopic plugin' => sub {
         before sub {
             diag 'making defaults happyman';
             $happyman = make_happyman_with_plugin(
-                'App::Happyman::Plugin::RandomTopic', {} );
+                'RandomTopic', {} );
             $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman', '!topic' );
         };
 
@@ -49,7 +49,7 @@ describe 'The RandomTopic plugin' => sub {
         before all => sub {
             diag 'Making short time happyman';
             $happyman = make_happyman_with_plugin(
-                'App::Happyman::Plugin::RandomTopic',
+                'RandomTopic',
                 {   check_interval => 0.2,
                     min_topic_age  => 3,
                 }

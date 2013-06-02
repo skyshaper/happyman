@@ -9,6 +9,7 @@ use AnyEvent;
 use AnyEvent::Strict;
 use AnyEvent::IRC::Client;
 use AnyEvent::IRC::Util qw(encode_ctcp prefix_nick);
+use Class::Load qw(load_class);
 use Data::Dumper::Concise;
 use EV;
 use Mojo::Log;
@@ -70,9 +71,11 @@ sub log_debug {
     $self->_log->debug($message) if $self->debug;
 }
 
-sub add_plugin {
-    my ( $self, $plugin ) = @_;
-    $plugin->conn($self);
+sub load_plugin {
+    my ( $self, $name, $configuration ) = @_;
+    my $class = "App::Happyman::Plugin::$name";
+    load_class($class);
+    my $plugin = $class->new(%{ $configuration }, conn => $self);
     push $self->_plugins, $plugin;
 }
 

@@ -30,7 +30,7 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
 
     before sub {
         $happyman = make_happyman_with_plugin(
-            'App::Happyman::Plugin::SATQ',
+            'SATQ',
             {   uri      => 'http://localhost:7777/quotes',
                 user     => 'happyman',
                 password => 'happypass',

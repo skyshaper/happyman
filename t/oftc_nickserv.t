@@ -14,7 +14,7 @@ describe 'OftcNickserv' => sub {
         $irc = make_test_client('NickServ');
         async_sleep(5);
         $happyman = make_happyman_with_plugin(
-            'App::Happyman::Plugin::OftcNickserv',
+            'OftcNickserv',
             { password => 'happypassword', }
         );
     };
