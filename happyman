@@ -17,4 +17,4 @@ while ( my ( $plugin_name, $plugin_conf ) = each %conf ) {
     $conn->add_plugin( $class->new($plugin_conf) );
 }
 
-$conn->run();
+$conn->run_forever();

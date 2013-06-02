@@ -21,7 +21,7 @@ sub _build_mojo {
     post '/plain' => sub {
         my ($app) = @_;
         $self->_log( 'Receiving /plain: ' . $app->param('message') );
-        $self->conn->send_notice( $app->param('message') );
+        $self->conn->send_notice_to_channel( $app->param('message') );
         $app->render( text => 'sent' );
     };
 
@@ -41,7 +41,7 @@ sub _build_mojo {
                 ( split( qr{\n}, $commit->{message} ) )[0],
             );
             $self->_log("Sending GitHub commit: $message");
-            $self->conn->send_notice($message);
+            $self->conn->send_notice_to_channel($message);
         }
 
         $app->render( status => 200, text => 'sent' );
@@ -55,7 +55,7 @@ sub _build_mojo {
         my $message = sprintf( '%s deployed %s to %s',
             $app->param('user'), $app->param('head'), $app->param('url') );
         $self->_log("Sending Heroku message: $message");
-        $self->conn->send_notice($message);
+        $self->conn->send_notice_to_channel($message);
         $app->render( status => 200, text => 'sent' );
     };
 

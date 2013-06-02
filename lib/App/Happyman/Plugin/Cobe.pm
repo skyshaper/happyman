@@ -66,7 +66,7 @@ sub on_message {
                 my ( undef, $line ) = @_;
                 $self->_log(
                     'Replying to ' . $msg->sender_nick . ': ' . $line );
-                $msg->reply($line);
+                $msg->reply_on_channel($line);
             }
         );
     }

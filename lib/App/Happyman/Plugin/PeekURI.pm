@@ -70,13 +70,13 @@ sub _fetch_tweet_text {
             my ( $header, $response, $reason, $error_response ) = @_;
 
             if ($response) {
-                $self->conn->send_notice( 'Tweet by @'
+                $self->conn->send_notice_to_channel( 'Tweet by @'
                         . $response->{user}{screen_name} . ': '
                         . $response->{text} );
             }
             else {
                 for my $error ( @{ $error_response->{errors} } ) {
-                    $self->conn->send_notice(
+                    $self->conn->send_notice_to_channel(
                         "Twitter: $error->{code}: $error->{message}");
                 }
             }
@@ -93,13 +93,13 @@ sub _fetch_and_extract_from_dom {
         sub {
             my ( $ua, $tx ) = @_;
             if ( !$tx->success ) {
-                $self->conn->send_notice( $tx->error );
+                $self->conn->send_notice_to_channel( $tx->error );
                 return;
             }
 
             return if $tx->res->headers->content_type !~ /html/;
 
-            $self->conn->send_notice(
+            $self->conn->send_notice_to_channel(
                 $tx->res->dom->at($selector)->all_text );
         }
     );

@@ -47,9 +47,9 @@ sub addressed_me {
             and $self->addressed_nick eq $self->conn->nick );
 }
 
-sub reply {
+sub reply_on_channel {
     my ( $self, $text ) = @_;
-    $self->conn->send_message( $self->sender_nick . ': ' . $text );
+    $self->conn->send_message_to_channel( $self->sender_nick . ': ' . $text );
 }
 
 1;

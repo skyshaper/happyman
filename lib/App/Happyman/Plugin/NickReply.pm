@@ -16,7 +16,7 @@ sub on_message {
         $timer = AE::timer rand(2), 0, sub {
             undef $timer;
             $self->_log( "Replying to " . $msg->sender_nick );
-            $self->conn->send_message( $msg->sender_nick );
+            $self->conn->send_message_to_channel( $msg->sender_nick );
         };
     }
 }

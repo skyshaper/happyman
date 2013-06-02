@@ -113,7 +113,7 @@ sub _build_irc {
 
             my $msg
                 = App::Happyman::Message->new( $self, $sender, $full_text );
-            $self->_trigger_event( 'on_message', $msg );
+            $self->_call_plugin_event_handlers( 'on_message', $msg );
         },
         connect => sub {
             my ( $irc, $err ) = @_;
@@ -129,12 +129,12 @@ sub _build_irc {
         registered => sub {
             $self->_log->info('Registered');
             $irc->enable_ping(60);
-            $self->_trigger_event('on_registered');
+            $self->_call_plugin_event_handlers('on_registered');
         },
         channel_topic => sub {
             my ( $irc, $channel, $topic, $who ) = @_;
             $self->_log->info("Topic: $topic");
-            $self->_trigger_event( 'on_topic', $topic );
+            $self->_call_plugin_event_handlers( 'on_topic', $topic );
         },
         debug_recv => sub {
             my ( $irc, $msg ) = @_;
@@ -154,7 +154,7 @@ sub BUILD {
     $self->_connect();    # enforce construction
 }
 
-sub run {
+sub run_forever {
     my ($self) = @_;
     while (1) {
         try {
@@ -162,7 +162,7 @@ sub run {
         }
         catch {
             chomp;
-            $self->send_notice("Caught exception: $_");
+            $self->send_notice_to_channel("Caught exception: $_");
             $self->_log->info("Caught exception: $_");
         }
     }
@@ -178,7 +178,7 @@ sub disconnect_and_wait {
     return;
 }
 
-sub _trigger_event {
+sub _call_plugin_event_handlers {
     my ( $self, $name, $msg ) = @_;
     foreach my $plugin ( @{ $self->_plugins } ) {
         next unless $plugin->can($name);
@@ -189,14 +189,14 @@ sub _trigger_event {
     }
 }
 
-sub send_message {
+sub send_message_to_channel {
     my ( $self, $body ) = @_;
     $self->log_debug("Sending message to channel: $body");
     $self->_irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
-sub send_notice {
+sub send_notice_to_channel {
     my ( $self, $body ) = @_;
     $self->log_debug("Sending notice to channel: $body");
     $self->_irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
@@ -209,7 +209,7 @@ sub send_private_message {
     $self->_irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
-sub nick_exists {
+sub is_nick_on_channel {
     my ( $self, $nick ) = @_;
     return defined $self->_irc->nick_modes( $self->channel, $nick );
 }

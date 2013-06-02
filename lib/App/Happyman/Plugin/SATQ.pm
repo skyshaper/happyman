@@ -39,10 +39,10 @@ sub on_message {
                 my ( undef, $tx ) = @_;
                 if ( $tx->error ) {
                     $self->_log( $tx->error );
-                    $msg->reply( $tx->error );
+                    $msg->reply_on_channel( $tx->error );
                 }
                 $self->_log( $tx->res->headers->location || $tx->res->code );
-                $msg->reply( $tx->res->headers->location || $tx->res->code );
+                $msg->reply_on_channel( $tx->res->headers->location || $tx->res->code );
             }
         );
     }
