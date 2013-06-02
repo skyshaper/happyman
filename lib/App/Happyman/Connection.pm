@@ -32,12 +32,11 @@ has [qw(ssl debug)] => (
     default => 0,
 );
 
-has irc => (
+has _irc => (
     is      => 'ro',
     isa     => 'AnyEvent::IRC::Client',
     lazy    => 1,
     builder => '_build_irc',
-    handles => { send => 'send_srv', },
 );
 
 has _plugins => (
@@ -79,8 +78,8 @@ sub add_plugin {
 
 sub _connect {
     my ($self) = @_;
-    $self->irc->enable_ssl() if $self->ssl;
-    $self->irc->connect(
+    $self->_irc->enable_ssl() if $self->ssl;
+    $self->_irc->connect(
         $self->host,
         $self->port,
         {   nick => $self->nick,
@@ -89,7 +88,7 @@ sub _connect {
         }
     );
 
-    $self->irc->send_srv( 'JOIN', $self->channel );
+    $self->_irc->send_srv( 'JOIN', $self->channel );
 }
 
 sub _retry_connect {
@@ -173,8 +172,8 @@ sub disconnect_and_wait {
     my ($self) = @_;
     my $cv = AE::cv;
     $self->_stay_connected(0);
-    $self->irc->reg_cb( disconnect => $cv );
-    $self->irc->send_srv('QUIT');
+    $self->_irc->reg_cb( disconnect => $cv );
+    $self->_irc->send_srv('QUIT');
     $cv->recv();
     return;
 }
@@ -193,32 +192,32 @@ sub _trigger_event {
 sub send_message {
     my ( $self, $body ) = @_;
     $self->log_debug("Sending message to channel: $body");
-    $self->irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
+    $self->_irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }
 
 sub send_notice {
     my ( $self, $body ) = @_;
     $self->log_debug("Sending notice to channel: $body");
-    $self->irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
+    $self->_irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
 }
 
 sub send_private_message {
     my ( $self, $nick, $body ) = @_;
     $self->log_debug("Sending privately to $nick: $body");
-    $self->irc->send_srv( 'PRIVMSG', $nick, $body );
+    $self->_irc->send_srv( 'PRIVMSG', $nick, $body );
 }
 
 sub nick_exists {
     my ( $self, $nick ) = @_;
-    return defined $self->irc->nick_modes( $self->channel, $nick );
+    return defined $self->_irc->nick_modes( $self->channel, $nick );
 }
 
 sub set_topic {
     my ( $self, $topic ) = @_;
     $self->log_debug("Setting topic: $topic");
-    $self->irc->send_msg( 'TOPIC', $self->channel, $topic );
+    $self->_irc->send_msg( 'TOPIC', $self->channel, $topic );
 }
 
 __PACKAGE__->meta->make_immutable();
