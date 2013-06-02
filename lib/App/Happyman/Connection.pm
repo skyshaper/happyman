@@ -58,17 +58,15 @@ has _log => (
     isa     => 'Mojo::Log',
     builder => '_build_log',
     lazy    => 1,
-    handles => { log => 'info', }
+    handles => { log => 'info', log_debug => 'debug' }
 );
 
 sub _build_log {
     my ($self) = @_;
-    return Mojo::Log->new();
-}
-
-sub log_debug {
-    my ( $self, $message ) = @_;
-    $self->_log->debug($message) if $self->debug;
+    my $level = $self->debug ? 'debug' : 'info';
+    return Mojo::Log->new(
+        level => $level,
+    );
 }
 
 sub load_plugin {
