@@ -14,21 +14,7 @@ use EV;
 use Mojo::Log;
 use TryCatch;
 
-has irc => (
-    is      => 'ro',
-    isa     => 'AnyEvent::IRC::Client',
-    lazy    => 1,
-    builder => '_build_irc',
-    handles => { send => 'send_srv', },
-);
-
-has nick => (
-    is       => 'ro',
-    isa      => 'Str',
-    required => 1,
-);
-
-has host => (
+has [qw(nick host channel)] => (
     is       => 'ro',
     isa      => 'Str',
     required => 1,
@@ -40,22 +26,18 @@ has port => (
     default => 6667,
 );
 
-has ssl => (
+has [qw(ssl debug)] => (
     is      => 'ro',
     isa     => 'Bool',
     default => 0,
 );
 
-has channel => (
-    is       => 'ro',
-    isa      => 'Str',
-    required => 1,
-);
-
-has debug => (
+has irc => (
     is      => 'ro',
-    isa     => 'Bool',
-    default => 0,
+    isa     => 'AnyEvent::IRC::Client',
+    lazy    => 1,
+    builder => '_build_irc',
+    handles => { send => 'send_srv', },
 );
 
 has _plugins => (
