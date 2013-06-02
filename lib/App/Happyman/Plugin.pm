@@ -4,7 +4,7 @@ use Moose::Role;
 use namespace::autoclean;
 
 has 'conn' => (
-    is  => 'rw',
+    is  => 'ro',
     isa => 'App::Happyman::Connection',
 );
 
