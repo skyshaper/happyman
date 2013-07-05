@@ -13,10 +13,8 @@ describe 'OftcNickserv' => sub {
     before sub {
         $irc = make_test_client('NickServ');
         async_sleep(5);
-        $happyman = make_happyman_with_plugin(
-            'OftcNickserv',
-            { password => 'happypassword', }
-        );
+        $happyman = make_happyman_with_plugin( 'OftcNickserv',
+            { password => 'happypassword', } );
     };
 
     after sub {

@@ -25,8 +25,7 @@ describe 'The RandomTopic plugin' => sub {
 
         before sub {
             diag 'making defaults happyman';
-            $happyman = make_happyman_with_plugin(
-                'RandomTopic', {} );
+            $happyman = make_happyman_with_plugin( 'RandomTopic', {} );
             $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman', '!topic' );
         };
 

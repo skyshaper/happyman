@@ -18,9 +18,8 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     before all => sub {
         $irc      = make_test_client();
-        $happyman = make_happyman_with_plugin(
-            'SocketAnnouncer', {} );
-        $lwp = LWP::UserAgent->new();
+        $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {} );
+        $lwp      = LWP::UserAgent->new();
     };
 
     after all => sub {

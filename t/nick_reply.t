@@ -12,9 +12,7 @@ describe 'The NickReply plugin' => sub {
     my $irc;
 
     before sub {
-        $happyman
-            = make_happyman_with_plugin( 'NickReply',
-            {} );
+        $happyman = make_happyman_with_plugin( 'NickReply', {} );
         $irc = make_test_client();
     };
 

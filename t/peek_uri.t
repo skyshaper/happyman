@@ -22,9 +22,7 @@ describe 'PeekURI' => sub {
         my $happyman;
 
         before sub {
-            $happyman
-                = make_happyman_with_plugin( 'PeekURI',
-                {} );
+            $happyman = make_happyman_with_plugin( 'PeekURI', {} );
         };
 
         after sub {
@@ -117,10 +115,8 @@ describe 'PeekURI' => sub {
         my $happyman;
 
         before sub {
-            $happyman = make_happyman_with_plugin(
-                'PeekURI',
-                { twitter_consumer_key => 'foo', }
-            );
+            $happyman = make_happyman_with_plugin( 'PeekURI',
+                { twitter_consumer_key => 'foo', } );
         };
 
         after sub {

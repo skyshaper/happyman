@@ -64,16 +64,14 @@ has _log => (
 sub _build_log {
     my ($self) = @_;
     my $level = $self->debug ? 'debug' : 'info';
-    return Mojo::Log->new(
-        level => $level,
-    );
+    return Mojo::Log->new( level => $level, );
 }
 
 sub load_plugin {
     my ( $self, $name, $configuration ) = @_;
     my $class = "App::Happyman::Plugin::$name";
     load_class($class);
-    my $plugin = $class->new(%{ $configuration }, conn => $self);
+    my $plugin = $class->new( %{$configuration}, conn => $self );
     push $self->_plugins, $plugin;
 }
 
