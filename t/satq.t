@@ -21,9 +21,19 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
         $httpd->reg_cb(
             '/quotes' => sub {
                 my ( undef, $req ) = @_;
-                $req->respond(
-                    [ 200, 'OK', { Location => 'http://example.com' }, '' ] );
-                $http_request_cv->send($req);
+                my $w;
+                $w = AE::timer(
+                    40, 0,
+                    sub {
+                        undef $w;
+                        $req->respond(
+                            [   200, 'OK',
+                                { Location => 'http://example.com' }, ''
+                            ]
+                        );
+                        $http_request_cv->send($req);
+                    }
+                );
             },
         );
     };
@@ -75,7 +85,7 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             };
 
             it 'posts the quote link to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout( $irc, 50 ),
                     'HMTest: http://example.com' );
             };
         };
