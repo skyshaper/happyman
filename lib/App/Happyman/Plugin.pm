@@ -17,13 +17,7 @@ has '_ua' => (
 
 sub _build_ua {
     my ($self) = @_;
-    my $ua = Mojo::UserAgent->new(
-        {   inactivity_timeout => 60,
-            connect_timeout    => 60,
-            request_timeout    => 60,
-        }
-    );
-    return $ua;
+    return Mojo::UserAgent->new();
 }
 
 sub _plugin_name {
