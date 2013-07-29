@@ -61,7 +61,7 @@ sub _build_mojo {
 
     my $daemon = Mojo::Server::Daemon->new(
         app    => app,
-        listen => ['http://*:6666']
+        listen => ['http://localhost:6666']
     );
     $daemon->start();
     return $daemon;
