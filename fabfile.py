@@ -1,15 +1,15 @@
 from fabric.api import *
 
 env.hosts = [
-    'shaperia@happyman.skyshaper.org'
+    'root@mxeyweb.mxey.net'
 ]
 
 def deploy():
     local('git push')
-    with cd('happyman'):
-        run('git pull')
-        run('carton install --deployment')
-    run('svc -t ~/service/happyman')
+    with cd('/srv/happyman/happyman'):
+        run('su happyman -c "git pull"')
+        run('su happyman -c "carton install --deployment"')
+    execute(restart)
 
 def restart():
-    run('svc -t ~/service/happyman')
+    run('supervisorctl restart happyman')
