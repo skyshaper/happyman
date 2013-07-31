@@ -4,6 +4,7 @@ use warnings;
 use App::Happyman::Test;
 use AnyEvent;
 use AnyEvent::HTTPD;
+use AnyEvent::IRC::Util qw(encode_ctcp);
 use MIME::Base64;
 use Test::Spec;
 
@@ -77,6 +78,29 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             it 'posts the quote link to the channel' => sub {
                 is( wait_on_message_or_timeout( $irc, 5 ),
                     'HMTest: http://example.com' );
+            };
+        };
+    };
+    
+    describe 'when 20 actions have been received' => sub {
+        before sub {
+            for ( 1 .. 20 ) {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    encode_ctcp(['ACTION', 'waves']) );
+            }
+            async_sleep(3);
+        };
+
+        describe 'when issued the !quote command' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    '!quote' );
+            };
+
+            it 'posts the last 10 actions to SATQ' => sub {
+                my $req       = $http_request_cv->recv();
+                my $raw_quote = $req->parm('quote[raw_quote]');
+                is( $raw_quote, join( "\n", ('* HMTest waves') x 10 ) );
             };
         };
     };

@@ -21,6 +21,15 @@ has [qw(uri user password)] => (
     required => 1,
 );
 
+sub _push_line_to_buffer {
+    my ($self, $line) = @_;
+    if ( @{ $self->_buffer } >= 10 ) {
+        shift $self->_buffer;
+    }
+    $self->_log_debug("Buffering: $line");
+    push $self->_buffer, $line;
+}
+
 sub on_message {
     my ( $self, $msg ) = @_;
     if ( $msg->full_text =~ /^\!quote\s*$/ ) {
@@ -48,12 +57,13 @@ sub on_message {
         );
     }
 
-    my $line = sprintf( '<%s> %s', $msg->sender_nick, $msg->full_text );
-    if ( @{ $self->_buffer } >= 10 ) {
-        shift $self->_buffer;
-    }
-    $self->_log_debug("Buffering: $line");
-    push $self->_buffer, $line;
+    $self->_push_line_to_buffer(sprintf( '<%s> %s', $msg->sender_nick, $msg->full_text ));
+
+}
+
+sub on_action {
+    my ($self, $action) = @_;
+    $self->_push_line_to_buffer(sprintf( '* %s %s', $action->sender_nick, $action->text ));
 }
 
 __PACKAGE__->meta->make_immutable();

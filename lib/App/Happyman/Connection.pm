@@ -3,6 +3,7 @@ use v5.18;
 use Moose;
 use namespace::autoclean;
 
+use App::Happyman::Action;
 use App::Happyman::Message;
 use App::Happyman::Plugin;
 use AnyEvent;
@@ -113,6 +114,13 @@ sub _build_irc {
             my $msg
                 = App::Happyman::Message->new( $self, $sender, $full_text );
             $self->_call_plugin_event_handlers( 'on_message', $msg );
+        },
+        ctcp_action => sub {
+            my ( $irc, $src, $target, $msg, $type ) = @_;
+            if ($target eq $self->channel && $type eq 'PRIVMSG') {
+                my $action = App::Happyman::Action->new(sender_nick => $src, text => $msg);
+                $self->_call_plugin_event_handlers( 'on_action', $action );
+            }
         },
         connect => sub {
             my ( $irc, $err ) = @_;
