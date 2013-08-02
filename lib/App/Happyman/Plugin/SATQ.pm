@@ -6,6 +6,7 @@ use namespace::autoclean;
 with 'App::Happyman::Plugin';
 
 use Data::Dumper::Concise;
+use Encode;
 use Mojo::UserAgent;
 use MIME::Base64;
 
@@ -36,7 +37,7 @@ sub _upload_quote_to_satq {
         . encode_base64( $self->user . ':' . $self->password, '' );
     my $headers = { Authorization => $authorization };
     my $form
-        = { 'quote[raw_quote]' => join( "\n", @{ $self->_buffer } ) };
+        = { 'quote[raw_quote]' => decode('utf-8', join( "\n", @{ $self->_buffer } )) };
     $self->_log_debug( 'Posting quote: ' . Dumper($form) );
 
     $self->_ua->post(
