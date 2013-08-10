@@ -1,0 +1,5 @@
+PyStemmer==1.2.0
+argparse==1.2.1
+cobe==2.0.2
+http://downloads.sourceforge.net/project/python-irclib/python-irclib/0.4.6/python-irclib-0.4.6.tar.gz
+wsgiref==0.1.2
