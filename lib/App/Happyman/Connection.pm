@@ -161,8 +161,24 @@ sub BUILD {
     $self->_connect();    # enforce construction
 }
 
+sub _set_up_sigterm_handler {
+    my ($self) = @_;
+    my $signal_watcher;
+    $signal_watcher = AE::signal(TERM => sub {
+        undef $signal_watcher;
+        $self->_stay_connected(0);
+        $self->_irc->reg_cb( disconnect => sub {
+            exit;
+        });
+        $self->_irc->send_srv('QUIT', "Yes, I'm a happy man");
+    });
+}
+
 sub run_forever {
     my ($self) = @_;
+
+    $self->_set_up_sigterm_handler();
+
     while (1) {
         try {
             AE::cv->recv();
