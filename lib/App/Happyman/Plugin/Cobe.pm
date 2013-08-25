@@ -37,7 +37,8 @@ sub _spawn_child {
     my ( $in, $out );
 
     my $pid = open2( $out, $in,
-        './python/virtualenv/bin/python ./python/cobe_pipe.py ' . $self->brain );
+        './python/virtualenv/bin/python ./python/cobe_pipe.py '
+            . $self->brain );
     binmode $out, ':encoding(UTF-8)';
 
     $self->_in( AnyEvent::Handle->new( fh => $in ) );

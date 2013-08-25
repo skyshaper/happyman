@@ -82,7 +82,8 @@ describe 'PeekURI' => sub {
 
             it 'sends the error to the channel' => sub {
                 is( wait_on_message_or_timeout( $irc, 5 ),
-                    "Couldn't connect: IO::Socket::INET: Bad hostname 'doesnotexist.example.com'" );
+                    "Couldn't connect: IO::Socket::INET: Bad hostname 'doesnotexist.example.com'"
+                );
             };
         };
 

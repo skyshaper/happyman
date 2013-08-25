@@ -81,12 +81,12 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             };
         };
     };
-    
+
     describe 'when 20 actions have been received' => sub {
         before sub {
             for ( 1 .. 20 ) {
                 $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
-                    encode_ctcp(['ACTION', 'waves']) );
+                    encode_ctcp( [ 'ACTION', 'waves' ] ) );
             }
             async_sleep(3);
         };

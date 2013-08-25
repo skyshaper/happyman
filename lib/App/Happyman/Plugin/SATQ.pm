@@ -23,7 +23,7 @@ has [qw(uri user password)] => (
 );
 
 sub _push_line_to_buffer {
-    my ($self, $line) = @_;
+    my ( $self, $line ) = @_;
     if ( @{ $self->_buffer } >= 10 ) {
         shift $self->_buffer;
     }
@@ -32,12 +32,13 @@ sub _push_line_to_buffer {
 }
 
 sub _upload_quote_to_satq {
-    my ($self, $quote_command_message) = @_;
-    my $authorization = 'Basic '
-        . encode_base64( $self->user . ':' . $self->password, '' );
+    my ( $self, $quote_command_message ) = @_;
+    my $authorization
+        = 'Basic ' . encode_base64( $self->user . ':' . $self->password, '' );
     my $headers = { Authorization => $authorization };
     my $form
-        = { 'quote[raw_quote]' => decode('utf-8', join( "\n", @{ $self->_buffer } )) };
+        = { 'quote[raw_quote]' =>
+            decode( 'utf-8', join( "\n", @{ $self->_buffer } ) ) };
     $self->_log_debug( 'Posting quote: ' . Dumper($form) );
 
     $self->_ua->post(
@@ -51,8 +52,8 @@ sub _upload_quote_to_satq {
                 $quote_command_message->reply_on_channel( $tx->error );
             }
             $self->_log( $tx->res->headers->location || $tx->res->code );
-            $quote_command_message->reply_on_channel( $tx->res->headers->location
-                    || $tx->res->code );
+            $quote_command_message->reply_on_channel(
+                $tx->res->headers->location || $tx->res->code );
         }
     );
 }
@@ -63,13 +64,15 @@ sub on_message {
         $self->_upload_quote_to_satq($msg);
     }
 
-    $self->_push_line_to_buffer(sprintf( '<%s> %s', $msg->sender_nick, $msg->full_text ));
+    $self->_push_line_to_buffer(
+        sprintf( '<%s> %s', $msg->sender_nick, $msg->full_text ) );
 
 }
 
 sub on_action {
-    my ($self, $action) = @_;
-    $self->_push_line_to_buffer(sprintf( '* %s %s', $action->sender_nick, $action->text ));
+    my ( $self, $action ) = @_;
+    $self->_push_line_to_buffer(
+        sprintf( '* %s %s', $action->sender_nick, $action->text ) );
 }
 
 __PACKAGE__->meta->make_immutable();

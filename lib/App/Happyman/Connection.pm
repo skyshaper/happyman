@@ -117,8 +117,11 @@ sub _build_irc {
         },
         ctcp_action => sub {
             my ( $irc, $src, $target, $msg, $type ) = @_;
-            if ($target eq $self->channel && $type eq 'PRIVMSG') {
-                my $action = App::Happyman::Action->new(sender_nick => $src, text => $msg);
+            if ( $target eq $self->channel && $type eq 'PRIVMSG' ) {
+                my $action = App::Happyman::Action->new(
+                    sender_nick => $src,
+                    text        => $msg
+                );
                 $self->_call_plugin_event_handlers( 'on_action', $action );
             }
         },
@@ -164,14 +167,18 @@ sub BUILD {
 sub _set_up_sigterm_handler {
     my ($self) = @_;
     my $signal_watcher;
-    $signal_watcher = AE::signal(TERM => sub {
-        undef $signal_watcher;
-        $self->_stay_connected(0);
-        $self->_irc->reg_cb( disconnect => sub {
-            exit;
-        });
-        $self->_irc->send_srv('QUIT', "Yes, I'm a happy man");
-    });
+    $signal_watcher = AE::signal(
+        TERM => sub {
+            undef $signal_watcher;
+            $self->_stay_connected(0);
+            $self->_irc->reg_cb(
+                disconnect => sub {
+                    exit;
+                }
+            );
+            $self->_irc->send_srv( 'QUIT', "Yes, I'm a happy man" );
+        }
+    );
 }
 
 sub run_forever {
