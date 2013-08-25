@@ -1,0 +1,5 @@
+PyStemmer==1.2.0
+argparse==1.2.1
+cobe==2.1.0
+python-irclib==0.4.8
+wsgiref==0.1.2

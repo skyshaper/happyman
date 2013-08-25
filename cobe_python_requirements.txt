@@ -1,2 +1,1 @@
-cobe==2.1.0
-http://downloads.sourceforge.net/project/python-irclib/python-irclib/0.4.8/python-irclib-0.4.8.tar.gz
+cobe
