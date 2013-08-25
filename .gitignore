@@ -5,7 +5,7 @@
 /happyman.conf
 /local
 /cobe.sqlite*
-/python_virtualenv
+/python/virtualenv
 /training
 
 *.pyc

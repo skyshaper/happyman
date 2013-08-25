@@ -1,6 +1,6 @@
 #!/bin/sh -ex
 carton update
 carton bundle
-./python_virtualenv/bin/pip install --upgrade -r ./cobe_python_requirements.txt
-./python_virtualenv/bin/pip freeze > ./cobe_python_requirements_lock.txt
-./python_virtualenv/bin/pip install --download=vendor/python_cache -r ./cobe_python_requirements_lock.txt
+./python/virtualenv/bin/pip install --upgrade -r ./python/requirements.txt
+./python/virtualenv/bin/pip freeze > ./python/requirements_lock.txt
+./python/virtualenv/bin/pip install --download=python/vendor/cache/ -r ./python/requirements_lock.txt
