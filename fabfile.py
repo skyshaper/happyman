@@ -15,7 +15,7 @@ def deploy():
     local('git push')
     with cd(env.target_directory):
         run('git remote update && git reset --hard origin/master')
-        run('carton install --cached --deployment')
+        run('./vendor/bin/carton install --cached --deployment')
         with cd('python_virtualenv'):
             run('./bin/pip install -r ../cobe_python_requirements.txt')
     execute(restart)
