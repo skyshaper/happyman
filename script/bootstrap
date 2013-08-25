@@ -1,6 +1,6 @@
 #!/bin/sh -e
 curl -L http://cpanmin.us | perl - App::cpanminus
 cpanm Carton
-carton install
+carton install --cached
 virtualenv python_virtualenv
 cd python_virtualenv && ./bin/pip install -r ../cobe_python_requirements.txt
