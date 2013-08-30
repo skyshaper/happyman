@@ -11,7 +11,6 @@ use List::MoreUtils qw(natatime);
 use Mojo::UserAgent;
 use URI::Find;
 use URI::URL;
-use XML::LibXML;
 
 has twitter_consumer_key => (
     is      => 'ro',
