@@ -1,7 +1,9 @@
 {
-  "channel": "#happyman",
-  "host": "localhost",
-  "nick": "happyman",
+  "connection": {
+    "channel": "#happyman",
+    "host": "localhost",
+    "nick": "happyman",
+  },
   "plugins": {
     "NickReply": {},
     "PeekURI": {},
