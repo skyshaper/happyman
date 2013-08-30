@@ -8,7 +8,6 @@ our @EXPORT
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
-use Config::INI::Reader;
 
 sub make_happyman_with_plugin {
     my ( $plugin_name, $plugin_params ) = @_;
@@ -60,10 +59,6 @@ sub disconnect_and_wait {
     $irc->send_srv('QUIT');
     $cv->recv();
     return;
-}
-
-sub load_local_config {
-    return Config::INI::Reader->read_file('happyman.conf');
 }
 
 sub async_sleep {
