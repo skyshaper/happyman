@@ -1,0 +1,12 @@
+---
+- hosts: all
+  vars:
+    target: /home/shaperia/happyman
+  user: shaperia
+  tasks:
+    - command: /package/host/localhost/python-2.7/bin/pip install virtualenv creates={{ target }}/virtualenv
+    - git: repo=https://github.com/skyshaper/happyman.git dest={{ target }} 
+    - command: /home/shaperia/bin/virtualenv ./python/virtualenv creates={{ target }}/python/virtualenv
+    - command: "./vendor/bin/carton install --cached --deployment --without develop,test chdir={{ target }}"
+    - command: "{{ target }}/python/virtualenv/bin/pip install --no-index --find-links={{ target }}/python/vendor/cache/ -r {{ target }}/python/requirements_lock.txt"
+    - command: svc -t /home/shaperia/service/happyman

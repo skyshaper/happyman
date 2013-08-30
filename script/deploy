@@ -1,0 +1,2 @@
+#!/bin/sh -e
+exec ansible-playbook -i ansible_hosts ansible_playbook.yaml
