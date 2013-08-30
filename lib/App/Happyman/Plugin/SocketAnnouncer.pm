@@ -9,7 +9,6 @@ use Data::Dumper::Concise;
 use Encode;
 use Mojo::JSON;
 use Mojolicious::Lite;
-use TryCatch;
 
 has _mojo => (
     is      => 'ro',

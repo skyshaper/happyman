@@ -21,7 +21,7 @@ requires 'Net::SSLeay';
 requires 'Perl::Critic';
 requires 'Perl::Tidy';
 requires 'Test::Spec';
-requires 'TryCatch';
+requires 'Try::Tiny';
 requires 'URI';
 requires 'URI::Find';
 requires 'XML::LibXML';

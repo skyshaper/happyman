@@ -14,7 +14,7 @@ use Module::Load;
 use Data::Dumper::Concise;
 use EV;
 use Mojo::Log;
-use TryCatch;
+use Try::Tiny;
 
 has [qw(nick host channel)] => (
     is       => 'ro',
@@ -191,10 +191,9 @@ sub run_forever {
             AE::cv->recv();
         }
         catch {
-            chomp;
             $self->send_notice_to_channel("Caught exception: $_");
             $self->_log->info("Caught exception: $_");
-        }
+        };
     }
 }
 
