@@ -7,7 +7,6 @@
   "plugins": {
     "NickReply": {},
     "PeekURI": {},
-    "RandomTopic": {},
     "Cobe": {},
     "SocketAnnouncer": {}
   }
