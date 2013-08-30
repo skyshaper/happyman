@@ -1,27 +1,30 @@
 requires 'AnyEvent';
-requires 'AnyEvent::HTTP';
-requires 'AnyEvent::HTTPD';
 requires 'AnyEvent::IRC';
 requires 'AnyEvent::Twitter';
-requires 'AnyEvent::Worker';
 requires 'Data::Dumper::Concise';
-requires 'Data::Handle';
 requires 'EV';
 requires 'File::Slurp';
 requires 'IO::Socket::SSL';
 requires 'List::MoreUtils';
-requires 'Log::Dispatchouli';
-requires 'LWP::Protocol::AnyEvent::http';
-requires 'LWP::UserAgent';
 requires 'Module::Load';
 requires 'Mojolicious';
 requires 'Moose';
 requires 'namespace::autoclean';
 requires 'Net::SSLeay';
-requires 'Perl::Critic';
-requires 'Perl::Tidy';
-requires 'Test::Spec';
 requires 'Try::Tiny';
 requires 'URI';
 requires 'URI::Find';
-requires 'XML::LibXML';
+
+on 'test' => sub {
+    requires 'AnyEvent::HTTP';
+    requires 'AnyEvent::HTTPD';
+    requires 'Data::Handle';
+    requires 'LWP::Protocol::AnyEvent::http';
+    requires 'LWP::UserAgent';
+    requires 'Test::Spec';
+};
+
+on 'develop' => sub {
+    requires 'Perl::Critic';
+    requires 'Perl::Tidy';
+};
