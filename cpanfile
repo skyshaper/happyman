@@ -5,7 +5,6 @@ requires 'AnyEvent::IRC';
 requires 'AnyEvent::Twitter';
 requires 'AnyEvent::Worker';
 requires 'Class::Load';
-requires 'Config::INI::Reader';
 requires 'Data::Dumper::Concise';
 requires 'Data::Handle';
 requires 'EV';

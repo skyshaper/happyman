@@ -4,13 +4,17 @@ use warnings;
 use lib 'lib';
 
 use App::Happyman::Connection;
-use Config::INI::Reader;
+use File::Slurp;
+use Mojo::JSON;
 
-my %conf = %{ Config::INI::Reader->read_file('happyman.conf') };
-my $conn = App::Happyman::Connection->new( $conf{_} );
+my $json = Mojo::JSON->new;
+my $conf = $json->decode(scalar read_file('happyman.conf'));
+if (!$conf) {
+    die 'Failed to parse config: ' . $json->error . "\n";
+}
+my $conn = App::Happyman::Connection->new( $conf->{connection} );
 
-delete $conf{_};
-while ( my ( $plugin_name, $plugin_conf ) = each %conf ) {
+while ( my ( $plugin_name, $plugin_conf ) = each $conf->{plugins} ) {
     $conn->load_plugin( $plugin_name, $plugin_conf );
 }
 

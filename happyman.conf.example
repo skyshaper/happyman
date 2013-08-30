@@ -1,9 +1,12 @@
-nick = happyman
-host = localhost
-channel = #happyman
-
-[Cobe]
-[PeekURI]
-[SocketAnnouncer]
-[NickReply]
-[RandomTopic]
+{
+  "channel": "#happyman",
+  "host": "localhost",
+  "nick": "happyman",
+  "plugins": {
+    "NickReply": {},
+    "PeekURI": {},
+    "RandomTopic": {},
+    "Cobe": {},
+    "SocketAnnouncer": {}
+  }
+}

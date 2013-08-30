@@ -274,21 +274,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  Config-INI-0.020
-    pathname: R/RJ/RJBS/Config-INI-0.020.tar.gz
-    provides:
-      Config::INI 0.020
-      Config::INI::Reader 0.020
-      Config::INI::Writer 0.020
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.30
-      IO::File 1.14
-      IO::String 0
-      Mixin::Linewise::Readers 0
-      Mixin::Linewise::Writers 0
-      strict 0
-      warnings 0
   Config-Tiny-2.14
     pathname: A/AD/ADAMK/Config-Tiny-2.14.tar.gz
     provides:
@@ -1811,21 +1796,6 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
-  Mixin-Linewise-0.004
-    pathname: R/RJ/RJBS/Mixin-Linewise-0.004.tar.gz
-    provides:
-      MLTests undef
-      Mixin::Linewise 0.004
-      Mixin::Linewise::Readers 0.004
-      Mixin::Linewise::Writers 0.004
-    requirements:
-      Carp 0
-      ExtUtils::MakeMaker 6.30
-      IO::File 0
-      IO::String 0
-      Sub::Exporter 0
-      strict 0
-      warnings 0
   Module-Build-0.4007
     pathname: L/LE/LEONT/Module-Build-0.4007.tar.gz
     provides:
