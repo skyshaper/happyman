@@ -6,7 +6,8 @@ use namespace::autoclean;
 with 'App::Happyman::Plugin';
 
 use Data::Dumper::Concise;
-use JSON::XS;
+use Encode;
+use Mojo::JSON;
 use Mojolicious::Lite;
 use TryCatch;
 
@@ -27,8 +28,13 @@ sub _build_mojo {
 
     post '/github' => sub {
         my ($app) = @_;
-        $self->_log_debug( Dumper( $app->param('payload') ) );
-        my $data = JSON::XS->new->decode( $app->param('payload') );
+
+        # Mojolicous decodes all request parameters, but Mojo::JSON only accepts bytes
+        my $payload_string = $app->param('payload');
+        my $payload_bytes  = encode('utf-8', $payload_string);
+
+        my $json = Mojo::JSON->new;
+        my $data = $json->decode( $payload_bytes );
 
         foreach my $commit ( @{ $data->{commits} } ) {
             my $message = sprintf(

@@ -1698,14 +1698,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  JSON-XS-2.34
-    pathname: M/ML/MLEHMANN/JSON-XS-2.34.tar.gz
-    provides:
-      JSON::XS 2.34
-      JSON::XS::Boolean 2.34
-    requirements:
-      ExtUtils::MakeMaker 0
-      common::sense 0
   LWP-MediaTypes-6.02
     pathname: G/GA/GAAS/LWP-MediaTypes-6.02.tar.gz
     provides:

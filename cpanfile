@@ -11,7 +11,6 @@ requires 'Data::Handle';
 requires 'EV';
 requires 'File::Slurp';
 requires 'IO::Socket::SSL';
-requires 'JSON::XS';
 requires 'List::MoreUtils';
 requires 'Log::Dispatchouli';
 requires 'LWP::UserAgent';
