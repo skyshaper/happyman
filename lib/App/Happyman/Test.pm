@@ -2,7 +2,7 @@ package App::Happyman::Test;
 use v5.18;
 use warnings;
 
-use parent 'Exporter';
+use parent 'Test::Builder::Module';
 our @EXPORT
     = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait wait_on_message_or_timeout load_local_config async_sleep);
 
@@ -31,7 +31,7 @@ sub make_test_client {
     $irc->connect( 'localhost', 6667, { nick => $nick } );
     my ( undef, $error ) = $cv->recv();
     if ($error) {
-        BAIL_OUT("Failed to connect to test IRC server!: $error");
+        __PACKAGE__->builder->BAIL_OUT("Failed to connect to test IRC server!: $error");
     }
     $irc->send_srv( 'JOIN', '#happyman' );
     return $irc;
