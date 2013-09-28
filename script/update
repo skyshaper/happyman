@@ -4,3 +4,6 @@ carton bundle
 ./python/virtualenv/bin/pip install --upgrade -r ./python/requirements.txt
 ./python/virtualenv/bin/pip freeze > ./python/requirements_lock.txt
 ./python/virtualenv/bin/pip install --download=python/vendor/cache/ -r ./python/requirements_lock.txt
+./script/test
+git add -A
+git commit -m "Update dependencies"
