@@ -59,7 +59,7 @@ sub _ignore_link {
 
 sub _fetch_tweet_text {
     my ( $self, $uri ) = @_;
-    $uri =~ m{/(\d+)$};
+    $uri =~ m{status/(\d+)};
     return unless $1;
 
     $self->_log_debug("Fetching $uri");

@@ -110,6 +110,19 @@ describe 'PeekURI' => sub {
                 );
             };
         };
+        
+        describe 'when seeing a Twitter URL with a picture' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    'https://twitter.com/ManuelaSchwesig/status/373757590347321344/photo/1' );
+            };
+
+            it 'sends the author and message to the channel' => sub {
+                is( wait_on_message_or_timeout( $irc, 5 ),
+                    'Tweet by @ManuelaSchwesig: Gute Kitas anstatt Betreuungsgeld! Sonnige Grüsse aus Coburg ;-) http://t.co/0OSX2gzZBA'
+                );
+            };
+        };
     };
 
     describe 'with incorrect Twitter authentication' => sub {
