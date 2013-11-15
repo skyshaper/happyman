@@ -221,6 +221,7 @@ sub _call_plugin_event_handlers {
 sub send_message_to_channel {
     my ( $self, $body ) = @_;
     $self->log_debug("Sending message to channel: $body");
+    $self->_call_plugin_event_handlers( 'on_send_message_to_channel', $body );
     $self->_irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
 }

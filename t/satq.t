@@ -105,6 +105,27 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
         };
     };
 
+    describe 'when happyman has spoken 20 lines' => sub {
+        before sub {
+            for ( 1 .. 20 ) {
+                $happyman->send_message_to_channel('Hello World');
+            }
+        };
+
+        describe 'when issued the !quote command' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    '!quote' );
+            };
+
+            it 'posts the last 10 lines to SATQ' => sub {
+                my $req       = $http_request_cv->recv();
+                my $raw_quote = $req->parm('quote[raw_quote]');
+                is( $raw_quote, join( "\n", ('<happyman> Hello World') x 10 ) );
+            };
+        };
+    };
+
 };
 
 runtests unless caller;

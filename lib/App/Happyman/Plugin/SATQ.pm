@@ -75,4 +75,11 @@ sub on_action {
         sprintf( '* %s %s', $action->sender_nick, $action->text ) );
 }
 
+sub on_send_message_to_channel {
+    my ($self, $body ) = @_;
+    $self->_push_line_to_buffer(
+        sprintf( '<%s> %s', $self->conn->nick, $body ) );
+}
+
+
 __PACKAGE__->meta->make_immutable();

@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "${1}" ]; then
-  carton exec prove -I lib t/*.t
+  ./vendor/bin/carton exec prove -I lib t/*.t
 else
-  carton exec perl -I lib "${1}"
+  ./vendor/bin/carton exec perl -I lib "${1}"
 fi
