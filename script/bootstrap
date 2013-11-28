@@ -1,6 +1,4 @@
 #!/bin/sh -e
-curl -L http://cpanmin.us | perl - App::cpanminus
-cpanm Carton
 carton install --cached
 virtualenv python/virtualenv
 ./python/virtualenv/bin/pip install --no-index --find-links=python/vendor/cache/ -r python/requirements_lock.txt
