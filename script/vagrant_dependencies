@@ -4,7 +4,7 @@ apt-get -y dist-upgrade
 
 apt-get install -y build-essential wget
 cd /tmp && wget http://www.cpan.org/src/5.0/perl-5.18.1.tar.gz && tar xf perl-5.18.1.tar.gz
-cd /tmp/perl-5.18.1 && bash Configure -des && make && make install
+cd /tmp/perl-5.18.1 && ./Configure -des && make && make install
 
 apt-get install -y python python-dev python-setuptools
 easy_install virtualenv
