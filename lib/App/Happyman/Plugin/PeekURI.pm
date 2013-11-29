@@ -59,12 +59,12 @@ sub _ignore_link {
 
 sub _fetch_tweet_text {
     my ( $self, $uri ) = @_;
-    $uri =~ m{status/(\d+)};
-    return unless $1;
+    $uri =~ m{status(es)?/(?<id>\d+)};
+    return unless $+{id};
 
     $self->_log_debug("Fetching $uri");
     $self->_twitter->get(
-        "statuses/show/$1",
+        "statuses/show/$+{id}",
         sub {
             my ( $header, $response, $reason, $error_response ) = @_;
 

@@ -137,10 +137,23 @@ describe 'PeekURI' => sub {
             $happyman->disconnect_and_wait();
         };
 
-        describe 'when seeing a TwitterURI' => sub {
+        describe 'when seeing a TwitterURI (status)' => sub {
             before sub {
                 $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
                     'https://twitter.com/BR3NDA/status/328753576220446720' );
+            };
+
+            it 'sends the error message to the channel' => sub {
+                is( wait_on_message_or_timeout( $irc, 5 ),
+                    'Twitter: 32: Could not authenticate you'
+                );
+            };
+        }; 
+        
+        describe 'when seeing a TwitterURI (statuses)' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    'https://twitter.com/BR3NDA/statuses/328753576220446720' );
             };
 
             it 'sends the error message to the channel' => sub {
