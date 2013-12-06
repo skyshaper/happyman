@@ -2,7 +2,7 @@
   "connection": {
     "channel": "#happyman",
     "host": "localhost",
-    "nick": "happyman",
+    "nick": "happyman"
   },
   "plugins": {
     "NickReply": {},
