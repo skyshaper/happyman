@@ -4,7 +4,7 @@ use warnings;
 
 use parent 'Test::Builder::Module';
 our @EXPORT
-    = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait wait_on_message_or_timeout load_local_config async_sleep);
+    = qw(make_happyman_with_plugin make_test_client wait_on_event_or_timeout disconnect_and_wait wait_on_message_or_timeout wait_on_action_or_timeout load_local_config async_sleep);
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
@@ -31,7 +31,8 @@ sub make_test_client {
     $irc->connect( 'localhost', 6667, { nick => $nick } );
     my ( undef, $error ) = $cv->recv();
     if ($error) {
-        __PACKAGE__->builder->BAIL_OUT("Failed to connect to test IRC server!: $error");
+        __PACKAGE__->builder->BAIL_OUT(
+            "Failed to connect to test IRC server!: $error");
     }
     $irc->send_srv( 'JOIN', '#happyman' );
     return $irc;
@@ -50,6 +51,13 @@ sub wait_on_message_or_timeout {
     my ( undef, undef, $ircmsg )
         = wait_on_event_or_timeout( $irc, 'publicmsg', $timeout );
     return $ircmsg ? $ircmsg->{params}->[1] : undef;
+}
+
+sub wait_on_action_or_timeout {
+    my ( $irc, $timeout ) = @_;
+    my ( undef, undef, undef, $msg )
+        = wait_on_event_or_timeout( $irc, 'ctcp_action', $timeout );
+    return $msg;
 }
 
 sub disconnect_and_wait {

@@ -233,6 +233,13 @@ sub send_notice_to_channel {
         $body );
 }
 
+sub send_action_to_channel {
+    my ( $self, $body ) = @_;
+    $self->log_debug("Sending action to channel: $body");
+    $self->_irc->send_long_message( 'utf-8', 0, "PRIVMSG\001ACTION",
+        $self->channel, $body );
+}
+
 sub send_private_message {
     my ( $self, $nick, $body ) = @_;
     $self->log_debug("Sending privately to $nick: $body");

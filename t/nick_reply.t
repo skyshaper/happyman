@@ -2,6 +2,7 @@ use v5.16;
 use warnings;
 
 use App::Happyman::Test;
+use AnyEvent::IRC::Util qw(encode_ctcp);
 use Test::Spec;
 
 use_ok('App::Happyman::Connection');
@@ -30,6 +31,18 @@ describe 'The NickReply plugin' => sub {
 
         it 'should reply with sender\'s nickname' => sub {
             is( wait_on_message_or_timeout( $irc, 5 ), $irc->nick );
+        };
+    };
+
+    describe 'when hugged by a user' => sub {
+
+        before sub {
+            $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                encode_ctcp( [ 'ACTION', 'hugs happyman' ] ) );
+        };
+
+        it 'should hug the sender back' => sub {
+            is( wait_on_action_or_timeout( $irc, 5 ), "hugs " . $irc->nick );
         };
     };
 
