@@ -7,3 +7,5 @@ carton bundle
 ./script/test
 git add -A
 git commit -m "Update dependencies"
+git push
+./script/deploy
