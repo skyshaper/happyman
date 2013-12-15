@@ -212,15 +212,6 @@ DISTRIBUTIONS
       strict 0
       version 0
       warnings 0
-  Class-Method-Modifiers-2.04
-    pathname: E/ET/ETHER/Class-Method-Modifiers-2.04.tar.gz
-    provides:
-      Class::Method::Modifiers 2.04
-    requirements:
-      ExtUtils::MakeMaker 6.59
-      Test::Fatal 0
-      Test::More 0
-      perl 5.006
   Clone-0.34
     pathname: G/GA/GARU/Clone-0.34.tar.gz
     provides:
@@ -665,15 +656,15 @@ DISTRIBUTIONS
       File::Temp 0
       Scalar::Util 0
       Test::More 0.88
-  IO-Socket-SSL-1.960
-    pathname: S/SU/SULLR/IO-Socket-SSL-1.960.tar.gz
+  IO-Socket-SSL-1.962
+    pathname: S/SU/SULLR/IO-Socket-SSL-1.962.tar.gz
     provides:
-      IO::Socket::SSL 1.960
+      IO::Socket::SSL 1.962
       IO::Socket::SSL::Intercept 1.93
-      IO::Socket::SSL::SSL_Context 1.960
-      IO::Socket::SSL::SSL_HANDLE 1.960
-      IO::Socket::SSL::Session_Cache 1.960
-      IO::Socket::SSL::Utils 0.01
+      IO::Socket::SSL::SSL_Context 1.962
+      IO::Socket::SSL::SSL_HANDLE 1.962
+      IO::Socket::SSL::Session_Cache 1.962
+      IO::Socket::SSL::Utils 0.02
     requirements:
       ExtUtils::MakeMaker 0
       Net::SSLeay 1.46
@@ -859,8 +850,8 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-4.57
-    pathname: S/SR/SRI/Mojolicious-4.57.tar.gz
+  Mojolicious-4.60
+    pathname: M/MR/MRAMBERG/Mojolicious-4.60.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -923,7 +914,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.57
+      Mojolicious 4.60
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -971,34 +962,6 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
-  Moo-1.003000
-    pathname: H/HA/HAARG/Moo-1.003000.tar.gz
-    provides:
-      Method::Generate::Accessor undef
-      Method::Generate::BuildAll undef
-      Method::Generate::Constructor undef
-      Method::Generate::DemolishAll undef
-      Method::Inliner undef
-      Moo 1.003000
-      Moo::HandleMoose undef
-      Moo::HandleMoose::FakeConstructor undef
-      Moo::HandleMoose::FakeMetaClass undef
-      Moo::Object undef
-      Moo::Role undef
-      Moo::_Utils undef
-      Moo::_mro undef
-      Moo::sification undef
-      Sub::Defer undef
-      Sub::Quote undef
-      oo undef
-    requirements:
-      Class::Method::Modifiers 1.1
-      Devel::GlobalDestruction 0.11
-      Dist::CheckConflicts 0.02
-      ExtUtils::MakeMaker 0
-      Module::Runtime 0.012
-      Role::Tiny 1.003
-      strictures 1.004003
   Moose-2.1005
     pathname: E/ET/ETHER/Moose-2.1005.tar.gz
     provides:
@@ -1810,15 +1773,6 @@ DISTRIBUTIONS
       Readonly::Scalar 1.03
     requirements:
       ExtUtils::MakeMaker 0
-  Role-Tiny-1.003001
-    pathname: H/HA/HAARG/Role-Tiny-1.003001.tar.gz
-    provides:
-      Role::Tiny 1.003001
-      Role::Tiny::With undef
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::Fatal 0.003
-      Test::More 0.96
   Software-License-0.103005
     pathname: R/RJ/RJBS/Software-License-0.103005.tar.gz
     provides:
@@ -2378,16 +2332,16 @@ DISTRIBUTIONS
       URI::Escape 0
       WWW::RobotRules 6
       perl 5.008001
-  namespace-autoclean-0.14
-    pathname: E/ET/ETHER/namespace-autoclean-0.14.tar.gz
+  namespace-autoclean-0.15
+    pathname: E/ET/ETHER/namespace-autoclean-0.15.tar.gz
     provides:
-      namespace::autoclean 0.14
+      namespace::autoclean 0.15
     requirements:
       B::Hooks::EndOfScope 0.12
       Class::MOP 0.80
       ExtUtils::MakeMaker 6.30
       List::Util 0
-      Module::Build::Tiny 0.028
+      Module::Build::Tiny 0.030
       namespace::clean 0.20
       perl 5.006
       strict 0
@@ -2401,9 +2355,3 @@ DISTRIBUTIONS
       ExtUtils::CBuilder 0.27
       Package::Stash 0.23
       Test::More 0.88
-  strictures-1.004004
-    pathname: E/ET/ETHER/strictures-1.004004.tar.gz
-    provides:
-      strictures 1.004004
-    requirements:
-      ExtUtils::MakeMaker 0
