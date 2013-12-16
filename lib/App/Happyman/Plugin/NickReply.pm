@@ -16,8 +16,7 @@ sub _do_nick_reply {
         $self->_log( "Triggered by " . $sender_nick );
 
         my $timer;
-        $timer = AE::timer
-            rand(2), 0, sub {
+        $timer = AE::timer rand(2), 0, sub {
             undef $timer;
             $self->_log( "Replying to " . $sender_nick );
             $action->();

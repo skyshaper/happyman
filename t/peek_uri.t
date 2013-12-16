@@ -108,11 +108,12 @@ describe 'PeekURI' => sub {
                 );
             };
         };
-        
+
         describe 'when seeing a Twitter URL with a picture' => sub {
             before sub {
                 $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
-                    'https://twitter.com/ManuelaSchwesig/status/373757590347321344/photo/1' );
+                    'https://twitter.com/ManuelaSchwesig/status/373757590347321344/photo/1'
+                );
             };
 
             it 'sends the author and message to the channel' => sub {
@@ -146,12 +147,13 @@ describe 'PeekURI' => sub {
                     'Twitter: 32: Could not authenticate you'
                 );
             };
-        }; 
-        
+        };
+
         describe 'when seeing a TwitterURI (statuses)' => sub {
             before sub {
                 $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
-                    'https://twitter.com/BR3NDA/statuses/328753576220446720' );
+                    'https://twitter.com/BR3NDA/statuses/328753576220446720'
+                );
             };
 
             it 'sends the error message to the channel' => sub {

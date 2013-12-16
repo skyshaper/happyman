@@ -122,7 +122,8 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             it 'posts the last 10 lines to SATQ' => sub {
                 my $req       = $http_request_cv->recv();
                 my $raw_quote = $req->parm('quote[raw_quote]');
-                is( $raw_quote, join( "\n", ('<happyman> Hello World') x 10 ) );
+                is( $raw_quote,
+                    join( "\n", ('<happyman> Hello World') x 10 ) );
             };
         };
     };

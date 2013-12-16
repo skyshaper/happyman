@@ -28,12 +28,12 @@ sub _build_mojo {
     post '/github' => sub {
         my ($app) = @_;
 
-        # Mojolicous decodes all request parameters, but Mojo::JSON only accepts bytes
+# Mojolicous decodes all request parameters, but Mojo::JSON only accepts bytes
         my $payload_string = $app->param('payload');
-        my $payload_bytes  = encode('utf-8', $payload_string);
+        my $payload_bytes = encode( 'utf-8', $payload_string );
 
         my $json = Mojo::JSON->new;
-        my $data = $json->decode( $payload_bytes );
+        my $data = $json->decode($payload_bytes);
 
         foreach my $commit ( @{ $data->{commits} } ) {
             my $message = sprintf(

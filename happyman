@@ -8,8 +8,8 @@ use File::Slurp;
 use Mojo::JSON;
 
 my $json = Mojo::JSON->new;
-my $conf = $json->decode(scalar read_file('happyman.conf'));
-if (!$conf) {
+my $conf = $json->decode( scalar read_file('happyman.conf') );
+if ( !$conf ) {
     die 'Failed to parse config: ' . $json->error . "\n";
 }
 my $conn = App::Happyman::Connection->new( $conf->{connection} );
