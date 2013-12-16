@@ -16,7 +16,7 @@ sub make_happyman_with_plugin {
         host    => 'localhost',
         port    => 6667,
         channel => '#happyman',
-        debug   => 1,
+        debug   => $ENV{HAPPYMAN_TEST_DEBUG} ? 1 : 0,
     );
     $happyman->load_plugin( $plugin_name, $plugin_params );
     return $happyman;
