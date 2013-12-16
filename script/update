@@ -6,6 +6,6 @@ carton bundle
 ./python/virtualenv/bin/pip install --download=python/vendor/cache/ -r ./python/requirements_lock.txt
 ./script/test
 git add -A
-git commit -m "Update dependencies"
+git commit -m "Update dependencies" || exit 0 
 git push
 ./script/deploy
