@@ -507,6 +507,47 @@ DISTRIBUTIONS
       File::Spec 0
       strict 0
       warnings 0
+  ExtUtils-MakeMaker-6.84
+    pathname: B/BI/BINGOS/ExtUtils-MakeMaker-6.84.tar.gz
+    provides:
+      DynaLoader 6.84
+      ExtUtils::Command::MM 6.84
+      ExtUtils::Liblist 6.84
+      ExtUtils::Liblist::Kid 6.84
+      ExtUtils::MM 6.84
+      ExtUtils::MM_AIX 6.84
+      ExtUtils::MM_Any 6.84
+      ExtUtils::MM_BeOS 6.84
+      ExtUtils::MM_Cygwin 6.84
+      ExtUtils::MM_DOS 6.84
+      ExtUtils::MM_Darwin 6.84
+      ExtUtils::MM_MacOS 6.84
+      ExtUtils::MM_NW5 6.84
+      ExtUtils::MM_OS2 6.84
+      ExtUtils::MM_QNX 6.84
+      ExtUtils::MM_UWIN 6.84
+      ExtUtils::MM_Unix 6.84
+      ExtUtils::MM_VMS 6.84
+      ExtUtils::MM_VOS 6.84
+      ExtUtils::MM_Win32 6.84
+      ExtUtils::MM_Win95 6.84
+      ExtUtils::MY 6.84
+      ExtUtils::MakeMaker 6.84
+      ExtUtils::MakeMaker::Config 6.84
+      ExtUtils::MakeMaker::_version 6.84
+      ExtUtils::Mkbootstrap 6.84
+      ExtUtils::Mksymlists 6.84
+      ExtUtils::testlib 6.84
+      MM 6.84
+      MY 6.84
+      in 6.84
+    requirements:
+      Data::Dumper 0
+      DirHandle 0
+      File::Basename 0
+      File::Spec 0.8
+      Pod::Man 0
+      perl 5.006
   File-Listing-6.04
     pathname: G/GA/GAAS/File-Listing-6.04.tar.gz
     provides:
@@ -682,6 +723,15 @@ DISTRIBUTIONS
       JSON::Backend::PP 2.59
       JSON::Boolean 2.59
       JSON::backportPP::Boolean 2.27202
+    requirements:
+      ExtUtils::MakeMaker 0
+      Test::More 0
+  JSON-PP-2.27203
+    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
+    provides:
+      JSON::PP 2.27203
+      JSON::PP::Boolean 2.27203
+      JSON::PP::IncrParser 2.27203
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
@@ -962,6 +1012,7 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
+      perl 5.010001
   Moose-2.1005
     pathname: E/ET/ETHER/Moose-2.1005.tar.gz
     provides:
@@ -1488,6 +1539,18 @@ DISTRIBUTIONS
       Scalar::Util 1.18
       Test::More 0.42
       perl 5.00503
+  Parse-CPAN-Meta-1.4409
+    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4409.tar.gz
+    provides:
+      Parse::CPAN::Meta 1.4409
+    requirements:
+      CPAN::Meta::YAML 0.008
+      Carp 0
+      Exporter 0
+      ExtUtils::MakeMaker 6.30
+      File::Spec 0.80
+      JSON::PP 2.27200
+      strict 0
   Perl-Critic-1.121
     pathname: T/TH/THALJEF/Perl-Critic-1.121.tar.gz
     provides:
