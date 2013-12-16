@@ -42,7 +42,7 @@ describe 'The NickReply plugin' => sub {
         };
 
         it 'should hug the sender back' => sub {
-            is( wait_on_action_or_timeout( $irc, 5 ), "hugs " . $irc->nick );
+            is( wait_on_action_or_timeout($irc), "hugs " . $irc->nick );
         };
     };
 
