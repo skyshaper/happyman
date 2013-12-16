@@ -40,6 +40,7 @@ sub make_test_client {
 
 sub wait_on_event_or_timeout {
     my ( $irc, $event, $timeout ) = @_;
+    $timeout //= 10;
     my $cv = AE::cv;
     $irc->reg_cb( $event => $cv );
     my $timer = AE::timer( $timeout, 0, $cv );

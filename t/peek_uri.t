@@ -38,8 +38,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the first paragraph to the channel' => sub {
-                like(
-                    wait_on_message_or_timeout( $irc, 5 ),
+                like( wait_on_message_or_timeout($irc),
                     qr/Perl is a family of high-level, general-purpose, interpreted, dynamic programming languages/
                 );
             };
@@ -54,7 +53,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'does not react' => sub {
-                ok( !wait_on_message_or_timeout( $irc, 5 ) );
+                ok( !wait_on_message_or_timeout($irc) );
             };
         };
 
@@ -67,8 +66,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the title to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
-                    'Index of /~mxey/' );
+                is( wait_on_message_or_timeout($irc), 'Index of /~mxey/' );
             };
         };
 
@@ -81,7 +79,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the error to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     "Couldn't connect: IO::Socket::INET: Bad hostname 'doesnotexist.example.com'"
                 );
             };
@@ -94,7 +92,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the error to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ), 'Not Found' );
+                is( wait_on_message_or_timeout($irc), 'Not Found' );
             };
         };
 
@@ -105,7 +103,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the author and message to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     'Tweet by @BR3NDA: Remembering that time I went to a Microsoft conference. all their swag clothing came in women\'s style. I had never seen that in open source.'
                 );
             };
@@ -118,7 +116,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the author and message to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     'Tweet by @ManuelaSchwesig: Gute Kitas anstatt Betreuungsgeld! Sonnige Grüsse aus Coburg ;-) http://t.co/0OSX2gzZBA'
                 );
             };
@@ -144,7 +142,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the error message to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     'Twitter: 32: Could not authenticate you'
                 );
             };
@@ -157,7 +155,7 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the error message to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     'Twitter: 32: Could not authenticate you'
                 );
             };

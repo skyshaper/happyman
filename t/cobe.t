@@ -33,7 +33,7 @@ describe 'The Cobe plugin' => sub {
             };
 
             it 'tells the sender it does not know enough yet' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
+                is( wait_on_message_or_timeout($irc),
                     'HMTest: I don\'t know enough to answer you yet!' );
             };
         };

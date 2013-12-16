@@ -76,8 +76,9 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
             };
 
             it 'posts the quote link to the channel' => sub {
-                is( wait_on_message_or_timeout( $irc, 5 ),
-                    'HMTest: http://example.com' );
+                is( wait_on_message_or_timeout($irc),
+                    'HMTest: http://example.com'
+                );
             };
         };
     };

@@ -30,7 +30,7 @@ describe 'The NickReply plugin' => sub {
         };
 
         it 'should reply with sender\'s nickname' => sub {
-            is( wait_on_message_or_timeout( $irc, 5 ), $irc->nick );
+            is( wait_on_message_or_timeout($irc), $irc->nick );
         };
     };
 
@@ -53,7 +53,7 @@ describe 'The NickReply plugin' => sub {
         };
 
         it 'should not reply' => sub {
-            ok( !wait_on_message_or_timeout( $irc, 5 ) );
+            ok( !wait_on_message_or_timeout($irc) );
         };
     };
 };

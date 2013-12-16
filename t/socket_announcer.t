@@ -41,7 +41,7 @@ describe 'The SocketAnnouncer plugin' => sub {
         };
 
         it 'should send the message to the channel' => sub {
-            is( wait_on_message_or_timeout( $irc, 5 ), 'Hello World' );
+            is( wait_on_message_or_timeout($irc), 'Hello World' );
         };
     };
 
@@ -91,7 +91,7 @@ describe 'The SocketAnnouncer plugin' => sub {
 #     };
 #
 #     it 'sends announcement to the channel' => sub {
-#         is( wait_on_message_or_timeout( $irc, 5 ),
+#         is( wait_on_message_or_timeout( $irc ),
 #            'mxey@mxey.net deployed d94580a to http://skyshaper-quotes.herokuapp.com' );
 #     };
 # };
