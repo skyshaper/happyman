@@ -1,16 +1,16 @@
 # carton snapshot format: version 1.0
 DISTRIBUTIONS
-  AnyEvent-7.05
-    pathname: M/ML/MLEHMANN/AnyEvent-7.05.tar.gz
+  AnyEvent-7.07
+    pathname: M/ML/MLEHMANN/AnyEvent-7.07.tar.gz
     provides:
       AE undef
       AE::Log::COLLECT undef
       AE::Log::FILTER undef
       AE::Log::LOG undef
-      AnyEvent 7.05
-      AnyEvent::Base 7.05
-      AnyEvent::CondVar 7.05
-      AnyEvent::CondVar::Base 7.05
+      AnyEvent 7.07
+      AnyEvent::Base 7.07
+      AnyEvent::CondVar 7.07
+      AnyEvent::CondVar::Base 7.07
       AnyEvent::DNS undef
       AnyEvent::Debug undef
       AnyEvent::Debug::Backtrace undef
@@ -1026,8 +1026,8 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-4.61
-    pathname: S/SR/SRI/Mojolicious-4.61.tar.gz
+  Mojolicious-4.62
+    pathname: S/SR/SRI/Mojolicious-4.62.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1090,7 +1090,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.61
+      Mojolicious 4.62
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
