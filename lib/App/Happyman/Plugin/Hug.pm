@@ -10,8 +10,6 @@ use AnyEvent;
 sub _do_nick_reply {
     my ( $self, $text, $needed_text, $sender_nick, $action ) = @_;
 
-    $text =~ s/^\s+|\s+$//g;
-
     if ( $text eq $needed_text ) {
         $self->_log( "Triggered by " . $sender_nick );
 

@@ -34,6 +34,18 @@ describe 'The Hug plugin' => sub {
         };
     };
 
+    describe 'when hugged by a user surrounde by whitespace' => sub {
+
+        before sub {
+            $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                encode_ctcp( [ 'ACTION', ' hugs happyman ' ] ) );
+        };
+
+        it 'should hug the sender back' => sub {
+            is( wait_on_action_or_timeout($irc), "hugs " . $irc->nick );
+        };
+    };
+
     describe 'when receiving other actions' => sub {
 
         before sub {

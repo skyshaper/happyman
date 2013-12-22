@@ -9,4 +9,11 @@ has [qw(text sender_nick)] => (
     required => 1,
 );
 
+sub BUILDARGS {
+    my ( $self, %args ) = @_;
+    
+    $args{text} =~ s/^\s+|\s+$//g;
+    return \%args;
+}
+
 1;
