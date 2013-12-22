@@ -34,6 +34,18 @@ describe 'The NickReply plugin' => sub {
         };
     };
 
+    describe 'when mentioned with nickname surrounded by whitespace' => sub {
+    
+        before sub {
+            $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                ' happyman ' );
+        };
+    
+        it 'should reply with sender\'s nickname' => sub {
+            is( wait_on_message_or_timeout($irc), $irc->nick );
+        };
+    };
+
     describe 'when receiving other messages' => sub {
 
         before sub {

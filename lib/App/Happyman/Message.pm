@@ -22,6 +22,9 @@ has 'conn' => (
 
 sub BUILDARGS {
     my ( $self, $conn, $sender_nick, $full_text ) = @_;
+    
+    $full_text =~ s/^\s+|\s+$//g;
+    
     if ( $full_text =~ /^(\w+)[:,]\s+(.+)$/ ) {
         return {
             conn           => $conn,
