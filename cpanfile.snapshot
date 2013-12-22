@@ -373,54 +373,16 @@ DISTRIBUTIONS
       Digest::base 1.00
       ExtUtils::MakeMaker 0
       perl 5.004
-  Dist-CheckConflicts-0.09
-    pathname: D/DO/DOY/Dist-CheckConflicts-0.09.tar.gz
+  Dist-CheckConflicts-0.10
+    pathname: D/DO/DOY/Dist-CheckConflicts-0.10.tar.gz
     provides:
-      Bar 0.02
-      Bar::Bar 0.01
-      Bar::Bar::Bad 0.01
-      Bar::Bar::Good 0.02
-      Bar::Baz 0.02
-      Bar::Baz::Bad 0.01
-      Bar::Baz::Good 0.02
-      Bar::Conflicts undef
-      Bar::Conflicts2 undef
-      Bar::Conflicts3 undef
-      Bar::Conflicts::Bad undef
-      Bar::Conflicts::Bad2 undef
-      Bar::Conflicts::Bad3 undef
-      Bar::Conflicts::Good undef
-      Bar::Conflicts::Good2 undef
-      Bar::Conflicts::Good3 undef
-      Bar::Foo 0.01
-      Bar::Foo::Bad 0.01
-      Bar::Foo::Good 0.02
-      Bar::Quux 0.02
-      Bar::Quux::Bad 0.01
-      Bar::Quux::Good 0.02
-      Bar::Three 0.02
-      Bar::Two 0.02
-      Broken undef
-      Dist::CheckConflicts 0.09
-      Foo undef
-      Foo::Bar 0.01
-      Foo::Baz 0.02
-      Foo::Conflicts undef
-      Foo::Conflicts2 undef
-      Foo::Conflicts::Bad undef
-      Foo::Conflicts::Broken undef
-      Foo::Conflicts::Good undef
-      Foo::Foo 0.01
-      Foo::Quux 0.02
-      Foo::Thing 0.02
-      Foo::Three 0.02
-      Foo::Two 0.02
+      Dist::CheckConflicts 0.10
     requirements:
       Carp 0
       Exporter 0
       ExtUtils::MakeMaker 6.30
       List::MoreUtils 0.12
-      Module::Runtime 0
+      Module::Runtime 0.009
       base 0
       strict 0
       warnings 0
@@ -525,47 +487,6 @@ DISTRIBUTIONS
       File::Spec 0
       strict 0
       warnings 0
-  ExtUtils-MakeMaker-6.84
-    pathname: B/BI/BINGOS/ExtUtils-MakeMaker-6.84.tar.gz
-    provides:
-      DynaLoader 6.84
-      ExtUtils::Command::MM 6.84
-      ExtUtils::Liblist 6.84
-      ExtUtils::Liblist::Kid 6.84
-      ExtUtils::MM 6.84
-      ExtUtils::MM_AIX 6.84
-      ExtUtils::MM_Any 6.84
-      ExtUtils::MM_BeOS 6.84
-      ExtUtils::MM_Cygwin 6.84
-      ExtUtils::MM_DOS 6.84
-      ExtUtils::MM_Darwin 6.84
-      ExtUtils::MM_MacOS 6.84
-      ExtUtils::MM_NW5 6.84
-      ExtUtils::MM_OS2 6.84
-      ExtUtils::MM_QNX 6.84
-      ExtUtils::MM_UWIN 6.84
-      ExtUtils::MM_Unix 6.84
-      ExtUtils::MM_VMS 6.84
-      ExtUtils::MM_VOS 6.84
-      ExtUtils::MM_Win32 6.84
-      ExtUtils::MM_Win95 6.84
-      ExtUtils::MY 6.84
-      ExtUtils::MakeMaker 6.84
-      ExtUtils::MakeMaker::Config 6.84
-      ExtUtils::MakeMaker::_version 6.84
-      ExtUtils::Mkbootstrap 6.84
-      ExtUtils::Mksymlists 6.84
-      ExtUtils::testlib 6.84
-      MM 6.84
-      MY 6.84
-      in 6.84
-    requirements:
-      Data::Dumper 0
-      DirHandle 0
-      File::Basename 0
-      File::Spec 0.8
-      Pod::Man 0
-      perl 5.006
   File-HomeDir-1.00
     pathname: A/AD/ADAMK/File-HomeDir-1.00.tar.gz
     provides:
@@ -582,12 +503,13 @@ DISTRIBUTIONS
       File::HomeDir::Windows 1.00
     requirements:
       Carp 0
-      Cwd 3.12
+      Cwd 3
       ExtUtils::MakeMaker 6.36
       File::Path 2.01
-      File::Spec 3.12
+      File::Spec 3
       File::Temp 0.19
       File::Which 0.05
+      Mac::SystemDirectory 0.04
       Test::More 0.47
       perl 5.00503
   File-Listing-6.04
@@ -845,15 +767,6 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::More 0
-  JSON-PP-2.27203
-    pathname: M/MA/MAKAMAKA/JSON-PP-2.27203.tar.gz
-    provides:
-      JSON::PP 2.27203
-      JSON::PP::Boolean 2.27203
-      JSON::PP::IncrParser 2.27203
-    requirements:
-      ExtUtils::MakeMaker 0
-      Test::More 0
   LWP-MediaTypes-6.02
     pathname: G/GA/GAAS/LWP-MediaTypes-6.02.tar.gz
     provides:
@@ -890,6 +803,7 @@ DISTRIBUTIONS
     provides:
       Lingua::EN::Inflect 1.895
     requirements:
+      ExtUtils::MakeMaker 0
       Test::More 0
       version 0
   List-MoreUtils-0.33
@@ -908,6 +822,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
+      perl 5.006
+  Mac-SystemDirectory-0.06
+    pathname: C/CH/CHANSEN/Mac-SystemDirectory-0.06.tar.gz
+    provides:
+      Mac::SystemDirectory 0.06
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Test::More 0.86
       perl 5.006
   Module-Build-0.4203
     pathname: L/LE/LEONT/Module-Build-0.4203.tar.gz
@@ -1138,7 +1060,6 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
-      perl 5.010001
   Moose-2.1005
     pathname: E/ET/ETHER/Moose-2.1005.tar.gz
     provides:
@@ -1588,6 +1509,7 @@ DISTRIBUTIONS
       Data::Dumper 0
       Exception::Class 0
       Exporter 0
+      Module::Build 0.36
       PPI 1.208
       PPI::Document 1.208
       PPI::Document::Fragment 1.208
@@ -1664,18 +1586,6 @@ DISTRIBUTIONS
       Scalar::Util 1.18
       Test::More 0.42
       perl 5.00503
-  Parse-CPAN-Meta-1.4409
-    pathname: D/DA/DAGOLDEN/Parse-CPAN-Meta-1.4409.tar.gz
-    provides:
-      Parse::CPAN::Meta 1.4409
-    requirements:
-      CPAN::Meta::YAML 0.008
-      Carp 0
-      Exporter 0
-      ExtUtils::MakeMaker 6.30
-      File::Spec 0.80
-      JSON::PP 2.27200
-      strict 0
   Path-Class-0.33
     pathname: K/KW/KWILLIAMS/Path-Class-0.33.tar.gz
     provides:
@@ -1762,10 +1672,10 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Path-Tiny-0.049
-    pathname: D/DA/DAGOLDEN/Path-Tiny-0.049.tar.gz
+  Path-Tiny-0.051
+    pathname: D/DA/DAGOLDEN/Path-Tiny-0.051.tar.gz
     provides:
-      Path::Tiny 0.049
+      Path::Tiny 0.051
       flock undef
     requirements:
       Carp 0
@@ -2450,6 +2360,7 @@ DISTRIBUTIONS
       Exporter 0
       File::Temp 0
       IO::Handle 0
+      Module::Build 0.36
       Test::Builder 0
       Test::More 0
       Test::Tester 0.107
