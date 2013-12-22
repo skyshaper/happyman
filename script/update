@@ -1,4 +1,5 @@
 #!/bin/sh -ex
+rm -rf local vendor/bundle
 carton update
 carton bundle
 ./python/virtualenv/bin/pip install --upgrade -r ./python/requirements.txt
