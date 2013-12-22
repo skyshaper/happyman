@@ -5,6 +5,7 @@
     "nick": "happyman"
   },
   "plugins": {
+    "Hug": {},
     "NickReply": {},
     "PeekURI": {},
     "Cobe": {},

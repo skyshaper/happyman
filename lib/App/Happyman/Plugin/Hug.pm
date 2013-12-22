@@ -1,4 +1,4 @@
-package App::Happyman::Plugin::NickReply;
+package App::Happyman::Plugin::Hug;
 use v5.18;
 use Moose;
 use namespace::autoclean;
@@ -24,15 +24,16 @@ sub _do_nick_reply {
     }
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
+sub on_action {
+    my ( $self, $action ) = @_;
 
     $self->_do_nick_reply(
-        $msg->full_text,
-        $self->conn->nick,
-        $msg->sender_nick,
+        $action->text,
+        "hugs " . $self->conn->nick,
+        $action->sender_nick,
         sub {
-            $self->conn->send_message_to_channel( $msg->sender_nick );
+            $self->conn->send_action_to_channel(
+                "hugs " . $action->sender_nick );
         }
     );
 }
