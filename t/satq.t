@@ -106,6 +106,27 @@ describe 'App::Happyman::Plugin::SATQ' => sub {
         };
     };
 
+    describe 'when an empty action has been received' => sub {
+        before sub {
+            $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                encode_ctcp( [ 'ACTION', ' ' ] ) );
+            async_sleep(3);
+        };
+
+        describe 'when issued the !quote command' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    '!quote' );
+            };
+
+            it 'posts the action to SATQ' => sub {
+                my $req       = $http_request_cv->recv();
+                my $raw_quote = $req->parm('quote[raw_quote]');
+                is( $raw_quote, '* HMTest ' );
+            };
+        };
+    };
+
     describe 'when happyman has spoken 20 lines' => sub {
         before sub {
             for ( 1 .. 20 ) {

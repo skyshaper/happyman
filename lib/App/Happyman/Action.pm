@@ -7,7 +7,7 @@ use Moose::Util::TypeConstraints;
 
 subtype 'TrimmedStr'
     => as 'Str'
-    => where { /^\S .* \S$/x };
+    => where { /^(\S .* \S|)$/x };
 
 coerce 'TrimmedStr'
     => from 'Str'
