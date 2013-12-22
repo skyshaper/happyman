@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
-use AnyEvent;
+use App::Happyman::Delay;
 
 sub on_message {
     my ( $self, $msg ) = @_;
@@ -13,9 +13,7 @@ sub on_message {
     if ( $msg->full_text eq $self->conn->nick ) {
         $self->_log( "Triggered by " . $msg->sender_nick );
     
-        my $timer;
-        $timer = AE::timer rand(2), 0, sub {
-            undef $timer;
+        delayed_randomly {
             $self->_log( "Replying to " . $msg->sender_nick );
             $self->conn->send_message_to_channel( $msg->sender_nick );
         };

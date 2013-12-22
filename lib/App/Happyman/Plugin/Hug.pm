@@ -5,7 +5,7 @@ use namespace::autoclean;
 
 with 'App::Happyman::Plugin';
 
-use AnyEvent;
+use App::Happyman::Delay;
 
 sub on_action {
     my ( $self, $action ) = @_;
@@ -13,9 +13,7 @@ sub on_action {
     if ( $action->text eq 'hugs ' . $self->conn->nick ) {
         $self->_log( 'Hugged by ' . $action->sender_nick );
     
-        my $timer;
-        $timer = AE::timer rand(2), 0, sub {
-            undef $timer;
+        delayed_randomly {
             $self->_log( 'Hugging ' . $action->sender_nick );
             $self->conn->send_action_to_channel(
                 'hugs ' . $action->sender_nick );
