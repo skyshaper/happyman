@@ -5,8 +5,10 @@ use warnings;
 use AnyEvent;
 use parent 'Exporter';
 
+## no critic (ProhibitAutomaticExportation)
 our @EXPORT = qw(delayed_randomly);
 
+## no critic (ProhibitSubroutinePrototypes)
 sub delayed_randomly (&) {
     my ($code) = @_;
 
