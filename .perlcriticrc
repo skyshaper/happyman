@@ -1,3 +1,5 @@
+severity = 4
+
 # Makes no sense for test modules, 
 # in the other ones I use “__PACKAGE__->meta->make_immutable();” instead of 1
 [-Perl::Critic::Policy::Modules::RequireEndWithOne]
