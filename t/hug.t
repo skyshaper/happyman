@@ -50,7 +50,7 @@ describe 'The Hug plugin' => sub {
 
         before sub {
             $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
-            encode_ctcp( [ 'ACTION', 'foobar' ] ) );
+                encode_ctcp( [ 'ACTION', 'foobar' ] ) );
         };
 
         it 'should not reply' => sub {

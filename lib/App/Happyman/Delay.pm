@@ -9,7 +9,7 @@ our @EXPORT = qw(delayed_randomly);
 
 sub delayed_randomly (&) {
     my ($code) = @_;
-    
+
     my $timer;
     $timer = AE::timer rand(2), 0, sub {
         undef $timer;

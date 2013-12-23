@@ -9,10 +9,10 @@ use App::Happyman::Delay;
 
 sub on_action {
     my ( $self, $action ) = @_;
-    
+
     if ( $action->text eq 'hugs ' . $self->conn->nick ) {
         $self->_log( 'Hugged by ' . $action->sender_nick );
-    
+
         delayed_randomly {
             $self->_log( 'Hugging ' . $action->sender_nick );
             $self->conn->send_action_to_channel(
