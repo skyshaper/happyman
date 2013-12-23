@@ -29,6 +29,7 @@ sub _push_line_to_buffer {
     }
     $self->_log_debug("Buffering: $line");
     push $self->_buffer, $line;
+    return;
 }
 
 sub _upload_quote_to_satq {
@@ -56,6 +57,7 @@ sub _upload_quote_to_satq {
                 $tx->res->headers->location || $tx->res->code );
         }
     );
+    return;
 }
 
 sub on_message {
@@ -67,18 +69,21 @@ sub on_message {
     $self->_push_line_to_buffer(
         sprintf( '<%s> %s', $msg->sender_nick, $msg->full_text ) );
 
+    return;
 }
 
 sub on_action {
     my ( $self, $action ) = @_;
     $self->_push_line_to_buffer(
         sprintf( '* %s %s', $action->sender_nick, $action->text ) );
+    return;
 }
 
 sub on_send_message_to_channel {
     my ( $self, $body ) = @_;
     $self->_push_line_to_buffer(
         sprintf( '<%s> %s', $self->conn->nick, $body ) );
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

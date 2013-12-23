@@ -55,6 +55,7 @@ sub _build_twitter {
 
 sub _ignore_link {
     my ( $self, $uri ) = @_;
+    return;
 }
 
 sub _fetch_tweet_text {
@@ -81,6 +82,7 @@ sub _fetch_tweet_text {
             }
         }
     );
+    return;
 }
 
 sub _fetch_and_extract_from_dom {
@@ -109,11 +111,13 @@ sub _fetch_and_extract_from_dom {
 sub _fetch_html_title {
     my ( $self, $uri ) = @_;
     $self->_fetch_and_extract_from_dom( $uri, 'title' );
+    return;
 }
 
 sub _fetch_wikipedia_title {
     my ( $self, $uri ) = @_;
     $self->_fetch_and_extract_from_dom( $uri, '#mw-content-text p' );
+    return;
 }
 
 sub on_message {
@@ -138,6 +142,7 @@ sub on_message {
         }
     );
     $finder->find( \$msg->text );
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

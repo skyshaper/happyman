@@ -16,6 +16,7 @@ sub on_registered {
     $self->_log('Claiming my nick from NickServ');
     $self->conn->send_private_message( 'NickServ',
         join( ' ', 'IDENTIFY', $self->password, $self->conn->nick ) );
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

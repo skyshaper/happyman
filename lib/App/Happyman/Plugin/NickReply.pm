@@ -18,6 +18,7 @@ sub on_message {
             $self->conn->send_message_to_channel( $msg->sender_nick );
         };
     }
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

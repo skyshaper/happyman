@@ -30,11 +30,13 @@ sub _plugin_name {
 sub _log {
     my ( $self, $message ) = @_;
     $self->conn->log( '[' . $self->_plugin_name . "] $message" );
+    return;
 }
 
 sub _log_debug {
     my ( $self, $message ) = @_;
     $self->conn->log_debug( '[' . $self->_plugin_name . "] $message" );
+    return;
 }
 
 1;

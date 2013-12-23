@@ -53,6 +53,7 @@ sub addressed_me {
 sub reply_on_channel {
     my ( $self, $text ) = @_;
     $self->conn->send_message_to_channel( $self->sender_nick . ': ' . $text );
+    return;
 }
 
 1;

@@ -15,6 +15,7 @@ sub delayed_randomly (&) {
         undef $timer;
         $code->();
     };
+    return;
 }
 
 1;

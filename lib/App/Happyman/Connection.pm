@@ -74,6 +74,7 @@ sub load_plugin {
     load($class);
     my $plugin = $class->new( %{$configuration}, conn => $self );
     push $self->_plugins, $plugin;
+    return;
 }
 
 sub _connect {
@@ -89,6 +90,7 @@ sub _connect {
     );
 
     $self->_irc->send_srv( 'JOIN', $self->channel );
+    return;
 }
 
 sub _retry_connect {
@@ -99,6 +101,7 @@ sub _retry_connect {
         $self->_log->info('Retrying connect');
         $self->_connect();
     };
+    return;
 }
 
 sub _build_irc {
@@ -162,6 +165,7 @@ sub _build_irc {
 sub BUILD {
     my ($self) = @_;
     $self->_connect();    # enforce construction
+    return;
 }
 
 sub _set_up_sigterm_handler {
@@ -179,6 +183,7 @@ sub _set_up_sigterm_handler {
             $self->_irc->send_srv( 'QUIT', "Yes, I'm a happy man" );
         }
     );
+    return;
 }
 
 sub run_forever {
@@ -195,6 +200,7 @@ sub run_forever {
             $self->_log->info("Caught exception: $_");
         };
     }
+    return;
 }
 
 sub disconnect_and_wait {
@@ -216,6 +222,7 @@ sub _call_plugin_event_handlers {
         $plugin->$name($msg);
         $self->log_debug("Done: $plugin $name");
     }
+    return;
 }
 
 sub send_message_to_channel {
@@ -224,6 +231,7 @@ sub send_message_to_channel {
     $self->_call_plugin_event_handlers( 'on_send_message_to_channel', $body );
     $self->_irc->send_long_message( 'utf-8', 0, 'PRIVMSG', $self->channel,
         $body );
+    return;
 }
 
 sub send_notice_to_channel {
@@ -231,6 +239,7 @@ sub send_notice_to_channel {
     $self->log_debug("Sending notice to channel: $body");
     $self->_irc->send_long_message( 'utf-8', 0, 'NOTICE', $self->channel,
         $body );
+    return;
 }
 
 sub send_action_to_channel {
@@ -238,12 +247,14 @@ sub send_action_to_channel {
     $self->log_debug("Sending action to channel: $body");
     $self->_irc->send_long_message( 'utf-8', 0, "PRIVMSG\001ACTION",
         $self->channel, $body );
+    return;
 }
 
 sub send_private_message {
     my ( $self, $nick, $body ) = @_;
     $self->log_debug("Sending privately to $nick: $body");
     $self->_irc->send_srv( 'PRIVMSG', $nick, $body );
+    return;
 }
 
 sub is_nick_on_channel {
@@ -255,6 +266,7 @@ sub set_topic {
     my ( $self, $topic ) = @_;
     $self->log_debug("Setting topic: $topic");
     $self->_irc->send_msg( 'TOPIC', $self->channel, $topic );
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

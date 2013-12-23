@@ -19,6 +19,7 @@ sub on_action {
                 'hugs ' . $action->sender_nick );
         };
     }
+    return;
 }
 
 __PACKAGE__->meta->make_immutable();

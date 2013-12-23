@@ -29,6 +29,7 @@ has brain => (
 sub BUILD {
     my ($self) = @_;
     $self->_child;
+    return;
 }
 
 sub _spawn_child {
@@ -71,6 +72,7 @@ sub on_message {
             }
         );
     }
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
