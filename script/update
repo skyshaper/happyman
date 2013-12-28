@@ -2,6 +2,9 @@
 rm -rf local vendor/bundle
 carton update
 carton bundle
+if git diff --quiet --exit-code; then
+    exit 0
+fi
 ./python/virtualenv/bin/pip install --upgrade -r ./python/requirements.txt
 ./python/virtualenv/bin/pip freeze > ./python/requirements_lock.txt
 ./python/virtualenv/bin/pip install --download=python/vendor/cache/ -r ./python/requirements_lock.txt
@@ -10,3 +13,4 @@ git add -A
 git commit -m "Update dependencies" || exit 0 
 git push
 ./script/deploy
+exit 1
