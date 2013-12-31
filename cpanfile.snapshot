@@ -2336,14 +2336,14 @@ DISTRIBUTIONS
     requirements:
       ExtUtils::MakeMaker 0
       Test::Builder 0
-  Test-Trap-v0.2.2
-    pathname: E/EB/EBHANSSEN/Test-Trap-v0.2.2.tar.gz
+  Test-Trap-v0.2.3
+    pathname: E/EB/EBHANSSEN/Test-Trap-v0.2.3.tar.gz
     provides:
-      Test::Trap 0.002002
-      Test::Trap::Builder 0.002002
-      Test::Trap::Builder::PerlIO 0.002002
-      Test::Trap::Builder::SystemSafe 0.002002
-      Test::Trap::Builder::TempFile 0.002002
+      Test::Trap 0.002003
+      Test::Trap::Builder 0.002003
+      Test::Trap::Builder::PerlIO 0.002003
+      Test::Trap::Builder::SystemSafe 0.002003
+      Test::Trap::Builder::TempFile 0.002003
     requirements:
       Carp 0
       Data::Dump 0
