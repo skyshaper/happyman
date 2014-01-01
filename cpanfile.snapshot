@@ -255,14 +255,14 @@ DISTRIBUTIONS
       Symbol 0
       Test 0
       perl 5.006
-  Data-Dumper-Concise-2.020
-    pathname: F/FR/FREW/Data-Dumper-Concise-2.020.tar.gz
+  Data-Dumper-Concise-2.021
+    pathname: F/FR/FREW/Data-Dumper-Concise-2.021.tar.gz
     provides:
-      Data::Dumper::Concise 2.020
+      Data::Dumper::Concise 2.021
       Data::Dumper::Concise::Sugar undef
       Devel::Dwarn undef
     requirements:
-      ExtUtils::MakeMaker 6.42
+      ExtUtils::MakeMaker 6.59
       perl 5.006
   Data-Handle-0.02001003
     pathname: K/KE/KENTNL/Data-Handle-0.02001003.tar.gz
