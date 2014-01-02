@@ -14,6 +14,7 @@ has _mojo => (
     is      => 'ro',
     isa     => 'Mojo::Server::Daemon',
     builder => '_build_mojo',
+    lazy => 1,
 );
 
 has port => (
@@ -22,6 +23,11 @@ has port => (
     default => sub { 6666 },
 );
 
+sub BUILD {
+    my ($self) = @_;
+    $self->_mojo; # force construction
+    return;
+}
 
 sub _build_mojo {
     my ($self) = @_;
@@ -62,7 +68,7 @@ sub _build_mojo {
 
     my $daemon = Mojo::Server::Daemon->new(
         app    => app,
-        listen => ['http://localhost:6666']
+        listen => ['http://localhost:' . $self->port],
     );
     $daemon->start();
     return $daemon;

@@ -20,7 +20,9 @@ describe 'The SocketAnnouncer plugin' => sub {
         my $conf = load_local_config();
         $socket_announcer_port = $conf->{plugins}{SocketAnnouncer}{port} // 6666;
         $irc      = make_test_client();
-        $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {} );
+        $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {
+            port => $socket_announcer_port,
+        } );
         $lwp      = LWP::UserAgent->new();
     };
 
