@@ -14,6 +14,10 @@ use Mojo::JSON;
 sub load_local_config {
     my $json = Mojo::JSON->new;
     my $conf = $json->decode( scalar read_file('happyman.conf') );
+    if (!$conf) {
+        __PACKAGE__->builder->BAIL_OUT('Failed to load local happyman.conf');
+    }
+    
     return $conf;
 }
 
