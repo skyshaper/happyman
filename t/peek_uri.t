@@ -74,7 +74,7 @@ describe 'PeekURI' => sub {
             before sub {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
-                    '#happyman', 'http://doesnotexist.example.com/'
+                    '#happyman', 'http://doesnotexist.example.com./'
                 );
             };
 
