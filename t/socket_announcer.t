@@ -80,25 +80,6 @@ describe 'The SocketAnnouncer plugin' => sub {
         };
     };
 
-# describe 'when sent a Heroku deploy hook' => sub {
-#     before sub {
-#         $lwp->post("http://localhost:$socket_announcer_port/heroku", {
-#             app => 'skyshaper-quotes',
-#             git_log => ' * Maximilian Gaß: Empty test commit to test push hook',
-#             head => 'd94580a',
-#             head_long => 'd94580ab73ad45a6e44aa283444e3ddb81d01005',
-#             prev_head => '1f1d7fd',
-#             url => 'http://skyshaper-quotes.herokuapp.com',
-#             user => 'mxey@mxey.net',
-#         });
-#     };
-#
-#     it 'sends announcement to the channel' => sub {
-#         is( wait_on_message_or_timeout( $irc ),
-#            'mxey@mxey.net deployed d94580a to http://skyshaper-quotes.herokuapp.com' );
-#     };
-# };
-
 };
 
 runtests unless caller;

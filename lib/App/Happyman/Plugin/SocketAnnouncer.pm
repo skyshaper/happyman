@@ -60,17 +60,6 @@ sub _build_mojo {
         return;
     };
 
-    post '/heroku' => sub {
-        my ($app) = @_;
-
-        # $self->_log(['Receiving /heroku: %s', $app->param]);
-        my $message = sprintf( '%s deployed %s to %s',
-            $app->param('user'), $app->param('head'), $app->param('url') );
-        $self->_log("Sending Heroku message: $message");
-        $self->conn->send_notice_to_channel($message);
-        $app->render( status => 200, text => 'sent' );
-    };
-
     my $daemon = Mojo::Server::Daemon->new(
         app    => app,
         listen => ['http://localhost:6666']
