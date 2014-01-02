@@ -8,14 +8,23 @@ our @EXPORT
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
+use File::Slurp;
+use Mojo::JSON;
+
+sub load_local_config {
+    my $json = Mojo::JSON->new;
+    my $conf = $json->decode( scalar read_file('happyman.conf') );
+    return $conf;
+}
 
 sub make_happyman_with_plugin {
     my ( $plugin_name, $plugin_params ) = @_;
+    my $conf = load_local_config();
     my $happyman = App::Happyman::Connection->new(
-        nick    => 'happyman',
-        host    => 'localhost',
-        port    => 6667,
-        channel => '#happyman',
+        nick    => $conf->{connection}{nick} // 'happyman',
+        host    => $conf->{connection}{host} // 'localhost',
+        port    => $conf->{connection}{port} // 6667,
+        channel => $conf->{connection}{channel} // '#happyman',
         debug   => $ENV{HAPPYMAN_TEST_DEBUG} ? 1 : 0,
     );
     $happyman->load_plugin( $plugin_name, $plugin_params );
@@ -24,11 +33,14 @@ sub make_happyman_with_plugin {
 
 sub make_test_client {
     my ($nick) = @_;
+    my $conf = load_local_config();
     $nick ||= 'HMTest';
     my $irc = AnyEvent::IRC::Client->new();
     my $cv  = AE::cv;
     $irc->reg_cb( connect => $cv );
-    $irc->connect( 'localhost', 6667, { nick => $nick } );
+    $irc->connect( $conf->{connection}{host} // 'localhost',
+                   $conf->{connection}{port} // 6667,
+                   { nick => $nick } );
     my ( undef, $error ) = $cv->recv();
     if ($error) {
         __PACKAGE__->builder->BAIL_OUT(
