@@ -18,7 +18,6 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     before all => sub {
         my $conf = load_local_config();
-        use Data::Dumper; say Dumper $conf;
         $socket_announcer_port = $conf->{plugins}{SocketAnnouncer}{port} // 6666;
         $irc      = make_test_client();
         $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {} );
