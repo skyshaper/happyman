@@ -79,8 +79,8 @@ describe 'PeekURI' => sub {
             };
 
             it 'sends the error to the channel' => sub {
-                is( wait_on_message_or_timeout($irc),
-                    "Couldn't connect: nodename nor servname provided, or not known"
+                like( wait_on_message_or_timeout($irc),
+                    qr/^Couldn't connect: /
                 );
             };
         };
