@@ -16,6 +16,13 @@ has _mojo => (
     builder => '_build_mojo',
 );
 
+has port => (
+    is => 'ro',
+    isa => 'Int',
+    default => sub { 6666 },
+);
+
+
 sub _build_mojo {
     my ($self) = @_;
     post '/plain' => sub {

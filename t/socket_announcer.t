@@ -14,9 +14,12 @@ use_ok('App::Happyman::Connection');
 use_ok('App::Happyman::Plugin::SocketAnnouncer');
 
 describe 'The SocketAnnouncer plugin' => sub {
-    my ( $irc, $lwp, $happyman );
+    my ( $irc, $lwp, $happyman, $socket_announcer_port );
 
     before all => sub {
+        my $conf = load_local_config();
+        use Data::Dumper; say Dumper $conf;
+        $socket_announcer_port = $conf->{plugins}{SocketAnnouncer}{port} // 6666;
         $irc      = make_test_client();
         $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {} );
         $lwp      = LWP::UserAgent->new();
@@ -28,14 +31,14 @@ describe 'The SocketAnnouncer plugin' => sub {
     };
 
     it 'should accept HTTP requests on its socket' => sub {
-        my $response = $lwp->head('http://localhost:6666/');
+        my $response = $lwp->head("http://localhost:$socket_announcer_port/");
         is( $response->status_line, '404 Not Found' );
     };
 
     describe 'when sent a plain message' => sub {
         before sub {
             $lwp->post(
-                'http://localhost:6666/plain',
+                "http://localhost:$socket_announcer_port/plain",
                 { message => 'Hello World', }
             );
         };
@@ -50,7 +53,7 @@ describe 'The SocketAnnouncer plugin' => sub {
         before sub {
             my $github_payload = read_file( Data::Handle->new(__PACKAGE__) );
             $lwp->post(
-                'http://localhost:6666/github',
+                "http://localhost:$socket_announcer_port/github",
                 { payload => $github_payload }
             );
         };
@@ -79,7 +82,7 @@ describe 'The SocketAnnouncer plugin' => sub {
 
 # describe 'when sent a Heroku deploy hook' => sub {
 #     before sub {
-#         $lwp->post('http://localhost:6666/heroku', {
+#         $lwp->post("http://localhost:$socket_announcer_port/heroku", {
 #             app => 'skyshaper-quotes',
 #             git_log => ' * Maximilian Gaß: Empty test commit to test push hook',
 #             head => 'd94580a',
