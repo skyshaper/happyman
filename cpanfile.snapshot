@@ -916,12 +916,12 @@ DISTRIBUTIONS
       Try::Tiny 0
       strict 0
       warnings 0
-  Module-Pluggable-4.8
-    pathname: S/SI/SIMONW/Module-Pluggable-4.8.tar.gz
+  Module-Pluggable-5.0
+    pathname: S/SI/SIMONW/Module-Pluggable-5.0.tar.gz
     provides:
       Devel::InnerPackage 0.4
-      Module::Pluggable 4.8
-      Module::Pluggable::Object 4.8
+      Module::Pluggable 5.0
+      Module::Pluggable::Object 5.0
     requirements:
       File::Basename 0
       File::Spec 3.00
