@@ -1,5 +1,5 @@
 #!/bin/sh -ex
-rm -rf local vendor/bundle
+rm -rf local vendor/cache
 carton update
 carton bundle
 if git diff --quiet --exit-code; then
