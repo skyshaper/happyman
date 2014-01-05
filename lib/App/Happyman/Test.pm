@@ -1,5 +1,5 @@
 package App::Happyman::Test;
-use v5.18;
+use v5.16;
 use warnings;
 
 use parent 'Test::Builder::Module';
