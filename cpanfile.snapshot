@@ -938,8 +938,8 @@ DISTRIBUTIONS
       perl 5.006
       strict 0
       warnings 0
-  Mojolicious-4.65
-    pathname: S/SR/SRI/Mojolicious-4.65.tar.gz
+  Mojolicious-4.66
+    pathname: S/SR/SRI/Mojolicious-4.66.tar.gz
     provides:
       Mojo undef
       Mojo::Asset undef
@@ -1002,7 +1002,7 @@ DISTRIBUTIONS
       Mojo::UserAgent::Server undef
       Mojo::UserAgent::Transactor undef
       Mojo::Util undef
-      Mojolicious 4.65
+      Mojolicious 4.66
       Mojolicious::Command undef
       Mojolicious::Command::cgi undef
       Mojolicious::Command::cpanify undef
@@ -1418,68 +1418,68 @@ DISTRIBUTIONS
       Test::Object 0.07
       Test::SubCalls 1.07
       perl 5.006
-  PPIx-Regexp-0.035
-    pathname: W/WY/WYANT/PPIx-Regexp-0.035.tar.gz
+  PPIx-Regexp-0.036
+    pathname: W/WY/WYANT/PPIx-Regexp-0.036.tar.gz
     provides:
-      PPIx::Regexp 0.035
-      PPIx::Regexp::Constant 0.035
-      PPIx::Regexp::Dumper 0.035
-      PPIx::Regexp::Element 0.035
-      PPIx::Regexp::Lexer 0.035
-      PPIx::Regexp::Node 0.035
-      PPIx::Regexp::Node::Range 0.035
-      PPIx::Regexp::Structure 0.035
-      PPIx::Regexp::Structure::Assertion 0.035
-      PPIx::Regexp::Structure::BranchReset 0.035
-      PPIx::Regexp::Structure::Capture 0.035
-      PPIx::Regexp::Structure::CharClass 0.035
-      PPIx::Regexp::Structure::Code 0.035
-      PPIx::Regexp::Structure::Main 0.035
-      PPIx::Regexp::Structure::Modifier 0.035
-      PPIx::Regexp::Structure::NamedCapture 0.035
-      PPIx::Regexp::Structure::Quantifier 0.035
-      PPIx::Regexp::Structure::RegexSet 0.035
-      PPIx::Regexp::Structure::Regexp 0.035
-      PPIx::Regexp::Structure::Replacement 0.035
-      PPIx::Regexp::Structure::Subexpression 0.035
-      PPIx::Regexp::Structure::Switch 0.035
-      PPIx::Regexp::Structure::Unknown 0.035
-      PPIx::Regexp::Support 0.035
-      PPIx::Regexp::Token 0.035
-      PPIx::Regexp::Token::Assertion 0.035
-      PPIx::Regexp::Token::Backreference 0.035
-      PPIx::Regexp::Token::Backtrack 0.035
-      PPIx::Regexp::Token::CharClass 0.035
-      PPIx::Regexp::Token::CharClass::POSIX 0.035
-      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.035
-      PPIx::Regexp::Token::CharClass::Simple 0.035
-      PPIx::Regexp::Token::Code 0.035
-      PPIx::Regexp::Token::Comment 0.035
-      PPIx::Regexp::Token::Condition 0.035
-      PPIx::Regexp::Token::Control 0.035
-      PPIx::Regexp::Token::Delimiter 0.035
-      PPIx::Regexp::Token::Greediness 0.035
-      PPIx::Regexp::Token::GroupType 0.035
-      PPIx::Regexp::Token::GroupType::Assertion 0.035
-      PPIx::Regexp::Token::GroupType::BranchReset 0.035
-      PPIx::Regexp::Token::GroupType::Code 0.035
-      PPIx::Regexp::Token::GroupType::Modifier 0.035
-      PPIx::Regexp::Token::GroupType::NamedCapture 0.035
-      PPIx::Regexp::Token::GroupType::Subexpression 0.035
-      PPIx::Regexp::Token::GroupType::Switch 0.035
-      PPIx::Regexp::Token::Interpolation 0.035
-      PPIx::Regexp::Token::Literal 0.035
-      PPIx::Regexp::Token::Modifier 0.035
-      PPIx::Regexp::Token::Operator 0.035
-      PPIx::Regexp::Token::Quantifier 0.035
-      PPIx::Regexp::Token::Recursion 0.035
-      PPIx::Regexp::Token::Reference 0.035
-      PPIx::Regexp::Token::Structure 0.035
-      PPIx::Regexp::Token::Unknown 0.035
-      PPIx::Regexp::Token::Unmatched 0.035
-      PPIx::Regexp::Token::Whitespace 0.035
-      PPIx::Regexp::Tokenizer 0.035
-      PPIx::Regexp::Util 0.035
+      PPIx::Regexp 0.036
+      PPIx::Regexp::Constant 0.036
+      PPIx::Regexp::Dumper 0.036
+      PPIx::Regexp::Element 0.036
+      PPIx::Regexp::Lexer 0.036
+      PPIx::Regexp::Node 0.036
+      PPIx::Regexp::Node::Range 0.036
+      PPIx::Regexp::Structure 0.036
+      PPIx::Regexp::Structure::Assertion 0.036
+      PPIx::Regexp::Structure::BranchReset 0.036
+      PPIx::Regexp::Structure::Capture 0.036
+      PPIx::Regexp::Structure::CharClass 0.036
+      PPIx::Regexp::Structure::Code 0.036
+      PPIx::Regexp::Structure::Main 0.036
+      PPIx::Regexp::Structure::Modifier 0.036
+      PPIx::Regexp::Structure::NamedCapture 0.036
+      PPIx::Regexp::Structure::Quantifier 0.036
+      PPIx::Regexp::Structure::RegexSet 0.036
+      PPIx::Regexp::Structure::Regexp 0.036
+      PPIx::Regexp::Structure::Replacement 0.036
+      PPIx::Regexp::Structure::Subexpression 0.036
+      PPIx::Regexp::Structure::Switch 0.036
+      PPIx::Regexp::Structure::Unknown 0.036
+      PPIx::Regexp::Support 0.036
+      PPIx::Regexp::Token 0.036
+      PPIx::Regexp::Token::Assertion 0.036
+      PPIx::Regexp::Token::Backreference 0.036
+      PPIx::Regexp::Token::Backtrack 0.036
+      PPIx::Regexp::Token::CharClass 0.036
+      PPIx::Regexp::Token::CharClass::POSIX 0.036
+      PPIx::Regexp::Token::CharClass::POSIX::Unknown 0.036
+      PPIx::Regexp::Token::CharClass::Simple 0.036
+      PPIx::Regexp::Token::Code 0.036
+      PPIx::Regexp::Token::Comment 0.036
+      PPIx::Regexp::Token::Condition 0.036
+      PPIx::Regexp::Token::Control 0.036
+      PPIx::Regexp::Token::Delimiter 0.036
+      PPIx::Regexp::Token::Greediness 0.036
+      PPIx::Regexp::Token::GroupType 0.036
+      PPIx::Regexp::Token::GroupType::Assertion 0.036
+      PPIx::Regexp::Token::GroupType::BranchReset 0.036
+      PPIx::Regexp::Token::GroupType::Code 0.036
+      PPIx::Regexp::Token::GroupType::Modifier 0.036
+      PPIx::Regexp::Token::GroupType::NamedCapture 0.036
+      PPIx::Regexp::Token::GroupType::Subexpression 0.036
+      PPIx::Regexp::Token::GroupType::Switch 0.036
+      PPIx::Regexp::Token::Interpolation 0.036
+      PPIx::Regexp::Token::Literal 0.036
+      PPIx::Regexp::Token::Modifier 0.036
+      PPIx::Regexp::Token::Operator 0.036
+      PPIx::Regexp::Token::Quantifier 0.036
+      PPIx::Regexp::Token::Recursion 0.036
+      PPIx::Regexp::Token::Reference 0.036
+      PPIx::Regexp::Token::Structure 0.036
+      PPIx::Regexp::Token::Unknown 0.036
+      PPIx::Regexp::Token::Unmatched 0.036
+      PPIx::Regexp::Token::Whitespace 0.036
+      PPIx::Regexp::Tokenizer 0.036
+      PPIx::Regexp::Util 0.036
     requirements:
       List::MoreUtils 0
       List::Util 0
