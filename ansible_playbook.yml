@@ -12,4 +12,4 @@
     - file: path={{target}}/local state=absent
     - command: "mv -T {{target}}/local.new {{target}}/local"
     - command: "{{ target }}/python/virtualenv/bin/pip install --no-index --find-links={{ target }}/python/vendor/cache/ -r {{ target }}/python/requirements_lock.txt"
-    - command: svc -t /home/shaperia/service/happyman
+    - command: /command/svc -t /home/shaperia/service/happyman
