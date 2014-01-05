@@ -1,3 +1,5 @@
+requires 'perl', '5.16.0';
+
 requires 'AnyEvent';
 requires 'AnyEvent::IRC';
 requires 'AnyEvent::Twitter';

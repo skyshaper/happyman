@@ -503,12 +503,13 @@ DISTRIBUTIONS
       File::HomeDir::Windows 1.00
     requirements:
       Carp 0
-      Cwd 3.12
+      Cwd 3
       ExtUtils::MakeMaker 6.36
       File::Path 2.01
-      File::Spec 3.12
+      File::Spec 3
       File::Temp 0.19
       File::Which 0.05
+      Mac::SystemDirectory 0.04
       Test::More 0.47
       perl 5.00503
   File-Listing-6.04
@@ -821,6 +822,14 @@ DISTRIBUTIONS
       ExtUtils::MakeMaker 6.59
       Test::More 0.47
       perl 5.006
+  Mac-SystemDirectory-0.06
+    pathname: C/CH/CHANSEN/Mac-SystemDirectory-0.06.tar.gz
+    provides:
+      Mac::SystemDirectory 0.06
+    requirements:
+      ExtUtils::MakeMaker 6.42
+      Test::More 0.86
+      perl 5.006
   Module-Build-0.4203
     pathname: L/LE/LEONT/Module-Build-0.4203.tar.gz
     provides:
@@ -1050,6 +1059,7 @@ DISTRIBUTIONS
       ojo undef
     requirements:
       ExtUtils::MakeMaker 0
+      perl 5.010001
   Moose-2.1005
     pathname: E/ET/ETHER/Moose-2.1005.tar.gz
     provides:
@@ -1684,6 +1694,25 @@ DISTRIBUTIONS
       overload 0
       strict 0
       warnings 0
+  PathTools-3.40
+    pathname: S/SM/SMUELLER/PathTools-3.40.tar.gz
+    provides:
+      Cwd 3.40
+      File::Spec 3.40
+      File::Spec::Cygwin 3.40
+      File::Spec::Epoc 3.40
+      File::Spec::Functions 3.40
+      File::Spec::Mac 3.40
+      File::Spec::OS2 3.40
+      File::Spec::Unix 3.40
+      File::Spec::VMS 3.40
+      File::Spec::Win32 3.40
+    requirements:
+      Carp 0
+      ExtUtils::MakeMaker 0
+      File::Basename 0
+      Scalar::Util 0
+      Test 0
   Perl-Critic-1.121
     pathname: T/TH/THALJEF/Perl-Critic-1.121.tar.gz
     provides:
@@ -1994,6 +2023,7 @@ DISTRIBUTIONS
       Role::Tiny::With undef
     requirements:
       Exporter 5.57
+      ExtUtils::MakeMaker 0
       Test::Fatal 0.003
       Test::More 0.96
   Software-License-0.103008

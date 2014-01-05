@@ -1,5 +1,5 @@
 package App::Happyman::Plugin::PeekURI;
-use v5.18;
+use v5.16;
 use Moose;
 use namespace::autoclean;
 
