@@ -2,6 +2,7 @@ use v5.16;
 use warnings;
 
 use App::Happyman::Test;
+use AnyEvent::IRC::Util qw(encode_ctcp);
 use Test::Spec;
 
 use_ok('App::Happyman::Connection');
@@ -62,6 +63,18 @@ describe 'PeekURI' => sub {
                 $irc->send_chan(
                     '#happyman', 'PRIVMSG',
                     '#happyman', 'http://chaosdorf.de/~mxey/'
+                );
+            };
+
+            it 'sends the title to the channel' => sub {
+                is( wait_on_message_or_timeout($irc), 'Index of /~mxey/' );
+            };
+        };
+
+        describe 'when seeing a URI as an action' => sub {
+            before sub {
+                $irc->send_chan( '#happyman', 'PRIVMSG', '#happyman',
+                    encode_ctcp( [ 'ACTION', 'http://chaosdorf.de/~mxey/' ] )
                 );
             };
 

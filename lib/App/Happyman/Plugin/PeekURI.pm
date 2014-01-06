@@ -120,8 +120,8 @@ sub _fetch_wikipedia_title {
     return;
 }
 
-sub on_message {
-    my ( $self, $msg ) = @_;
+sub _scan_text_for_uris {
+    my ( $self, $text ) = @_;
     my @peekers = (
         [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
         [ qr/\.wikipedia\.org$/ => \&_fetch_wikipedia_title ],
@@ -141,8 +141,19 @@ sub on_message {
             }
         }
     );
-    $finder->find( \$msg->text );
+    $finder->find( \$text );
     return;
+
+}
+
+sub on_message {
+    my ( $self, $msg ) = @_;
+    $self->_scan_text_for_uris( $msg->text );
+}
+
+sub on_action {
+    my ( $self, $action ) = @_;
+    $self->_scan_text_for_uris( $action->text );
 }
 
 __PACKAGE__->meta->make_immutable();
