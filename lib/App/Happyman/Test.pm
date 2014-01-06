@@ -14,22 +14,22 @@ use Mojo::JSON;
 sub load_local_config {
     my $json = Mojo::JSON->new;
     my $conf = $json->decode( scalar read_file('happyman.conf') );
-    if (!$conf) {
+    if ( !$conf ) {
         __PACKAGE__->builder->BAIL_OUT('Failed to load local happyman.conf');
     }
-    
+
     return $conf;
 }
 
 sub make_happyman_with_plugin {
     my ( $plugin_name, $plugin_params ) = @_;
-    my $conf = load_local_config();
+    my $conf     = load_local_config();
     my $happyman = App::Happyman::Connection->new(
-        nick    => $conf->{connection}{nick} // 'happyman',
-        host    => $conf->{connection}{host} // 'localhost',
-        port    => $conf->{connection}{port} // 6667,
+        nick    => $conf->{connection}{nick}    // 'happyman',
+        host    => $conf->{connection}{host}    // 'localhost',
+        port    => $conf->{connection}{port}    // 6667,
         channel => $conf->{connection}{channel} // '#happyman',
-        debug   => $ENV{HAPPYMAN_TEST_DEBUG} ? 1 : 0,
+        debug => $ENV{HAPPYMAN_TEST_DEBUG} ? 1 : 0,
     );
     $happyman->load_plugin( $plugin_name, $plugin_params );
     return $happyman;
@@ -42,10 +42,13 @@ sub make_test_client {
     my $irc = AnyEvent::IRC::Client->new();
     my $cv  = AE::cv;
     $irc->reg_cb( connect => $cv );
-    $irc->connect( $conf->{connection}{host} // 'localhost',
-                   $conf->{connection}{port} // 6667,
-                   { nick => $nick } );
+    $irc->connect(
+        $conf->{connection}{host} // 'localhost',
+        $conf->{connection}{port} // 6667,
+        { nick => $nick }
+    );
     my ( undef, $error ) = $cv->recv();
+
     if ($error) {
         __PACKAGE__->builder->BAIL_OUT(
             "Failed to connect to test IRC server!: $error");

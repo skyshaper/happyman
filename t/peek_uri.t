@@ -93,8 +93,7 @@ describe 'PeekURI' => sub {
 
             it 'sends the error to the channel' => sub {
                 like( wait_on_message_or_timeout($irc),
-                    qr/^Couldn't connect: /
-                );
+                    qr/^Couldn't connect: / );
             };
         };
 

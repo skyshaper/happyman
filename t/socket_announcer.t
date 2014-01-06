@@ -18,12 +18,12 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     before all => sub {
         my $conf = load_local_config();
-        $socket_announcer_port = $conf->{plugins}{SocketAnnouncer}{port} // 6666;
+        $socket_announcer_port = $conf->{plugins}{SocketAnnouncer}{port}
+            // 6666;
         $irc      = make_test_client();
-        $happyman = make_happyman_with_plugin( 'SocketAnnouncer', {
-            port => $socket_announcer_port,
-        } );
-        $lwp      = LWP::UserAgent->new();
+        $happyman = make_happyman_with_plugin( 'SocketAnnouncer',
+            { port => $socket_announcer_port, } );
+        $lwp = LWP::UserAgent->new();
     };
 
     after all => sub {
@@ -38,10 +38,8 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     describe 'when sent a plain message' => sub {
         before sub {
-            $lwp->post(
-                "http://localhost:$socket_announcer_port/plain",
-                { message => 'Hello World', }
-            );
+            $lwp->post( "http://localhost:$socket_announcer_port/plain",
+                { message => 'Hello World', } );
         };
 
         it 'should send the message to the channel' => sub {
@@ -53,10 +51,8 @@ describe 'The SocketAnnouncer plugin' => sub {
 
         before sub {
             my $github_payload = read_file( Data::Handle->new(__PACKAGE__) );
-            $lwp->post(
-                "http://localhost:$socket_announcer_port/github",
-                { payload => $github_payload }
-            );
+            $lwp->post( "http://localhost:$socket_announcer_port/github",
+                { payload => $github_payload } );
         };
 
         it 'should send the 3 commits to the channel' => sub {
