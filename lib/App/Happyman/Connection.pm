@@ -132,11 +132,12 @@ sub _build_irc {
             my ( $irc, $err ) = @_;
             return if not $err;
 
-            $self->_log->info('Connection failed');
+            $self->_log->info("Connection failed: $err");
             $self->_retry_connect();
         },
         disconnect => sub {
-            $self->_log->info('Disconnected');
+          my ( $irc, $reason ) = @_;
+            $self->_log->info("Disconnected: $reason");
             $self->_retry_connect() if $self->_stay_connected;
         },
         registered => sub {
