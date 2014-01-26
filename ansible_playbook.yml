@@ -1,15 +1,16 @@
 ---
 - hosts: all
   vars:
-    target: /home/shaperia/happyman
-  user: shaperia
+    target: /opt/happyman
   tasks:
-    - command: /package/host/localhost/python-2.7/bin/pip install virtualenv creates=/home/shaperia/bin/pip
-    - git: repo=https://github.com/skyshaper/happyman.git dest={{ target }} 
-    - command: /home/shaperia/bin/virtualenv ./python/virtualenv creates={{ target }}/python/virtualenv
+    - pkgng: name=py27-virtualenv state=present
+    - git: repo=https://github.com/skyshaper/happyman.git dest={{ target }}
+    - command: virtualenv {{target}}/python/virtualenv creates={{ target }}/python/virtualenv
     - file: path={{target}}/local.new state=absent
-    - command: "./vendor/bin/carton install --cached --deployment --without develop,test --path local.new chdir={{ target }}"
+    - pkgng: name=p5-carton state=present
+    - pkgng: name=p5-Getopt-Long state=present
+    - command: "carton install --without develop,test --path local.new chdir={{ target }}"
     - file: path={{target}}/local state=absent
-    - command: "mv -T {{target}}/local.new {{target}}/local"
+    - command: "mv {{target}}/local.new {{target}}/local"
     - command: "{{ target }}/python/virtualenv/bin/pip install --no-index --find-links={{ target }}/python/vendor/cache/ -r {{ target }}/python/requirements_lock.txt"
-    - command: /command/svc -t /home/shaperia/service/happyman
+    - command: service happyman restart
