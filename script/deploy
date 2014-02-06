@@ -1,2 +1,2 @@
 #!/bin/sh -e
-exec ansible-playbook -i ansible_hosts ansible_playbook.yaml
+exec ansible-playbook -i ansible_hosts -K --sudo ansible_playbook.yml
