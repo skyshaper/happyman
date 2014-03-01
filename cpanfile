@@ -15,16 +15,13 @@ requires 'Try::Tiny';
 requires 'URI';
 requires 'URI::Find';
 
-on 'test' => sub {
+on 'develop' => sub {
     requires 'AnyEvent::HTTP';
     requires 'AnyEvent::HTTPD';
     requires 'Data::Handle';
     requires 'LWP::Protocol::AnyEvent::http';
     requires 'LWP::UserAgent';
     requires 'Test::Spec';
-};
-
-on 'develop' => sub {
     requires 'Perl::Critic';
     requires 'Perl::Tidy';
 };

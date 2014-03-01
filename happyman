@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 use v5.14;
 use warnings;
-use lib 'lib';
+use lib qw(lib local/lib/perl5);
 
 use App::Happyman::Connection;
 use File::Slurp;

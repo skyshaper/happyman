@@ -1,0 +1,23 @@
+- hosts: all
+  roles:
+    - common
+- hosts: development
+  tasks:
+    - name: install test ircd
+      apt: pkg=ngircd
+    - include: happyman.yml application_directory=/vagrant cpanm_with_develop=yes
+- hosts: production
+  tasks:
+    - name: install supervisor
+      apt: pkg=supervisor
+    - name: get code
+      git: repo=https://github.com/skyshaper/happyman.git dest=/opt/happyman
+    - include: happyman.yml application_directory=/opt/happyman
+    - name: create happyman user
+      user: name=happyman system=yes home=/opt/happyman createhome=no shell=/bin/zsh
+    - copy: create supervisor config
+      copy: src=files/supervisor/happyman.conf dest=/etc/supervisor/conf.d/happyman.conf
+    - copy: create happyman config
+      copy: src=files/happyman.conf dest=/opt/happyman/happyman.conf
+    - name: restart
+      service: name=supervisor state=restarted

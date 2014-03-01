@@ -1,0 +1,14 @@
+- name: install cpanminus
+  shell: wget -O - http://cpanmin.us | perl - App::cpanminus creates=/usr/local/bin/cpanm
+- name: install APT dependencies
+  apt: pkg={{item}}
+  with_items:
+    - python-virtualenv
+    - python-dev
+    - libssl-dev
+- name: install Perl libraries
+  command: cpanm --installdeps --notest --with-develop --local-lib {{application_directory}}/local . chdir={{application_directory}}
+- name: create virtualenv
+  command: virtualenv {{application_directory}}/python/virtualenv creates={{application_directory}}/python/virtualenv
+- name: install Python libraries
+  command: "{{application_directory}}/python/virtualenv/bin/pip install -r {{application_directory}}/python/requirements.txt"

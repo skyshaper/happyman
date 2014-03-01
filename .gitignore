@@ -11,3 +11,4 @@
 *.pyc
 /log
 /.vagrant
+/ansible/files/happyman.conf

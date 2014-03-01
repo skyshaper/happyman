@@ -1,1 +1,0 @@
-happyman.mxeyserv.mxey.net ansible_python_interpreter=/usr/local/bin/python ansible_ssh_host=mxey.net ansible_ssh_port=62204
