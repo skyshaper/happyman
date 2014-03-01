@@ -1,5 +1,5 @@
 package App::Happyman::Delay;
-use v5.16;
+use v5.14;
 use warnings;
 
 use AnyEvent;
