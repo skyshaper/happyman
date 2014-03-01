@@ -13,3 +13,4 @@
 /.vagrant
 /ansible/files/happyman.conf
 /vagrant_ansible_inventory_default
+/.idea
