@@ -38,13 +38,13 @@
       user: name=happyman system=yes home=/opt/happyman createhome=no shell=/bin/zsh
       notify:
         - restart happyman
-    - copy: create supervisor config
+    - name: create supervisor config
       copy:
         src=files/etc/supervisor/conf.d/happyman.conf
         dest=/etc/supervisor/conf.d/happyman.conf
       notify:
         - restart happyman
-    - copy: create happyman config
+    - name: create happyman config
       copy:
         src=files/opt/happyman/happyman.conf
         dest=/opt/happyman/happyman.conf
