@@ -33,7 +33,7 @@ describe 'The SocketAnnouncer plugin' => sub {
 
     it 'should accept HTTP requests on its socket' => sub {
         my $response = $lwp->head("http://localhost:$socket_announcer_port/");
-        is( $response->status_line, '404 Not Found' );
+        is( $response->status_line, '200 OK' );
     };
 
     describe 'when sent a plain message' => sub {

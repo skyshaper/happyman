@@ -31,6 +31,12 @@ sub BUILD {
 
 sub _build_mojo {
     my ($self) = @_;
+
+    get '/' => sub {
+        my ($app) = @_;
+        $app->render( text => '' );
+    };
+
     post '/plain' => sub {
         my ($app) = @_;
         $self->_log( 'Receiving /plain: ' . $app->param('message') );
