@@ -1,2 +1,2 @@
 [production]
-188.226.171.69 ansible_ssh_user=root
+happyman.skyshaper.org ansible_ssh_user=root
