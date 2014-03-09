@@ -8,8 +8,41 @@
     - include: happyman.yml application_directory=/vagrant cpanm_with_develop=yes
 - hosts: production
   tasks:
-    - name: install supervisor
-      apt: pkg=supervisor
+    - name: install packages
+      apt: pkg={{item}}
+      with_items:
+        - supervisor
+        - apache2
+
+    - name: enable Apache mod_ssl
+      command: a2enmod ssl creates=/etc/apache2/mods-enabled/ssl.load
+      notify:
+        - restart apache
+    - name: enable Apache mod_rewrite
+      command: a2enmod rewrite creates=/etc/apache2/mods-enabled/rewrite.load
+      notify:
+        - restart apache
+    - name: enable Apache mod_rewrite
+      command: a2enmod rewrite creates=/etc/apache2/mods-enabled/rewrite.load
+      notify:
+        - restart apache
+    - name: enable Apache SSL VHost
+      command: a2ensite default-ssl creates=/etc/apache2/sites-enabled/default-ssl
+      notify:
+        - reload apache
+    - name: configure Apache default VHost
+      template:
+        src=templates/apache2/default.j2
+        dest=/etc/apache2/sites-available/default
+      notify:
+        - reload apache
+    - name: configure Apache default-ssl VHost
+      template:
+        src=templates/apache2/default-ssl.j2
+        dest=/etc/apache2/sites-available/default-ssl
+      notify:
+        - reload apache
+
     - name: get code
       git: repo=https://github.com/skyshaper/happyman.git dest=/opt/happyman
     - include: happyman.yml application_directory=/opt/happyman
@@ -20,4 +53,10 @@
     - copy: create happyman config
       copy: src=files/happyman.conf dest=/opt/happyman/happyman.conf
     - name: restart
-      service: name=supervisor state=restarted
+      supervisorctl: name=happyman state=restarted
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+    - name: reload apache
+      service: name=apache2 state=reloaded
