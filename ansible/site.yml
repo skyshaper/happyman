@@ -33,8 +33,12 @@
     - name: create happyman user
       user: name=happyman system=yes home=/opt/happyman createhome=no shell=/bin/zsh
     - copy: create supervisor config
-      copy: src=files/supervisor/happyman.conf dest=/etc/supervisor/conf.d/happyman.conf
+      copy:
+        src=files/etc/supervisor/conf.d/happyman.conf
+        dest=/etc/supervisor/conf.d/happyman.conf
     - copy: create happyman config
-      copy: src=files/happyman.conf dest=/opt/happyman/happyman.conf
+      copy:
+        src=files/opt/happyman/happyman.conf
+        dest=/opt/happyman/happyman.conf
     - name: restart
       supervisorctl: name=happyman state=restarted
