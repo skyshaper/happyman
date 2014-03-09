@@ -1,2 +1,0 @@
-[production]
-happyman.skyshaper.org ansible_ssh_user=root
