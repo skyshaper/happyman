@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ -z "${1}" ]; then
-  ./vendor/bin/carton exec prove -I lib t/*.t
+  exec prove -I local/lib/perl5 -I lib t/*.t
 else
-  HAPPYMAN_TEST_DEBUG=1 ./vendor/bin/carton exec perl -I lib "${1}"
+  HAPPYMAN_TEST_DEBUG=1 exec perl -I local/lib/perl5 -I lib "${1}"
 fi
