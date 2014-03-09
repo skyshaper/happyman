@@ -29,16 +29,27 @@
         - reload nginx
     - name: get code
       git: repo=https://github.com/skyshaper/happyman.git dest=/opt/happyman
+      notify:
+        - restart happyman
+      register: git_result
     - include: happyman.yml application_directory=/opt/happyman
+      when: git_result.changed == True
     - name: create happyman user
       user: name=happyman system=yes home=/opt/happyman createhome=no shell=/bin/zsh
+      notify:
+        - restart happyman
     - copy: create supervisor config
       copy:
         src=files/etc/supervisor/conf.d/happyman.conf
         dest=/etc/supervisor/conf.d/happyman.conf
+      notify:
+        - restart happyman
     - copy: create happyman config
       copy:
         src=files/opt/happyman/happyman.conf
         dest=/opt/happyman/happyman.conf
-    - name: restart
+      notify:
+        - restart happyman
+  handlers:
+    - name: restart happyman
       supervisorctl: name=happyman state=restarted
