@@ -1,4 +1,9 @@
 #!/bin/sh -e
-./vendor/bin/carton install --cached
+cpanm --installdeps --notest --with-develop --local-lib local .
 virtualenv python/virtualenv
-./python/virtualenv/bin/pip install --no-index --find-links=python/vendor/cache/ -r python/requirements_lock.txt
+
+# Work around “clang: error: unknown argument: '-mno-fused-madd'”
+export CFLAGS=-Qunused-arguments
+export CPPFLAGS=-Qunused-arguments
+
+./python/virtualenv/bin/pip install --allow-all-external --allow-unverified python-irclib -r python/requirements.txt

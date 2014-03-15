@@ -1,1 +1,2 @@
-cobe
+# 2.1.0 has dependencies that no longer work
+git+https://github.com/pteichman/cobe.git#egg=cobe
