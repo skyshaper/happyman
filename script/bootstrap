@@ -1,4 +1,5 @@
 #!/bin/sh -e
+cpanm --notest --local-lib local List::Util
 cpanm --installdeps --notest --with-develop --local-lib local .
 virtualenv python/virtualenv
 
