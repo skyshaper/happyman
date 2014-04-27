@@ -39,6 +39,9 @@ has _irc => (
     isa     => 'AnyEvent::IRC::Client',
     lazy    => 1,
     builder => '_build_irc',
+    handles => {
+        actual_nick => 'nick',
+    }
 );
 
 has _plugins => (
