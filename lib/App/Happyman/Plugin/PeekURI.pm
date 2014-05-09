@@ -100,8 +100,10 @@ sub _fetch_and_extract_from_dom {
 
             return if $tx->res->headers->content_type !~ /html/;
 
-            $self->conn->send_notice_to_channel(
-                $tx->res->dom->at($selector)->all_text );
+            my $text = $tx->res->dom->at($selector)->all_text;
+            $text =~ s{\n}{ }gx;
+
+            $self->conn->send_notice_to_channel( $text );
         }
     );
 
