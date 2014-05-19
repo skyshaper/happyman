@@ -17,7 +17,7 @@ has '_ua' => (
 
 sub _build_ua {
     my ($self) = @_;
-    return Mojo::UserAgent->new();
+    return Mojo::UserAgent->new()->max_redirects(3);
 }
 
 sub _plugin_name {
