@@ -100,6 +100,11 @@ sub _fetch_and_extract_from_dom {
 
             return if $tx->res->headers->content_type !~ /html/;
 
+            if (not $tx->res->dom->at($selector)) {
+                $self->conn->send_notice_to_channel(
+                    "PeekURI: Unable to find content at selector '$selector'" );
+            }
+
             my $text = $tx->res->dom->at($selector)->all_text;
             $text =~ s{\n}{ }gx;
 
