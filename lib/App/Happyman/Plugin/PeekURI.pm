@@ -53,6 +53,13 @@ sub _build_twitter {
     );
 }
 
+# Overrides _build_ua from App::Happyman::Plugin
+sub _build_ua {
+    my ($self) = @_;
+    return Mojo::UserAgent->new()->max_redirects(3);
+}
+
+
 sub _ignore_link {
     my ( $self, $uri ) = @_;
     return;
