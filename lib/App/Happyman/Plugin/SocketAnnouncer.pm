@@ -17,6 +17,12 @@ has _mojo => (
     lazy    => 1,
 );
 
+has bindhost => (
+    is      => 'ro',
+    isa     => 'Str',
+    default => sub {'localhost'},
+);
+
 has port => (
     is      => 'ro',
     isa     => 'Int',
@@ -74,7 +80,7 @@ sub _build_mojo {
 
     my $daemon = Mojo::Server::Daemon->new(
         app    => app,
-        listen => [ 'http://localhost:' . $self->port ],
+        listen => [ 'http://' . $self->bindhost . ':' . $self->port ],
     );
     $daemon->start();
     return $daemon;
