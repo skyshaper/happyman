@@ -128,6 +128,12 @@ sub _fetch_html_title {
     return;
 }
 
+sub _fetch_mobile_wikipedia_title {
+    my ( $self, $uri ) = @_;
+    $self->_fetch_and_extract_from_dom( $uri, '#content p' );
+    return;
+}
+
 sub _fetch_wikipedia_title {
     my ( $self, $uri ) = @_;
     $self->_fetch_and_extract_from_dom( $uri, '#mw-content-text p' );
@@ -137,10 +143,11 @@ sub _fetch_wikipedia_title {
 sub _scan_text_for_uris {
     my ( $self, $text ) = @_;
     my @peekers = (
-        [ qr/(^|\.)ibash\.de$/  => \&_ignore_link ],
-        [ qr/\.wikipedia\.org$/ => \&_fetch_wikipedia_title ],
-        [ qr/^twitter\.com$/    => \&_fetch_tweet_text ],
-        [ qr/./                 => \&_fetch_html_title ],
+        [ qr/(^|\.)ibash\.de$/     => \&_ignore_link ],
+        [ qr/\.m\.wikipedia\.org$/ => \&_fetch_mobile_wikipedia_title ],
+        [ qr/\.wikipedia\.org$/    => \&_fetch_wikipedia_title ],
+        [ qr/^twitter\.com$/       => \&_fetch_tweet_text ],
+        [ qr/./                    => \&_fetch_html_title ],
     );
 
     my $finder = URI::Find->new(
