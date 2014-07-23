@@ -25,7 +25,7 @@ sub BUILDARGS {
 
     $full_text =~ s/^\s+|\s+$//g;
 
-    if ( $full_text =~ /^(\w+)[:,]\s+(.+)$/ ) {
+    if ( $full_text =~ /^([0-9a-zA-Z_\\-]+)[:,]\s+(.+)$/ ) {
         return {
             conn           => $conn,
             sender_nick    => $sender_nick,
