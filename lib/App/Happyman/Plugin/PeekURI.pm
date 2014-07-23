@@ -86,6 +86,10 @@ sub _fetch_tweet_text {
                     $self->conn->send_notice_to_channel(
                         "Twitter: $error->{code}: $error->{message}");
                 }
+                if (not $error_response->{errors} or not @{ $error_response->{errors} } ) {
+                    $self->conn->send_notice_to_channel(
+                        "Twitter: unknown error");
+                }
             }
         }
     );
@@ -128,6 +132,12 @@ sub _fetch_html_title {
     return;
 }
 
+sub _fetch_html_tweet {
+    my ( $self, $uri ) = @_;
+    $self->_fetch_and_extract_from_dom( $uri, 'div.js-original-tweet p.tweet-text' );
+    return;
+}
+
 sub _fetch_mobile_wikipedia_title {
     my ( $self, $uri ) = @_;
     $self->_fetch_and_extract_from_dom( $uri, '#content p' );
@@ -146,7 +156,7 @@ sub _scan_text_for_uris {
         [ qr/(^|\.)ibash\.de$/     => \&_ignore_link ],
         [ qr/\.m\.wikipedia\.org$/ => \&_fetch_mobile_wikipedia_title ],
         [ qr/\.wikipedia\.org$/    => \&_fetch_wikipedia_title ],
-        [ qr/^twitter\.com$/       => \&_fetch_tweet_text ],
+        [ qr/^twitter\.com$/       => \&_fetch_html_tweet ],
         [ qr/./                    => \&_fetch_html_title ],
     );
 
