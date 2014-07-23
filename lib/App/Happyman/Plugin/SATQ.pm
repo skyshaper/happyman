@@ -24,7 +24,7 @@ has [qw(uri user password)] => (
 
 sub _push_line_to_buffer {
     my ( $self, $line ) = @_;
-    if ( @{ $self->_buffer } >= 10 ) {
+    if ( @{ $self->_buffer } >= 20 ) {
         shift $self->_buffer;
     }
     $self->_log_debug("Buffering: $line");
